@@ -4,18 +4,16 @@ using UnityEngine;
 
 namespace TeamC
 {
+    /// <summary> PlayerのSuperクラス </summary>
     public class PlayerSuperClass : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        // Money [G]
+        private decimal _currentResource = 1;
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        // the amount of stage which cleared
+        private int _clearedStageAmount = 0;
+
+        // the damage which player can apply to Game Logic Processing Damage of Boss
+        private decimal _applayableDamage = 10;
     }
 }

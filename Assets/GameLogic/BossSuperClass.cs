@@ -4,18 +4,14 @@ using UnityEngine;
 
 namespace TeamC
 {
+    /// <summary> BossのSuperクラス </summary>
     public class BossSuperClass : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        private decimal _hp = 0;
+        /// <summary> ボスのHPを返す </summary>
+        public decimal GetHP
         {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
+            get { return _hp; }
         }
     }
 }

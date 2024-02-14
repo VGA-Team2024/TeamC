@@ -4,18 +4,11 @@ using UnityEngine;
 
 namespace TeamC
 {
+    /// <summary> SkillsのSuperクラス </summary>
     public class SkillsSuperClass : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        private int _requiredLv = 1; // the level required
+        private string _skillName = "SkillsName"; // the name of skills
+        private float _coolTime = 1.0f; // the cool time "unit is Seconds"
     }
 }

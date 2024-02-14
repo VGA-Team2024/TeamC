@@ -37,6 +37,7 @@ namespace TeamC
     /// <summary> プレイヤーが継承する </summary>
     public interface IPlayer
     {
+        // ボスへのダメージを計算したうえで確定する処理
         
     }
     

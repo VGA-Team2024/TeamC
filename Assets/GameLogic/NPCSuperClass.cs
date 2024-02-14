@@ -4,18 +4,23 @@ using UnityEngine;
 
 namespace TeamC
 {
+    /// <summary> NPCのSuperクラス </summary>
     public class NPCSuperClass : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        private int _currentLv = 1;         // level
+        private float _basePrice = 1f;      // price
+        private float _currentDmg = 1f;     // damage
+
+        /// <summary> levelを取得する </summary>
+        public int GetLevel
         {
-        
+            get { return _currentLv; }
         }
 
-        // Update is called once per frame
-        void Update()
+        /// <summary> levelの値を初期化する </summary>
+        public int SetLevel
         {
-        
+            set { _currentLv = value; }
         }
     }
 }
