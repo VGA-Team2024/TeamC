@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 namespace TeamC
 {
     /// <summary> PlayerのSuperクラス </summary>
-    public class PlayerSuperClass : MonoBehaviour
+    public class PlayerSuperClass : MonoBehaviour, IPlayer
     {
         // Money [G]
         private decimal _currentResource = 1;
@@ -15,5 +16,14 @@ namespace TeamC
 
         // the damage which player can apply to Game Logic Processing Damage of Boss
         private decimal _applayableDamage = 10;
+        public float CalculateApplyingDamageToBoss()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetClearedStageAmount()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

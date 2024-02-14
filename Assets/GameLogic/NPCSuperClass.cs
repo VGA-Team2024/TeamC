@@ -1,15 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using System.IO;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace TeamC
 {
+    /// <summary> NPCデータのひな形 </summary>
+    [CreateAssetMenu(fileName = "GeneratedNPCData", menuName = "CreateNPCData", order = 1)]
+    public class NPCDataTemplate : ScriptableObject
+    {
+        /// <summary> NPCの名称 </summary>
+        public string Name;
+
+        /// <summary> NPCのベース価格 </summary>
+        public float BasePrice;
+
+        /// <summary> NPCの効果(毎フレーム呼び出す) </summary>
+        public UnityEvent Effects;
+    }
+
     /// <summary> NPCのSuperクラス </summary>
     public class NPCSuperClass : MonoBehaviour
     {
-        private int _currentLv = 1;         // level
-        private float _basePrice = 1f;      // price
-        private float _currentDmg = 1f;     // damage
+        [SerializeField, Tooltip("NPCのデータのひな形")]
+        private NPCDataTemplate dataTemplate; // data template
+
+        private int _currentLv = 1; // level
+        private float _currentPrice = 1f; // price
 
         /// <summary> levelを取得する </summary>
         public int GetLevel
@@ -21,6 +39,36 @@ namespace TeamC
         public int SetLevel
         {
             set { _currentLv = value; }
+        }
+
+        /// <summary> current-price の値を取得する </summary>
+        public float GetCurrentPrice
+        {
+            get { return _currentPrice; }
+        }
+
+        /// <summary> current-price の値を初期化する </summary>
+        public float SetCurrentPrice
+        {
+            set { _currentPrice = value; }
+        }
+
+        /// <summary> NPCの名前を取得する </summary>
+        public string GetNPCName
+        {
+            get { return dataTemplate.Name; }
+        }
+
+        /// <summary> ベース価格の値を取得する </summary>
+        public float GetBasePrice
+        {
+            get { return dataTemplate.BasePrice; }
+        }
+
+        /// <summary> NPCの効果を取得する </summary>
+        public UnityEvent GetNPCEffects
+        {
+            get { return dataTemplate.Effects; }
         }
     }
 }
