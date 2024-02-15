@@ -1,11 +1,12 @@
-using System;
-using System.IO;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace TeamC
 {
+    /// *MEMO*
+    /// ～目標～
+    /// NPCの
+     
     /// <summary> NPCデータのひな形 </summary>
     [CreateAssetMenu(fileName = "GeneratedNPCData", menuName = "CreateNPCData", order = 1)]
     public class NPCDataTemplate : ScriptableObject
