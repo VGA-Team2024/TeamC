@@ -56,6 +56,12 @@ namespace TeamC
         public int GetClearedStageAmount();
     }
 
+    public interface IDataSaver
+    {
+        public void ReadData();
+        public void SaveData();
+    }
+
     /// <summary> ゲームロジックの処理を担うクラス </summary>
     public class GameLogicCore : MonoBehaviour
     {
