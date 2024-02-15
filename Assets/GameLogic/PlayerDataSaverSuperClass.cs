@@ -8,14 +8,31 @@ namespace TeamC
     /// <summary> プレイヤーのセーブデータ管理コンポーネントのSuperクラス </summary>
     public class PlayerDataSaverSuperClass : MonoBehaviour, IDataSaver
     {
-        public void ReadData()
+        private Action<ClientDataTemplate> OnReadData;
+        private Action<ClientDataTemplate> OnSaveData;
+
+        /// <summary> セーブデータの読み込み処理をここへデリデート登録 </summary>
+        protected event Action<ClientDataTemplate> EventReadData
         {
-            throw new NotImplementedException();
+            add { OnReadData += value; }
+            remove { OnReadData -= value; }
         }
 
-        public void SaveData()
+        /// <summary> セーブデータの読み込みをここへデリゲート登録 </summary>
+        protected event Action<ClientDataTemplate> EventSaveData
         {
-            throw new NotImplementedException();
+            add { OnSaveData += value; }
+            remove { OnSaveData -= value; }
+        }
+
+        public void ReadData(ClientDataTemplate clientData) // called by GL
+        {
+            OnReadData(clientData);
+        }
+
+        public void SaveData(ClientDataTemplate clientData) // called by GL
+        {
+            OnSaveData(clientData);
         }
     }
 }
