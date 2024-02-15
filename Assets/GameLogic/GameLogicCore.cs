@@ -60,7 +60,7 @@ namespace TeamC
         /// initialize game-objects
         /// { 1.Boss }
         /// <summary> Bossが死んだときにこれを呼び出す </summary>
-        public void CalledMethodOnBossDeath()
+        void CalledMethodOnBossDeath()
         {
         }
 
@@ -78,6 +78,10 @@ namespace TeamC
         }
 
         private void Update()
+        {
+        }
+
+        private void LateUpdate()
         {
         }
 
