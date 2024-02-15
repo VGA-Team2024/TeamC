@@ -1,9 +1,16 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace TeamC
 {
+    /// *MEMO*
+    /// ～目標～
+    /// 各コンポーネントとの緊密
+    /// （メソッドの呼び合いとかCallBackはGLとSuperクラスで実装している部分）
+    /// な部分をあらかた開発＋実装できるとこまでが目標
+    /// ～セーブデータの必要なデータ～
+    /// プレイヤーの到達したステージ数
+     
     /// <summary> ゲーム内のオブジェクトが継承する </summary>
     public interface IInitializedTarget
     {
@@ -68,7 +75,7 @@ namespace TeamC
         /// { 3.Shop } 
         void Initialize() // Initialize On GameLogic Was Started
         {
-            /// Boss Init
+            /// Init Boss
             var boss = FindFirstObjectByType<BossSuperClass>();
             boss.CallbackOnDeath += this.CalledMethodOnBossDeath;
         }
