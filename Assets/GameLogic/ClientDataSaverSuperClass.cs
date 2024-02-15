@@ -1,12 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace TeamC
 {
     /// <summary> プレイヤーのセーブデータ管理コンポーネントのSuperクラス </summary>
-    public class PlayerDataSaverSuperClass : MonoBehaviour, IDataSaver
+    public class ClientDataSaverSuperClass : MonoBehaviour, IDataSaver
     {
         private Action<ClientDataTemplate> OnReadData;
         private Action<ClientDataTemplate> OnSaveData;

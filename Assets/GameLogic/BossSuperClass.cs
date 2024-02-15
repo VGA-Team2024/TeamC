@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+// 2/16 90% - implemented
+
 namespace TeamC
 {
     /// <summary> BossのSuperクラス </summary>

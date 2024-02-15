@@ -58,7 +58,6 @@ namespace TeamC
     public interface IPlayer
     {
         /// <summary>ボスへのダメージを計算したうえで確定する処理PlayerのみGLへのボスへのダメージのアプライを許す </summary>
-
         /// <summary> 現在到達したステージ数を返す処理 </summary>
         public int GetClearedStageAmount();
 
@@ -81,6 +80,7 @@ namespace TeamC
         /// on scene transit
         private void OnEnable()
         {
+            // read saved client data and initialize
         }
 
         /// initialize game-objects
@@ -109,16 +109,13 @@ namespace TeamC
         {
         }
 
-        private void Update()
-        {
-        }
-
-        private void LateUpdate()
+        private void FixedUpdate()
         {
         }
 
         private void OnDisable()
         {
+            // save client data
         }
     }
 }

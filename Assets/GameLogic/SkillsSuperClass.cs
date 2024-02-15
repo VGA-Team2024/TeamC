@@ -15,7 +15,7 @@ namespace TeamC
         public string SkillName = "SkillsName"; // the name of skills
 
         /// <summary> クールタイム[秒] </summary>
-        public float CoolTime = 1.0f; // the cool time "unit is Seconds"
+        public decimal CoolTime = 1; // the cool time "unit is Seconds"
 
         /// <summary> 効果 </summary>
         /// インスペクタからAssetsのスクリプトの関数を指定できるので指定してSkillsへアタッチする使い方を想定

@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+// 2/16 90% implemented
+
 namespace TeamC
 {
     /// *MEMO*
