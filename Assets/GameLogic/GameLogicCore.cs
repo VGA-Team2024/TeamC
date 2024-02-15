@@ -10,7 +10,6 @@ namespace TeamC
     /// な部分をあらかた開発＋実装できるとこまでが目標
     /// ～セーブデータの必要なデータ～
     /// プレイヤーの到達したステージ数
-     
     /// <summary> ゲーム内のオブジェクトが継承する </summary>
     public interface IInitializedTarget
     {
@@ -58,8 +57,12 @@ namespace TeamC
 
     public interface IDataSaver
     {
-        public void ReadData();
-        public void SaveData();
+        /// <summary> クライアントのデータを読み込む </summary>
+        /// <param name="clientData"></param>
+        public void ReadData(ClientDataTemplate clientData);
+
+        /// <summary> クライアントのデータを書き込む </summary>
+        public void SaveData(ClientDataTemplate clientData);
     }
 
     /// <summary> ゲームロジックの処理を担うクラス </summary>
