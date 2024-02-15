@@ -10,7 +10,6 @@ namespace TeamC
         /// ～目標～
         /// ボスの派生クラスはUIに対する制御とHPに対する
         /// 制御だけ書けばよいとこまでがSuperクラスで実装できている部分とする
-
         [SerializeField, Header("The Health Point The Boss Have")]
         private decimal hp = 0; // the hp of boss
 
@@ -186,17 +185,13 @@ namespace TeamC
         public Action CallbackOnDeath { get; set; } // the action given from game logic
 
         public decimal GetReward() => rewards;
-        
-        /// <summary> ボスが死んだときにこれを呼ぶ </summary>
-        protected void OnDeath() // on death call this action
-        {
-            CallbackOnDeath();
-        }
 
-        public void ApplyDamageToBoss(float damage) // on applied damage
-        {
-            hp -= (decimal)damage;
-        }
+        /// <summary> ボスが死んだときにこれを呼ぶ </summary>
+        // on death call this action
+        protected void OnDeath() => CallbackOnDeath();
+
+        // on applied damage
+        public void ApplyDamageToBoss(float damage) => hp -= (decimal)damage;
 
         public void InitializeObject() // Called On GL-Start
         {
