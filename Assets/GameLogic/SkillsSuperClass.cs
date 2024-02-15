@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace TeamC
 {
@@ -10,6 +9,6 @@ namespace TeamC
         private int _requiredLv = 1; // the level required
         private string _skillName = "SkillsName"; // the name of skills
         private float _coolTime = 1.0f; // the cool time "unit is Seconds"
-        
+        private UnityEvent Effects; //the effects 
     }
 }

@@ -1,11 +1,12 @@
-using System;
-using System.IO;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace TeamC
 {
+    /// *MEMO*
+    /// ～目標～
+    /// NPCの
+     
     /// <summary> NPCデータのひな形 </summary>
     [CreateAssetMenu(fileName = "GeneratedNPCData", menuName = "CreateNPCData", order = 1)]
     public class NPCDataTemplate : ScriptableObject
@@ -27,7 +28,6 @@ namespace TeamC
         private NPCDataTemplate dataTemplate; // data template
 
         private int _currentLv = 1; // level
-        private float _currentPrice = 1f; // price
 
         /// <summary> levelを取得する </summary>
         public int GetLevel
@@ -39,18 +39,6 @@ namespace TeamC
         public int SetLevel
         {
             set { _currentLv = value; }
-        }
-
-        /// <summary> current-price の値を取得する </summary>
-        public float GetCurrentPrice
-        {
-            get { return _currentPrice; }
-        }
-
-        /// <summary> current-price の値を初期化する </summary>
-        public float SetCurrentPrice
-        {
-            set { _currentPrice = value; }
         }
 
         /// <summary> NPCの名前を取得する </summary>
