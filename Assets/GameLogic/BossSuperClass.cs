@@ -13,14 +13,16 @@ namespace TeamC
         ///
         /// ～指示～
         /// 
-        
-        private decimal _hp = 0; // the hp of boss
-        private decimal _rewards = 0; // the gold of boss
+        [SerializeField, Header("The Health Point The Boss Have")]
+        private decimal hp = 0; // the hp of boss
+
+        [SerializeField, Header("The Rewards When Defeated The Boss")]
+        private decimal rewards = 0; // the gold of boss
 
         /// <summary> ボスのHPを返す </summary>
         public decimal GetHP
         {
-            get { return _hp; }
+            get { return hp; }
         }
 
         #region BossInitialization
@@ -66,7 +68,7 @@ namespace TeamC
 
             switch (baseStage)
             {
-                    // ここの仕様はちょっと細かくなかったためこれでよいか聞いてみたい
+                // ここの仕様はちょっと細かくなかったためこれでよいか聞いてみたい
                 case 1:
                     return 10000 * clearedStages;
                 case 6:
@@ -190,23 +192,23 @@ namespace TeamC
             CallbackOnDeath();
         }
 
-        public void InitObject() // Called On GL-Start
+        public void ApplyDamage(float damage) // on applied damage
+        {
+            hp -= (decimal)damage;
+        }
+
+        public void InitializeObject() // Called On GL-Start
         {
             // calculate hp
             var player = FindFirstObjectByType<PlayerSuperClass>();
             var clearedStage = 0;
-
-            // when IPlayer Is Inherited
-            if ((player as IPlayer) != null)
-            {
-                // Try Getting Cleared Stage
-                clearedStage = player.GetClearedStageAmount();
-                _hp = CalculateHealthPoint(clearedStage);
-                _rewards = CalculateRewards(clearedStage);
-            }
+            // Get Cleared Stage
+            clearedStage = player.GetClearedStageAmount();
+            hp = CalculateHealthPoint(clearedStage);
+            rewards = CalculateRewards(clearedStage);
         }
 
-        public void FinalObject() // Called On GL-End
+        public void FinalizeObject() // Called On GL-End
         {
             throw new NotImplementedException();
         }
