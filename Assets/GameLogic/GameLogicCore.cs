@@ -14,10 +14,10 @@ namespace TeamC
     public interface IInitializedTarget
     {
         /// <summary> ゲーム内のオブジェクトを初期化する </summary>
-        public void InitObject();
+        public void InitializeObject();
 
         /// <summary> ゲーム内のオブジェクトを終了処理させる </summary>
-        public void FinalObject();
+        public void FinalizeObject();
     }
 
     /// <summary> ボスのクラスが継承する </summary>
@@ -28,6 +28,9 @@ namespace TeamC
 
         /// <summary> 死んだときにこれを呼ぶ </summary>
         public void OnDeath();
+
+        /// <summary> ボスへダメージを加える時にこれを呼ぶ </summary>
+        public void ApplyDamage(float damage);
     }
 
     /// <summary> ショップが継承する </summary>
@@ -48,7 +51,7 @@ namespace TeamC
     /// <summary> プレイヤーが継承する </summary>
     public interface IPlayer
     {
-        /// <summary>ボスへのダメージを計算したうえで確定する処理 </summary>
+        /// <summary>ボスへのダメージを計算したうえで確定する処理PlayerのみGLへのボスへのダメージのアプライを許す </summary>
         public float CalculateApplyingDamageToBoss();
 
         /// <summary> 現在到達したステージ数を返す処理 </summary>
@@ -75,7 +78,7 @@ namespace TeamC
 
         /// initialize game-objects
         /// { 1.Boss }
-        /// <summary> Bossが死んだときにこれを呼び出す </summary>
+        /// <summary> Bossが死んだときの処理 </summary>
         void CalledMethodOnBossDeath()
         {
         }
