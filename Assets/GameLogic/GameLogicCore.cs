@@ -23,14 +23,15 @@ namespace TeamC
     /// <summary> ボスのクラスが継承する </summary>
     public interface IBoss
     {
-        /// <summary> ボスが死んだときのCallback関数 </summary>
+        /// <summary> ボスが死んだときのCallback関数GLから初期化される </summary>
         public Action CallbackOnDeath { get; set; }
 
-        /// <summary> 死んだときにこれを呼ぶ </summary>
-        public void OnDeath();
-
         /// <summary> ボスへダメージを加える時にこれを呼ぶ </summary>
-        public void ApplyDamage(float damage);
+        public void ApplyDamageToBoss(float damage);
+
+        /// <summary> ボス撃破時のリワードを取得 </summary>
+        /// <returns></returns>
+        public decimal GetReward();
     }
 
     /// <summary> ショップが継承する </summary>
@@ -52,10 +53,11 @@ namespace TeamC
     public interface IPlayer
     {
         /// <summary>ボスへのダメージを計算したうえで確定する処理PlayerのみGLへのボスへのダメージのアプライを許す </summary>
-        public float CalculateApplyingDamageToBoss();
 
         /// <summary> 現在到達したステージ数を返す処理 </summary>
         public int GetClearedStageAmount();
+
+        public void ApplyRewardToPlayer(decimal rewards);
     }
 
     public interface IDataSaver
@@ -81,6 +83,12 @@ namespace TeamC
         /// <summary> Bossが死んだときの処理 </summary>
         void CalledMethodOnBossDeath()
         {
+            // get reward from boss
+            var boss = FindFirstObjectByType<BossSuperClass>();
+            var rewards = boss.GetReward();
+            // apply reward to player
+            var player = FindFirstObjectByType<PlayerSuperClass>();
+            player.ApplyRewardToPlayer(rewards);
         }
 
         /// { 2.NPCs }

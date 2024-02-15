@@ -8,7 +8,7 @@ namespace TeamC
     {
         // Money [G]
         private decimal _currentResource = 1;
-        
+
         /// <summary> 現状のリソース量 </summary>
         protected decimal CurrentResource
         {
@@ -18,18 +18,18 @@ namespace TeamC
 
         // the amount of stage which cleared
         private int _clearedStageAmount = 0;
-        
+
         // the damage which player can apply to Game Logic Processing Damage of Boss
         private decimal _appliableDamage = 10;
-        
-        public float CalculateApplyingDamageToBoss()
-        {
-            throw new NotImplementedException();
-        }
 
-        public int GetClearedStageAmount()
+        public int GetClearedStageAmount() // return stage cleared
         {
             return _clearedStageAmount;
+        }
+
+        public void ApplyRewardToPlayer(decimal rewards) // apply rewards
+        {
+            _currentResource += rewards;
         }
     }
 }
