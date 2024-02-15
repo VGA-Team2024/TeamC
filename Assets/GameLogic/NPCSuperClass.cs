@@ -17,12 +17,13 @@ namespace TeamC
         /// <summary> NPCのベース価格 </summary>
         public float BasePrice;
 
-        /// <summary> NPCの効果(毎フレーム呼び出す) </summary>
+        /// <summary> NPCの効果(毎フレーム呼び出すFixedUpdate内) </summary>
+        /// インスペクタからAssetsのスクリプトの関数を指定できるので指定してNPCへアタッチする使い方を想定
         public UnityEvent Effects;
     }
 
     /// <summary> NPCのSuperクラス </summary>
-    public class NPCSuperClass : MonoBehaviour
+    public class NPCSuperClass : MonoBehaviour, INonPlayerCharacter
     {
         [SerializeField, Tooltip("NPCのデータのひな形")]
         private NPCDataTemplate dataTemplate; // data template
@@ -41,22 +42,14 @@ namespace TeamC
             set { _currentLv = value; }
         }
 
-        /// <summary> NPCの名前を取得する </summary>
-        public string GetNPCName
-        {
-            get { return dataTemplate.Name; }
-        }
-
-        /// <summary> ベース価格の値を取得する </summary>
-        public float GetBasePrice
-        {
-            get { return dataTemplate.BasePrice; }
-        }
-
         /// <summary> NPCの効果を取得する </summary>
         public UnityEvent GetNPCEffects
         {
             get { return dataTemplate.Effects; }
         }
+
+        public string GetNPCName() => dataTemplate.Name;
+
+        public float GetBacePrice() => dataTemplate.BasePrice;
     }
 }

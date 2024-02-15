@@ -42,6 +42,11 @@ namespace TeamC
     /// <summary> NPCが継承する </summary>
     public interface INonPlayerCharacter
     {
+        /// <summary> NPC名を返す </summary>
+        public string GetNPCName();
+
+        /// <summary> ベース価格を返す </summary>
+        public float GetBacePrice();
     }
 
     /// <summary> スキルが継承する </summary>
