@@ -9,5 +9,8 @@ namespace TeamC
     {
         /// <summary> 現状のリソース量を取得 </summary>
         public decimal GetCurrentResource() => base.CurrentResource;
+
+        /// <summary> 現状のクリック時のダメージ量を取得 </summary>
+        public decimal GetPlayerApplayingDamage => base.CurrentDamagesOnClick;
     }
 }

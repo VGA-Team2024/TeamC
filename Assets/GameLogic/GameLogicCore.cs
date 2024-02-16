@@ -57,13 +57,14 @@ namespace TeamC
     /// <summary> プレイヤーが継承する </summary>
     public interface IPlayer
     {
-        /// <summary>ボスへのダメージを計算したうえで確定する処理PlayerのみGLへのボスへのダメージのアプライを許す </summary>
         /// <summary> 現在到達したステージ数を返す処理 </summary>
         public int GetClearedStageAmount();
-
+        
+        /// <summary> リワード（増えるお金）をプレイヤーに適応する </summary>
         public void ApplyRewardToPlayer(decimal rewards);
-        
-        
+
+        /// <summary> 引数の値分リソースを減らす </summary>
+        public void DecreasePlayerResource(decimal amount);
     }
 
     public interface IDataSaver
