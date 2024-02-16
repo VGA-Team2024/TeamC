@@ -13,6 +13,7 @@ namespace TeamC
             
         }
 
+        /// <summary> ボタンからNPC名を渡して購入時にこれをボタンから呼び出す </summary>
         public void BuyNPC(string name)
         {
             // Superクラスでは、購入数に応じてコストを算出し、それをプレイヤーへコストの適応をして、購入数を＋１しただけ
