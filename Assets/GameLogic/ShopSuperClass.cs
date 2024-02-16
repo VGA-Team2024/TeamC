@@ -65,10 +65,10 @@ namespace TeamC
                 cost *= (decimal)1.15;
             // apply decrease resource to player
             player.DecreasePlayerResource(cost);
-            // increment bought count 
-            ++npcShoppedInfo[name];
             // task to instanciate
             TaskToInstanciate(boughtCnt);
+            // increment bought count 
+            ++npcShoppedInfo[name];
         }
     }
 }
