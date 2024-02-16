@@ -29,19 +29,7 @@ namespace TeamC
         [SerializeField, Tooltip("NPCのデータのひな形"), Header("NPCのデータのひな形")]
         private NPCDataTemplate dataTemplate; // data template
 
-        private int _currentLv = 1; // level
-
-        /// <summary> levelを取得する </summary>
-        public int GetLevel
-        {
-            get { return _currentLv; }
-        }
-
-        /// <summary> levelの値を初期化する </summary>
-        public int SetLevel
-        {
-            set { _currentLv = value; }
-        }
+        protected int _currentLv = 1; // level
 
         /// <summary> NPCの効果を取得する </summary>
         protected UnityEvent GetNPCEffects
@@ -51,7 +39,7 @@ namespace TeamC
 
         public string GetNPCName() => dataTemplate.Name;
 
-        public float GetBacePrice() => dataTemplate.BasePrice;
+        public float GetBasePrice() => dataTemplate.BasePrice;
 
         public void InitializeObject()
         {

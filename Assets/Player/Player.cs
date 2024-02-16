@@ -8,9 +8,9 @@ namespace TeamC
     public class Player : PlayerSuperClass
     {
         /// <summary> 現状のリソース量を取得 </summary>
-        public decimal GetCurrentResource() => base.CurrentResource;
+        public decimal GetCurrentResource() => base._currentResource;
 
         /// <summary> 現状のクリック時のダメージ量を取得 </summary>
-        public decimal GetPlayerApplayingDamage => base.CurrentDamagesOnClick;
+        public decimal GetPlayerApplayingDamage => base._damageOnClick;
     }
 }

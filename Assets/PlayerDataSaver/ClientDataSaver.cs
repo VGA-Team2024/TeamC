@@ -13,6 +13,9 @@ namespace TeamC
         /// の処理の本体を実装する。
         /// base.EventReadData,base.EventSaveData
         /// へ機能の本体の関数をデリゲート登録すればよい
-        
+        /// JSON形式のファイルをセーブする処理を書けばよい
+        /// Application.dataPath + セーブデータファイル名.json
+        /// でファイル名を指定するとよい。Application.dataPathはエディタ上でのＡｓｓｅｔｓディレクトリ
+        /// 直下のファイルパス
     }
 }

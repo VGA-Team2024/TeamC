@@ -10,6 +10,7 @@ namespace TeamC
     /// な部分をあらかた開発＋実装できるとこまでが目標
     /// ～セーブデータの必要なデータ～
     /// プレイヤーの到達したステージ数
+    
     /// <summary> ゲーム内のオブジェクトが継承する </summary>
     public interface IInitializedTarget
     {
@@ -46,12 +47,14 @@ namespace TeamC
         public string GetNPCName();
 
         /// <summary> ベース価格を返す </summary>
-        public float GetBacePrice();
+        public float GetBasePrice();
     }
 
     /// <summary> スキルが継承する </summary>
     public interface ISkills
     {
+        /// <summary> スキルを発動する </summary>
+        public void FireSkills();
     }
 
     /// <summary> プレイヤーが継承する </summary>
