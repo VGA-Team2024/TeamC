@@ -8,7 +8,6 @@ namespace TeamC
     /// *MEMO*
     /// ～目標～
     /// NPCの
-     
     /// <summary> NPCデータのひな形 </summary>
     [CreateAssetMenu(fileName = "GeneratedNPCData", menuName = "CreateNPCData", order = 1)]
     public class NPCDataTemplate : ScriptableObject
@@ -25,9 +24,9 @@ namespace TeamC
     }
 
     /// <summary> NPCのSuperクラス </summary>
-    public class NPCSuperClass : MonoBehaviour, INonPlayerCharacter
+    public class NPCSuperClass : MonoBehaviour, INonPlayerCharacter, IInitializedTarget
     {
-        [SerializeField, Tooltip("NPCのデータのひな形")]
+        [SerializeField, Tooltip("NPCのデータのひな形"), Header("NPCのデータのひな形")]
         private NPCDataTemplate dataTemplate; // data template
 
         private int _currentLv = 1; // level
@@ -45,7 +44,7 @@ namespace TeamC
         }
 
         /// <summary> NPCの効果を取得する </summary>
-        public UnityEvent GetNPCEffects
+        protected UnityEvent GetNPCEffects
         {
             get { return dataTemplate.Effects; }
         }
@@ -53,5 +52,13 @@ namespace TeamC
         public string GetNPCName() => dataTemplate.Name;
 
         public float GetBacePrice() => dataTemplate.BasePrice;
+
+        public void InitializeObject()
+        {
+        }
+
+        public void FinalizeObject()
+        {
+        }
     }
 }

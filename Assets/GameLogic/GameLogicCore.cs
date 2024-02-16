@@ -62,6 +62,8 @@ namespace TeamC
         public int GetClearedStageAmount();
 
         public void ApplyRewardToPlayer(decimal rewards);
+        
+        
     }
 
     public interface IDataSaver
@@ -103,6 +105,12 @@ namespace TeamC
             /// Init Boss
             var boss = FindFirstObjectByType<BossSuperClass>();
             boss.CallbackOnDeath += this.CalledMethodOnBossDeath;
+        }
+
+        /// { 4.Player}
+        public void ApplyDamageToBoss(decimal damage)
+        {
+            
         }
 
         private void Start()
