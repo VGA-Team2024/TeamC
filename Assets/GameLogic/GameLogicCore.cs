@@ -107,10 +107,11 @@ namespace TeamC
             boss.CallbackOnDeath += this.CalledMethodOnBossDeath;
         }
 
-        /// { 4.Player}
+        /// { 4.Player + NPC}
         public void ApplyDamageToBoss(decimal damage)
         {
-            
+            var boss = GameObject.FindFirstObjectByType<BossSuperClass>();
+            boss.ApplyDamageToBoss(damage);
         }
 
         private void Start()
