@@ -10,7 +10,6 @@ namespace TeamC
         void TaskToInstanciateNPC(int boughtCnt)
         {
             // ★NPCをシーン場へInstanciateする処理はSuperクラスには書いていない★
-            
         }
 
         /// <summary> ボタンからNPC名を渡して購入時にこれをボタンから呼び出す </summary>
