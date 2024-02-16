@@ -23,7 +23,7 @@ namespace TeamC
         private decimal _appliableDamage = 10;
 
         /// <summary> ボスへ割り当てるダメージ総量 </summary>
-        protected decimal AppliableDamage
+        protected decimal AppliableDamages
         {
             get { return _appliableDamage; }
             set { _appliableDamage = value; }
@@ -37,12 +37,6 @@ namespace TeamC
         public void ApplyRewardToPlayer(decimal rewards) // apply rewards
         {
             _currentResource += rewards;
-        }
-
-        protected void ApplyDamageToBoss()
-        {
-            var gl = GameObject.FindFirstObjectByType<GameLogicCore>();
-            gl.ApplyDamageToBoss(_appliableDamage);
         }
     }
 }

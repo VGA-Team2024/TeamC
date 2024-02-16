@@ -194,6 +194,7 @@ namespace TeamC
 
         // on applied damage
         public void ApplyDamageToBoss(float damage) => hp -= (decimal)damage;
+        public void ApplyDamageToBoss(decimal damage) => hp -= damage;
 
         public void InitializeObject() // Called On GL-Start
         {
