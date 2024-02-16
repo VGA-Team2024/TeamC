@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+// 2/16 90% implemented
+
 namespace TeamC
 {
     /// *MEMO*
     /// ～目標～
     /// NPCの
-     
     /// <summary> NPCデータのひな形 </summary>
     [CreateAssetMenu(fileName = "GeneratedNPCData", menuName = "CreateNPCData", order = 1)]
     public class NPCDataTemplate : ScriptableObject
@@ -17,14 +18,15 @@ namespace TeamC
         /// <summary> NPCのベース価格 </summary>
         public float BasePrice;
 
-        /// <summary> NPCの効果(毎フレーム呼び出す) </summary>
+        /// <summary> NPCの効果(毎フレーム呼び出すFixedUpdate内) </summary>
+        /// インスペクタからAssetsのスクリプトの関数を指定できるので指定してNPCへアタッチする使い方を想定
         public UnityEvent Effects;
     }
 
     /// <summary> NPCのSuperクラス </summary>
-    public class NPCSuperClass : MonoBehaviour
+    public class NPCSuperClass : MonoBehaviour, INonPlayerCharacter, IInitializedTarget
     {
-        [SerializeField, Tooltip("NPCのデータのひな形")]
+        [SerializeField, Tooltip("NPCのデータのひな形"), Header("NPCのデータのひな形")]
         private NPCDataTemplate dataTemplate; // data template
 
         private int _currentLv = 1; // level
@@ -41,22 +43,22 @@ namespace TeamC
             set { _currentLv = value; }
         }
 
-        /// <summary> NPCの名前を取得する </summary>
-        public string GetNPCName
-        {
-            get { return dataTemplate.Name; }
-        }
-
-        /// <summary> ベース価格の値を取得する </summary>
-        public float GetBasePrice
-        {
-            get { return dataTemplate.BasePrice; }
-        }
-
         /// <summary> NPCの効果を取得する </summary>
-        public UnityEvent GetNPCEffects
+        protected UnityEvent GetNPCEffects
         {
             get { return dataTemplate.Effects; }
+        }
+
+        public string GetNPCName() => dataTemplate.Name;
+
+        public float GetBacePrice() => dataTemplate.BasePrice;
+
+        public void InitializeObject()
+        {
+        }
+
+        public void FinalizeObject()
+        {
         }
     }
 }

@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace TeamC
 {
-    public class Boss : MonoBehaviour
+    /// <summary> Bossのコンポーネント。これがSceneに存在 </summary>
+    public class Boss : BossSuperClass
     {
-    
+        /// ～TODO～
+        /// 毎フレームの死亡してるかの判定 base.OnDeath()をボスが死んだときに呼び出す
+        /// 毎フレームのアニメーションやパーティクルの生成とか？
     }
 }
