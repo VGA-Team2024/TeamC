@@ -22,6 +22,13 @@ namespace TeamC
         // the damage which player can apply to Game Logic Processing Damage of Boss
         private decimal _appliableDamage = 10;
 
+        /// <summary> ボスへ割り当てるダメージ総量 </summary>
+        protected decimal AppliableDamage
+        {
+            get { return _appliableDamage; }
+            set { _appliableDamage = value; }
+        }
+
         public int GetClearedStageAmount() // return stage cleared
         {
             return _clearedStageAmount;
@@ -30,6 +37,12 @@ namespace TeamC
         public void ApplyRewardToPlayer(decimal rewards) // apply rewards
         {
             _currentResource += rewards;
+        }
+
+        protected void ApplyDamageToBoss()
+        {
+            var gl = GameObject.FindFirstObjectByType<GameLogicCore>();
+            gl.ApplyDamageToBoss(_appliableDamage);
         }
     }
 }
