@@ -35,7 +35,8 @@ namespace TeamC
             throw new System.NotImplementedException();
         }
 
-        void Buy(string npcName)
+        /// <summary>  </summary>
+        protected void Buy(string npcName)
         {
             
         }
