@@ -27,7 +27,7 @@ namespace TeamC
     /// <summary> NPCのSuperクラス </summary>
     public class NPCSuperClass : MonoBehaviour, INonPlayerCharacter
     {
-        [SerializeField, Tooltip("NPCのデータのひな形")]
+        [SerializeField, Tooltip("NPCのデータのひな形"), Header("NPCのデータのひな形")]
         private NPCDataTemplate dataTemplate; // data template
 
         private int _currentLv = 1; // level
@@ -45,7 +45,7 @@ namespace TeamC
         }
 
         /// <summary> NPCの効果を取得する </summary>
-        public UnityEvent GetNPCEffects
+        protected UnityEvent GetNPCEffects
         {
             get { return dataTemplate.Effects; }
         }
