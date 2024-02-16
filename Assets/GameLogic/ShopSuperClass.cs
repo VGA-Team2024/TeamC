@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace TeamC
@@ -16,6 +18,12 @@ namespace TeamC
         /// <summary> NPCの名前に対応したそのNPCの購入数を格納 </summary>
         private Dictionary<string, int> npcShoppedInfo;
 
+        /// <summary> NPCの購入情報NPC名とその購入数を格納している </summary>
+        protected Dictionary<string, int> GetNPCShoppedInfo
+        {
+            get { return npcShoppedInfo; }
+        }
+
         public void InitializeObject()
         {
             //- 仮処理
@@ -25,20 +33,42 @@ namespace TeamC
             foreach (var npc in npcList)
             {
                 // calculate the bought count link to npc-name
-                npcShoppedInfo.Add(npc.name, 1);
+                npcShoppedInfo.Add(npc.name, 0);
             }
             //-
         }
 
         public void FinalizeObject()
         {
+            // save shop info etc...
+
             throw new System.NotImplementedException();
         }
 
-        /// <summary>  </summary>
-        protected void Buy(string npcName)
+        /// <summary> 購入処理。プレイヤーのリソースを減らす処理と、購入数の＋１のみ </summary>
+        protected void DecreasePlayerSource(string npcName, Action<int> TaskToInstanciate)
         {
+            // get player
+            var player = GameObject.FindFirstObjectByType<PlayerSuperClass>();
+            /// process buying 
+
+            // get bought count
+            var boughtCnt = npcShoppedInfo[npcName];
+            // get target npc
+            var target = npcList.Where(_ => _.Name == npcName).ToList();
             
+            decimal cost = 999999;
+            // get base-price
+            if (target.Count == 1) cost = (decimal)target[0].BasePrice;
+            // calculate cost
+            for (int i = 0; i < boughtCnt; i++)
+                cost *= (decimal)1.15;
+            // apply decrease resource to player
+            player.DecreasePlayerResource(cost);
+            // increment bought count 
+            ++npcShoppedInfo[name];
+            // task to instanciate
+            TaskToInstanciate(boughtCnt);
         }
     }
 }

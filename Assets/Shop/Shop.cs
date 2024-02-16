@@ -4,18 +4,19 @@ using UnityEngine;
 
 namespace TeamC
 {
+    /// <summary> ショップ機能を提供する </summary>
     public class Shop : ShopSuperClass
     {
-        // Start is called before the first frame update
-        void Start()
+        void TaskToInstanciateNPC(int boughtCnt)
         {
-        
+            // ★NPCをシーン場へInstanciateする処理はSuperクラスには書いていない★
+            
         }
 
-        // Update is called once per frame
-        void Update()
+        public void BuyNPC(string name)
         {
-        
+            // Superクラスでは、購入数に応じてコストを算出し、それをプレイヤーへコストの適応をして、購入数を＋１しただけ
+            base.DecreasePlayerSource(name, TaskToInstanciateNPC);
         }
     }
 }
