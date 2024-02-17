@@ -35,6 +35,7 @@ namespace TeamC
                 // calculate the bought count link to npc-name
                 _npcShopHistory.Add(npc.name, 0);
             }
+
             //-
             throw new System.NotImplementedException();
         }
@@ -47,28 +48,38 @@ namespace TeamC
         }
 
         /// <summary> 購入処理。プレイヤーのリソースを減らす処理と、購入数の＋１のみ </summary>
-        protected void DecreasePlayerSource(string npcName, Action<int> taskToInstantiate)
+        protected void DecreasePlayerSource(string npcName, decimal cost , Action<int> taskToInstantiate)
         {
             // get player
             var player = GameObject.FindFirstObjectByType<PlayerSuperClass>();
             // process buying 
             // get bought count
             var boughtCnt = _npcShopHistory[npcName];
-            // get target npc
-            var target = npcList.Where(_ => _.Name == npcName).ToList();
-
-            decimal cost = 999999;
-            // get base-price
-            if (target.Count == 1) cost = (decimal)target[0].BasePrice;
-            // calculate cost
-            for (int i = 0; i < boughtCnt; i++)
-                cost *= (decimal)1.15;
-            // apply decrease resource to player
             player.DecreasePlayerResource(cost);
             // task to instantiate
             taskToInstantiate(boughtCnt);
             // increment bought count 
-            ++_npcShopHistory[name];
+            ++_npcShopHistory[npcName];
+        }
+
+        /// <summary> NPC名に応じたNPCの購入数に応じた価格を算出して返す </summary>
+        protected decimal CalculateCostToBuy(string npcName)
+        {
+            // get bought count
+            var boughtCnt = _npcShopHistory[npcName];
+            // get target npc
+            var target = npcList.Where(_ => _.Name == npcName).ToList();
+
+            decimal cost = 0;
+            // get base-price
+            if (target.Count == 1) cost = (decimal)target[0].BasePrice;
+            // calculate cost
+            for (int i = 0; i < boughtCnt; i++)
+            {
+                cost *= (decimal)1.15;
+            }
+
+            return cost;
         }
     }
 }
