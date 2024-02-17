@@ -8,10 +8,11 @@ namespace TeamC
     /// <summary> BossのSuperクラス </summary>
     public class BossSuperClass : MonoBehaviour, IInitializedTarget, IBoss
     {
-        /// *MEMO*
-        /// ～目標～
-        /// ボスの派生クラスはUIに対する制御とHPに対する
-        /// 制御だけ書けばよいとこまでがSuperクラスで実装できている部分とする
+        // *MEMO*
+        // ～目標～
+        // ボスの派生クラスはUIに対する制御とHPに対する
+        // 制御だけ書けばよいとこまでがSuperクラスで実装できている部分とする
+        
         [SerializeField, Header("The Health Point The Boss Have")]
         private decimal hp = 0; // the hp of boss
 
@@ -198,6 +199,8 @@ namespace TeamC
 
         public void InitializeObject() // Called On GL-Start
         {
+            // ★if client data is exist read saved client data★
+            
             // calculate hp
             var player = FindFirstObjectByType<PlayerSuperClass>();
             var clearedStage = 0;
@@ -209,6 +212,8 @@ namespace TeamC
 
         public void FinalizeObject() // Called On GL-End
         {
+            // ★save boss hp to client data★ 
+            
             throw new NotImplementedException();
         }
     }

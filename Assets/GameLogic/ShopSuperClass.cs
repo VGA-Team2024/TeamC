@@ -16,26 +16,28 @@ namespace TeamC
         private List<NPCDataTemplate> npcList;
 
         /// <summary> NPCの名前に対応したそのNPCの購入数を格納 </summary>
-        private Dictionary<string, int> npcShoppedInfo;
+        private Dictionary<string, int> _npcShopHistory;
 
-        /// <summary> NPCの購入情報NPC名とその購入数を格納している </summary>
-        protected Dictionary<string, int> GetNPCShoppedInfo
+        /// <summary> NPCの購入情報NPC名とその購入数を格納している #sd </summary>
+        protected Dictionary<string, int> GetNPCShopHistory
         {
-            get { return npcShoppedInfo; }
+            get { return _npcShopHistory; }
         }
 
         public void InitializeObject()
         {
             //- 仮処理
-            //- get npc bought count etc...
+            //- get npc bought count from save-data etc...
 
             //- ↓
             foreach (var npc in npcList)
             {
                 // calculate the bought count link to npc-name
-                npcShoppedInfo.Add(npc.name, 0);
+                _npcShopHistory.Add(npc.name, 0);
             }
+
             //-
+            throw new System.NotImplementedException();
         }
 
         public void FinalizeObject()
@@ -46,29 +48,38 @@ namespace TeamC
         }
 
         /// <summary> 購入処理。プレイヤーのリソースを減らす処理と、購入数の＋１のみ </summary>
-        protected void DecreasePlayerSource(string npcName, Action<int> TaskToInstanciate)
+        protected void DecreasePlayerSource(string npcName, decimal cost , Action<int> taskToInstantiate)
         {
             // get player
             var player = GameObject.FindFirstObjectByType<PlayerSuperClass>();
-            /// process buying 
-
+            // process buying 
             // get bought count
-            var boughtCnt = npcShoppedInfo[npcName];
+            var boughtCnt = _npcShopHistory[npcName];
+            player.DecreasePlayerResource(cost);
+            // task to instantiate
+            taskToInstantiate(boughtCnt);
+            // increment bought count 
+            ++_npcShopHistory[npcName];
+        }
+
+        /// <summary> NPC名に応じたNPCの購入数に応じた価格を算出して返す </summary>
+        protected decimal CalculateCostToBuy(string npcName)
+        {
+            // get bought count
+            var boughtCnt = _npcShopHistory[npcName];
             // get target npc
             var target = npcList.Where(_ => _.Name == npcName).ToList();
-            
-            decimal cost = 999999;
+
+            decimal cost = 0;
             // get base-price
             if (target.Count == 1) cost = (decimal)target[0].BasePrice;
             // calculate cost
             for (int i = 0; i < boughtCnt; i++)
+            {
                 cost *= (decimal)1.15;
-            // apply decrease resource to player
-            player.DecreasePlayerResource(cost);
-            // task to instanciate
-            TaskToInstanciate(boughtCnt);
-            // increment bought count 
-            ++npcShoppedInfo[name];
+            }
+
+            return cost;
         }
     }
 }
