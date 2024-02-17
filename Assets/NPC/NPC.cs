@@ -12,6 +12,7 @@ namespace TeamC
     // 並びにSOを継承していて各NPCの効果の処理を実現しているメソッドを実装してください。
     // base.GetPlayerApplayingDamage() でプレイヤーのダメージ量の取得
     // base.SetPlayerApplayingDamage() でプレイヤーのダメージ量を引数の値で初期化
+    // 実装漏れあれば問い合わせて下さい
     
     #endregion
     
