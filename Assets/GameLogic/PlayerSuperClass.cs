@@ -6,30 +6,23 @@ namespace TeamC
     /// <summary> PlayerのSuperクラス </summary>
     public class PlayerSuperClass : MonoBehaviour, IPlayer
     {
+        // base dmg 
+        private const decimal PLAYERBASEDMG = 10;
+
         // Money [G]
-        private decimal _currentResource = 1;
-        
+        protected decimal _currentResource = 1;
+
         // damage amount on clicked boss
-        private decimal _damageOnClick = 10;
+        protected decimal _damageOnClick = 10;
 
-        /// <summary> 現状のリソース量 </summary>
-        protected decimal CurrentResource
+        /// <summary> ダメージ量を初期化する </summary>
+        protected decimal SetDamageOnClick
         {
-            get { return _currentResource; }
-            set { _currentResource = value; }
-        }
-
-        /// <summary> クリック時のダメージ量 </summary>
-        protected decimal CurrentDamagesOnClick
-        {
-            get { return _damageOnClick; }
             set { _damageOnClick = value; }
         }
-        
-        protected 
 
         // the amount of stage which cleared
-        private int _clearedStageAmount = 0;
+        protected int _clearedStageAmount = 0;
 
         public int GetClearedStageAmount() // return stage cleared
         {
