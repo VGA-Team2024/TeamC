@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 7320601513999451203}
   - component: {fileID: 2795732036736924951}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: "\u9B54\u6CD5\u4F7F\u3044\u30DC\u30BF\u30F3"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2878273413817551667}
+      - m_Target: {fileID: 2821908693204018381}
         m_TargetAssemblyTypeName: TeamC.Shop, Assembly-CSharp
         m_MethodName: BuyNPC
         m_Mode: 5
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 2808982814408729210}
   - component: {fileID: 5840399617708008003}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: "\u4ED9\u4EBA\u30DC\u30BF\u30F3"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -388,7 +388,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2878273413817551667}
+      - m_Target: {fileID: 2821908693204018381}
         m_TargetAssemblyTypeName: TeamC.Shop, Assembly-CSharp
         m_MethodName: BuyNPC
         m_Mode: 5
@@ -624,7 +624,7 @@ GameObject:
   - component: {fileID: 4680654371998495596}
   - component: {fileID: 1766407223138131141}
   m_Layer: 5
-  m_Name: Button (4)
+  m_Name: "\u8A69\u4EBA\u30DC\u30BF\u30F3"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -732,7 +732,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2878273413817551667}
+      - m_Target: {fileID: 2821908693204018381}
         m_TargetAssemblyTypeName: TeamC.Shop, Assembly-CSharp
         m_MethodName: BuyNPC
         m_Mode: 5
@@ -1159,7 +1159,7 @@ GameObject:
   - component: {fileID: 2093554935229892079}
   - component: {fileID: 7300761805631849983}
   m_Layer: 5
-  m_Name: Button
+  m_Name: "\u6226\u58EB\u30DC\u30BF\u30F3"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1267,7 +1267,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2878273413817551667}
+      - m_Target: {fileID: 2821908693204018381}
         m_TargetAssemblyTypeName: TeamC.Shop, Assembly-CSharp
         m_MethodName: BuyNPC
         m_Mode: 5
@@ -1292,7 +1292,7 @@ GameObject:
   - component: {fileID: 809261787387304937}
   - component: {fileID: 8153803323806549693}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: "\u76D7\u8CCA\u30DC\u30BF\u30F3"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1400,7 +1400,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2878273413817551667}
+      - m_Target: {fileID: 2821908693204018381}
         m_TargetAssemblyTypeName: TeamC.Shop, Assembly-CSharp
         m_MethodName: BuyNPC
         m_Mode: 5
@@ -1558,7 +1558,7 @@ GameObject:
   - component: {fileID: 4794500953803605432}
   - component: {fileID: 4143023104935749255}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: "\u30B7\u30E7\u30C3\u30D7"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1958,6 +1958,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6812089385319871396}
   - component: {fileID: 6481593971751286917}
+  - component: {fileID: 2821908693204018381}
   m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
@@ -2015,6 +2016,31 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &2821908693204018381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6901235536270027385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4747868b78fac7c4d8252b7225e031ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcList: []
+  npcTexts:
+  - {fileID: 2109860503872260748}
+  - {fileID: 2258948200836549782}
+  - {fileID: 3255079035776552925}
+  - {fileID: 3327237410874790041}
+  - {fileID: 4740139329843081700}
+  _button:
+  - {fileID: 7300761805631849983}
+  - {fileID: 2795732036736924951}
+  - {fileID: 8153803323806549693}
+  - {fileID: 5840399617708008003}
+  - {fileID: 1766407223138131141}
 --- !u!1 &7353389426386129177
 GameObject:
   m_ObjectHideFlags: 0
@@ -2127,11 +2153,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 490224763697357590}
-  - component: {fileID: 2878273413817551667}
   - component: {fileID: 7362023616022522361}
   - component: {fileID: 4010278197226002769}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2161,26 +2186,6 @@ RectTransform:
   m_AnchoredPosition: {x: -220, y: 251.21}
   m_SizeDelta: {x: 400, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2878273413817551667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8255723627116796167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4747868b78fac7c4d8252b7225e031ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  npcList: []
-  npcTexts:
-  - {fileID: 2109860503872260748}
-  - {fileID: 2258948200836549782}
-  - {fileID: 3255079035776552925}
-  - {fileID: 3327237410874790041}
-  - {fileID: 4740139329843081700}
-  _button: []
 --- !u!222 &7362023616022522361
 CanvasRenderer:
   m_ObjectHideFlags: 0
