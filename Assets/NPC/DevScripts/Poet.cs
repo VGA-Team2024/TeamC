@@ -1,20 +1,20 @@
-using UnityEngine;
-
 namespace TeamC
 {
     /// <summary>詩人の処理</summary>
     public class Poet : NPCSuperClass
     {
-        void OnEnable()
-        {
-            // 雇用してたらキャラクターを表示する
-        }
+        private int _effectMagnification = 1;
 
-        public void PoetBuff()
+        public int GetCurrentLevel() => _currentLv;
+
+        //全てのNPCの効果を2×購入数倍する
+        public int GetEffectMagnification() => _effectMagnification;
+        public void SetEffectMagnification(int level) => _effectMagnification = level * 2;
+
+        private void FixedUpdate()
         {
-            Debug.LogWarning("未実装です");
-            return;
-            // 全てのNPCの効果を2×購入数倍する
+            //throw new NotImplementedException();
+            base.GetNPCEffects.Invoke();
         }
     }
 }
