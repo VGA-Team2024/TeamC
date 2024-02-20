@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 8309e93f7b1b4964f8c8086ed1be660a, type: 3}
   m_Name: TestWarriorData
-  m_EditorClassIdentifier: Assembly-CSharp:TeamC:NPCDataTemplate
+  m_EditorClassIdentifier: 
   Name: "\u6226\u58EB"
   BasePrice: 0
   Effects:
