@@ -26,7 +26,7 @@ namespace TeamC
 
         void TaskToUpdateText(decimal cost, int boughtCount)
         {
-            
+
         }
 
         /// <summary> ボタンからNPC名を渡して購入時にこれをボタンから呼び出す </summary>
@@ -38,6 +38,9 @@ namespace TeamC
         }
 
         /// <summary> NPCの購入数に応じた価格の算出 </summary>
-        public decimal CalculateNPCCost(string npcName) => base.CalculateCostToBuy(npcName);
+        public decimal CalculateNPCCost(string npcName)
+        {
+            return base.CalculateCostToBuy(npcName);
+        }
     }
 }
