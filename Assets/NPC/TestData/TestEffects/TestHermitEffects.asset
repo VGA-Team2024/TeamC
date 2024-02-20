@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae7e1c33fbefa8a4dbc3e4b096a97af7, type: 3}
   m_Name: TestHermitEffects
   m_EditorClassIdentifier: 
-  testLevel: 1
   skills:
-  - data: {fileID: 11400000, guid: 66c40562839a5d247a0650bd0f9fc5ae, type: 2}
-    canUseSkill: 1
-  - data: {fileID: 11400000, guid: 4202602ab12a2c24497f5ca6e426e390, type: 2}
-    canUseSkill: 1
+  - {fileID: 11400000, guid: 66c40562839a5d247a0650bd0f9fc5ae, type: 2}
+  - {fileID: 11400000, guid: 4202602ab12a2c24497f5ca6e426e390, type: 2}
