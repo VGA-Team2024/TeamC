@@ -30,6 +30,7 @@ namespace TeamC
 		private Player _player = new();
 		private Action<decimal, int> _noAction;
 		private string _name;
+		
 		private void Start()
 		{
 			var list = GetNPCShopHistory.Keys.ToList();
@@ -63,6 +64,23 @@ namespace TeamC
 				//テキストの更新
 				_buttonDic[name].GetComponentInChildren<Text>().text =
 					$"{name} Lv{GetNPCShopHistory[name]} {CalculateNPCCost(name).ToString("F0")}G";
+			}
+		}
+		
+		///<summary>ボタンが押せるかどうか</summary>
+		/// <param name="value"></param>
+		public void IsPushButton(decimal value)
+		{
+			foreach (Button button in _button)
+			{
+				if (_player.GetCurrentResource() >= CalculateNPCCost(button.name))
+				{
+					button.interactable = true;
+				}
+				else
+				{
+					button.interactable = false;
+				}
 			}
 		}
 
