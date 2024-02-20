@@ -61,7 +61,7 @@ namespace TeamC
     public interface IPlayer
     {
         /// <summary> 現在到達したステージ数を返す処理 </summary>
-        public int GetClearedStageAmount();
+        public int GetClearedFloorAmount();
         
         /// <summary> リワード（増えるお金）をプレイヤーに適応する </summary>
         public void ApplyRewardToPlayer(decimal rewards);
