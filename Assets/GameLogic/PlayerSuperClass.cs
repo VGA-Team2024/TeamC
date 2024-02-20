@@ -10,7 +10,7 @@ namespace TeamC
         private const decimal PLAYERBASEDMG = 10;
 
         // Money [G]
-        protected decimal _currentResource = 1;
+        protected decimal _currentGold = 1;
 
         // damage amount on clicked boss
         protected decimal _damageOnClick = 10;
@@ -31,12 +31,12 @@ namespace TeamC
 
         public void ApplyRewardToPlayer(decimal rewards) // apply rewards
         {
-            _currentResource += rewards;
+            _currentGold += rewards;
         }
 
-        public void DecreasePlayerResource(decimal amount) // apply reduce resource to player
+        public void DecreasePlayerGold(decimal amount) // apply reduce resource to player
         {
-            _currentResource -= amount;
+            _currentGold -= amount;
         }
     }
 }

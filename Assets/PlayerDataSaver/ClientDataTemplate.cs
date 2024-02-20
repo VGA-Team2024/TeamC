@@ -7,6 +7,6 @@ namespace TeamC
     /// <summary> クライアントのデータのひな形 </summary>
     public class ClientDataTemplate : MonoBehaviour
     {
-    
+        
     }
 }
