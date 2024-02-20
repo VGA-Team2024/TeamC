@@ -67,7 +67,7 @@ namespace TeamC
         public void ApplyRewardToPlayer(decimal rewards);
 
         /// <summary> 引数の値分リソースを減らす </summary>
-        public void DecreasePlayerResource(decimal amount);
+        public void DecreasePlayerGold(decimal amount);
     }
 
     public interface IDataSaver
