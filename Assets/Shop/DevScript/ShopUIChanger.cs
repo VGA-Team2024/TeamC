@@ -1,43 +1,69 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace TeamC
 {
+
+	/// <summary> ショップ機能を提供する </summary>
 	public class ShopUIChanger : ShopSuperClass
 	{
-		private Button[] _button;
+		[SerializeField] private TMP_Text[] npcTexts;
+		[SerializeField] private Button[] _button;
+		private Dictionary<string, TMP_Text> _npcDic;
+		private Dictionary<string, Button> _buttonDic;
 		private Player _player = new();
-		private Action<int> _action;
-
+		private Action<decimal, int> _noAction;
+		private string _name;
+		
 		private void Start()
 		{
-			_action += ReflectText;
-			int i = 0;
-			_button = gameObject.GetComponentsInChildren<Button>();
-			foreach (var npc in GetNPCShoppedInfo)
+			var list = GetNPCShopHistory.Keys.ToList();
+			//名前で検索できるように
+			for(int i = 0; i < list.Count; i++)
 			{
-				_button[i].onClick.AddListener(() => DecreasePlayerSource(npc.Key, _action));
-				i++;
+				npcTexts[i].gameObject.SetActive(false);
+				_npcDic.Add(list[i], npcTexts[i]);
+				_buttonDic.Add(list[i], _button[i]);
+				_button[i].GetComponentInChildren<Text>().text = $"{list[i]} lv0 {CalculateNPCCost(list[i])}";
 			}
 		}
 
-		///<summary>テキストの更新</summary>
-		void ReflectText(int level)
+		void TaskToInstantiateNPC(int boughtCnt)
 		{
-			string[] str = gameObject.GetComponentInChildren<Text>().text.Split();
-			gameObject.GetComponentInChildren<Text>().text = $"{str[0]} {level}";
+			// ★NPCをシーン場へInstanciateする処理はSuperクラスには書いていない★
+			if (boughtCnt == 0)
+			{
+				_npcDic[_name].gameObject.SetActive(true);
+			}
 		}
 
+		/// <summary> ボタンからNPC名を渡して購入時にこれをボタンから呼び出す </summary>
+		public void BuyNPC(string name)
+		{
+			if (_player.GetCurrentGold() >= CalculateNPCCost(name))
+			{
+				_name = name;
+				// Superクラスでは、購入数に応じてコストを算出し、
+				// それをプレイヤーへコストの適応をして、購入数を＋１しただけ
+				base.DecreasePlayerSource(name, CalculateNPCCost(name), TaskToInstantiateNPC, _noAction);
+				//テキストの更新
+				_buttonDic[name].GetComponentInChildren<Text>().text =
+					$"{name} Lv{GetNPCShopHistory[name]} {CalculateNPCCost(name).ToString("F0")}G";
+			}
+		}
+		
 		///<summary>ボタンが押せるかどうか</summary>
 		/// <param name="value"></param>
 		public void IsPushButton(decimal value)
 		{
 			foreach (Button button in _button)
 			{
-				//次の価格がほしい
-				if (_player.GetCurrentResource() >= value)
+				if (_player.GetCurrentGold() >= CalculateNPCCost(button.name))
 				{
 					button.interactable = true;
 				}
@@ -46,6 +72,12 @@ namespace TeamC
 					button.interactable = false;
 				}
 			}
+		}
+
+		/// <summary> NPCの購入数に応じた価格の算出 </summary>
+		public decimal CalculateNPCCost(string npcName)
+		{
+			return base.CalculateCostToBuy(npcName);
 		}
 	}
 }
