@@ -14,7 +14,7 @@ namespace TeamC
 
         // damage amount on clicked boss
         protected decimal _damageOnClick = 10;
-
+        
         /// <summary> ダメージ量を初期化する </summary>
         protected decimal SetDamageOnClick
         {
@@ -22,17 +22,11 @@ namespace TeamC
         }
 
         // the amount of stage which cleared
-        protected int _clearedStageAmount = 0;
+        protected int _clearedFloorAmount = 0;
         
-        /// <summary> 突破ステージ数を返す </summary>
-        public int GetThroughStages
+        public int GetClearedFloorAmount() // return stage cleared
         {
-            get { return _clearedStageAmount; }
-        }
-
-        public int GetClearedStageAmount() // return stage cleared
-        {
-            return _clearedStageAmount;
+            return _clearedFloorAmount;
         }
 
         public void ApplyRewardToPlayer(decimal rewards) // apply rewards

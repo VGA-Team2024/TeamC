@@ -4,6 +4,14 @@ using UnityEngine;
 
 namespace TeamC
 {
+    #region memo
+
+    // ＠取得できる値＠
+    // ゴールド
+    // ダメージ/クリック
+    // 突破ステージ数（基底クラス）
+
+    #endregion
     /// <summary> Playerのコンポーネント。これがSceneに存在 </summary>
     public class Player : PlayerSuperClass
     {
