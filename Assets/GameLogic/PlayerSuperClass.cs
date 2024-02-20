@@ -23,6 +23,12 @@ namespace TeamC
 
         // the amount of stage which cleared
         protected int _clearedStageAmount = 0;
+        
+        /// <summary> 突破ステージ数を返す </summary>
+        public int GetThroughStages
+        {
+            get { return _clearedStageAmount; }
+        }
 
         public int GetClearedStageAmount() // return stage cleared
         {
