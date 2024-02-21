@@ -55,7 +55,7 @@ namespace TeamC
             // process buying 
             // get bought count
             var boughtCnt = _npcShopHistory[npcName];
-            player.DecreasePlayerResource(cost);
+            player.DecreasePlayerGold(cost);
             // task to instantiate
             taskToInstantiate(boughtCnt);
             // increment bought count 

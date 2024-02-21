@@ -205,7 +205,7 @@ namespace TeamC
             var player = FindFirstObjectByType<PlayerSuperClass>();
             var clearedStage = 0;
             // Get Cleared Stage
-            clearedStage = player.GetClearedStageAmount();
+            clearedStage = player.GetClearedFloorAmount();
             hp = CalculateHealthPoint(clearedStage);
             rewards = CalculateRewards(clearedStage);
         }

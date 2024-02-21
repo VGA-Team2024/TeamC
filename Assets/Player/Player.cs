@@ -4,12 +4,20 @@ using UnityEngine;
 
 namespace TeamC
 {
+    #region memo
+
+    // ＠取得できる値＠
+    // ゴールド
+    // ダメージ/クリック
+    // 突破ステージ数（基底クラス）
+
+    #endregion
     /// <summary> Playerのコンポーネント。これがSceneに存在 </summary>
     public class Player : PlayerSuperClass
     {
         /// <summary> 現状のリソース量を取得 </summary>
-        public decimal GetCurrentResource() => base._currentResource;
-
+        public decimal GetCurrentGold() => base._currentGold;
+        
         /// <summary> 現状のクリック時のダメージ量を取得 </summary>
         public decimal GetPlayerApplayingDamage => base._damageOnClick;
 

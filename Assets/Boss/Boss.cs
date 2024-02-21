@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,10 +20,16 @@ namespace TeamC
         {
             if (IsDeadBoss())
                 base.OnDeath();
+
         }
         bool IsDeadBoss()
         {
             return base.GetHP <= 0;
+
+        }
+        void PointerDown()
+        {
+            
         }
     }
 }

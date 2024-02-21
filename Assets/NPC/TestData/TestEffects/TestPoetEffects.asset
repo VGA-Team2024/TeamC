@@ -9,11 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: GenNPC_Test
-  m_EditorClassIdentifier: Assembly-CSharp:TeamC:NPCDataTemplate
-  Name: 
-  BasePrice: 0
-  Effects:
-    m_PersistentCalls:
-      m_Calls: []
+  m_Script: {fileID: 11500000, guid: 2f88275731aeff141bc04778a0dab5c7, type: 3}
+  m_Name: TestPoetEffects
+  m_EditorClassIdentifier: 

@@ -6,8 +6,8 @@ namespace TeamC
     /// <summary> プレイヤーのセーブデータ管理コンポーネントのSuperクラス </summary>
     public class ClientDataSaverSuperClass : MonoBehaviour, IDataSaver
     {
-        private Action<ClientDataTemplate> OnReadData;
-        private Action<ClientDataTemplate> OnSaveData;
+        private Action<ClientDataTemplate> OnReadData; // Action -> Func
+        private Action<ClientDataTemplate> OnSaveData; // Action<ClientDataTemplate> -> Action
 
         /// <summary> セーブデータの読み込み処理をここへデリデート登録 </summary>
         protected event Action<ClientDataTemplate> EventReadData
