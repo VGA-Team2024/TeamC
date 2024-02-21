@@ -48,7 +48,7 @@ namespace TeamC
         }
 
         /// <summary> 購入処理。プレイヤーのリソースを減らす処理と、購入数の＋１のみ </summary>
-        protected void DecreasePlayerSource(string npcName, decimal cost , Action<int> taskToInstantiate)
+        public void DecreasePlayerSource(string npcName, decimal cost, Action<int> taskToInstantiate)
         {
             // get player
             var player = GameObject.FindFirstObjectByType<PlayerSuperClass>();
@@ -63,7 +63,7 @@ namespace TeamC
         }
 
         /// <summary> NPC名に応じたNPCの購入数に応じた価格を算出して返す </summary>
-        protected decimal CalculateCostToBuy(string npcName)
+        public decimal CalculateCostToBuy(string npcName)
         {
             // get bought count
             var boughtCnt = _npcShopHistory[npcName];
