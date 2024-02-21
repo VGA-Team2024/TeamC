@@ -50,7 +50,7 @@ namespace TeamC
                 _isCoolTime = false;
 
 #if UNITY_EDITOR
-                Debug.Log("クールタイム終了");
+                //Debug.Log("クールタイム終了");
 #endif
             }
         }
