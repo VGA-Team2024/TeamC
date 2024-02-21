@@ -16,7 +16,8 @@ namespace TeamC
     /// <summary> Bossのコンポーネント。これがSceneに存在 </summary>
     public class Boss : BossSuperClass
     {
-        [SerializeField] SpriteRenderer _defaultDragonTexture;
+        SpriteRenderer currentRenderer;
+        [SerializeField] Sprite _defaultDragonTexture;
         [SerializeField] Sprite _FirstDragonTexture;
         [SerializeField] Sprite _SecondDragonTexture;
         [SerializeField] Sprite _ThirdDragonTexture;
@@ -33,18 +34,22 @@ namespace TeamC
                 base.OnDeath();
 
             currentStage = player.GetClearedFloorAmount();
-            //if (currentStage > 0 && currentStage < 6)
-            //{
-
-            //}
+            if(currentStage > 0 &&  currentStage < 6)
+            {
+                currentRenderer.sprite = _defaultDragonTexture;
+            }
             if (currentStage >= 6 && currentStage < 11)
-                _defaultDragonTexture.sprite = _FirstDragonTexture;
+                currentRenderer.sprite = _FirstDragonTexture;
+
             if (currentStage >= 11 && currentStage < 16)
-                _defaultDragonTexture.sprite = _SecondDragonTexture;
+                currentRenderer.sprite = _SecondDragonTexture;
+
             if (currentStage >= 16 && currentStage < 21)
-                _defaultDragonTexture.sprite = _ThirdDragonTexture;
+                currentRenderer.sprite = _ThirdDragonTexture;
+
             if (currentStage >= 21 && currentStage <= 26)
-                _defaultDragonTexture.sprite = _FourthDragonTexture;
+                currentRenderer.sprite = _FourthDragonTexture;
+
         }
         bool IsDeadBoss()
         {
