@@ -20,8 +20,10 @@ namespace TeamC
         // でファイル名を指定するとよい。Application.dataPathはエディタ上でのＡｓｓｅｔｓディレクトリ
         // 直下のファイルパス
 
-        private void EventSaveData(ClientDataTemplate data)
+        private void SaveData()
         {
+            ClientDataTemplate data = new();
+
             // プレイヤーの状態を取得
             var player = GameObject.FindFirstObjectByType<Player>();
             int playerThroughtFloor = player.GetClearedFloorAmount();
