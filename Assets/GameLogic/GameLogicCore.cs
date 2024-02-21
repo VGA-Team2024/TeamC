@@ -96,6 +96,7 @@ namespace TeamC
     /// <summary> ゲームロジックの処理を担うクラス </summary>
     public class GameLogicCore : MonoBehaviour
     {
+        private float _elapsedTime = 0f;
         private ClientDataTemplate savedData = new();
 
         private void OnEnable()
@@ -154,6 +155,15 @@ namespace TeamC
 
         private void FixedUpdate()
         {
+            _elapsedTime = Time.deltaTime;
+
+            if (_elapsedTime >= 60.0f)
+            {
+                // save client data
+                var clientSaveDatas = FindFirstObjectByType<ClientDataSaverSuperClass>();
+                clientSaveDatas.SaveData();
+                _elapsedTime = 0f;
+            } // if elapsed one minutes
         }
 
         private void OnDisable()
