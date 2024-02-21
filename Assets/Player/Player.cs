@@ -17,7 +17,7 @@ namespace TeamC
     {
         /// <summary> 現状のリソース量を取得 </summary>
         public decimal GetCurrentGold() => base._currentGold;
-
+        
         /// <summary> 現状のクリック時のダメージ量を取得 </summary>
         public decimal GetPlayerApplayingDamage => base._damageOnClick;
 
