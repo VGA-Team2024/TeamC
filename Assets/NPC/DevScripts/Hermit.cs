@@ -1,11 +1,13 @@
 using System.Collections.Generic;
-using System.Linq;
+using UnityEngine;
 
 namespace TeamC
 {
     /// <summary>仙人の処理</summary>
     public class Hermit : NPC, IHermit
     {
+        [SerializeField, Header("スキルのデータベース")] private SkillsDataTemplate[] skills;
+        
         private void FixedUpdate()
         {
             //throw new NotImplementedException();
@@ -15,11 +17,10 @@ namespace TeamC
         public List<SkillsDataTemplate> GetFirableSkills()
         {
             //throw new System.NotImplementedException();
-
-            List<SkillsDataTemplate> skillList = FindObjectsOfType<SkillsDataTemplate>().ToList();
+            
             List<SkillsDataTemplate> result = new List<SkillsDataTemplate>();
 
-            foreach (var skill in skillList)
+            foreach (var skill in skills)
             {
                 if (!skill.IsLocked)
                 {
