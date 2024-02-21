@@ -74,10 +74,10 @@ namespace TeamC
     {
         /// <summary> クライアントのデータを読み込む </summary>
         /// <param name="clientData"></param>
-        public void ReadData(ClientDataTemplate clientData);
+        public ClientDataTemplate ReadData();
 
         /// <summary> クライアントのデータを書き込む </summary>
-        public void SaveData(ClientDataTemplate clientData);
+        public void SaveData();
     }
 
     /// <summary> ゲームロジックの処理を担うクラス </summary>
