@@ -16,6 +16,8 @@ namespace TeamC
         public int _saveHermitLevel;
         public decimal _saveCurrentBossHP;
 
+        public ClientDataTemplate() { }
+
         public ClientDataTemplate(int playerThroughtFloor, int playerGold, int wizardLevel, int warriorLevel,
         int thiefLevel, int poetLevel, int hermitLevel, int bossHP)
         {

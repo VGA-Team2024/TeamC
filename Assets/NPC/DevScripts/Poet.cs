@@ -1,11 +1,9 @@
 namespace TeamC
 {
     /// <summary>詩人の処理</summary>
-    public class Poet : NPCSuperClass
+    public class Poet : NPC
     {
         private int _effectMagnification = 1;
-
-        public int GetCurrentLevel() => _currentLv;
 
         //全てのNPCの効果を2×購入数倍する
         public int GetEffectMagnification() => _effectMagnification;

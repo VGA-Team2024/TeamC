@@ -19,6 +19,6 @@ namespace TeamC
     /// <summary> NPCの機能を提供 </summary>
     public class NPC : NPCSuperClass
     {
-        
+        public int GetCurrentLevel() => _currentLv;
     }
 }
