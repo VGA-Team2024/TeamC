@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,5 +16,20 @@ namespace TeamC
     /// <summary> Bossのコンポーネント。これがSceneに存在 </summary>
     public class Boss : BossSuperClass
     {
+        void Update()
+        {
+            if (IsDeadBoss())
+                base.OnDeath();
+
+        }
+        bool IsDeadBoss()
+        {
+            return base.GetHP <= 0;
+
+        }
+        void PointerDown()
+        {
+            
+        }
     }
 }
