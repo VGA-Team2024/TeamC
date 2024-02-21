@@ -48,7 +48,7 @@ namespace TeamC
         }
 
         /// <summary> 購入処理。プレイヤーのリソースを減らす処理と、購入数の＋１のみ </summary>
-        protected void DecreasePlayerSource(string npcName, decimal cost , Action<int> taskToInstantiate,Action<decimal, int> taskToUpdateText)
+        protected void DecreasePlayerSource(string npcName, decimal cost , Action<int> taskToInstantiate)
         {
             // get player
             var player = GameObject.FindFirstObjectByType<PlayerSuperClass>();
@@ -58,7 +58,6 @@ namespace TeamC
             player.DecreasePlayerGold(cost);
             // task to instantiate
             taskToInstantiate(boughtCnt);
-            taskToUpdateText(cost, boughtCnt);
             // increment bought count 
             ++_npcShopHistory[npcName];
         }
