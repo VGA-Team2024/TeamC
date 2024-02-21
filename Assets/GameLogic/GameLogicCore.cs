@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace TeamC
@@ -10,7 +12,6 @@ namespace TeamC
     /// な部分をあらかた開発＋実装できるとこまでが目標
     /// ～セーブデータの必要なデータ～
     /// プレイヤーの到達したステージ数
-    
     /// <summary> ゲーム内のオブジェクトが継承する </summary>
     public interface IInitializedTarget
     {
@@ -38,6 +39,11 @@ namespace TeamC
     /// <summary> ショップが継承する </summary>
     public interface IShop
     {
+        /// <summary> NPCのコストの算出 </summary>
+        public decimal CalculateCostToBuy(string npcName);
+
+        /// <summary> プレイヤーのゴールドを減らす </summary>
+        public void DecreasePlayerSource(string npcName, decimal cost, Action<int> taskToInstantiate);
     }
 
     /// <summary> NPCが継承する </summary>
@@ -57,12 +63,19 @@ namespace TeamC
         public void FireSkills();
     }
 
+    /// <summary> 仙人クラスに継承してほしいインターフェイス </summary>
+    public interface IHermit
+    {
+        /// <summary> 発動可能なスキルを返す </summary>
+        public List<SkillsDataTemplate> GetFirableSkills();
+    }
+
     /// <summary> プレイヤーが継承する </summary>
     public interface IPlayer
     {
         /// <summary> 現在到達したステージ数を返す処理 </summary>
         public int GetClearedFloorAmount();
-        
+
         /// <summary> リワード（増えるお金）をプレイヤーに適応する </summary>
         public void ApplyRewardToPlayer(decimal rewards);
 
@@ -83,10 +96,13 @@ namespace TeamC
     /// <summary> ゲームロジックの処理を担うクラス </summary>
     public class GameLogicCore : MonoBehaviour
     {
-        /// on scene transit
+        private ClientDataTemplate savedData = new();
+
         private void OnEnable()
         {
             // read saved client data and initialize
+            var clientSaveDatas = FindFirstObjectByType<ClientDataSaverSuperClass>();
+            savedData = clientSaveDatas.ReadData();
         }
 
         /// initialize game-objects
@@ -109,6 +125,15 @@ namespace TeamC
             /// Init Boss
             var boss = FindFirstObjectByType<BossSuperClass>();
             boss.CallbackOnDeath += this.CalledMethodOnBossDeath;
+
+            // init all GOs
+            var gos = GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
+            // filtering inherited class IInitializedTarget
+            var initTargets = gos.ToList().Where(_ => _.GetComponent<IInitializedTarget>() != null).ToList();
+            foreach (var obj in initTargets)
+            {
+                obj.GetComponent<IInitializedTarget>().InitializeObject();
+            } // initialize all objects
         }
 
         /// { 4.Player + NPC}
@@ -116,6 +141,11 @@ namespace TeamC
         {
             var boss = GameObject.FindFirstObjectByType<BossSuperClass>();
             boss.ApplyDamageToBoss(damage);
+        }
+
+        private void Awake()
+        {
+            Initialize();
         }
 
         private void Start()
@@ -129,6 +159,17 @@ namespace TeamC
         private void OnDisable()
         {
             // save client data
+            var clientSaveDatas = FindFirstObjectByType<ClientDataSaverSuperClass>();
+            clientSaveDatas.SaveData();
+
+            // finalize all GOs
+            var gos = GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
+            // filtering inherited class IInitializedTarget
+            var initTargets = gos.ToList().Where(_ => _.GetComponent<IInitializedTarget>() != null).ToList();
+            foreach (var obj in initTargets)
+            {
+                obj.GetComponent<IInitializedTarget>().FinalizeObject();
+            } // finalize all objects
         }
     }
 }
