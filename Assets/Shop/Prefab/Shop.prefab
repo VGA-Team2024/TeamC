@@ -2028,7 +2028,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4747868b78fac7c4d8252b7225e031ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcList: []
+  npcList:
+  - {fileID: 11400000, guid: fc72dfea4fc0bfc49bdc677b710692de, type: 2}
+  - {fileID: 11400000, guid: 11f24514308eab4419354f408aa50eb2, type: 2}
+  - {fileID: 11400000, guid: 5b29fa030fdfa67438d2c3f3497543f0, type: 2}
+  - {fileID: 11400000, guid: 4b9d927ac9b3dc74db915ce73eb02016, type: 2}
+  - {fileID: 11400000, guid: 6e239d1022560d64a8f5fb5eb8e3b10e, type: 2}
   npcTexts:
   - {fileID: 2109860503872260748}
   - {fileID: 2258948200836549782}
@@ -2069,7 +2074,7 @@ RectTransform:
   m_GameObject: {fileID: 7353389426386129177}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7004865309425655320}
