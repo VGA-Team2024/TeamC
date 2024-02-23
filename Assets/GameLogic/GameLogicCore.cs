@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using SgLibUnite.Singleton;
 
 namespace TeamC
 {
@@ -94,8 +95,9 @@ namespace TeamC
     }
 
     /// <summary> ゲームロジックの処理を担うクラス </summary>
-    public class GameLogicCore : MonoBehaviour
+    public class GameLogicCore : SingletonBaseClass<GameLogicCore>
     {
+        private float _elapsedTime = 0f;
         private ClientDataTemplate savedData = new();
 
         private void OnEnable()
@@ -143,7 +145,7 @@ namespace TeamC
             boss.ApplyDamageToBoss(damage);
         }
 
-        private void Awake()
+        protected override void ToDoAtAwakeSingleton()
         {
             Initialize();
         }
@@ -154,6 +156,15 @@ namespace TeamC
 
         private void FixedUpdate()
         {
+            _elapsedTime = Time.deltaTime;
+
+            if (_elapsedTime >= 60.0f)
+            {
+                // save client data
+                var clientSaveDatas = FindFirstObjectByType<ClientDataSaverSuperClass>();
+                clientSaveDatas.SaveData();
+                _elapsedTime = 0f;
+            } // if elapsed one minutes
         }
 
         private void OnDisable()
