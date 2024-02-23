@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using SgLibUnite.Singleton;
 
 namespace TeamC
 {
@@ -94,7 +95,7 @@ namespace TeamC
     }
 
     /// <summary> ゲームロジックの処理を担うクラス </summary>
-    public class GameLogicCore : MonoBehaviour
+    public class GameLogicCore : SingletonBaseClass<GameLogicCore>
     {
         private float _elapsedTime = 0f;
         private ClientDataTemplate savedData = new();
@@ -144,7 +145,7 @@ namespace TeamC
             boss.ApplyDamageToBoss(damage);
         }
 
-        private void Awake()
+        protected override void ToDoAtAwakeSingleton()
         {
             Initialize();
         }

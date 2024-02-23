@@ -1,11 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
+using SgLibUnite.Singleton;
 
 namespace TeamC
 {
     /// <summary> プレイヤーのセーブデータ管理コンポーネントのSuperクラス </summary>
-    public class ClientDataSaverSuperClass : MonoBehaviour, IDataSaver
+    public class ClientDataSaverSuperClass : SingletonBaseClass<ClientDataSaverSuperClass>, IDataSaver
     {
         string filePath = Application.dataPath + "/saveData.json"; // ファイルパス
         public ClientDataTemplate ReadData() // called by GL
@@ -67,6 +67,11 @@ namespace TeamC
             File.WriteAllText(filePath, jsonData);
 
             Debug.Log("Game saved!"); // 保存されたことをログに出力
+        }
+
+        protected override void ToDoAtAwakeSingleton()
+        {
+            
         }
     }
 }

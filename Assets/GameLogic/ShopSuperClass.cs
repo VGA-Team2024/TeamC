@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using SgLibUnite.Singleton;
 
 namespace TeamC
 {
@@ -10,7 +11,7 @@ namespace TeamC
     /// NPCの購入数をセーブデータに記憶
     /// 
     /// <summary> ShopのSuperクラス </summary>
-    public class ShopSuperClass : MonoBehaviour, IShop, IInitializedTarget
+    public class ShopSuperClass : SingletonBaseClass<ShopSuperClass>, IShop, IInitializedTarget
     {
         [SerializeField, Tooltip("購入可能なNPCのリスト"), Header("The Buyable NPCs")]
         private List<NPCDataTemplate> npcList;
@@ -80,6 +81,11 @@ namespace TeamC
             }
 
             return cost;
+        }
+
+        protected override void ToDoAtAwakeSingleton()
+        {
+            
         }
     }
 }
