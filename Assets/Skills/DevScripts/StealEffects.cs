@@ -3,7 +3,7 @@ using UnityEngine;
 namespace TeamC
 {
     /// <summary>スティールの効果</summary>
-    [CreateAssetMenu(fileName = "GeneratedStealEffects", menuName = "CreateStealEffects")]
+    [CreateAssetMenu(fileName = "GeneratedStealEffects", menuName = "CreateSkillEffects/CreateStealEffects")]
     public class StealEffects : ScriptableObject
     {
         private Steal _steal;

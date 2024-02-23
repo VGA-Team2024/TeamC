@@ -3,7 +3,7 @@ using UnityEngine;
 namespace TeamC
 {
     /// <summary>詩人の効果</summary>
-    [CreateAssetMenu(fileName = "GeneratedPoetEffects", menuName = "CreatePoetEffects")]
+    [CreateAssetMenu(fileName = "GeneratedPoetEffects", menuName = "CreateNPCEffects/CreatePoetEffects")]
     public class PoetEffects : ScriptableObject
     {
         private Poet _poet;

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace TeamC
 {
     /// <summary>盗賊の効果</summary>
-    [CreateAssetMenu(fileName = "GeneratedThiefEffects", menuName = "CreateThiefEffects")]
+    [CreateAssetMenu(fileName = "GeneratedThiefEffects", menuName = "CreateNPCEffects/CreateThiefEffects")]
     public class ThiefEffects : ScriptableObject
     {
         [SerializeField, Header("盗みのリキャストタイム")] private float recastTime = 10.0f;

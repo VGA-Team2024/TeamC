@@ -3,7 +3,7 @@ using UnityEngine;
 namespace TeamC
 {
     /// <summary>仙人の効果</summary>
-    [CreateAssetMenu(fileName = "GeneratedHermitEffects", menuName = "CreateHermitEffects")]
+    [CreateAssetMenu(fileName = "GeneratedHermitEffects", menuName = "CreateNPCEffects/CreateHermitEffects")]
     public class HermitEffects : ScriptableObject
     {
         [SerializeField, Header("スキルのデータベース")] private SkillsDataTemplate[] skills;

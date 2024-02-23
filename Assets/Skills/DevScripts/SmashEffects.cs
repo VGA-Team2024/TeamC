@@ -3,7 +3,7 @@ using UnityEngine;
 namespace TeamC
 {
     /// <summary>スマッシュの効果</summary>
-    [CreateAssetMenu(fileName = "GeneratedSmashEffects", menuName = "CreateSmashEffects")]
+    [CreateAssetMenu(fileName = "GeneratedSmashEffects", menuName = "CreateSkillEffects/CreateSmashEffects")]
     public class SmashEffects : ScriptableObject
     {
         private Smash _smash;
