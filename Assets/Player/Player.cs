@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,5 +24,11 @@ namespace TeamC
 
         /// <summary> クリック時のダメージ量を初期化 </summary>
         public void SetPlayerApplayingDamage(decimal dmg) => base.SetDamageOnClick = dmg;
+
+        private void Start()
+        {
+            // set this player tag
+            this.gameObject.tag = "Player";
+        }
     }
 }
