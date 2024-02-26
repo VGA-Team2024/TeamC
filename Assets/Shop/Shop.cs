@@ -45,6 +45,8 @@ namespace TeamC
                     // calculate the bought count link to npc-name
                     _npcShopHistory.Add(npc.name, 0);
                 }
+
+                data = default;
             }
 
             // get each npc level to calculate bought-count
@@ -80,7 +82,7 @@ namespace TeamC
         public void DecreasePlayerSource(string npcName, decimal cost, Action<int, string> taskToInstantiate)
         {
             // get player
-            var player = GameObject.FindFirstObjectByType<PlayerSuperClass>();
+            var player = GameObject.FindFirstObjectByType<Player>();
             // process buying 
             // get bought count
             var boughtCnt = this._npcShopHistory[npcName];
@@ -138,20 +140,32 @@ namespace TeamC
         /// <summary> ボタンからNPC名を渡して購入時にこれをボタンから呼び出す </summary>
         public void BuyNPC(string name)
         {
+            Debug.Log($"G:{_player.GetCurrentGold()},C:{CalculateNPCCost(name)}");
             if (_player.GetCurrentGold() >= CalculateNPCCost(name))
             {
+                Debug.Log("YOU CAN BUY!");
                 // Superクラスでは、購入数に応じてコストを算出し、
                 // それをプレイヤーへコストの適応をして、購入数を＋１しただけ
                 DecreasePlayerSource(name, CalculateNPCCost(name), TaskToInstantiateNPC);
                 UpdateButtonDisplayInfo(name);
             }
+            else
+            {
+                Debug.Log("NEVER!");
+            }
         }
 
         void UpdateButtonDisplayInfo(string name)
         {
+            var cnt = 0;
             var index = name switch { "Warrior" => 0, "Wizard" => 1, "Thief" => 2, "Hermit" => 3, "Poet" => 4 };
-            _shopButton[index].GetComponentInChildren<TMP_Text>().text =
+            _npcShopHistory.TryGetValue(
+                index switch { 0 => "Warrior", 1 => "Wizard", 2 => "Thief", 3 => "Hermit", 4 => "Poet" },
+                out cnt
+            );
+            _shopButton[index].GetComponentInChildren<TMP_Text>().text = " " +
                 index switch { 0 => "戦士", 1 => "魔法使い", 2 => "盗賊", 3 => "仙人", 4 => "詩人" } 
+                + ((cnt - 1) > 0 ? cnt - 1 : 0).ToString() + "Lv "
                 + CalculateCostToBuy(
                     index switch { 0 => "Warrior", 1 => "Wizard", 2 => "Thief", 3 => "Hermit", 4 => "Poet" } 
                 ) + "G";
@@ -159,11 +173,17 @@ namespace TeamC
 
         void UpdateButtonDisplayInfo()
         {
+            var cnt = 0;
             //テキストの更新
             for (int i = 0; i < _shopButton.Length; i++)
             {
-                _shopButton[i].GetComponentInChildren<TMP_Text>().text =
+                _npcShopHistory.TryGetValue(
+                    i switch { 0 => "Warrior", 1 => "Wizard", 2 => "Thief", 3 => "Hermit", 4 => "Poet" },
+                    out cnt
+                );
+                _shopButton[i].GetComponentInChildren<TMP_Text>().text = " " + 
                     i switch { 0 => "戦士", 1 => "魔法使い", 2 => "盗賊", 3 => "仙人", 4 => "詩人" } 
+                    + ((cnt - 1) > 0 ? cnt - 1 : 0).ToString() + "Lv "
                     + CalculateCostToBuy(
                         i switch { 0 => "Warrior", 1 => "Wizard", 2 => "Thief", 3 => "Hermit", 4 => "Poet" } 
                         ) + "G";
@@ -188,7 +208,7 @@ namespace TeamC
         private void Update()
         {
             UpdateButtonDisplayInfo();
-            Debug.Log($"Cnt:{_npcShopHistory.Count}");
+            // Debug.Log($"Cnt:{_npcShopHistory.Count}");
         }
     }
 }
