@@ -37,7 +37,6 @@ namespace TeamC
 
         public void InitializeObject()
         {
-            _isActive = false;
         }
 
         public void PauseObject()
