@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7911420116163327262}
   - component: {fileID: 3393943950202276733}
   - component: {fileID: 5048308503604350860}
+  - component: {fileID: 398992355863452832}
   m_Layer: 5
   m_Name: SmashSkill
   m_TagString: Untagged
@@ -147,6 +148,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillData: {fileID: 11400000, guid: fdad806ff0930b1409c942acbb4169b0, type: 2}
+--- !u!114 &398992355863452832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56797301766137129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f8f567025b9d24c9719b87d79ddbe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2567201724721315895
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,6 +445,7 @@ GameObject:
   - component: {fileID: 5661094504538121247}
   - component: {fileID: 9222648098608521007}
   - component: {fileID: 3664518816548585450}
+  - component: {fileID: 6779789156123539772}
   m_Layer: 5
   m_Name: StealSkill
   m_TagString: Untagged
@@ -566,6 +580,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillData: {fileID: 11400000, guid: 26246b1ddfda1ab4882a1b1668d8adc6, type: 2}
+--- !u!114 &6779789156123539772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3978889758241842375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 311278fd34fd7204e9ad95184e719392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6766367435065468791
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,6 +643,7 @@ GameObject:
   - component: {fileID: 1775901635758590291}
   - component: {fileID: 4378068521782465539}
   - component: {fileID: 5879168952331120115}
+  - component: {fileID: 6136874986459586611}
   m_Layer: 5
   m_Name: DestroySkill
   m_TagString: Untagged
@@ -751,6 +778,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillData: {fileID: 11400000, guid: d7dd6beb9f7da3f45960f0e954a0d143, type: 2}
+--- !u!114 &6136874986459586611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8132190392846879018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c024b4bb2e7384ea8207b544751e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9146154799078170950
 GameObject:
   m_ObjectHideFlags: 0
