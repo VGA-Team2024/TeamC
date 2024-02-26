@@ -77,7 +77,7 @@ namespace TeamC
             // save shop info etc...
         }
 
-        /// <summary> 購入処理。プレイヤーのリソースを減らす処理と、購入数の＋１のみ </summary>
+        /// <summary> 購入処理。プレイヤーのリソースを減らす処理と、購入数の＋１処理のみ </summary>
         public void DecreasePlayerSource(string npcName, decimal cost, Action<int, string> taskToInstantiate)
         {
             // get player

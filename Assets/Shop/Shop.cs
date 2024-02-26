@@ -90,8 +90,8 @@ namespace TeamC
             //名前で検索できるように
             List<string> names = new List<string>();
             
-            _npcNameLabelDic.Clear();
-            _npcNameButtonDic.Clear();
+            // _npcNameLabelDic.Clear();
+            // _npcNameButtonDic.Clear();
             
             for (int i = 0; i < names.Count; i++)
             {
