@@ -10,7 +10,7 @@ namespace TeamC
 
         private Hermit _hermit;
         private int _hermitLevel;
-
+        
         /// <summary>仙人の効果発動時の処理</summary>
         public void OnHermitEffects()
         {
@@ -32,7 +32,7 @@ namespace TeamC
                     if (currentLevel >= skill.RequiredLevel)
                     {
                         // スキルのロックが解除される
-                        //skill.canUseSkill = true;
+                        skill.IsLocked = false;
 
 #if UNITY_EDITOR
                         Debug.Log($"{skill.name}が使用可能です");
@@ -41,7 +41,7 @@ namespace TeamC
                     else
                     {
                         // スキルをロックする
-                        //skill.canUseSkill = false;
+                        skill.IsLocked = true;
 
 #if UNITY_EDITOR
                         Debug.Log($"{skill.name}は使用不可能です");
