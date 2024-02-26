@@ -1,5 +1,6 @@
 namespace TeamC
 {
+    /// <summary>スティールのスキル</summary>
     public class StealSkill : SkillsSuperClass
     {
         /// <summary>スキルロックののフラグを取得します</summary>

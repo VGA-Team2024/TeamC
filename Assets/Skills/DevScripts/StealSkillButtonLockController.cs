@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace TeamC
 {
+    /// <summary>スティールのスキルロック状況を管理します</summary>
     [RequireComponent(typeof(ClicableObject))]
     [RequireComponent(typeof(StealSkill))]
     public class StealSkillButtonLockController : MonoBehaviour

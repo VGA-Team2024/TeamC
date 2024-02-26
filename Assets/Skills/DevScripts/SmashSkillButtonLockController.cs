@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace TeamC
 {
+    /// <summary>スマッシュのスキルボタンのロック状況を管理します</summary>
     [RequireComponent(typeof(ClicableObject))]
     [RequireComponent(typeof(SmashSkill))]
     public class SmashSkillButtonLockController : MonoBehaviour

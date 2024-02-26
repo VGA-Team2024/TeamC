@@ -1,5 +1,6 @@
 namespace TeamC
 {
+    /// <summary>スマッシュのスキル</summary>
     public class SmashSkill : SkillsSuperClass
     {
         /// <summary>スキルロックののフラグを取得します</summary>

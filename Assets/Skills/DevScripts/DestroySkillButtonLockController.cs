@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace TeamC
 {
+    /// <summary>デストロイのスキルボタンのロック状況を管理します</summary>
     [RequireComponent(typeof(ClicableObject))]
     [RequireComponent(typeof(DestroySkill))]
     public class DestroySkillButtonLockController : MonoBehaviour
