@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a04b45eb935b3744a84377aa2ec2995, type: 3}
-  m_Name: TestPoetData
+  m_Name: TestThiefData
   m_EditorClassIdentifier: 
-  Name: "\u8A69\u4EBA"
-  BasePrice: 0
+  id: 2
+  Name: "\u76D7\u8CCA"
+  BasePrice: 100
   Effects:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 588981a087c851a44875d47fab7a22a4, type: 2}
-        m_TargetAssemblyTypeName: TeamC.PoetEffects, Assembly-CSharp
-        m_MethodName: OnPoetEffects
+      - m_Target: {fileID: 11400000, guid: 9248ea9b513a5114489866b6f8663a66, type: 2}
+        m_TargetAssemblyTypeName: TeamC.ThiefEffects, Assembly-CSharp
+        m_MethodName: OnThiefEffects
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
