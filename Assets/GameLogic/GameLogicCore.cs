@@ -44,7 +44,7 @@ namespace TeamC
         public decimal CalculateCostToBuy(string npcName);
 
         /// <summary> プレイヤーのゴールドを減らす </summary>
-        public void DecreasePlayerSource(string npcName, decimal cost, Action<int> taskToInstantiate);
+        public void DecreasePlayerSource(string npcName, decimal cost, Action<int, string> taskToInstantiate);
     }
 
     /// <summary> NPCが継承する </summary>

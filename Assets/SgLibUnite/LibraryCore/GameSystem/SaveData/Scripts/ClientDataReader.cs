@@ -11,7 +11,7 @@ namespace SgLibUnite
             protected override void ToDoAtAwakeSingleton() { }
 
             /// <summary> セーブデータの読み込み </summary>
-            public ClientDataTemplate ReadSaveData()
+            public ClientDataTemplate_ActionGame ReadSaveData()
             {
                 string dataStr = "";
                 try
@@ -19,12 +19,12 @@ namespace SgLibUnite
                     StreamReader sr = new StreamReader(Application.dataPath + "/PlayerSavedData.json");
                     dataStr = sr.ReadToEnd();
                     sr.Close();
-                    return JsonUtility.FromJson<ClientDataTemplate>(dataStr);
+                    return JsonUtility.FromJson<ClientDataTemplate_ActionGame>(dataStr);
                 }
                 catch(FileNotFoundException)
                 {
                     var t = GameObject.FindGameObjectWithTag("Player_Pos_OnNoData").transform;
-                    var data = new ClientDataTemplate();
+                    var data = new ClientDataTemplate_ActionGame();
                     data.lastLookingRotation = t.rotation;
                     data.lastStandingPosition = t.position;
 
