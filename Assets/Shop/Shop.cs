@@ -27,7 +27,7 @@ namespace TeamC
 
         [SerializeField] private Button[] _shopButton;
 
-        private Player _player = new();
+        private Player _player;
         
         [SerializeField, Tooltip("購入可能なNPCのリスト"), Header("The Buyable NPCs")]
         private List<NPCDataTemplate> npcList;
@@ -61,6 +61,8 @@ namespace TeamC
             this._npcShopHistory.Add("Thief", thf);
             this._npcShopHistory.Add("Hermit", hrmt);
             this._npcShopHistory.Add("Poet", pt);
+
+            _player = GameObject.FindFirstObjectByType<Player>();
         }
 
         public void PauseObject()
@@ -85,7 +87,8 @@ namespace TeamC
             var player = GameObject.FindFirstObjectByType<Player>();
             // process buying 
             // get bought count
-            var boughtCnt = this._npcShopHistory[npcName];
+            var boughtCnt = 0;
+            this._npcShopHistory.TryGetValue(npcName, out boughtCnt);
             player.DecreasePlayerGold(cost);
             // task to instantiate
             taskToInstantiate(boughtCnt + 1, npcName);
@@ -140,7 +143,7 @@ namespace TeamC
         /// <summary> ボタンからNPC名を渡して購入時にこれをボタンから呼び出す </summary>
         public void BuyNPC(string name)
         {
-            Debug.Log($"G:{_player.GetCurrentGold()},C:{CalculateNPCCost(name)}");
+            // Debug.Log($"G:{_player.GetCurrentGold()},C:{CalculateNPCCost(name)}");
             if (_player.GetCurrentGold() >= CalculateNPCCost(name))
             {
                 Debug.Log("YOU CAN BUY!");
@@ -148,6 +151,7 @@ namespace TeamC
                 // それをプレイヤーへコストの適応をして、購入数を＋１しただけ
                 DecreasePlayerSource(name, CalculateNPCCost(name), TaskToInstantiateNPC);
                 UpdateButtonDisplayInfo(name);
+            throw new NotImplementedException();
             }
             else
             {

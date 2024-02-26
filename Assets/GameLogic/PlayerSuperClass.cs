@@ -32,6 +32,7 @@ namespace TeamC
         public void ApplyRewardToPlayer(decimal rewards) // apply rewards
         {
             _currentGold += rewards;
+            Debug.Log($"Current Gold : {_currentGold}");
         }
 
         public void DecreasePlayerGold(decimal amount) // apply reduce resource to player
