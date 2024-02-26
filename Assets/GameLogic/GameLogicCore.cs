@@ -161,6 +161,7 @@ namespace TeamC
             foreach (var obj in initTargets)
             {
                 obj.GetComponent<IInitializedTarget>().InitializeObject();
+                Debug.Log($"Initialized:{obj.name}");
             } // initialize all objects
         }
 
@@ -173,11 +174,11 @@ namespace TeamC
 
         protected override void ToDoAtAwakeSingleton()
         {
-            Initialize();
         }
 
         private void Start()
         {
+            Initialize();
         }
 
         private void FixedUpdate()

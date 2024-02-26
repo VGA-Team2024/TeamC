@@ -18,7 +18,7 @@ namespace TeamC
         private List<NPCDataTemplate> npcList;
 
         /// <summary> NPCの名前に対応したそのNPCの購入数を格納 TName, TBoughtCount </summary>
-        private Dictionary<string, int> _npcShopHistory = new(); // name, bought-count
+        private Dictionary<string, int> _npcShopHistory; // name, bought-count
 
         /// <summary> NPCの購入情報NPC名とその購入数を格納している #sd </summary>
         protected Dictionary<string, int> GetNPCShopHistory
@@ -28,6 +28,8 @@ namespace TeamC
 
         public void InitializeObject()
         {
+            _npcShopHistory.Clear();
+
             try
             {
                 ClientDataTemplate dataMayDntExist =
@@ -45,31 +47,20 @@ namespace TeamC
             }
 
             var data = GameObject.FindFirstObjectByType<ClientDataSaverSuperClass>().ReadData();
-            if (data == null)
-            {
-                foreach (var npc in npcList)
-                {
-                    // calculate the bought count link to npc-name
-                    _npcShopHistory.Add(npc.name, 0);
-                }
-            }
-            else
-            {
-                // get each npc level to calculate bought-count
-                var wror = data._saveWarriorLevel - 1;
-                var wzrd = data._saveWizardLevel - 1;
-                var thf = data._saveThiefLevel - 1;
-                var hrmt = data._saveHermitLevel - 1;
-                var pt = data._savePoetLevel - 1;
 
-                _npcShopHistory.Clear();
+            // get each npc level to calculate bought-count
+            var wror = data._saveWarriorLevel;
+            var wzrd = data._saveWizardLevel;
+            var thf = data._saveThiefLevel;
+            var hrmt = data._saveHermitLevel;
+            var pt = data._savePoetLevel;
 
-                _npcShopHistory.Add("Warrior", wror);
-                _npcShopHistory.Add("Wizard", wzrd);
-                _npcShopHistory.Add("Thief", thf);
-                _npcShopHistory.Add("Hermit", hrmt);
-                _npcShopHistory.Add("Poet", pt);
-            }
+
+            _npcShopHistory.Add("Warrior", wror);
+            _npcShopHistory.Add("Wizard", wzrd);
+            _npcShopHistory.Add("Thief", thf);
+            _npcShopHistory.Add("Hermit", hrmt);
+            _npcShopHistory.Add("Poet", pt);
         }
 
         public void PauseObject()
@@ -97,7 +88,7 @@ namespace TeamC
             var boughtCnt = _npcShopHistory[npcName];
             player.DecreasePlayerGold(cost);
             // task to instantiate
-            taskToInstantiate(boughtCnt+1, npcName);
+            taskToInstantiate(boughtCnt + 1, npcName);
             // increment bought count 
             ++_npcShopHistory[npcName];
         }
@@ -105,8 +96,17 @@ namespace TeamC
         /// <summary> NPC名に応じたNPCの購入数に応じた価格を算出して返す </summary>
         public decimal CalculateCostToBuy(string npcName)
         {
+            var boughtCnt = 0;
             // get bought count
-            var boughtCnt = _npcShopHistory[npcName];
+            if (_npcShopHistory[npcName] != null)
+            {
+                boughtCnt = _npcShopHistory[npcName];
+            }
+            else
+            {
+                boughtCnt = 0;
+            }
+
             // get target npc
             var target = npcList.Where(_ => _.Name == npcName).ToList();
 
@@ -114,7 +114,7 @@ namespace TeamC
             // get base-price
             if (target.Count == 1) cost = (decimal)target[0].BasePrice;
             // calculate cost
-            for (int i = 0; i < boughtCnt; i++)
+            for (int i = 0; i <= boughtCnt; i++)
             {
                 cost *= (decimal)1.15;
             }

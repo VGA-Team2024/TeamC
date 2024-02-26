@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -66,32 +67,36 @@ namespace TeamC
             //     $"{name} Lv{GetNPCShopHistory[name]} {CalculateNPCCost(name).ToString("F0")}G";
         }
 
-        ///<summary>ボタンが押せるかどうか</summary>
-        /// <param name="value"></param>
-        public void IsPushButton(decimal value)
-        {
-            foreach (Button button in _shopButton)
-            {
-                if (_player.GetCurrentGold() >= CalculateNPCCost(button.name))
-                {
-                    button.interactable = true;
-                }
-                else
-                {
-                    button.interactable = false;
-                }
-            }
-        }
-
         /// <summary> NPCの購入数に応じた価格の算出 </summary>
         public decimal CalculateNPCCost(string npcName)
         {
             return base.CalculateCostToBuy(npcName);
         }
 
-        private void Start()
+        private void LateUpdate()
         {
-            
+            // 各購入ボタンへコストの表示
+            for (int i = 0; i < _shopButton.Length; ++i)
+            {
+                switch (i)
+                {
+                    case 0:
+                        _shopButton[i].GetComponentInChildren<TMP_Text>().text = "戦士 : " + CalculateNPCCost("Warrior").ToString();
+                        break;
+                    case 1:
+                        _shopButton[i].GetComponentInChildren<TMP_Text>().text = "魔法使い : " + CalculateNPCCost("Wizard").ToString();
+                        break;
+                    case 2:
+                        _shopButton[i].GetComponentInChildren<TMP_Text>().text = "盗賊 : " + CalculateNPCCost("Thief").ToString();
+                        break;
+                    case 3:
+                        _shopButton[i].GetComponentInChildren<TMP_Text>().text = "仙人 : " + CalculateNPCCost("Hermit").ToString();
+                        break;
+                    case 4:
+                        _shopButton[i].GetComponentInChildren<TMP_Text>().text = "詩人 : " + CalculateNPCCost("Poet").ToString();
+                        break;
+                }
+            }
         }
     }
 }
