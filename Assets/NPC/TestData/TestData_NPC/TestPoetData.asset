@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a04b45eb935b3744a84377aa2ec2995, type: 3}
   m_Name: TestPoetData
   m_EditorClassIdentifier: 
-  id: 4
-  Name: "\u8A69\u4EBA"
+  Name: Poet
   BasePrice: 1000
   Effects:
     m_PersistentCalls:

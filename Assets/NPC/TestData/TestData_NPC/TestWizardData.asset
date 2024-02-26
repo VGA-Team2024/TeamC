@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a04b45eb935b3744a84377aa2ec2995, type: 3}
   m_Name: TestWizardData
   m_EditorClassIdentifier: 
-  id: 1
-  Name: "\u9B54\u6CD5\u4F7F\u3044"
+  Name: Wizard
   BasePrice: 10
   Effects:
     m_PersistentCalls:
