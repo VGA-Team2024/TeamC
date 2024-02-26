@@ -94,8 +94,10 @@ namespace TeamC
         /// <summary> NPC名に応じたNPCの購入数に応じた価格を算出して返す </summary>
         public decimal CalculateCostToBuy(string npcName)
         {
+            if (_npcShopHistory.Count == 0) return 1;
             // get bought count
-            var boughtCnt = this._npcShopHistory[npcName];
+            var boughtCnt = 0;
+            _npcShopHistory.TryGetValue(npcName, out boughtCnt);
             // get target npc
             var target = npcList.Where(_ => _.Name == npcName).ToList();
 
@@ -110,11 +112,7 @@ namespace TeamC
 
             return cost;
         }
-
-        protected override void ToDoAtAwakeSingleton()
-        {
-        }
-
+        
         void TaskToInstantiateNPC(int boughtCnt, string name)
         {
             switch (name)
@@ -151,15 +149,35 @@ namespace TeamC
 
         void UpdateButtonDisplayInfo(string name)
         {
+            var index = name switch { "Warrior" => 0, "Wizard" => 1, "Thief" => 2, "Hermit" => 3, "Poet" => 4 };
+            _shopButton[index].GetComponentInChildren<TMP_Text>().text =
+                index switch { 0 => "戦士", 1 => "魔法使い", 2 => "盗賊", 3 => "仙人", 4 => "詩人" } 
+                + CalculateCostToBuy(
+                    index switch { 0 => "Warrior", 1 => "Wizard", 2 => "Thief", 3 => "Hermit", 4 => "Poet" } 
+                ) + "G";
+        }
+
+        void UpdateButtonDisplayInfo()
+        {
             //テキストの更新
-            // _npcNameButtonDic[name].GetComponentInChildren<TMP_Text>().text =
-            //     $"{name} Lv{GetNPCShopHistory[name]} {CalculateNPCCost(name).ToString("F0")}G";
+            for (int i = 0; i < _shopButton.Length; i++)
+            {
+                _shopButton[i].GetComponentInChildren<TMP_Text>().text =
+                    i switch { 0 => "戦士", 1 => "魔法使い", 2 => "盗賊", 3 => "仙人", 4 => "詩人" } 
+                    + CalculateCostToBuy(
+                        i switch { 0 => "Warrior", 1 => "Wizard", 2 => "Thief", 3 => "Hermit", 4 => "Poet" } 
+                        ) + "G";
+            }
         }
 
         /// <summary> NPCの購入数に応じた価格の算出 </summary>
         public decimal CalculateNPCCost(string npcName)
         {
             return CalculateCostToBuy(npcName);
+        }
+        
+        protected override void ToDoAtAwakeSingleton()
+        {
         }
 
         private void Start()
@@ -169,6 +187,8 @@ namespace TeamC
 
         private void Update()
         {
+            UpdateButtonDisplayInfo();
+            Debug.Log($"Cnt:{_npcShopHistory.Count}");
         }
     }
 }
