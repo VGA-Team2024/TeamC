@@ -20,6 +20,7 @@ namespace TeamC
         /// <summary> NPCの名前に対応したそのNPCの購入数を格納 TName, TBoughtCount </summary>
         private Dictionary<string, int> _npcShopHistory = new(); // name, bought-count
 
+        protected List<int> _shopHis = new();
         /// <summary> NPCの購入情報NPC名とその購入数を格納している #sd </summary>
         protected Dictionary<string, int> GetNPCShopHistory
         {
@@ -28,22 +29,6 @@ namespace TeamC
 
         public void InitializeObject()
         {
-            try
-            {
-                ClientDataTemplate dataMayDntExist =
-                    GameObject.FindFirstObjectByType<ClientDataSaverSuperClass>().ReadData();
-            }
-            catch (FileNotFoundException)
-            {
-                foreach (var npc in npcList)
-                {
-                    // calculate the bought count link to npc-name
-                    _npcShopHistory.Add(npc.name, 0);
-                }
-
-                Debug.Log("Shop-S-Class:SaveData Cannot Read!");
-            }
-
             var data = GameObject.FindFirstObjectByType<ClientDataSaverSuperClass>().ReadData();
             if (data == null)
             {
@@ -62,13 +47,17 @@ namespace TeamC
                 var hrmt = data._saveHermitLevel - 1;
                 var pt = data._savePoetLevel - 1;
 
-                _npcShopHistory.Clear();
-
                 _npcShopHistory.Add("Warrior", wror);
                 _npcShopHistory.Add("Wizard", wzrd);
                 _npcShopHistory.Add("Thief", thf);
                 _npcShopHistory.Add("Hermit", hrmt);
                 _npcShopHistory.Add("Poet", pt);
+                
+                _shopHis.Add(wror);
+                _shopHis.Add(wzrd);
+                _shopHis.Add(thf);
+                _shopHis.Add(hrmt);
+                _shopHis.Add(pt);
             }
         }
 
@@ -105,9 +94,12 @@ namespace TeamC
         /// <summary> NPC名に応じたNPCの購入数に応じた価格を算出して返す </summary>
         public decimal CalculateCostToBuy(string npcName)
         {
+            int boughtCnt = 0;
             // get bought count
-            var boughtCnt = _npcShopHistory[npcName];
+            // var boughtCnt = _npcShopHistory[npcName];
             // get target npc
+            boughtCnt = _shopHis[
+                npcName switch { "Warrior" => 0, "Wizard" => 1, "Thief" => 2, "Hermit" => 3, "Poet" => 4 }];
             var target = npcList.Where(_ => _.Name == npcName).ToList();
 
             decimal cost = 0;
@@ -124,6 +116,7 @@ namespace TeamC
 
         protected override void ToDoAtAwakeSingleton()
         {
+            
         }
     }
 }
