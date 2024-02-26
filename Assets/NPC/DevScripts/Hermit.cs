@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace TeamC
@@ -6,8 +8,6 @@ namespace TeamC
     /// <summary>仙人の処理</summary>
     public class Hermit : NPC, IHermit
     {
-        [SerializeField, Header("スキルのデータベース")] private SkillsDataTemplate[] skills;
-        
         private void FixedUpdate()
         {
             //throw new NotImplementedException();
@@ -17,16 +17,22 @@ namespace TeamC
         public List<SkillsDataTemplate> GetFirableSkills()
         {
             //throw new System.NotImplementedException();
-            
-            List<SkillsDataTemplate> result = new List<SkillsDataTemplate>();
 
-            foreach (var skill in skills)
+            // Resources/SkillsDataフォルダからIsLockedがfalseのスキルのデータをListで取得します
+            List<SkillsDataTemplate> result = Resources.LoadAll("SkillsData", typeof(SkillsDataTemplate))
+                .OfType<SkillsDataTemplate>().Where(data => !data.IsLocked).ToList();
+
+#if UNITY_EDITOR
+            // 使用可能なスキルをコンソールに出力する
+            string message = String.Empty;
+
+            foreach (var skill in result)
             {
-                if (!skill.IsLocked)
-                {
-                    result.Add(skill);
-                }
+                message += $"{skill.SkillName}\n";
             }
+
+            Debug.Log(message);
+#endif
 
             return result;
         }

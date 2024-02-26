@@ -4,7 +4,7 @@ using UnityEngine;
 namespace TeamC
 {
     /// <summary>戦士の効果</summary>
-    [CreateAssetMenu(fileName = "GeneratedWarriorEffects", menuName = "CreateWarriorEffects")]
+    [CreateAssetMenu(fileName = "GeneratedWarriorEffects", menuName = "CreateNPCEffects/CreateWarriorEffects")]
     public class WarriorEffects : ScriptableObject
     {
         [SerializeField, Header("攻撃のリキャストタイム")] private float recastTime = 10.0f;

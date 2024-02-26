@@ -1,5 +1,6 @@
 namespace TeamC
 {
+    /// <summary>デストロイのスキル</summary>
     public class DestroySkill : SkillsSuperClass
     {
         /// <summary>スキルロックののフラグを取得します</summary>
