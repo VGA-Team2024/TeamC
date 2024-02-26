@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace TeamC
@@ -28,17 +23,27 @@ namespace TeamC
 
         [SerializeField] private Button[] _shopButton;
 
-        private Dictionary<string, TMP_Text> _npcNameLabelDic;
-        private Dictionary<string, Button> _npcNameButtonDic;
-        
         private Player _player = new();
-        
+
         void TaskToInstantiateNPC(int boughtCnt, string name)
         {
-            // ★NPCをシーン場へInstanciateする処理はSuperクラスには書いていない★
-            if (boughtCnt == 0)
+            switch (name)
             {
-            	_npcNameLabelDic[name].gameObject.SetActive(true);
+                case "Warrior":
+                    GameObject.FindFirstObjectByType<Warrior>().SetActivation((boughtCnt >= 1));
+                    break;
+                case "Wizard":
+                    GameObject.FindFirstObjectByType<Wizard>().SetActivation((boughtCnt >= 1));
+                    break;
+                case "Thief":
+                    GameObject.FindFirstObjectByType<Thief>().SetActivation((boughtCnt >= 1));
+                    break;
+                case "Hermit":
+                    GameObject.FindFirstObjectByType<Hermit>().SetActivation((boughtCnt >= 1));
+                    break;
+                case "Poet":
+                    GameObject.FindFirstObjectByType<Poet>().SetActivation((boughtCnt >= 1));
+                    break;
             }
         }
 
@@ -50,15 +55,15 @@ namespace TeamC
                 // Superクラスでは、購入数に応じてコストを算出し、
                 // それをプレイヤーへコストの適応をして、購入数を＋１しただけ
                 base.DecreasePlayerSource(name, CalculateNPCCost(name), TaskToInstantiateNPC);
-                UpdateButtonDisplayInfo();
+                UpdateButtonDisplayInfo(name);
             }
         }
 
-        void UpdateButtonDisplayInfo()
+        void UpdateButtonDisplayInfo(string name)
         {
             //テキストの更新
-            _npcNameButtonDic[name].GetComponentInChildren<Text>().text =
-                $"{name} Lv{GetNPCShopHistory[name]} {CalculateNPCCost(name).ToString("F0")}G";
+            // _npcNameButtonDic[name].GetComponentInChildren<TMP_Text>().text =
+            //     $"{name} Lv{GetNPCShopHistory[name]} {CalculateNPCCost(name).ToString("F0")}G";
         }
 
         ///<summary>ボタンが押せるかどうか</summary>
@@ -86,17 +91,7 @@ namespace TeamC
 
         private void Start()
         {
-            if (GetNPCShopHistory.Keys == null) return;
-            //名前で検索できるように
-            List<string> names = new List<string>();
             
-            for (int i = 0; i < names.Count; i++)
-            {
-            	_npcLabels[i].gameObject.SetActive(false);
-            	_npcNameLabelDic.Add(names[i], _npcLabels[i]);
-            	_npcNameButtonDic.Add(names[i], _shopButton[i]);
-            	_shopButton[i].GetComponentInChildren<TMP_Text>().text = $"{names[i]} lv0 {CalculateNPCCost(names[i])}";
-            }
         }
     }
 }

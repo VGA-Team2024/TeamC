@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace TeamC
 {
@@ -16,45 +15,47 @@ namespace TeamC
     /// <summary> Bossのコンポーネント。これがSceneに存在 </summary>
     public class Boss : BossSuperClass
     {
-        SpriteRenderer currentRenderer;
+        Image _img;
         [SerializeField] Sprite _defaultDragonTexture;
         [SerializeField] Sprite _FirstDragonTexture;
         [SerializeField] Sprite _SecondDragonTexture;
         [SerializeField] Sprite _ThirdDragonTexture;
         [SerializeField] Sprite _FourthDragonTexture;
+
         int currentStage = 0;
+
         PlayerSuperClass player;
+
         void Start()
         {
+            _img = GetComponent<Image>();
             player = FindFirstObjectByType<PlayerSuperClass>();
-        }
-        void Update()
-        {
-            if (IsDeadBoss())
-                base.OnDeath();
 
             currentStage = player.GetClearedFloorAmount();
-            if(currentStage > 0 &&  currentStage < 6)
-            {
-                currentRenderer.sprite = _defaultDragonTexture;
-            }
+            if (currentStage >= 0 && currentStage < 6)
+                _img.sprite = _defaultDragonTexture;
             if (currentStage >= 6 && currentStage < 11)
-                currentRenderer.sprite = _FirstDragonTexture;
+                _img.sprite = _FirstDragonTexture;
 
             if (currentStage >= 11 && currentStage < 16)
-                currentRenderer.sprite = _SecondDragonTexture;
+                _img.sprite = _SecondDragonTexture;
 
             if (currentStage >= 16 && currentStage < 21)
-                currentRenderer.sprite = _ThirdDragonTexture;
+                _img.sprite = _ThirdDragonTexture;
 
             if (currentStage >= 21 && currentStage <= 26)
-                currentRenderer.sprite = _FourthDragonTexture;
-
+                _img.sprite = _FourthDragonTexture;
         }
-        bool IsDeadBoss()
+
+        void Update()
+        {
+            if (IsBossDead())
+                base.OnDeath();
+        }
+
+        bool IsBossDead()
         {
             return base.GetHP <= 0;
         }
-
     }
 }

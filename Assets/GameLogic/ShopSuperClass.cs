@@ -72,6 +72,16 @@ namespace TeamC
             }
         }
 
+        public void PauseObject()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ResumeObject()
+        {
+            throw new NotImplementedException();
+        }
+
         public void FinalizeObject()
         {
             // save shop info etc...
@@ -87,7 +97,7 @@ namespace TeamC
             var boughtCnt = _npcShopHistory[npcName];
             player.DecreasePlayerGold(cost);
             // task to instantiate
-            taskToInstantiate(boughtCnt, npcName);
+            taskToInstantiate(boughtCnt+1, npcName);
             // increment bought count 
             ++_npcShopHistory[npcName];
         }
