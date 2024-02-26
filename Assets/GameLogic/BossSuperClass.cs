@@ -12,17 +12,27 @@ namespace TeamC
         // ～目標～
         // ボスの派生クラスはUIに対する制御とHPに対する
         // 制御だけ書けばよいとこまでがSuperクラスで実装できている部分とする
-        
+
         [SerializeField, Header("The Health Point The Boss Have")]
         private decimal hp = 0; // the hp of boss
 
         [SerializeField, Header("The Rewards When Defeated The Boss")]
         private decimal rewards = 0; // the gold of boss
 
+        private decimal _maxHpAtCurrentFloor;
+
         /// <summary> ボスのHPを返す </summary>
         public decimal GetHP
         {
             get { return hp; }
+        }
+
+        /// <summary>
+        /// ボスのその階層のHPの最大値
+        /// </summary>
+        public decimal GetMaxHPAtCurrentFloor
+        {
+            get { return _maxHpAtCurrentFloor; }
         }
 
         #region BossInitialization
@@ -34,7 +44,7 @@ namespace TeamC
             #region CalculateBaseStage
 
             // baseFloor = 1
-            if (1 <= clearedStages && clearedStages < 6)
+            if (0 <= clearedStages && clearedStages < 6)
             {
                 baseStage = 1;
             }
@@ -145,7 +155,7 @@ namespace TeamC
             #region CalculateBaseStage
 
             // baseFloor = 1
-            if (1 <= clearedStages && clearedStages < 6)
+            if (0 <= clearedStages && clearedStages < 6)
             {
                 baseStage = 1;
             }
@@ -200,20 +210,31 @@ namespace TeamC
         public void InitializeObject() // Called On GL-Start
         {
             // ★if client data is exist read saved client data★
-            
+
             // calculate hp
             var player = FindFirstObjectByType<PlayerSuperClass>();
             var clearedStage = 0;
             // Get Cleared Stage
             clearedStage = player.GetClearedFloorAmount();
-            hp = CalculateHealthPoint(clearedStage);
-            rewards = CalculateRewards(clearedStage);
+            hp = CalculateHealthPoint(clearedStage + 1);
+            rewards = CalculateRewards(clearedStage + 1);
+            _maxHpAtCurrentFloor = hp;
+        }
+
+        public void PauseObject()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ResumeObject()
+        {
+            throw new NotImplementedException();
         }
 
         public void FinalizeObject() // Called On GL-End
         {
             // ★save boss hp to client data★ 
-            
+
             throw new NotImplementedException();
         }
     }

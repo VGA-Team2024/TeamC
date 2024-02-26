@@ -8,17 +8,25 @@ namespace TeamC
     public class ClientDataSaverSuperClass : SingletonBaseClass<ClientDataSaverSuperClass>, IDataSaver
     {
         string filePath = Application.dataPath + "/saveData.json"; // ファイルパス
+
         public ClientDataTemplate ReadData() // called by GL
         {
             string dataStr = "";
-            try { dataStr = File.ReadAllText(filePath); }
+            try
+            {
+                dataStr = File.ReadAllText(filePath);
+                
+                StreamReader sr = new StreamReader(filePath);
+                dataStr = sr.ReadToEnd();
+                sr.Close();
+                return JsonUtility.FromJson<ClientDataTemplate>(dataStr);
+            }
             catch (FileNotFoundException)
             {
-                File.WriteAllText(filePath, string.Empty);
+                var data = new ClientDataTemplate();
+                data = default;
+                return data;
             }
-
-            var data = JsonUtility.FromJson<ClientDataTemplate>(dataStr);
-            return data;
         }
 
         public void SaveData()
@@ -63,15 +71,17 @@ namespace TeamC
 
 
             // JSON形式に変換して保存
-            string jsonData = JsonUtility.ToJson(data);
-            File.WriteAllText(filePath, jsonData);
+            string jsonStr = JsonUtility.ToJson(data);
 
+            StreamWriter sw = new StreamWriter(filePath, false);
+            sw.WriteLine(jsonStr);
+            sw.Flush();
+            sw.Close();
             Debug.Log("Game saved!"); // 保存されたことをログに出力
         }
 
         protected override void ToDoAtAwakeSingleton()
         {
-            
         }
     }
 }

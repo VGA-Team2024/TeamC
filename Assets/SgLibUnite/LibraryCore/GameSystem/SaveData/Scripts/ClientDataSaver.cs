@@ -11,7 +11,7 @@ namespace SgLibUnite
     namespace Systems
     {
         [Serializable]
-        public class ClientDataTemplate
+        public class ClientDataTemplate_ActionGame
         {
             /// <summary> The Position The Player Was Standing </summary>
             public Vector3 lastStandingPosition; // Pos
@@ -73,12 +73,12 @@ namespace SgLibUnite
             /// <summary> トランスフォームとシーン名を手動で指定してセーブ </summary>
             public void SaveData(Transform playerStandingTransform, string sceneName)
             {
-                ClientDataTemplate template = new ClientDataTemplate();
-                template.lastStandingPosition = playerStandingTransform.position;
-                template.lastLookingRotation = playerStandingTransform.rotation;
-                template.sceneNameLastStand = sceneName;
+                ClientDataTemplate_ActionGame templateActionGame = new ClientDataTemplate_ActionGame();
+                templateActionGame.lastStandingPosition = playerStandingTransform.position;
+                templateActionGame.lastLookingRotation = playerStandingTransform.rotation;
+                templateActionGame.sceneNameLastStand = sceneName;
 
-                string jsonStr = JsonUtility.ToJson(template);
+                string jsonStr = JsonUtility.ToJson(templateActionGame);
 
                 StreamWriter sw = new StreamWriter(_playerDataPath, false);
                 sw.WriteLine(jsonStr);

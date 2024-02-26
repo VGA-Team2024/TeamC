@@ -10,6 +10,7 @@ namespace TeamC
     {
         private void FixedUpdate()
         {
+            if(!_isActive) return;
             //throw new NotImplementedException();
             base.GetNPCEffects.Invoke();
         }

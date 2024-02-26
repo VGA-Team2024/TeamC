@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using SgLibUnite.Singleton;
@@ -16,8 +17,8 @@ namespace TeamC
         [SerializeField, Tooltip("購入可能なNPCのリスト"), Header("The Buyable NPCs")]
         private List<NPCDataTemplate> npcList;
 
-        /// <summary> NPCの名前に対応したそのNPCの購入数を格納 </summary>
-        private Dictionary<string, int> _npcShopHistory;
+        /// <summary> NPCの名前に対応したそのNPCの購入数を格納 TName, TBoughtCount </summary>
+        private Dictionary<string, int> _npcShopHistory = new(); // name, bought-count
 
         /// <summary> NPCの購入情報NPC名とその購入数を格納している #sd </summary>
         protected Dictionary<string, int> GetNPCShopHistory
@@ -27,29 +28,67 @@ namespace TeamC
 
         public void InitializeObject()
         {
-            //- 仮処理
-            //- get npc bought count from save-data etc...
-
-            //- ↓
-            foreach (var npc in npcList)
+            try
             {
-                // calculate the bought count link to npc-name
-                _npcShopHistory.Add(npc.name, 0);
+                ClientDataTemplate dataMayDntExist =
+                    GameObject.FindFirstObjectByType<ClientDataSaverSuperClass>().ReadData();
+            }
+            catch (FileNotFoundException)
+            {
+                foreach (var npc in npcList)
+                {
+                    // calculate the bought count link to npc-name
+                    _npcShopHistory.Add(npc.name, 0);
+                }
+
+                Debug.Log("Shop-S-Class:SaveData Cannot Read!");
             }
 
-            //-
-            throw new System.NotImplementedException();
+            var data = GameObject.FindFirstObjectByType<ClientDataSaverSuperClass>().ReadData();
+            if (data == null)
+            {
+                foreach (var npc in npcList)
+                {
+                    // calculate the bought count link to npc-name
+                    _npcShopHistory.Add(npc.name, 0);
+                }
+            }
+            else
+            {
+                // get each npc level to calculate bought-count
+                var wror = data._saveWarriorLevel - 1;
+                var wzrd = data._saveWizardLevel - 1;
+                var thf = data._saveThiefLevel - 1;
+                var hrmt = data._saveHermitLevel - 1;
+                var pt = data._savePoetLevel - 1;
+
+                _npcShopHistory.Clear();
+
+                _npcShopHistory.Add("Warrior", wror);
+                _npcShopHistory.Add("Wizard", wzrd);
+                _npcShopHistory.Add("Thief", thf);
+                _npcShopHistory.Add("Hermit", hrmt);
+                _npcShopHistory.Add("Poet", pt);
+            }
+        }
+
+        public void PauseObject()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ResumeObject()
+        {
+            throw new NotImplementedException();
         }
 
         public void FinalizeObject()
         {
             // save shop info etc...
-
-            throw new System.NotImplementedException();
         }
 
-        /// <summary> 購入処理。プレイヤーのリソースを減らす処理と、購入数の＋１のみ </summary>
-        public void DecreasePlayerSource(string npcName, decimal cost, Action<int> taskToInstantiate)
+        /// <summary> 購入処理。プレイヤーのリソースを減らす処理と、購入数の＋１処理のみ </summary>
+        public void DecreasePlayerSource(string npcName, decimal cost, Action<int, string> taskToInstantiate)
         {
             // get player
             var player = GameObject.FindFirstObjectByType<PlayerSuperClass>();
@@ -58,7 +97,7 @@ namespace TeamC
             var boughtCnt = _npcShopHistory[npcName];
             player.DecreasePlayerGold(cost);
             // task to instantiate
-            taskToInstantiate(boughtCnt);
+            taskToInstantiate(boughtCnt+1, npcName);
             // increment bought count 
             ++_npcShopHistory[npcName];
         }
@@ -85,7 +124,6 @@ namespace TeamC
 
         protected override void ToDoAtAwakeSingleton()
         {
-            
         }
     }
 }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a04b45eb935b3744a84377aa2ec2995, type: 3}
   m_Name: TestThiefData
   m_EditorClassIdentifier: 
-  Name: "\u76D7\u8CCA"
-  BasePrice: 0
+  Name: Thief
+  BasePrice: 100
   Effects:
     m_PersistentCalls:
       m_Calls:

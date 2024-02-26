@@ -19,6 +19,16 @@ namespace TeamC
         /// <summary> ゲーム内のオブジェクトを初期化する </summary>
         public void InitializeObject();
 
+        /// <summary>
+        /// 処理を一時停止する
+        /// </summary>
+        public void PauseObject();
+
+        /// <summary>
+        /// 処理の再開をする
+        /// </summary>
+        public void ResumeObject();
+
         /// <summary> ゲーム内のオブジェクトを終了処理させる </summary>
         public void FinalizeObject();
     }
@@ -44,7 +54,7 @@ namespace TeamC
         public decimal CalculateCostToBuy(string npcName);
 
         /// <summary> プレイヤーのゴールドを減らす </summary>
-        public void DecreasePlayerSource(string npcName, decimal cost, Action<int> taskToInstantiate);
+        public void DecreasePlayerSource(string npcName, decimal cost, Action<int, string> taskToInstantiate);
     }
 
     /// <summary> NPCが継承する </summary>
@@ -99,6 +109,7 @@ namespace TeamC
     {
         private float _elapsedTime = 0f;
         private ClientDataTemplate savedData = new();
+        private bool _isBossDeath = false;
 
         private void OnEnable()
         {
@@ -107,17 +118,32 @@ namespace TeamC
             savedData = clientSaveDatas.ReadData();
         }
 
+        private void MoveToNextFloor()
+        {
+            var player = FindFirstObjectByType<Player>();
+            player.SendMessagePlayerHadWin();
+            GameObject.FindFirstObjectByType<Boss>().InitializeObject();
+            _isBossDeath = false;
+        }
+
         /// initialize game-objects
         /// { 1.Boss }
         /// <summary> Bossが死んだときの処理 </summary>
         void CalledMethodOnBossDeath()
         {
-            // get reward from boss
-            var boss = FindFirstObjectByType<BossSuperClass>();
-            var rewards = boss.GetReward();
-            // apply reward to player
-            var player = FindFirstObjectByType<PlayerSuperClass>();
-            player.ApplyRewardToPlayer(rewards);
+            if (!_isBossDeath)
+            {
+                // get reward from boss
+                var boss = FindFirstObjectByType<BossSuperClass>();
+                var rewards = boss.GetReward();
+                // apply reward to player
+                var player = FindFirstObjectByType<Player>();
+                player.ApplyRewardToPlayer(rewards);
+                Debug.Log("Applied Reward");
+                Debug.Log($"{rewards.ToString("N0")}");
+                _isBossDeath = true;
+                MoveToNextFloor();
+            }
         }
 
         /// { 2.NPCs }

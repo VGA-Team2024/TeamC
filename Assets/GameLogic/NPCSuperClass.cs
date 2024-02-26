@@ -17,6 +17,9 @@ namespace TeamC
 
         protected int _currentLv = 1; // level
 
+        protected bool _isActive = false;
+        private IInitializedTarget _initializedTargetImplementation;
+
         /// <summary> NPCの効果を取得する </summary>
         protected UnityEvent GetNPCEffects
         {
@@ -27,8 +30,23 @@ namespace TeamC
 
         public float GetBasePrice() => dataTemplate.BasePrice;
 
+        public void SetActivation(bool cond)
+        {
+            _isActive = cond;
+        }
+
         public void InitializeObject()
         {
+        }
+
+        public void PauseObject()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ResumeObject()
+        {
+            throw new System.NotImplementedException();
         }
 
         public void FinalizeObject()
