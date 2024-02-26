@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 /// <summary> Skillsデータのひな形 </summary>
 [CreateAssetMenu(fileName = "GeneratedSkillsData", menuName = "CreateSkillsData", order = 1)]
@@ -10,16 +9,11 @@ public class SkillsDataTemplate : ScriptableObject
     public int RequiredLevel = 1; // the level required
 
     /// <summary> スキル名 </summary>
-    public string SkillDisplayName = "SkillsName"; // the name of skills
+    public string SkillName = "SkillsName"; // the name of skills
 
     /// <summary> クールタイム[秒] </summary>
     public decimal CoolTime = 1; // the cool time "unit is Seconds"
 
-    /// <summary>
-    /// スキルID
-    /// </summary>
-    public int Id;
-    
     /// <summary> 効果 </summary>
     /// インスペクタからAssetsのスクリプトの関数を指定できるので指定してSkillsへアタッチする使い方を想定
     public UnityEvent Effects; //the effects 

@@ -18,13 +18,13 @@ namespace TeamC
     #endregion
 
     /// <summary> ショップ機能を提供する </summary>
-    public class Shop : ShopSuperClassL
+    public class Shop : ShopSuperClass
     {
         [SerializeField] private TMP_Text[] _npcLabels;
 
         [SerializeField] private Button[] _shopButton;
 
-        private PlayerL _playerL = new();
+        private Player _player = new();
 
         void TaskToInstantiateNPC(int boughtCnt, string name)
         {
@@ -51,7 +51,7 @@ namespace TeamC
         /// <summary> ボタンからNPC名を渡して購入時にこれをボタンから呼び出す </summary>
         public void BuyNPC(string name)
         {
-            if (_playerL.GetCurrentGold() >= CalculateNPCCost(name))
+            if (_player.GetCurrentGold() >= CalculateNPCCost(name))
             {
                 // Superクラスでは、購入数に応じてコストを算出し、
                 // それをプレイヤーへコストの適応をして、購入数を＋１しただけ
