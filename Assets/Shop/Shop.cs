@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -92,6 +93,11 @@ namespace TeamC
         private void Start()
         {
             
+        }
+
+        private void Update()
+        {
+            Debug.Log($"{ _shopHis.Count}");
         }
     }
 }

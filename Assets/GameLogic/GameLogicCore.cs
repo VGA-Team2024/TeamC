@@ -173,11 +173,11 @@ namespace TeamC
 
         protected override void ToDoAtAwakeSingleton()
         {
-            Initialize();
         }
 
         private void Start()
         {
+            Initialize();
         }
 
         private void FixedUpdate()
