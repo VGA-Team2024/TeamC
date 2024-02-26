@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6919108365470292263}
   - component: {fileID: 202932759669379325}
   - component: {fileID: 4740139329843081700}
+  - component: {fileID: 2226000376499467259}
   m_Layer: 5
   m_Name: Poet
   m_TagString: Untagged
@@ -35,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 77.3, y: -168.9}
-  m_SizeDelta: {x: 214.6, y: 76}
+  m_SizeDelta: {x: 150, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &202932759669379325
 CanvasRenderer:
@@ -134,6 +135,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2226000376499467259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78714199217570601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 335af50ef0b94fe4b8b70924212c811b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataTemplate: {fileID: 11400000, guid: 6e239d1022560d64a8f5fb5eb8e3b10e, type: 2}
 --- !u!1 &962050076390933122
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,7 +450,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 505}
+  m_AnchoredPosition: {x: 0, y: 350}
   m_SizeDelta: {x: 1080, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8795903800474505876
@@ -1023,6 +1037,7 @@ GameObject:
   - component: {fileID: 3870533554772260254}
   - component: {fileID: 5437849351860135394}
   - component: {fileID: 3255079035776552925}
+  - component: {fileID: 7862836541514762427}
   m_Layer: 5
   m_Name: Thief
   m_TagString: Untagged
@@ -1047,7 +1062,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -95, y: -108}
-  m_SizeDelta: {x: 150, y: 110.80002}
+  m_SizeDelta: {x: 150, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5437849351860135394
 CanvasRenderer:
@@ -1146,6 +1161,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7862836541514762427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5452423093698995894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d797a95fd86b7440b9fe804df54d041, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataTemplate: {fileID: 11400000, guid: 5b29fa030fdfa67438d2c3f3497543f0, type: 2}
 --- !u!1 &5596008854067912805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1691,6 +1719,7 @@ GameObject:
   - component: {fileID: 3603247361368483234}
   - component: {fileID: 8175615263841817214}
   - component: {fileID: 2109860503872260748}
+  - component: {fileID: 2115002489202615151}
   m_Layer: 5
   m_Name: Warrior
   m_TagString: Untagged
@@ -1715,7 +1744,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -95, y: 100.7}
-  m_SizeDelta: {x: 150, y: 55.200012}
+  m_SizeDelta: {x: 150, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8175615263841817214
 CanvasRenderer:
@@ -1814,6 +1843,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2115002489202615151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6591515367835532858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ade4f05b4aeaa4d97beab55f42e8ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataTemplate: {fileID: 11400000, guid: fc72dfea4fc0bfc49bdc677b710692de, type: 2}
 --- !u!1 &6879841837236146467
 GameObject:
   m_ObjectHideFlags: 0
@@ -2121,10 +2163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2186,10 +2228,10 @@ RectTransform:
   - {fileID: 6919108365470292263}
   m_Father: {fileID: 7660067327266262548}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -280, y: -510}
-  m_SizeDelta: {x: 540, y: 1000}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -280, y: 297.8}
+  m_SizeDelta: {x: 500, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7362023616022522361
 CanvasRenderer:
@@ -2240,6 +2282,7 @@ GameObject:
   - component: {fileID: 3006311658093479115}
   - component: {fileID: 3843898918202846354}
   - component: {fileID: 3327237410874790041}
+  - component: {fileID: 8437366474504732860}
   m_Layer: 5
   m_Name: Hermit
   m_TagString: Untagged
@@ -2264,7 +2307,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 77.39999, y: 0}
-  m_SizeDelta: {x: 134.20001, y: 50}
+  m_SizeDelta: {x: 150, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3843898918202846354
 CanvasRenderer:
@@ -2363,6 +2406,23 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8437366474504732860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662040461045795894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4938c95e03dfd42bfe090ea2bf7106, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataTemplate: {fileID: 11400000, guid: 4b9d927ac9b3dc74db915ce73eb02016, type: 2}
+  skills:
+  - {fileID: 11400000, guid: fdad806ff0930b1409c942acbb4169b0, type: 2}
+  - {fileID: 11400000, guid: 26246b1ddfda1ab4882a1b1668d8adc6, type: 2}
+  - {fileID: 11400000, guid: d7dd6beb9f7da3f45960f0e954a0d143, type: 2}
 --- !u!1 &9201121957551509569
 GameObject:
   m_ObjectHideFlags: 0
@@ -2374,6 +2434,7 @@ GameObject:
   - component: {fileID: 1645841690960406192}
   - component: {fileID: 4209925533456355939}
   - component: {fileID: 2258948200836549782}
+  - component: {fileID: 6037119219750491600}
   m_Layer: 5
   m_Name: Wizard
   m_TagString: Untagged
@@ -2398,7 +2459,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 77.4, y: 175.13002}
-  m_SizeDelta: {x: 179.59999, y: 72.06}
+  m_SizeDelta: {x: 150, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4209925533456355939
 CanvasRenderer:
@@ -2497,3 +2558,16 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6037119219750491600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9201121957551509569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d73314d626f04d4598b4a53b00da1d1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataTemplate: {fileID: 11400000, guid: 11f24514308eab4419354f408aa50eb2, type: 2}
