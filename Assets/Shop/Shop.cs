@@ -32,7 +32,7 @@ namespace TeamC
 		
 		private void Start()
 		{
-			var list = GetNPCShopHistory.Keys.ToList();
+			List<string> list = GetNPCShopHistory.Keys.ToList();
 			//名前で検索できるように
 			for(int i = 0; i < list.Count; i++)
 			{

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 202932759669379325}
   - component: {fileID: 4740139329843081700}
   m_Layer: 5
-  m_Name: "\u8A69\u4EBA"
+  m_Name: Poet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,10 +32,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 490224763697357590}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 77.3, y: -168.9}
-  m_SizeDelta: {x: -185.4, y: -424}
+  m_SizeDelta: {x: 214.6, y: 76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &202932759669379325
 CanvasRenderer:
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 7320601513999451203}
   - component: {fileID: 2795732036736924951}
   m_Layer: 5
-  m_Name: "\u9B54\u6CD5\u4F7F\u3044\u30DC\u30BF\u30F3"
+  m_Name: WizardButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 2808982814408729210}
   - component: {fileID: 5840399617708008003}
   m_Layer: 5
-  m_Name: "\u4ED9\u4EBA\u30DC\u30BF\u30F3"
+  m_Name: HermitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -624,7 +624,7 @@ GameObject:
   - component: {fileID: 4680654371998495596}
   - component: {fileID: 1766407223138131141}
   m_Layer: 5
-  m_Name: "\u8A69\u4EBA\u30DC\u30BF\u30F3"
+  m_Name: PoetButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1024,7 +1024,7 @@ GameObject:
   - component: {fileID: 5437849351860135394}
   - component: {fileID: 3255079035776552925}
   m_Layer: 5
-  m_Name: "\u76D7\u8CCA"
+  m_Name: Thief
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1044,10 +1044,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 490224763697357590}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -95, y: -108}
-  m_SizeDelta: {x: -250, y: -389.19998}
+  m_SizeDelta: {x: 150, y: 110.80002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5437849351860135394
 CanvasRenderer:
@@ -1159,7 +1159,7 @@ GameObject:
   - component: {fileID: 2093554935229892079}
   - component: {fileID: 7300761805631849983}
   m_Layer: 5
-  m_Name: "\u6226\u58EB\u30DC\u30BF\u30F3"
+  m_Name: WarriorButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1292,7 +1292,7 @@ GameObject:
   - component: {fileID: 809261787387304937}
   - component: {fileID: 8153803323806549693}
   m_Layer: 5
-  m_Name: "\u76D7\u8CCA\u30DC\u30BF\u30F3"
+  m_Name: ThiefButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1558,7 +1558,7 @@ GameObject:
   - component: {fileID: 4794500953803605432}
   - component: {fileID: 4143023104935749255}
   m_Layer: 5
-  m_Name: "\u30B7\u30E7\u30C3\u30D7"
+  m_Name: Shop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1578,10 +1578,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7004865309425655320}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -336.8, y: 314.25}
-  m_SizeDelta: {x: -673.6, y: -628.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 113.20001, y: -35.75}
+  m_SizeDelta: {x: 226.40002, y: 71.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4794500953803605432
 CanvasRenderer:
@@ -1692,7 +1692,7 @@ GameObject:
   - component: {fileID: 8175615263841817214}
   - component: {fileID: 2109860503872260748}
   m_Layer: 5
-  m_Name: "\u6226\u58EB"
+  m_Name: Warriro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1712,10 +1712,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 490224763697357590}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -95, y: 100.7}
-  m_SizeDelta: {x: -250, y: -444.8}
+  m_SizeDelta: {x: 150, y: 55.200012}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8175615263841817214
 CanvasRenderer:
@@ -1985,10 +1985,10 @@ RectTransform:
   - {fileID: 1901091004585039374}
   m_Father: {fileID: 7004865309425655320}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 0, y: -100}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 300}
+  m_SizeDelta: {x: 900, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6481593971751286917
 MonoBehaviour:
@@ -2186,9 +2186,9 @@ RectTransform:
   - {fileID: 6919108365470292263}
   m_Father: {fileID: 7660067327266262548}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -220, y: 251.21}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 230, y: 251.21}
   m_SizeDelta: {x: 400, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7362023616022522361
@@ -2241,7 +2241,7 @@ GameObject:
   - component: {fileID: 3843898918202846354}
   - component: {fileID: 3327237410874790041}
   m_Layer: 5
-  m_Name: "\u4ED9\u4EBA"
+  m_Name: Hermit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2261,10 +2261,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 490224763697357590}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 77.39999, y: 0}
-  m_SizeDelta: {x: -265.8, y: -450}
+  m_SizeDelta: {x: 134.20001, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3843898918202846354
 CanvasRenderer:
@@ -2375,7 +2375,7 @@ GameObject:
   - component: {fileID: 4209925533456355939}
   - component: {fileID: 2258948200836549782}
   m_Layer: 5
-  m_Name: "\u9B54\u6CD5\u4F7F\u3044"
+  m_Name: Wizard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2395,10 +2395,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 490224763697357590}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 77.4, y: 175.13002}
-  m_SizeDelta: {x: -220.40001, y: -427.94}
+  m_SizeDelta: {x: 179.59999, y: 72.06}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4209925533456355939
 CanvasRenderer:
