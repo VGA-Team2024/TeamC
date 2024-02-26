@@ -3,24 +3,24 @@ using UnityEngine;
 namespace TeamC
 {
     /// <summary>スティールの効果</summary>
-    [CreateAssetMenu(fileName = "GeneratedStealEffects", menuName = "CreateSkillEffects/CreateStealEffects")]
-    public class StealEffects : ScriptableObject
+    [CreateAssetMenu(fileName = "GeneratedStealSkillEffects", menuName = "CreateSkillEffects/CreateStealSkillEffects")]
+    public class StealSkillEffects : ScriptableObject
     {
-        private Steal _steal;
+        private StealSkill _stealSkill;
         private Boss _boss;
         private Player _player;
 
         /// <summary>スティールの効果発動時の処理</summary>
         public void OnDestroySkillEffects()
         {
-            if (_steal == null)
-                _steal = FindFirstObjectByType<Steal>();
+            if (_stealSkill == null)
+                _stealSkill = FindFirstObjectByType<StealSkill>();
             if (_boss == null)
                 _boss = FindFirstObjectByType<Boss>();
             if (_player == null)
                 _player = FindFirstObjectByType<Player>();
             
-            if (_steal.GetIsLocked())
+            if (_stealSkill.GetIsLocked())
             {
 #if UNITY_EDITOR
                 Debug.Log("スキルロック中です。");
@@ -28,7 +28,7 @@ namespace TeamC
                 return;
             }
 
-            if (_steal.GetIsCoolTime())
+            if (_stealSkill.GetIsCoolTime())
             {
 #if UNITY_EDITOR
                 Debug.Log("クールタイム中です。");
