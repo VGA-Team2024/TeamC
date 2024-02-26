@@ -180,10 +180,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Floor
+  m_text: "\u968E\u5C64"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1c189b8e8fe978846ac52fc7ea99dff0, type: 2}
+  m_sharedMaterial: {fileID: -5212877066174656460, guid: 1c189b8e8fe978846ac52fc7ea99dff0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -382,6 +382,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9210836323632334838, guid: a197dd843957e0c458bdc2a329514cfc, type: 3}
+      propertyPath: _floorLabel
+      value: 
+      objectReference: {fileID: 15961248}
     - target: {fileID: -9210836323632334838, guid: a197dd843957e0c458bdc2a329514cfc, type: 3}
       propertyPath: _goldDispLabel
       value: 
@@ -2051,11 +2055,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 402571823289912744, guid: 7cd57e9e674c9e94eb9fea69f2d887c3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 271
+      value: 279
       objectReference: {fileID: 0}
     - target: {fileID: 402571823289912744, guid: 7cd57e9e674c9e94eb9fea69f2d887c3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -533
+      value: -653
       objectReference: {fileID: 0}
     - target: {fileID: 402571823289912744, guid: 7cd57e9e674c9e94eb9fea69f2d887c3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

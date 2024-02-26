@@ -122,6 +122,8 @@ namespace TeamC
         {
             var player = FindFirstObjectByType<Player>();
             player.SendMessagePlayerHadWin();
+            GameObject.FindFirstObjectByType<Boss>().InitializeObject();
+            _isBossDeath = false;
         }
 
         /// initialize game-objects
