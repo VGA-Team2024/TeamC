@@ -5,7 +5,7 @@ namespace TeamC
 {
     [Serializable]
     /// <summary> クライアントのデータのひな形 </summary>
-    public class ClientDataTemplate : MonoBehaviour
+    public class ClientDataTemplate
     {
         public int _savePlayerThroughtFloor;
         public decimal _savePlayerGold;
