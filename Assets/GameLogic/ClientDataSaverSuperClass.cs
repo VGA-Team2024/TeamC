@@ -15,7 +15,7 @@ namespace TeamC
             try
             {
                 dataStr = File.ReadAllText(filePath);
-                
+
                 StreamReader sr = new StreamReader(filePath);
                 dataStr = sr.ReadToEnd();
                 sr.Close();
@@ -23,20 +23,12 @@ namespace TeamC
             }
             catch (FileNotFoundException)
             {
-<<<<<<< HEAD
                 var data = new ClientDataTemplate();
                 data = default;
                 return data;
             }
-=======
-                File.WriteAllText(filePath, string.Empty);
-            }
-
-            var data = JsonUtility.FromJson<ClientDataTemplate>(dataStr);
-            return data;
->>>>>>> 7275553546be628699faad749cf55f9e7e791724
         }
-
+        
         public void SaveData()
         {
             ClientDataTemplate data = new();
