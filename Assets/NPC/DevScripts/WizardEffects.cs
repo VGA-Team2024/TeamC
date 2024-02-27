@@ -20,11 +20,11 @@ namespace TeamC
         {
             // 魔法使い、プレイヤー、詩人の検索    
             if (_wizard == null)
-                _wizard = FindFirstObjectByType<Wizard>().GetComponent<Wizard>();
+                _wizard = FindFirstObjectByType<Wizard>();
             if (_player == null)
-                _player = FindFirstObjectByType<Player>().GetComponent<Player>();
+                _player = FindFirstObjectByType<Player>();
             if (_poet == null)
-                _poet = FindFirstObjectByType<Poet>().GetComponent<Poet>();
+                _poet = FindFirstObjectByType<Poet>();
 
             // 現在の魔法使いのレベルを取得
             int currentWizardLevel = _wizard.GetCurrentLevel();
@@ -35,16 +35,19 @@ namespace TeamC
             if (currentWizardLevel != _wizardLevel || currentPoetEffectMagnification != _poetEffectMagnification)
             {
                 // プレイヤーのダメージを増加させる1×1.25のレベル-1乗増加
-                decimal wizardEffect = (decimal)Math.Pow(magnification, currentWizardLevel - 1);
+                decimal wizardEffect = (decimal)(Math.Pow(magnification, currentWizardLevel - 1) + 1);
+                Debug.Log($"Wizards Poop:{wizardEffect.ToString("N0")}");
                 //プレイヤーのタップ時ダメージにwizardEffectを掛ける
-                _player.SetPlayerApplayingDamage(_player.GetPlayerApplayingDamage * wizardEffect *
-                                                 currentPoetEffectMagnification);
+                var dmg = decimal.Multiply(_player.GetPlayerApplayingDamage, wizardEffect);
+                dmg = decimal.Multiply(dmg, currentPoetEffectMagnification);
+                _player.SetPlayerApplayingDamage(dmg);
+
                 // レベルの記録
                 _wizardLevel = currentWizardLevel;
                 _poetEffectMagnification = currentPoetEffectMagnification;
 
 #if UNITY_EDITOR
-                Debug.Log($"魔法使いがプレイヤーのタップダメージを{wizardEffect}倍上昇させています!");
+                Debug.Log($"魔法使いがプレイヤーのタップダメージを{wizardEffect}倍させています!");
 #endif
             }
         }

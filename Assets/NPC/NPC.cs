@@ -21,7 +21,7 @@ namespace TeamC
         [SerializeField, Tooltip("NPCのデータのひな形"), Header("NPCのデータのひな形")]
         private NPCDataTemplate dataTemplate; // data template
 
-        protected int _currentLv = 1; // level
+        protected int _currentLv = 0; // level
 
         protected bool _isActive = false;
         private IInitializedTarget _initializedTargetImplementation;
@@ -45,6 +45,7 @@ namespace TeamC
 
         public void InitializeObject()
         {
+            TaskOnShopBoughtCharacter += (x) => { this._currentLv = x; };
         }
 
         public void PauseObject()

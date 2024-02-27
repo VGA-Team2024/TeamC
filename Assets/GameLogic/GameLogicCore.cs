@@ -21,6 +21,8 @@ namespace TeamC
         private ClientDataTemplate savedData = new();
         private bool _isBossDeath = false;
 
+        private string info = "Chinnko";
+
         private void OnEnable()
         {
             // read saved client data and initialize
@@ -101,6 +103,14 @@ namespace TeamC
                 clientSaveDatas.SaveData();
                 _elapsedTime = 0f;
             } // if elapsed one minutes
+            
+            var wr = FindFirstObjectByType<Warrior>().GetCurrentLevel();
+            var wz = FindFirstObjectByType<Wizard>().GetCurrentLevel();
+            var th = FindFirstObjectByType<Thief>().GetCurrentLevel();
+            var h = FindFirstObjectByType<Hermit>().GetCurrentLevel();
+            var pt = FindFirstObjectByType<Poet>().GetCurrentLevel();
+            string info = $"NPC {wr}, {wz} , {th}, {h} , {pt}";
+            Debug.Log($"NPC:{info}");
         }
 
         private void OnApplicationQuit()

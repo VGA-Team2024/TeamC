@@ -195,9 +195,30 @@ namespace TeamC
                                                                              3 => "仙人", 4 => "詩人"
                                                                          }
                                                                          + "Lv"
-                                                                         + cnt.ToString()
+                                                                         + (cnt > -1
+                                                                             ? (cnt).ToString()
+                                                                             : String.Empty)
                                                                          + " "
                                                                          + costTxt;
+
+            switch (name)
+            {
+                case "Warrior":
+                    FindFirstObjectByType<Warrior>().TaskOnShopBoughtCharacter(cnt);
+                    break;
+                case "Wizard":
+                    FindFirstObjectByType<Wizard>().TaskOnShopBoughtCharacter(cnt);
+                    break;
+                case "Thief":
+                    FindFirstObjectByType<Thief>().TaskOnShopBoughtCharacter(cnt);
+                    break;
+                case "Hermit":
+                    FindFirstObjectByType<Hermit>().TaskOnShopBoughtCharacter(cnt);
+                    break;
+                case "Poet":
+                    FindFirstObjectByType<Poet>().TaskOnShopBoughtCharacter(cnt);
+                    break;
+            }
         }
 
         void UpdateButtonDisplayInfo()
@@ -227,7 +248,9 @@ namespace TeamC
                                                                              3 => "仙人", 4 => "詩人"
                                                                          }
                                                                          + "Lv"
-                                                                         + cnt.ToString()
+                                                                         + (cnt > -1
+                                                                             ? (cnt).ToString()
+                                                                             : String.Empty)
                                                                          + " "
                                                                          + costTxt;
             }

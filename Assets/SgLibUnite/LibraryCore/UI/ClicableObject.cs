@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TeamC;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -115,7 +116,7 @@ namespace SgLibUnite.UI
         {
             if (PointerEventData.InputButton.Left == eventData.button)
             {
-                Debug.Log("Click");
+                // Debug.Log("Click");
                 Press();
             }
         }
@@ -123,14 +124,6 @@ namespace SgLibUnite.UI
         public void OnSubmit(BaseEventData eventData)
         {
             Debug.Log("Submit");
-        }
-
-        private void Awake()
-        {
-        }
-
-        private void Update()
-        {
         }
     }
 }

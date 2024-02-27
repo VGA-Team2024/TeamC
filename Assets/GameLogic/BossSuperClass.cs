@@ -212,7 +212,7 @@ namespace TeamC
             // ★if client data is exist read saved client data★
 
             // calculate hp
-            var player = FindFirstObjectByType<PlayerSuperClass>();
+            var player = FindFirstObjectByType<Player>();
             var clearedStage = 0;
             // Get Cleared Stage
             clearedStage = player.GetClearedFloorAmount();
@@ -234,8 +234,6 @@ namespace TeamC
         public void FinalizeObject() // Called On GL-End
         {
             // ★save boss hp to client data★ 
-
-            throw new NotImplementedException();
         }
     }
 }

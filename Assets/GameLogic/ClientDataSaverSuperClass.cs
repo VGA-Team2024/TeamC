@@ -58,7 +58,6 @@ namespace TeamC
             var boss = GameObject.FindFirstObjectByType<Boss>();
             decimal bossHP = boss.GetHP;
 
-
             // Dataの値を初期化
             data._savePlayerThroughtFloor = playerThroughtFloor;
             data._savePlayerGold = playerGold;
