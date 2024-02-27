@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace TeamC
@@ -16,45 +18,40 @@ namespace TeamC
     public class Boss : BossSuperClass
     {
         Image _img;
-        [SerializeField] Sprite _defaultDragonTexture;
-        [SerializeField] Sprite _FirstDragonTexture;
-        [SerializeField] Sprite _SecondDragonTexture;
-        [SerializeField] Sprite _ThirdDragonTexture;
-        [SerializeField] Sprite _FourthDragonTexture;
+        [SerializeField] List<Sprite> _tex;
 
-        int currentStage = 0;
+        int _cfloor = 0;
 
-        PlayerSuperClass player;
+        Player _p;
 
         void Start()
         {
             _img = GetComponent<Image>();
-            player = FindFirstObjectByType<PlayerSuperClass>();
+            _p = FindFirstObjectByType<Player>();
             base.CallbackOnDeath += ChangeTexture;
         }
 
         void ChangeTexture()
         {
-            currentStage = player.GetClearedFloorAmount();
-            if (currentStage >= 0 && currentStage < 6)
-                _img.sprite = _defaultDragonTexture;
-            if (currentStage >= 6 && currentStage < 11)
-                _img.sprite = _FirstDragonTexture;
-
-            if (currentStage >= 11 && currentStage < 16)
-                _img.sprite = _SecondDragonTexture;
-
-            if (currentStage >= 16 && currentStage < 21)
-                _img.sprite = _ThirdDragonTexture;
-
-            if (currentStage >= 21 && currentStage <= 26)
-                _img.sprite = _FourthDragonTexture;
+            _cfloor = _p.GetClearedFloorAmount();
+            if (_cfloor >= 0 && _cfloor < 6)
+                _img.sprite = _tex[0];
+            else if (_cfloor < 11)
+                _img.sprite = _tex[1];
+            else if (_cfloor < 16)
+                _img.sprite = _tex[2];
+            else if (_cfloor < 21)
+                _img.sprite = _tex[3];
+            else if (_cfloor <= 26)
+                _img.sprite = _tex[4];
         }
 
         void Update()
         {
             if (IsBossDead())
+            {
                 base.OnDeath();
+            }
         }
 
         bool IsBossDead()

@@ -46,7 +46,7 @@ namespace TeamC
         private void Update()
         {
             _goldDispLabel.text = "賞金 : " + GetCurrentGold().ToString("N0");
-            _floorLabel.text = "階層 : " + _clearedFloorAmount.ToString();
+            _floorLabel.text = "階層 : " + (_clearedFloorAmount + 1).ToString();
         }
     }
 }

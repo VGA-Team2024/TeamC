@@ -103,7 +103,7 @@ namespace TeamC
             } // if elapsed one minutes
         }
 
-        private void OnDisable()
+        private void OnApplicationQuit()
         {
             // save client data
             var clientSaveDatas = FindFirstObjectByType<ClientDataSaverSuperClass>();

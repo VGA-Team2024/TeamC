@@ -56,6 +56,9 @@ namespace TeamC
         /// <summary> ベース価格を返す </summary>
         public float GetBasePrice();
 
+        /// <summary>
+        /// NPCが購入されたときに呼び出される。パラメータは購入数
+        /// </summary>
         public Action<int> TaskOnShopBoughtCharacter { get; set; }
     }
 
