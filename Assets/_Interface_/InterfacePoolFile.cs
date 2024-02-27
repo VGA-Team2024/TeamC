@@ -55,6 +55,8 @@ namespace TeamC
 
         /// <summary> ベース価格を返す </summary>
         public float GetBasePrice();
+
+        public Action<int> TaskOnShopBoughtCharacter { get; set; }
     }
 
     /// <summary> スキルが継承する </summary>
@@ -93,5 +95,4 @@ namespace TeamC
         /// <summary> クライアントのデータを書き込む </summary>
         public void SaveData();
     }
-
 }

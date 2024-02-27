@@ -1,7 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace TeamC
 {
@@ -17,8 +16,51 @@ namespace TeamC
     #endregion
     
     /// <summary> NPCの機能を提供 </summary>
-    public class NPC : NPCSuperClass
+    public class NPC : MonoBehaviour, INonPlayerCharacter, IInitializedTarget
     {
+        [SerializeField, Tooltip("NPCのデータのひな形"), Header("NPCのデータのひな形")]
+        private NPCDataTemplate dataTemplate; // data template
+
+        protected int _currentLv = 1; // level
+
+        protected bool _isActive = false;
+        private IInitializedTarget _initializedTargetImplementation;
+
+        /// <summary> NPCの効果を取得する </summary>
+        protected UnityEvent GetNPCEffects
+        {
+            get { return dataTemplate.Effects; }
+        }
+
+        public string GetNPCName() => dataTemplate.Name;
+
+        public float GetBasePrice() => dataTemplate.BasePrice;
+        
+        public Action<int> TaskOnShopBoughtCharacter { get; set; }
+
+        public void SetActivation(bool cond)
+        {
+            _isActive = cond;
+        }
+
+        public void InitializeObject()
+        {
+        }
+
+        public void PauseObject()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ResumeObject()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void FinalizeObject()
+        {
+        }
+        
         public int GetCurrentLevel() => _currentLv;
     }
 }
