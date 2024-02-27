@@ -32,7 +32,7 @@ namespace TeamC
         {
             var player = FindFirstObjectByType<Player>();
             player.SendMessagePlayerHadWin();
-            GameObject.FindFirstObjectByType<Boss>().InitializeObject();
+            GameObject.FindFirstObjectByType<Boss>().InitBoss();
             _isBossDeath = false;
         }
 
@@ -56,14 +56,25 @@ namespace TeamC
             }
         }
 
-        /// { 2.NPCs }
-        /// { 3.Shop } 
         void Initialize() // Initialize On GameLogic Was Started
         {
+            void NPCInit()
+            {
+                FindFirstObjectByType<Warrior>().SetLevel = savedData._saveWarriorLevel;
+                FindFirstObjectByType<Wizard>().SetLevel = savedData._saveWizardLevel;
+                FindFirstObjectByType<Thief>().SetLevel = savedData._saveThiefLevel;
+                FindFirstObjectByType<Hermit>().SetLevel = savedData._saveHermitLevel;
+                FindFirstObjectByType<Poet>().SetLevel = savedData._savePoetLevel;
+            }
+            
             /// Init Boss
             var boss = FindFirstObjectByType<BossSuperClass>();
             boss.CallbackOnDeath += this.CalledMethodOnBossDeath;
-
+            boss.SetHP = decimal.Parse( savedData._saveCurrentBossHP);
+            
+            // init player
+            FindFirstObjectByType<Player>().SetGold =decimal.Parse( savedData._savePlayerGold);
+            
             // init all GOs
             var gos = GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
             // filtering inherited class IInitializedTarget
@@ -72,6 +83,9 @@ namespace TeamC
             {
                 obj.GetComponent<IInitializedTarget>().InitializeObject();
             } // initialize all objects
+            
+            // init npcs
+            NPCInit();
         }
 
         /// { 4.Player + NPC}
@@ -103,7 +117,7 @@ namespace TeamC
             } // if elapsed one minutes
         }
 
-        private void OnDisable()
+        private void OnApplicationQuit()
         {
             // save client data
             var clientSaveDatas = FindFirstObjectByType<ClientDataSaverSuperClass>();

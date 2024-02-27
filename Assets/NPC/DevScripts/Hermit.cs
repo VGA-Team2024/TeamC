@@ -6,11 +6,14 @@ using UnityEngine;
 namespace TeamC
 {
     /// <summary>仙人の処理</summary>
-    public class Hermit : NPC, IHermit
+    public class Hermit : NPC, IInitializedTarget
     {
+        [SerializeField, Header("スキルのデータベース")] private SkillsDataTemplate[] skills;
+
         private void FixedUpdate()
         {
-            if(!_isActive) return;
+            _isActive = GetCurrentLevel() > 0;
+            if (!_isActive) return;
             //throw new NotImplementedException();
             base.GetNPCEffects.Invoke();
         }
@@ -19,10 +22,8 @@ namespace TeamC
         {
             //throw new System.NotImplementedException();
 
-            // Resources/SkillsDataフォルダからIsLockedがfalseのスキルのデータをListで取得します
-            List<SkillsDataTemplate> result = Resources.LoadAll("SkillsData", typeof(SkillsDataTemplate))
-                .OfType<SkillsDataTemplate>().Where(data => !data.IsLocked).ToList();
-
+            List<SkillsDataTemplate> result = new List<SkillsDataTemplate>();
+            
 #if UNITY_EDITOR
             // 使用可能なスキルをコンソールに出力する
             string message = String.Empty;
@@ -36,6 +37,25 @@ namespace TeamC
 #endif
 
             return result;
+        }
+
+        public void InitializeObject()
+        {
+            TaskOnShopBoughtCharacter += (x) => { this._currentLv = x; };
+        }
+
+        public void PauseObject()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ResumeObject()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void FinalizeObject()
+        {
         }
     }
 }

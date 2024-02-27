@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -37,30 +38,38 @@ namespace TeamC
 
         public void InitializeObject()
         {
-            var data = GameObject.FindFirstObjectByType<ClientDataSaverSuperClass>().ReadData();
-            if (data == null)
+            ClientDataTemplate data = new ClientDataTemplate();
+            try
             {
-                foreach (var npc in npcList)
+                data = GameObject.FindFirstObjectByType<ClientDataSaverSuperClass>().ReadData();
+
+                if (data != null)
                 {
-                    // calculate the bought count link to npc-name
-                    _npcShopHistory.Add(npc.name, 0);
+                    // get each npc level to calculate bought-count
+                    var wror = data._saveWarriorLevel;
+                    var wzrd = data._saveWizardLevel;
+                    var thf = data._saveThiefLevel;
+                    var hrmt = data._saveHermitLevel;
+                    var pt = data._savePoetLevel;
+
+                    this._npcShopHistory.Add("Warrior", wror);
+                    this._npcShopHistory.Add("Wizard", wzrd);
+                    this._npcShopHistory.Add("Thief", thf);
+                    this._npcShopHistory.Add("Hermit", hrmt);
+                    this._npcShopHistory.Add("Poet", pt);
                 }
-
-                data = default;
             }
-
-            // get each npc level to calculate bought-count
-            var wror = data._saveWarriorLevel - 1;
-            var wzrd = data._saveWizardLevel - 1;
-            var thf = data._saveThiefLevel - 1;
-            var hrmt = data._saveHermitLevel - 1;
-            var pt = data._savePoetLevel - 1;
-
-            this._npcShopHistory.Add("Warrior", wror);
-            this._npcShopHistory.Add("Wizard", wzrd);
-            this._npcShopHistory.Add("Thief", thf);
-            this._npcShopHistory.Add("Hermit", hrmt);
-            this._npcShopHistory.Add("Poet", pt);
+            catch (FileNotFoundException e)
+            {
+                this._npcShopHistory.Add("Warrior", 0);
+                this._npcShopHistory.Add("Wizard", 0);
+                this._npcShopHistory.Add("Thief", 0);
+                this._npcShopHistory.Add("Hermit", 0);
+                this._npcShopHistory.Add("Poet", 0);
+                // make exist file
+                GameObject.FindFirstObjectByType<ClientDataSaverSuperClass>().SaveData();
+                throw;
+            }
 
             _player = GameObject.FindFirstObjectByType<Player>();
         }
@@ -169,7 +178,7 @@ namespace TeamC
                 index switch { 0 => "Warrior", 1 => "Wizard", 2 => "Thief", 3 => "Hermit", 4 => "Poet" },
                 out cnt
             );
-            
+
             var costTxt = (CalculateCostToBuy(
                 index switch
                 {
@@ -178,7 +187,7 @@ namespace TeamC
                     4 => "Poet"
                 }
             ).ToString("F0") + "G");
-            
+
             _shopButton[index].GetComponentInChildren<TMP_Text>().text = " " +
                                                                          index switch
                                                                          {
@@ -186,9 +195,30 @@ namespace TeamC
                                                                              3 => "仙人", 4 => "詩人"
                                                                          }
                                                                          + "Lv"
-                                                                         + cnt.ToString()
+                                                                         + (cnt > -1
+                                                                             ? (cnt).ToString()
+                                                                             : String.Empty)
                                                                          + " "
                                                                          + costTxt;
+
+            switch (name)
+            {
+                case "Warrior":
+                    FindFirstObjectByType<Warrior>().TaskOnShopBoughtCharacter(cnt);
+                    break;
+                case "Wizard":
+                    FindFirstObjectByType<Wizard>().TaskOnShopBoughtCharacter(cnt);
+                    break;
+                case "Thief":
+                    FindFirstObjectByType<Thief>().TaskOnShopBoughtCharacter(cnt);
+                    break;
+                case "Hermit":
+                    FindFirstObjectByType<Hermit>().TaskOnShopBoughtCharacter(cnt);
+                    break;
+                case "Poet":
+                    FindFirstObjectByType<Poet>().TaskOnShopBoughtCharacter(cnt);
+                    break;
+            }
         }
 
         void UpdateButtonDisplayInfo()
@@ -201,7 +231,7 @@ namespace TeamC
                     i switch { 0 => "Warrior", 1 => "Wizard", 2 => "Thief", 3 => "Hermit", 4 => "Poet" },
                     out cnt
                 );
-                
+
                 var costTxt = (CalculateCostToBuy(
                     i switch
                     {
@@ -210,7 +240,7 @@ namespace TeamC
                         4 => "Poet"
                     }
                 ).ToString("F0") + "G");
-                
+
                 _shopButton[i].GetComponentInChildren<TMP_Text>().text = " " +
                                                                          i switch
                                                                          {
@@ -218,7 +248,9 @@ namespace TeamC
                                                                              3 => "仙人", 4 => "詩人"
                                                                          }
                                                                          + "Lv"
-                                                                         + cnt.ToString()
+                                                                         + (cnt > -1
+                                                                             ? (cnt).ToString()
+                                                                             : String.Empty)
                                                                          + " "
                                                                          + costTxt;
             }

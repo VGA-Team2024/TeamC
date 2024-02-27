@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6385965174091263051}
   - component: {fileID: 8611388060093458367}
   - component: {fileID: -1618768159982612203}
+  - component: {fileID: 4262050663977517749}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -27,7 +28,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3693510111227817778}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -89,11 +90,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 090a8c4bb037d5b4e94f2a56a343eda2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultDragonTexture: {fileID: 21300000, guid: ee5a1224c86852944aee4cf2496d51ba, type: 3}
-  _FirstDragonTexture: {fileID: 21300000, guid: ee5a1224c86852944aee4cf2496d51ba, type: 3}
-  _SecondDragonTexture: {fileID: 21300000, guid: e2c0444b32ffa8c479bd8c968cdefd4c, type: 3}
-  _ThirdDragonTexture: {fileID: 21300000, guid: 4e38d37875fa994419668b9dd6708bc7, type: 3}
-  _FourthDragonTexture: {fileID: 21300000, guid: c6bd8c37bd0db8048aff64e48fab6f82, type: 3}
+  _tex:
+  - {fileID: 21300000, guid: ee5a1224c86852944aee4cf2496d51ba, type: 3}
+  - {fileID: 21300000, guid: 4dcfa6e06ce3b7a4d9bf0c745e9b5e93, type: 3}
+  - {fileID: 21300000, guid: e2c0444b32ffa8c479bd8c968cdefd4c, type: 3}
+  - {fileID: 21300000, guid: 4e38d37875fa994419668b9dd6708bc7, type: 3}
+  - {fileID: 21300000, guid: c6bd8c37bd0db8048aff64e48fab6f82, type: 3}
 --- !u!114 &-1618768159982612203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,14 +141,28 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+        m_TargetAssemblyTypeName: TeamC.Player, Assembly-CSharp
+        m_MethodName: ApplyDamageToBoss
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4262050663977517749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3693510111227817778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 209c3c8c058dd3b42868a6996a5f5251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 0}
+  _hpLabel: {fileID: 0}
