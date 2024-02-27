@@ -30,7 +30,11 @@ namespace TeamC
         {
             _img = GetComponent<Image>();
             player = FindFirstObjectByType<PlayerSuperClass>();
+            base.CallbackOnDeath += ChangeTexture;
+        }
 
+        void ChangeTexture()
+        {
             currentStage = player.GetClearedFloorAmount();
             if (currentStage >= 0 && currentStage < 6)
                 _img.sprite = _defaultDragonTexture;
