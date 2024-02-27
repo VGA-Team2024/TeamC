@@ -1,10 +1,12 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace TeamC
 {
     /// <summary>仙人の処理</summary>
-    public class Hermit : NPC, IHermit, IInitializedTarget
+    public class Hermit : NPC, IInitializedTarget
     {
         [SerializeField, Header("スキルのデータベース")] private SkillsDataTemplate[] skills;
 
@@ -21,14 +23,18 @@ namespace TeamC
             //throw new System.NotImplementedException();
 
             List<SkillsDataTemplate> result = new List<SkillsDataTemplate>();
+            
+#if UNITY_EDITOR
+            // 使用可能なスキルをコンソールに出力する
+            string message = String.Empty;
 
-            foreach (var skill in skills)
+            foreach (var skill in result)
             {
-                if (!skill.IsLocked)
-                {
-                    result.Add(skill);
-                }
+                message += $"{skill.SkillName}\n";
             }
+
+            Debug.Log(message);
+#endif
 
             return result;
         }

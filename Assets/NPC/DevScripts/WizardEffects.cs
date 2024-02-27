@@ -4,7 +4,7 @@ using UnityEngine;
 namespace TeamC
 {
     /// <summary>魔法使いの効果</summary>
-    [CreateAssetMenu(fileName = "GeneratedWizardEffects", menuName = "CreateWizardEffects")]
+    [CreateAssetMenu(fileName = "GeneratedWizardEffects", menuName = "CreateNPCEffects/CreateWizardEffects")]
     public class WizardEffects : ScriptableObject
     {
         [SerializeField, Header("攻撃のダメージの倍率")] private double magnification = 1.25;

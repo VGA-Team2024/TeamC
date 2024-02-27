@@ -1,6 +1,7 @@
 namespace TeamC
 {
-    public class Steal : SkillsSuperClass
+    /// <summary>スティールのスキル</summary>
+    public class StealSkill : SkillsSuperClass
     {
         /// <summary>スキルロックののフラグを取得します</summary>
         public bool GetIsLocked() => GetSkillData.IsLocked;

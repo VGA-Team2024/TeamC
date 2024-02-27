@@ -3,7 +3,7 @@ using UnityEngine;
 namespace TeamC
 {
     /// <summary>デストロイの効果</summary>
-    [CreateAssetMenu(fileName = "GeneratedDestroySkillEffects", menuName = "CreateDestroySkillEffects")]
+    [CreateAssetMenu(fileName = "GeneratedDestroySkillEffects", menuName = "CreateSkillEffects/CreateDestroySkillEffects")]
     public class DestroySkillEffects : ScriptableObject
     {
         private DestroySkill _destroySkill;
