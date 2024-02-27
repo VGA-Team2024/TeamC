@@ -58,15 +58,18 @@ namespace TeamC
             var boss = GameObject.FindFirstObjectByType<Boss>();
             decimal bossHP = boss.GetHP;
 
+            decimal dmg = FindFirstObjectByType<Player>().GetPlayerApplayingDamage;
+
             // Dataの値を初期化
             data._savePlayerThroughtFloor = playerThroughtFloor;
-            data._savePlayerGold = playerGold;
+            data._savePlayerGold = playerGold.ToString();
             data._saveWizardLevel = wizardLevel;
             data._saveWarriorLevel = warriorLevel;
             data._saveThiefLevel = thiefLevel;
             data._savePoetLevel = poetLevel;
             data._saveHermitLevel = hermitLevel;
-            data._saveCurrentBossHP = bossHP;
+            data._saveCurrentBossHP = bossHP.ToString();
+            data._playerDamage = dmg.ToString();
 
 
             // JSON形式に変換して保存

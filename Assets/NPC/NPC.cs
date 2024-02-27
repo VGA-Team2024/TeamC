@@ -12,11 +12,11 @@ namespace TeamC
     // base.GetPlayerApplayingDamage() でプレイヤーのダメージ量の取得
     // base.SetPlayerApplayingDamage() でプレイヤーのダメージ量を引数の値で初期化
     // 実装漏れあれば問い合わせて下さい
-    
+
     #endregion
-    
+
     /// <summary> NPCの機能を提供 </summary>
-    public class NPC : MonoBehaviour, INonPlayerCharacter, IInitializedTarget
+    public class NPC : MonoBehaviour, INonPlayerCharacter
     {
         [SerializeField, Tooltip("NPCのデータのひな形"), Header("NPCのデータのひな形")]
         private NPCDataTemplate dataTemplate; // data template
@@ -35,7 +35,7 @@ namespace TeamC
         public string GetNPCName() => dataTemplate.Name;
 
         public float GetBasePrice() => dataTemplate.BasePrice;
-        
+
         public Action<int> TaskOnShopBoughtCharacter { get; set; }
 
         public void SetActivation(bool cond)
@@ -43,25 +43,11 @@ namespace TeamC
             _isActive = cond;
         }
 
-        public void InitializeObject()
-        {
-            TaskOnShopBoughtCharacter += (x) => { this._currentLv = x; };
-        }
-
-        public void PauseObject()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void ResumeObject()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void FinalizeObject()
-        {
-        }
-        
         public int GetCurrentLevel() => _currentLv;
+        
+        public int SetLevel
+        {
+            set { _currentLv = value; }
+        }
     }
 }

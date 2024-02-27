@@ -41,7 +41,7 @@ namespace TeamC
                 _img.sprite = _tex[2];
             else if (_cfloor < 21)
                 _img.sprite = _tex[3];
-            else if (_cfloor <= 26)
+            else
                 _img.sprite = _tex[4];
         }
 

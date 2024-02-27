@@ -21,8 +21,6 @@ namespace TeamC
         private ClientDataTemplate savedData = new();
         private bool _isBossDeath = false;
 
-        private string info = "Chinnko";
-
         private void OnEnable()
         {
             // read saved client data and initialize
@@ -34,7 +32,7 @@ namespace TeamC
         {
             var player = FindFirstObjectByType<Player>();
             player.SendMessagePlayerHadWin();
-            GameObject.FindFirstObjectByType<Boss>().InitializeObject();
+            GameObject.FindFirstObjectByType<Boss>().InitBoss();
             _isBossDeath = false;
         }
 
@@ -58,14 +56,25 @@ namespace TeamC
             }
         }
 
-        /// { 2.NPCs }
-        /// { 3.Shop } 
         void Initialize() // Initialize On GameLogic Was Started
         {
+            void NPCInit()
+            {
+                FindFirstObjectByType<Warrior>().SetLevel = savedData._saveWarriorLevel;
+                FindFirstObjectByType<Wizard>().SetLevel = savedData._saveWizardLevel;
+                FindFirstObjectByType<Thief>().SetLevel = savedData._saveThiefLevel;
+                FindFirstObjectByType<Hermit>().SetLevel = savedData._saveHermitLevel;
+                FindFirstObjectByType<Poet>().SetLevel = savedData._savePoetLevel;
+            }
+            
             /// Init Boss
             var boss = FindFirstObjectByType<BossSuperClass>();
             boss.CallbackOnDeath += this.CalledMethodOnBossDeath;
-
+            boss.SetHP = decimal.Parse( savedData._saveCurrentBossHP);
+            
+            // init player
+            FindFirstObjectByType<Player>().SetGold =decimal.Parse( savedData._savePlayerGold);
+            
             // init all GOs
             var gos = GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
             // filtering inherited class IInitializedTarget
@@ -74,6 +83,9 @@ namespace TeamC
             {
                 obj.GetComponent<IInitializedTarget>().InitializeObject();
             } // initialize all objects
+            
+            // init npcs
+            NPCInit();
         }
 
         /// { 4.Player + NPC}
@@ -103,14 +115,6 @@ namespace TeamC
                 clientSaveDatas.SaveData();
                 _elapsedTime = 0f;
             } // if elapsed one minutes
-            
-            var wr = FindFirstObjectByType<Warrior>().GetCurrentLevel();
-            var wz = FindFirstObjectByType<Wizard>().GetCurrentLevel();
-            var th = FindFirstObjectByType<Thief>().GetCurrentLevel();
-            var h = FindFirstObjectByType<Hermit>().GetCurrentLevel();
-            var pt = FindFirstObjectByType<Poet>().GetCurrentLevel();
-            string info = $"NPC {wr}, {wz} , {th}, {h} , {pt}";
-            Debug.Log($"NPC:{info}");
         }
 
         private void OnApplicationQuit()

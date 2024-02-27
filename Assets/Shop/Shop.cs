@@ -46,11 +46,11 @@ namespace TeamC
                 if (data != null)
                 {
                     // get each npc level to calculate bought-count
-                    var wror = data._saveWarriorLevel - 1;
-                    var wzrd = data._saveWizardLevel - 1;
-                    var thf = data._saveThiefLevel - 1;
-                    var hrmt = data._saveHermitLevel - 1;
-                    var pt = data._savePoetLevel - 1;
+                    var wror = data._saveWarriorLevel;
+                    var wzrd = data._saveWizardLevel;
+                    var thf = data._saveThiefLevel;
+                    var hrmt = data._saveHermitLevel;
+                    var pt = data._savePoetLevel;
 
                     this._npcShopHistory.Add("Warrior", wror);
                     this._npcShopHistory.Add("Wizard", wzrd);

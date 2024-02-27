@@ -27,6 +27,11 @@ namespace TeamC
             get { return hp; }
         }
 
+        public decimal SetHP
+        {
+            set { hp = value; }
+        }
+
         /// <summary>
         /// ボスのその階層のHPの最大値
         /// </summary>
@@ -69,9 +74,13 @@ namespace TeamC
                 baseStage = 21;
             }
             // bF = 26
-            else
+            else if(clearedStages < 27)
             {
                 baseStage = 26;
+            }
+            else
+            {
+                baseStage = 27;
             }
 
             #endregion
@@ -92,13 +101,13 @@ namespace TeamC
                 case 26:
                     return 1000000000000 * 26;
                 default:
-                    return 10000;
+                    return 10000000000000000000;
             }
         }
 
-        int CalculateBaseHP(int baseStage)
+        decimal CalculateBaseHP(int baseStage)
         {
-            int basedHP = 0;
+            decimal basedHP = 0;
 
             #region CalculateBaseHP
 
@@ -111,16 +120,16 @@ namespace TeamC
                 16 => 250000,
                 21 => 50000000,
                 26 => 1000000000,
-                _ => 100
+                _ => 10000000000000000000
             };
             return basedHP;
 
             #endregion
         }
 
-        float CalculateAdditionHP(int baseStage, int clearedStage)
+        decimal CalculateAdditionHP(int baseStage, int clearedStage)
         {
-            float additionHP = 0;
+            decimal additionHP = 1;
             switch (baseStage)
             {
                 case 1:
@@ -129,17 +138,21 @@ namespace TeamC
                     break;
                 case 6:
                     for (int i = 0; i < clearedStage - baseStage; i++)
-                        additionHP *= 1.5f;
+                        additionHP *= (decimal)1.5;
                     break;
                 case 11:
                 case 21:
                 case 16:
                     for (int i = 0; i < clearedStage - baseStage; i++)
-                        additionHP *= 2.0f;
+                        additionHP *= (decimal)2.0f;
                     break;
                 case 26:
                     for (int i = 0; i < clearedStage - baseStage; i++)
-                        additionHP *= 10.0f;
+                        additionHP *= (decimal)10.0f;
+                    break;
+                default:
+                    for (int i = 0; i < clearedStage - baseStage; i++)
+                        additionHP *= (decimal)15.0f;
                     break;
             }
 
@@ -148,8 +161,8 @@ namespace TeamC
 
         decimal CalculateHealthPoint(int clearedStages)
         {
-            float basedHP = -1;
-            float additionHP = -1;
+            decimal basedHP = -1;
+            decimal additionHP = -1;
             int baseStage = -1;
 
             #region CalculateBaseStage
@@ -180,9 +193,13 @@ namespace TeamC
                 baseStage = 21;
             }
             // bF = 26
-            else
+            else if(clearedStages <= 26)
             {
                 baseStage = 26;
+            }
+            else
+            {
+                baseStage = 27;
             }
 
             #endregion
@@ -216,8 +233,30 @@ namespace TeamC
             var clearedStage = 0;
             // Get Cleared Stage
             clearedStage = player.GetClearedFloorAmount();
-            hp = CalculateHealthPoint(clearedStage + 1);
-            rewards = CalculateRewards(clearedStage + 1);
+            hp = CalculateHealthPoint(clearedStage);
+            rewards = CalculateRewards(clearedStage);
+            _maxHpAtCurrentFloor = hp;
+
+            var foo = FindFirstObjectByType<ClientDataSaverSuperClass>().ReadData();
+            if (foo != null)
+            {
+                clearedStage = 0;
+                // Get Cleared Stage
+                clearedStage = foo._savePlayerThroughtFloor;
+                hp = decimal.Parse(foo._saveCurrentBossHP);
+                rewards = CalculateRewards(clearedStage);
+            }
+        }
+
+        public void InitBoss()
+        {
+            // calculate hp
+            var player = FindFirstObjectByType<Player>();
+            var clearedStage = 0;
+            // Get Cleared Stage
+            clearedStage = player.GetClearedFloorAmount();
+            hp = CalculateHealthPoint(clearedStage);
+            rewards = CalculateRewards(clearedStage);
             _maxHpAtCurrentFloor = hp;
         }
 

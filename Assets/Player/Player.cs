@@ -52,6 +52,11 @@ namespace TeamC
         /// <summary> クリック時のダメージ量を引数の値で初期化する </summary>
         public void SetPlayerApplayingDamage(decimal dmg) => _damageOnClick = dmg;
 
+        public decimal SetGold
+        {
+            set { _currentGold = value; }
+        }
+
         public void ApplyDamageToBoss()
         {
             GameObject.FindFirstObjectByType<GameLogicCore>().ApplyDamageToBoss(_damageOnClick);
@@ -85,6 +90,14 @@ namespace TeamC
 
             // the amount of stage which cleared
             _clearedFloorAmount = 0;
+
+            var d = FindFirstObjectByType<ClientDataSaverSuperClass>().ReadData();
+
+            _clearedFloorAmount = d._savePlayerThroughtFloor;
+            var dat = decimal.Parse(d._savePlayerGold);
+            _currentGold = dat > 1 ? dat : 1;
+            var foo = decimal.Parse(d._playerDamage);
+            _damageOnClick = foo > 10 ? foo : 10;
         }
 
         public void PauseObject()
