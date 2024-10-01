@@ -9,7 +9,7 @@ using TMPro;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class LocalizedText : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI _text;
+    [SerializeField, InspectorVariantName("TextMeshProの参照")] TextMeshProUGUI _text;
     [SerializeField, LocalizeText] string _textKey;
 
     private void Awake()
