@@ -12,20 +12,12 @@ namespace DataManagement
     /// <summary>
     /// マスターデータ管理クラス
     /// </summary>
-    public class MasterData
+    public partial class MasterData
     {
-        //設定系
-        const string DataPrefix = "DataAsset/MasterData";
-
         //シングルトン運用
         static MasterData _instance = new MasterData();
         static public MasterData Instance => _instance;
         private MasterData() { }
-
-
-        //マスターデータ読み込みリスト
-        public static TextMaster TextMaster { get; private set; }
-        public static EnemyMaster EnemyMaster { get; private set; }
 
 
         //読み込み管理
@@ -60,16 +52,7 @@ namespace DataManagement
                 }
             }
 
-            //マスタ読み込み
-            TextMaster = new TextMaster();
-            EnemyMaster = new EnemyMaster();
-
-            await UniTask.WhenAll(new List<UniTask>()
-            {
-                TextMaster.Marshal(),
-                EnemyMaster.Marshal(),
-            });
-            //
+            await MasterDataLoad();
 
             IsSetupComplete = true;
             Debug.Log("MasterData Load Done.");
