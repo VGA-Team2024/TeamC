@@ -22,7 +22,9 @@ namespace DataManagement
 
     public abstract class MasterDataBase<K, V> : IMasterData
     {
-        protected SerializableDictionary<K, V> _dic;
+        public class DataDic : SerializableDictionary<K, V> { }
+
+        protected DataDic _dic = new DataDic();
         
         public abstract string MasterName { get; }
 

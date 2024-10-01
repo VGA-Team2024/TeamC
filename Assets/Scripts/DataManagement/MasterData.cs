@@ -15,7 +15,7 @@ namespace DataManagement
     public class MasterData
     {
         //設定系
-        const string DataPrefix = "MasterData";
+        const string DataPrefix = "DataAsset/MasterData";
 
         //シングルトン運用
         static MasterData _instance = new MasterData();
