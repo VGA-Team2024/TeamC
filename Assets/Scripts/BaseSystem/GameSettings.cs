@@ -12,10 +12,11 @@ public class GameSettings
 
     static public string MasterDataAPIURI => "https://script.google.com/macros/s/AKfycbw6J_mqIsEjQUq1iThp7mnul7UiWhZYDyil3jIr75WR0QK1h2DKgsmnPva9aXDYqvYX/exec";
 
+
     /// <summary>
     /// チームで個別に設定してください
     /// </summary>
-    static Dictionary<string, SceneSetting> _sceneDic = new Dictionary<string, SceneSetting>()
+    static Dictionary<string, SceneSetting> _sceneTypeDic = new Dictionary<string, SceneSetting>()
     {
         {
             "Title" ,
@@ -24,18 +25,9 @@ public class GameSettings
             }
         },
         {
-            "Stage1" ,
+            "Stage" ,
             new SceneSetting(){
-                BaseSceneName = "Stage1",
-                AdditiveSceneName = new List<string>(){
-                    "IngameSystem"
-                }
-            }
-        },
-        {
-            "Stage2" ,
-            new SceneSetting(){
-                BaseSceneName = "Stage2",
+                BaseSceneName = "@PlayScene",
                 AdditiveSceneName = new List<string>(){
                     "IngameSystem"
                 }
@@ -49,5 +41,9 @@ public class GameSettings
         }
     };
 
-    public static SceneSetting GetSetting(string key) => _sceneDic.ContainsKey(key) ? _sceneDic[key] : throw new KeyNotFoundException("SceneSettingのキーがありません");
+    public static SceneSetting GetSetting(string key) => _sceneTypeDic.ContainsKey(key) ? _sceneTypeDic[key] : throw new KeyNotFoundException("SceneSettingのキーがありません");
+
+#if UNITY_EDITOR
+    public static Dictionary<string, SceneSetting> SceneTypeDic => _sceneTypeDic;
+#endif
 }

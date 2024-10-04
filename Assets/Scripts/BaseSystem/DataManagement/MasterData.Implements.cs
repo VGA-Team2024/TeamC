@@ -11,10 +11,11 @@ namespace DataManagement
 {
     /// <summary>
     /// マスターデータ管理クラス
+    /// NOTE: このクラスは破壊的変更を行う可能性があるので注意
     /// </summary>
     public partial class MasterData
     {
-        //設定系
+        //設定
         const string DataPrefix = "DataAsset/MasterData";
 
 
@@ -23,6 +24,7 @@ namespace DataManagement
         public static EnemyMaster EnemyMaster { get; private set; }
 
 
+        //読み込み処理
         async UniTask MasterDataLoad()
         {
             //マスタ読み込み
