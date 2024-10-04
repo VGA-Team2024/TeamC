@@ -13,6 +13,13 @@ using UnityEngine;
 /// </summary>
 public abstract class GameExecuterBase : MonoBehaviour
 {
+    // これで、AwakeとStartの前になる
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void EntryPoint()
+    {
+        SceneLoader.CheckScene();
+    }
+
     //Sceneで最初に何かする処理があれば書く
     public abstract void InitializeScene();
 
