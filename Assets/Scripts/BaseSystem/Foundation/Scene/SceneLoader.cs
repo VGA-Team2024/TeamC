@@ -22,7 +22,7 @@ public class SceneLoader
     // Editorでこのstaticクラスを作ってはいけない
 
     //シーン依存系
-    static SceneDependencies _sceneDependencies = new SceneDependencies();
+    static SceneDependencies _sceneDependencies;
 
 
     static public void Load()
@@ -135,8 +135,6 @@ public class SceneLoader
 
     public static async UniTask<bool> ChangeEditorScene(string currentSceneName)
     {
-        Debug.Log(currentSceneName);
-
         SceneDependencies sceneDB = GetSceneDB();
         var current = sceneDB.Get(currentSceneName);
 
@@ -163,8 +161,6 @@ public class SceneLoader
             Debug.LogError(current.Name + "の再生に必要なシーンがありません");
             return false;
         }
-
-        Debug.Log(baseScene.Name);
 
         SceneAsset sceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(baseScene.AssetPath);
         if (sceneAsset == null)

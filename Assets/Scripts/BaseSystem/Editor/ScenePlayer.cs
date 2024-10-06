@@ -26,7 +26,8 @@ public static class ScenePlayer
     static void OnChangeScene(Scene currentScene, Scene nextScene)
     {
         _currentSceneName = nextScene.name;
-        UnityEngine.Debug.Log("Active Scene Changed:" + _currentSceneName);
+
+        //UnityEngine.Debug.Log("Active Scene Changed:" + _currentSceneName);
     }
 
     private static void OnChangedPlayMode(PlayModeStateChange state)
@@ -51,8 +52,6 @@ public static class ScenePlayer
     /// </summary>
     public static async void Play()
     {
-        UnityEngine.Debug.Log(_currentSceneName);
-
         //シーンデータベースから現在のシーンが登録されているか確認してもらい、登録されていたらそのシーンで再生する
         await SceneLoader.ChangeEditorScene(_currentSceneName);
 
