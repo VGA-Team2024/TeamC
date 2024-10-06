@@ -1,46 +1,61 @@
+ï»¿using System.Diagnostics;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// ƒV[ƒ“Ä¶‚ğ‚â‚è‚â‚·‚­‚·‚éƒfƒoƒbƒO
+/// ã‚·ãƒ¼ãƒ³å†ç”Ÿã‚’ã‚„ã‚Šã‚„ã™ãã™ã‚‹ãƒ‡ãƒãƒƒã‚°
 /// </summary>
 [InitializeOnLoad]
 public static class ScenePlayer
 {
     /// <summary>
-    /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-    /// NOTE: InitializeOnLoad‘®«‚É‚æ‚èƒGƒfƒBƒ^[‹N“®‚ÉŒÄ‚Ño‚³‚ê‚é
+    /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+    /// NOTE: InitializeOnLoadå±æ€§ã«ã‚ˆã‚Šã‚¨ãƒ‡ã‚£ã‚¿ãƒ¼èµ·å‹•æ™‚ã«å‘¼ã³å‡ºã•ã‚Œã‚‹
     /// </summary>
     static ScenePlayer()
     {
         EditorApplication.playModeStateChanged += OnChangedPlayMode;
+        EditorSceneManager.activeSceneChangedInEditMode += OnChangeScene;
+
+        _currentSceneName = EditorSceneManager.GetActiveScene().name;
     }
 
-    //ƒvƒŒƒCƒ‚[ƒh‚ª•ÏX‚³‚ê‚½
+    [UnityEngine.SerializeField] static string _currentSceneName = "";
+
+    static void OnChangeScene(Scene currentScene, Scene nextScene)
+    {
+        _currentSceneName = nextScene.name;
+        UnityEngine.Debug.Log("Active Scene Changed:" + _currentSceneName);
+    }
+
     private static void OnChangedPlayMode(PlayModeStateChange state)
     {
-        //ƒGƒfƒBƒ^‚ÌÀs‚ªŠJn‚³‚ê‚½‚ÉAÅ‰‚ÌƒV[ƒ“‚ğnull‚É‚·‚é(•’Ê‚ÌÄ¶ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Ég‚í‚ê‚È‚¢‚æ‚¤‚É)
-        if (state == PlayModeStateChange.EnteredPlayMode)
+        switch(state)
         {
-            EditorSceneManager.playModeStartScene = null;
-        }
+            case PlayModeStateChange.EnteredEditMode:
+                EditorSceneManager.playModeStartScene = null;
+                break;
 
-        if (state == PlayModeStateChange.EnteredPlayMode)
-        {
-            Play();
+            case PlayModeStateChange.EnteredPlayMode:
+                Play();
+                break;
+
+            case PlayModeStateChange.ExitingPlayMode:
+                break;
         }
     }
 
     /// <summary>
-    /// Œ»İ‚ÌƒV[ƒ“ƒ`ƒFƒbƒN‚µ‚ÄAƒ}[ƒW‚ª•K—v‚ÈƒV[ƒ“‚ğ‘«‚·
+    /// ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³ãƒã‚§ãƒƒã‚¯ã—ã¦ã€ãƒãƒ¼ã‚¸ãŒå¿…è¦ãªã‚·ãƒ¼ãƒ³ã‚’è¶³ã™
     /// </summary>
-    public static void Play()
+    public static async void Play()
     {
-        //ƒV[ƒ“ƒf[ƒ^ƒx[ƒX‚©‚çŒ»İ‚ÌƒV[ƒ“‚ª“o˜^‚³‚ê‚Ä‚¢‚é‚©Šm”F‚µ‚Ä‚à‚ç‚¢A“o˜^‚³‚ê‚Ä‚¢‚½‚ç‚»‚ÌƒV[ƒ“‚ÅÄ¶‚·‚é
-        SceneLoader.PlayEditor();
+        UnityEngine.Debug.Log(_currentSceneName);
 
-        //“o˜^‚³‚ê‚Ä‚È‚¢ê‡‚Í‚»‚Ì‚Ü‚ÜÄ¶‚·‚é
+        //ã‚·ãƒ¼ãƒ³ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã‹ã‚‰ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³ãŒç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‹ç¢ºèªã—ã¦ã‚‚ã‚‰ã„ã€ç™»éŒ²ã•ã‚Œã¦ã„ãŸã‚‰ãã®ã‚·ãƒ¼ãƒ³ã§å†ç”Ÿã™ã‚‹
+        await SceneLoader.ChangeEditorScene(_currentSceneName);
+
         EditorApplication.isPlaying = true;
     }
 }

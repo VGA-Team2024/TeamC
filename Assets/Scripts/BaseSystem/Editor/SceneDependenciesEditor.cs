@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System.Text;
@@ -6,30 +6,31 @@ using System.Collections.Generic;
 
 using static SceneDependencies;
 using System.Linq;
+using UnityEditor.Build.Content;
 
 /// <summary>
-/// ƒV[ƒ“ˆË‘¶Œnİ’è‚ÌƒGƒfƒBƒ^Šg’£
+/// ã‚·ãƒ¼ãƒ³ä¾å­˜ç³»è¨­å®šã®ã‚¨ãƒ‡ã‚£ã‚¿æ‹¡å¼µ
 /// </summary>
 [CustomEditor(typeof(SceneDependencies), true, isFallback = true)]
 public class SceneDependenciesEditor : Editor
 {
     public const string TypeScriptPath = "/Scripts/BaseSystem/Dynamic/SceneType.cs";
 
-    //“®“I¶¬
+    //å‹•çš„ç”Ÿæˆ
     public static void CreateSceneDependencies()
     {
         string assetRoot = "Assets/"; //Application.dataPath;
-        //Šù‚ÉƒAƒZƒbƒg‚ ‚é‚©
+        //æ—¢ã«ã‚¢ã‚»ãƒƒãƒˆã‚ã‚‹ã‹
         var db = AssetDatabase.LoadAssetAtPath<SceneDependencies>(assetRoot + SOAssetPath);
         if(db == null)
         {
             db = ScriptableObject.CreateInstance<SceneDependencies>();
             AssetDatabase.CreateAsset(db, assetRoot + SOAssetPath);
-            //TODO: Addressables‚Ì©“®İ’è(‚Å‚«‚ê‚Î)
+            //TODO: Addressablesã®è‡ªå‹•è¨­å®š(ã§ãã‚Œã°)
         }
 
-        //“®“I¶¬
-        //NOTE: QÆ“I‚É‚ÍƒŒƒCƒ„‚ğ’´‚¦‚Ä‚¢‚é‚Ì‚Å‚æ‚­‚È‚¢‚ªAƒGƒfƒBƒ^Šg’£‚È‚Ì‚Å‚µ‚å‚¤‚ª‚È‚¢B
+        //å‹•çš„ç”Ÿæˆ
+        //NOTE: å‚ç…§çš„ã«ã¯ãƒ¬ã‚¤ãƒ¤ã‚’è¶…ãˆã¦ã„ã‚‹ã®ã§ã‚ˆããªã„ãŒã€ã‚¨ãƒ‡ã‚£ã‚¿æ‹¡å¼µãªã®ã§ã—ã‚‡ã†ãŒãªã„ã€‚
         using (FileStream fs = new FileStream(assetRoot + TypeScriptPath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
         {
             List<string> keys = new List<string>() { "Normal", "Ignore" };
@@ -56,30 +57,35 @@ public class SceneDependenciesEditor : Editor
         db.Set(dList);
         AssetDatabase.SaveAssets();
 
-        //sceneDB‚ğ‚à‚Æ‚ÉƒGƒfƒBƒ^‚Ìƒrƒ‹ƒhİ’è‚à•ÏX‚·‚é
-        List< EditorBuildSettingsScene> buildSettings = new List<EditorBuildSettingsScene>();
+        //æ›´æ–°ã—ãŸã®ã§ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚’æ¶ˆã™
+        SceneLoader.SceneDBCacheClear();
+
+        //sceneDBã‚’ã‚‚ã¨ã«ã‚¨ãƒ‡ã‚£ã‚¿ã®ãƒ“ãƒ«ãƒ‰è¨­å®šã‚‚å¤‰æ›´ã™ã‚‹
+        //NOTE: æ—¢ã«è¨­å®šãŒã‚ã‚Œã°é †ç•ªã¯å¤‰ã‚ã‚‰ãªã„ã‚ˆã†ã«ã™ã‚‹
+        List< EditorBuildSettingsScene> buildSettings = EditorBuildSettings.scenes.ToList();
         foreach (var d in dList)
         {
             if (d.SceneType == SceneType.Ignore) continue;
+            if (buildSettings.Where(bs => bs.path == d.AssetPath).Count() > 0) continue;
             buildSettings.Add(new EditorBuildSettingsScene(d.AssetPath, true));
         }
         EditorBuildSettings.scenes = buildSettings.ToArray();
     }
 
     /// <summary>
-    /// ƒCƒ“ƒXƒyƒNƒ^ã‚Åİ’è
+    /// ã‚¤ãƒ³ã‚¹ãƒšã‚¯ã‚¿ä¸Šã§è¨­å®š
     /// </summary>
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-        if (GUILayout.Button("Ä¶¬"))
+        if (GUILayout.Button("å†ç”Ÿæˆ"))
         {
             CreateSceneDependencies();
         }
     }
 
     /// <summary>
-    /// ƒƒjƒ…[‚©‚ç¶¬‚·‚é
+    /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‹ã‚‰ç”Ÿæˆã™ã‚‹
     /// </summary>
     [MenuItem("VTNTools/SceneManagement/CreateSceneDependencies")]
     public static void Create()

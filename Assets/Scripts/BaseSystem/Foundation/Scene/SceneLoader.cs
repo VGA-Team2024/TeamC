@@ -1,9 +1,11 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.AddressableAssets;
+using System;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -11,66 +13,15 @@ using UnityEditor.SceneManagement;
 #endif
 
 /// <summary>
-/// ƒV[ƒ“ƒ[ƒ_[
-/// NOTE: ƒV[ƒ“‚Ì“Ç‚İ‚İ‚ğŠÇ—‚·‚é
+/// ã‚·ãƒ¼ãƒ³ãƒ­ãƒ¼ãƒ€ãƒ¼
+/// NOTE: ã‚·ãƒ¼ãƒ³ã®èª­ã¿è¾¼ã¿ã‚’ç®¡ç†ã™ã‚‹
 /// </summary>
 public class SceneLoader
 {
-#if UNITY_EDITOR
-    public static bool PlayEditor()
-    {
-        SceneDependencies sceneDB = AssetDatabase.LoadAssetAtPath<SceneDependencies>("Assets/" + SceneDependencies.SOAssetPath);
-        var current = sceneDB.Get(SceneManager.GetActiveScene().name);
+    // åˆ¶ç´„
+    // Editorã§ã“ã®staticã‚¯ãƒ©ã‚¹ã‚’ä½œã£ã¦ã¯ã„ã‘ãªã„
 
-        //’ÊíÄ¶‚Ìê‡‚Í‚»‚Ì‚Ü‚Ü‹A‚é
-        if (current.SceneType == SceneType.Normal)
-            return true;
-
-        //ˆË‘¶ƒV[ƒ“‚ª‚ ‚éê‡‚Íƒx[ƒXƒV[ƒ“‚ğE‚Á‚Ä‚«‚ÄÄ¶‚·‚é
-        var setting = GameSettings.GetSetting(current.SceneType.ToString());
-
-        //ƒGƒfƒBƒ^Às‚ÌÅ‰‚ÌƒV[ƒ“‚Éæ“¾‚µ‚½ƒV[ƒ“‚ğİ’è
-        //@PlayScene‚Ìê‡‚ÍƒR[ƒ‹‚³‚ê‚½ƒV[ƒ“‚ğƒx[ƒX‚É‚·‚é
-        SceneDependencies.Dependencies baseScene;
-        if (setting.BaseSceneName == "@PlayScene")
-        {
-            baseScene = current;
-        }
-        else
-        {
-            baseScene = sceneDB.Get(setting.BaseSceneName);
-        }
-        if (baseScene == null)
-        {
-            Debug.LogError(current.Name + "‚ÌÄ¶‚É•K—v‚ÈƒV[ƒ“‚ª‚ ‚è‚Ü‚¹‚ñ");
-            return false;
-        }
-
-        SceneAsset sceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(baseScene.AssetPath);
-        if (sceneAsset == null)
-        {
-            Debug.LogError(baseScene.Name + "‚Æ‚¢‚¤ƒV[ƒ“ƒAƒZƒbƒg‚Í‘¶İ‚µ‚Ü‚¹‚ñ");
-            return false;
-        }
-
-        EditorSceneManager.playModeStartScene = sceneAsset;
-
-        //ƒGƒfƒBƒ^‚ÌÄ¶ŠJn
-        EditorApplication.isPlaying = true;
-
-        //’Ç‰ÁƒV[ƒ“‚Ì“Ç‚İ‚İ‚ğ‚·‚é•‘Ò‚Â
-        foreach (var addScene in setting.AdditiveSceneName)
-        {
-            SceneManager.LoadScene(addScene, LoadSceneMode.Additive);
-        }
-
-        return true;
-    }
-#endif
-
-    // §–ñ
-    // Editor‚Å‚±‚ÌstaticƒNƒ‰ƒX‚ğì‚Á‚Ä‚Í‚¢‚¯‚È‚¢
-
+    //ã‚·ãƒ¼ãƒ³ä¾å­˜ç³»
     static SceneDependencies _sceneDependencies = new SceneDependencies();
 
 
@@ -83,14 +34,14 @@ public class SceneLoader
 
     static public void CheckScene()
     {
-        Debug.Log("Check");
+
     }
 
 
 
     static void SceneInit()
     {
-        //Œ»İ‚ÌƒV[ƒ“‚Ì‰Šú‰»ˆ—‚ğ‚·‚é
+        //ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³ã®åˆæœŸåŒ–å‡¦ç†ã‚’ã™ã‚‹
         var execArrayInit = GameObject.FindObjectsOfType<GameExecuterBase>();
         foreach (var exec in execArrayInit)
         {
@@ -100,7 +51,7 @@ public class SceneLoader
 
     static void SceneTerm()
     {
-        //Œ»İ‚ÌƒV[ƒ“‚Ì‰ğ•úˆ—‚ğ‚·‚é
+        //ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³ã®è§£æ”¾å‡¦ç†ã‚’ã™ã‚‹
         var execArrayTerm = GameObject.FindObjectsOfType<GameExecuterBase>();
         foreach (var exec in execArrayTerm)
         {
@@ -111,21 +62,21 @@ public class SceneLoader
 
 
     /// <summary>
-    /// ƒV[ƒ“ŒÄ‚Ño‚µ
-    /// NOTE: ’Pˆê‚ÌƒV[ƒ“‚ğŒÄ‚Ño‚·
+    /// ã‚·ãƒ¼ãƒ³å‘¼ã³å‡ºã—
+    /// NOTE: å˜ä¸€ã®ã‚·ãƒ¼ãƒ³ã‚’å‘¼ã³å‡ºã™
     /// </summary>
     /// <param name="sceneName"></param>
     static public async void LoadSceneSimple(string sceneName)
     {
-        //ƒx[ƒXƒV[ƒ“‚Ì“Ç‚İ‚İ‚ğ‚·‚é•‘Ò‚Â
+        //ãƒ™ãƒ¼ã‚¹ã‚·ãƒ¼ãƒ³ã®èª­ã¿è¾¼ã¿ã‚’ã™ã‚‹ï¼†å¾…ã¤
         var baseSceneHandle = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         await UniTask.WaitUntil(() => baseSceneHandle.isDone);
     }
 
 
     /// <summary>
-    /// ƒV[ƒ“ŒÄ‚Ño‚µ
-    /// NOTE: LoadSceneMode.Additive‚ğg—p‚µA•¡”‚ÌƒV[ƒ“‚ğŒ‹‡‚·‚é
+    /// ã‚·ãƒ¼ãƒ³å‘¼ã³å‡ºã—
+    /// NOTE: LoadSceneMode.Additiveã‚’ä½¿ç”¨ã—ã€è¤‡æ•°ã®ã‚·ãƒ¼ãƒ³ã‚’çµåˆã™ã‚‹
     /// </summary>
     /// <param name="sceneName"></param>
     static public async void LoadScene(string sceneName)
@@ -145,11 +96,11 @@ public class SceneLoader
 #if USE_ADDRESSABLES
         //TBD
 #else
-        //ƒx[ƒXƒV[ƒ“‚Ì“Ç‚İ‚İ‚ğ‚·‚é•‘Ò‚Â
+        //ãƒ™ãƒ¼ã‚¹ã‚·ãƒ¼ãƒ³ã®èª­ã¿è¾¼ã¿ã‚’ã™ã‚‹ï¼†å¾…ã¤
         var baseSceneHandle = SceneManager.LoadSceneAsync(setting.BaseSceneName, LoadSceneMode.Single);
         await UniTask.WaitUntil(() => baseSceneHandle.isDone);
 
-        //’Ç‰ÁƒV[ƒ“‚Ì“Ç‚İ‚İ‚ğ‚·‚é•‘Ò‚Â
+        //è¿½åŠ ã‚·ãƒ¼ãƒ³ã®èª­ã¿è¾¼ã¿ã‚’ã™ã‚‹ï¼†å¾…ã¤
         List<AsyncOperation> handles = new List<AsyncOperation>();
         foreach(var addScene in setting.AdditiveSceneName)
         {
@@ -160,4 +111,82 @@ public class SceneLoader
 
         SceneInit();
     }
+
+
+
+
+
+#if UNITY_EDITOR
+    static SceneDependencies _sceneDBCache = null;
+
+    static SceneDependencies GetSceneDB()
+    {
+        if (_sceneDBCache == null)
+        {
+            _sceneDBCache = AssetDatabase.LoadAssetAtPath<SceneDependencies>("Assets/" + SceneDependencies.SOAssetPath);
+        }
+        return _sceneDBCache;
+    }
+
+    public static void SceneDBCacheClear()
+    {
+        _sceneDBCache = null;
+    }
+
+    public static async UniTask<bool> ChangeEditorScene(string currentSceneName)
+    {
+        Debug.Log(currentSceneName);
+
+        SceneDependencies sceneDB = GetSceneDB();
+        var current = sceneDB.Get(currentSceneName);
+
+        //é€šå¸¸å†ç”Ÿã®å ´åˆã¯ãã®ã¾ã¾å¸°ã‚‹
+        if (current.SceneType == SceneType.Normal)
+            return true;
+
+        //ä¾å­˜ã‚·ãƒ¼ãƒ³ãŒã‚ã‚‹å ´åˆã¯ãƒ™ãƒ¼ã‚¹ã‚·ãƒ¼ãƒ³ã‚’æ‹¾ã£ã¦ãã¦å†ç”Ÿã™ã‚‹
+        var setting = GameSettings.GetSetting(current.SceneType.ToString());
+
+        //ã‚¨ãƒ‡ã‚£ã‚¿å®Ÿè¡Œæ™‚ã®æœ€åˆã®ã‚·ãƒ¼ãƒ³ã«å–å¾—ã—ãŸã‚·ãƒ¼ãƒ³ã‚’è¨­å®š
+        //@PlaySceneã®å ´åˆã¯ã‚³ãƒ¼ãƒ«ã•ã‚ŒãŸã‚·ãƒ¼ãƒ³ã‚’ãƒ™ãƒ¼ã‚¹ã«ã™ã‚‹
+        SceneDependencies.Dependencies baseScene;
+        if (setting.BaseSceneName == "@PlayScene")
+        {
+            baseScene = current;
+        }
+        else
+        {
+            baseScene = sceneDB.Get(setting.BaseSceneName);
+        }
+        if (baseScene == null)
+        {
+            Debug.LogError(current.Name + "ã®å†ç”Ÿã«å¿…è¦ãªã‚·ãƒ¼ãƒ³ãŒã‚ã‚Šã¾ã›ã‚“");
+            return false;
+        }
+
+        Debug.Log(baseScene.Name);
+
+        SceneAsset sceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(baseScene.AssetPath);
+        if (sceneAsset == null)
+        {
+            Debug.LogError(baseScene.Name + "ã¨ã„ã†ã‚·ãƒ¼ãƒ³ã‚¢ã‚»ãƒƒãƒˆã¯å­˜åœ¨ã—ã¾ã›ã‚“");
+            return false;
+        }
+
+        EditorSceneManager.playModeStartScene = sceneAsset;
+
+        //èµ·å‹•æ™‚ã®ãƒ‰ãƒ©ã‚¤ãƒ
+        setting.StartDriver?.Invoke();
+
+        //è¿½åŠ ã‚·ãƒ¼ãƒ³ã®èª­ã¿è¾¼ã¿ã‚’ã™ã‚‹ï¼†å¾…ã¤
+        List<AsyncOperation> handles = new List<AsyncOperation>();
+        foreach (var addScene in setting.AdditiveSceneName)
+        {
+            handles.Add(EditorSceneManager.LoadSceneAsync(addScene, LoadSceneMode.Additive));
+        }
+        await UniTask.WaitUntil(() => handles.All(h => h.isDone));
+
+        return true;
+    }
+#endif
 }

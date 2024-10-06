@@ -1,8 +1,8 @@
-public enum SceneType
+﻿public enum SceneType
 {
 	Normal,
 	Ignore,
-	Title,
-	Stage,
-	Result
+	Ingame,
+	Ingame_Debug,
+	ProgramTest
 };
