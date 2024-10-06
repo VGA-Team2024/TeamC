@@ -1,4 +1,4 @@
-﻿public enum SceneType
+public enum SceneType
 {
 	Normal,
 	Ignore,
