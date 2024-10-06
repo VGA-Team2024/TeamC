@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,24 +10,24 @@ using Cysharp.Threading.Tasks;
 namespace DataManagement
 {
     /// <summary>
-    /// ƒ}ƒXƒ^[ƒf[ƒ^ŠÇ—ƒNƒ‰ƒX
-    /// NOTE: ‚±‚ÌƒNƒ‰ƒX‚Í”j‰ó“I•ÏX‚ğs‚¤‰Â”\«‚ª‚ ‚é‚Ì‚Å’ˆÓ
+    /// ãƒã‚¹ã‚¿ãƒ¼ãƒ‡ãƒ¼ã‚¿ç®¡ç†ã‚¯ãƒ©ã‚¹
+    /// NOTE: ã“ã®ã‚¯ãƒ©ã‚¹ã¯ç ´å£Šçš„å¤‰æ›´ã‚’è¡Œã†å¯èƒ½æ€§ãŒã‚ã‚‹ã®ã§æ³¨æ„
     /// </summary>
     public partial class MasterData
     {
-        //İ’è
+        //è¨­å®š
         const string DataPrefix = "DataAsset/MasterData";
 
 
-        //ƒ}ƒXƒ^[ƒf[ƒ^“Ç‚İ‚İƒŠƒXƒg
+        //ãƒã‚¹ã‚¿ãƒ¼ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿ãƒªã‚¹ãƒˆ
         public static TextMaster TextMaster { get; private set; }
         public static EnemyMaster EnemyMaster { get; private set; }
 
 
-        //“Ç‚İ‚İˆ—
+        //èª­ã¿è¾¼ã¿å‡¦ç†
         async UniTask MasterDataLoad()
         {
-            //ƒ}ƒXƒ^“Ç‚İ‚İ
+            //ãƒã‚¹ã‚¿èª­ã¿è¾¼ã¿
             TextMaster = new TextMaster();
             EnemyMaster = new EnemyMaster();
 

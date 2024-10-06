@@ -1,15 +1,15 @@
-
+ï»¿
 using UnityEngine;
 
 public class SampleExecuter : MonoBehaviour
 {
-    //Scene‚ÅÅ‰‚É‰½‚©‚·‚éˆ—‚ª‚ ‚ê‚Î‘‚­
+    //Sceneã§æœ€åˆã«ä½•ã‹ã™ã‚‹å‡¦ç†ãŒã‚ã‚Œã°æ›¸ã
     public void InitializeScene()
     {
 
     }
 
-    //Scene‚ÅÅŒã‚É‰½‚©‚·‚éˆ—‚ª‚ ‚ê‚Î‘‚­
+    //Sceneã§æœ€å¾Œã«ä½•ã‹ã™ã‚‹å‡¦ç†ãŒã‚ã‚Œã°æ›¸ã
     public void FinalizeScene()
     {
 

@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 /// <summary>
-/// ƒV[ƒ“ˆË‘¶ŠÖŒW‚Ìİ’è—pƒf[ƒ^
-/// TODO: “®“I¶¬•¨‚È‚Ì‚ÅƒAƒZƒbƒgƒƒjƒ…[‚É‚ÍÚ‚¹‚È‚¢
+/// ã‚·ãƒ¼ãƒ³ä¾å­˜é–¢ä¿‚ã®è¨­å®šç”¨ãƒ‡ãƒ¼ã‚¿
+/// TODO: å‹•çš„ç”Ÿæˆç‰©ãªã®ã§ã‚¢ã‚»ãƒƒãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«ã¯è¼‰ã›ãªã„
 /// </summary>
 public class SceneDependencies : ScriptableObject
 {
@@ -20,14 +19,14 @@ public class SceneDependencies : ScriptableObject
         public SceneType SceneType;
     }
 
-    [SerializeField] List<Dependencies> _dependencies = new List<Dependencies>();
+    [SerializeField] List<Dependencies> _dependencies;
     
     public Dependencies Get(string name)
     {
         return _dependencies.Where(d => d.Name == name).FirstOrDefault();
     }
 
-    //¶¬ƒR[ƒh‚È‚Ç‚ÍEditor‚É‚ ‚é
+    //ç”Ÿæˆã‚³ãƒ¼ãƒ‰ãªã©ã¯Editorã«ã‚ã‚‹
 
 #if UNITY_EDITOR
     public void Set(List<Dependencies> dp) { _dependencies = dp; }

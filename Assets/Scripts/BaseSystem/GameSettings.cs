@@ -1,12 +1,13 @@
-
+ï»¿
+using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
 public class GameSettings
 {
     public class SceneSetting
     {
-        public string BaseSceneName;
+        public string BaseSceneName = "";
+        public Action StartDriver = null;
         public List<string> AdditiveSceneName = new List<string>();
     }
 
@@ -14,18 +15,13 @@ public class GameSettings
 
 
     /// <summary>
-    /// ƒ`[ƒ€‚ÅŒÂ•Ê‚Éİ’è‚µ‚Ä‚­‚¾‚³‚¢
+    /// ãƒãƒ¼ãƒ ã§å€‹åˆ¥ã«è¨­å®šã—ã¦ãã ã•ã„
+    /// NOTE: @PlaySceneã¯ç¾åœ¨è¨­å®šä¸­ã®ã‚·ãƒ¼ãƒ³ãŒ
     /// </summary>
     static Dictionary<string, SceneSetting> _sceneTypeDic = new Dictionary<string, SceneSetting>()
     {
         {
-            "Title" ,
-            new SceneSetting(){
-                BaseSceneName = "Title"
-            }
-        },
-        {
-            "Stage" ,
+            "Ingame" ,
             new SceneSetting(){
                 BaseSceneName = "@PlayScene",
                 AdditiveSceneName = new List<string>(){
@@ -34,14 +30,28 @@ public class GameSettings
             }
         },
         {
-            "Result" ,
+            "Ingame_Debug" ,
             new SceneSetting(){
-                BaseSceneName = "Result"
+                BaseSceneName = "@PlayScene",
+                AdditiveSceneName = new List<string>(){
+                    "IngameSystem",
+                    "IngameDebug"
+                }
+            }
+        },
+        {
+            "ProgramTest" ,
+            new SceneSetting(){
+                BaseSceneName = "Night",
+                AdditiveSceneName = new List<string>(){
+                    "IngameSystem",
+                    ""
+                }
             }
         }
     };
 
-    public static SceneSetting GetSetting(string key) => _sceneTypeDic.ContainsKey(key) ? _sceneTypeDic[key] : throw new KeyNotFoundException("SceneSetting‚ÌƒL[‚ª‚ ‚è‚Ü‚¹‚ñ");
+    public static SceneSetting GetSetting(string key) => _sceneTypeDic.ContainsKey(key) ? _sceneTypeDic[key] : throw new KeyNotFoundException("SceneSettingã®ã‚­ãƒ¼ãŒã‚ã‚Šã¾ã›ã‚“");
 
 #if UNITY_EDITOR
     public static Dictionary<string, SceneSetting> SceneTypeDic => _sceneTypeDic;

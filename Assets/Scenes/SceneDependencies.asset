@@ -18,10 +18,10 @@ MonoBehaviour:
     SceneType: 0
   - Name: Morning
     AssetPath: Assets/Scenes/Design/Morning.unity
-    SceneType: 0
+    SceneType: 2
   - Name: Night
     AssetPath: Assets/Scenes/Design/Night.unity
-    SceneType: 3
+    SceneType: 2
   - Name: IngameSystem
     AssetPath: Assets/Scenes/System/IngameSystem.unity
     SceneType: 0
