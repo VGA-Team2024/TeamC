@@ -138,17 +138,18 @@ public class SceneLoader
         SceneDependencies sceneDB = GetSceneDB();
         var current = sceneDB.Get(currentSceneName);
 
-        //通常再生の場合はそのまま帰る
-        if (current.SceneType == SceneType.Normal)
-            return true;
-
         //依存シーンがある場合はベースシーンを拾ってきて再生する
-        var setting = GameSettings.GetSetting(current.SceneType.ToString());
+        GameSettings.SceneSetting setting = null;
+        if (current.SceneType != SceneType.Normal && current.SceneType != SceneType.Ignore)
+        {
+            setting = GameSettings.GetSetting(current.SceneType.ToString());
+        }
 
         //エディタ実行時の最初のシーンに取得したシーンを設定
         //@PlaySceneの場合はコールされたシーンをベースにする
+        //通常再生の場合もここを通る
         SceneDependencies.Dependencies baseScene;
-        if (setting.BaseSceneName == "@PlayScene")
+        if (setting == null || (setting != null && setting.BaseSceneName == "@PlayScene"))
         {
             baseScene = current;
         }
@@ -171,16 +172,21 @@ public class SceneLoader
 
         EditorSceneManager.playModeStartScene = sceneAsset;
 
-        //起動時のドライバ
-        setting.StartDriver?.Invoke();
-
-        //追加シーンの読み込みをする＆待つ
-        List<AsyncOperation> handles = new List<AsyncOperation>();
-        foreach (var addScene in setting.AdditiveSceneName)
+        if (setting != null)
         {
-            handles.Add(EditorSceneManager.LoadSceneAsync(addScene, LoadSceneMode.Additive));
+            //起動時のドライバ
+            setting.StartDriver?.Invoke();
+
+            //追加シーンの読み込みをする＆待つ
+            List<AsyncOperation> handles = new List<AsyncOperation>();
+            foreach (var addScene in setting.AdditiveSceneName)
+            {
+                handles.Add(EditorSceneManager.LoadSceneAsync(addScene, LoadSceneMode.Additive));
+            }
+            await UniTask.WaitUntil(() => handles.All(h => h.isDone));
         }
-        await UniTask.WaitUntil(() => handles.All(h => h.isDone));
+
+        SceneInit();
 
         return true;
     }

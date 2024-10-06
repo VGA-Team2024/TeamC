@@ -20,8 +20,8 @@ namespace DataManagement
 
 
         //マスターデータ読み込みリスト
-        public static TextMaster TextMaster { get; private set; }
-        public static EnemyMaster EnemyMaster { get; private set; }
+        static public TextMaster TextMaster { get; private set; }
+        static public EnemyMaster EnemyMaster { get; private set; }
 
 
         //読み込み処理
