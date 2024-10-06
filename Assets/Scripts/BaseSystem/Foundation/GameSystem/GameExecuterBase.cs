@@ -1,11 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using DataManagement;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// シーン読み込み直後や解放直前に処理をかけるスクリプト

@@ -101,8 +101,6 @@ public class BuildCommand
     [MenuItem("Assets/BuildAndCopyAddressables")]
     public static void BuildAndCopyAddressables()
     {
-        //プラットフォーム、オプション
-        BuildTarget platform = BuildTarget.StandaloneWindows;
         var outPath = "Assets/Addressables";
 
         // ビルド対象シーンリスト
@@ -110,36 +108,6 @@ public class BuildCommand
             .Where(scene => scene.enabled)
             .Select(scene => scene.path)
             .ToArray();
-
-        // Jenkins(コマンドライン)の引数をパース
-        var args = System.Environment.GetCommandLineArgs();
-        for (int i = 0; i < args.Length; i++)
-        {
-            switch (args[i])
-            {
-                case "-outPath":
-                    outPath = args[i + 1];
-                    break;
-                case "-platform":
-                    switch (args[i + 1])
-                    {
-                        case "Android":
-                            platform = BuildTarget.Android;
-                            break;
-
-                        case "Windows":
-                            platform = BuildTarget.StandaloneWindows;
-                            break;
-
-                        case "Switch":
-                            platform = BuildTarget.Switch;
-                            break;
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
 
         if (!Directory.Exists(outPath))
         {
