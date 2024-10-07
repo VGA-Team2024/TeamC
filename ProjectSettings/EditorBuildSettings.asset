@@ -6,15 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Design/Morning.unity
-    guid: 0de2f053148d51d4c8255fd5ede95194
+    path: Assets/Scenes/Mockup/01_Title.unity
+    guid: 9d8c992fe5a7d0d40864e7dd0205bb35
   - enabled: 1
-    path: Assets/Scenes/Design/Night.unity
-    guid: 3fc4caa4d09689641906dd3861daa8cf
+    path: Assets/Scenes/Mockup/02_GameMain.unity
+    guid: 26ea6efa274282943840f6c49baebcee
   - enabled: 1
-    path: Assets/Scenes/System/IngameSystem.unity
-    guid: 28bbf92597792604b989fbdc7a1fb369
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Mockup/03_Result.unity
+    guid: c8cb7d654958e2a498466c10e7f0caba
   m_configObjects: {}
