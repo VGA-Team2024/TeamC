@@ -3,7 +3,7 @@ using UniRx;
 using UnityEngine;
 
 /// <summary> プレイヤーがポータルに接触したときにイベントを発行するためのクラス </summary>
-[RequireComponent(typeof(Rigidbody))]   // プロトではコライダーのトリガーを使用しているため
+//[RequireComponent(typeof(Rigidbody(2D)))]   // プロトではコライダーのトリガーを使用しているため
 public class OnTriggerEvent : MonoBehaviour
 {
     private Collider _lastPortalUsed;   // 最後に使用したポータル
