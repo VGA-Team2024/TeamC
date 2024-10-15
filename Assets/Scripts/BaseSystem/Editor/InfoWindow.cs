@@ -39,12 +39,16 @@ public class InfoWindow : EditorWindow
 
     void OnGUI()
     {
+        EditorGUILayout.LabelField("この画面を選択して Alt + PrintScreen で画面をコピーできます。");
+        EditorGUILayout.Space(10);
+
         //
         if (GUILayout.Button("情報更新", GUILayout.Width(200)))
         {
             Refresh();
         }
         EditorGUILayout.Space(10);
+
 
         //Unity関係の情報
         EditorGUILayout.LabelField("Unity Infos:");
