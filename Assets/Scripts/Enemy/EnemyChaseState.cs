@@ -4,11 +4,11 @@ using UnityEngine;
 public class EnemyChaseState : IEnemyState
 {
     private EnemyBase _enemyBase = default;
-    private Transform _transform = default;
+    private readonly Transform _transform = default;
     private readonly float _speed = default;
     private readonly SpriteRenderer _spriteRenderer = default;
     private Vector2 _playerPos = default;
-    private bool _isFly = default;
+    private readonly bool _isFly = default;
     
     public EnemyChaseState(EnemyBase enemyBase, Transform transform, float speed, SpriteRenderer renderer, bool isFly)
     {

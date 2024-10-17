@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class EnemyIdleState : IEnemyState
 {
     private EnemyBase _enemyBase = default;
