@@ -10,7 +10,7 @@ public class MapUpdate : MonoBehaviour
     [SerializeField] private GameObject _startMapPrefab;    // 仮：最初にいるマップ
     
     private GameObject _currentMapPrefab; // 現在いるマップデータ
-
+    
     private void Start()
     {
         if (!_player.TryGetComponent<Rigidbody>(out _))
@@ -25,13 +25,11 @@ public class MapUpdate : MonoBehaviour
         
         _triggerEvent.OnTriggerEnterAsObservable.Subscribe(collider =>
         {
-            //Debug.Log("プレイヤーがポータルに入った");
             HandleTriggerEnter(collider);
         }).AddTo(this);
 
         _triggerEvent.OnTriggerExitAsObservable.Subscribe(collider =>
         {
-            //Debug.Log("プレイヤーがポータルを出た");
             HandleTriggerExit(collider);
         }).AddTo(this);
         
@@ -52,7 +50,6 @@ public class MapUpdate : MonoBehaviour
             {
                 if (mapData.EntranceColliders.Contains(other))
                 {
-                    //Instantiate(mapdata.exitMapPrefab);
                     _currentMapPrefab.SetActive(false);     // 前までいたマップを非アクティブ化
                     mapData.ExitMapPrefab.SetActive(true);  // ポータル先のマップをアクティブ化
                     _currentMapPrefab = mapData.ExitMapPrefab; // 現在のマップを更新
@@ -100,6 +97,5 @@ public class MapUpdate : MonoBehaviour
     private void ToTeleportPlayer(Collider targetCollider)
     {
         _player.transform.position = targetCollider.transform.position;
-        //Debug.Log("テレポート");
     }
 }
