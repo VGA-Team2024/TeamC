@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using Cysharp.Threading.Tasks;
 public class PlayerMove : MonoBehaviour ,IDamageable
 {
     Rigidbody _rb;
@@ -9,10 +10,15 @@ public class PlayerMove : MonoBehaviour ,IDamageable
     [SerializeField, Header("プレイヤーのジャンプ力")] float _jumpPower = 5;
     [SerializeField, Header("攻撃時に出すゲームオブジェクト")] GameObject _attackCollider;
     [SerializeField, Header("着地判定用Rayの長さ")] float _rayLength = 0.55f;
+
+    Cinemachine.CinemachineImpulseSource source;
+
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        source = GetComponent<Cinemachine.CinemachineImpulseSource>();
+
     }
 
     private void Awake()
@@ -23,7 +29,7 @@ public class PlayerMove : MonoBehaviour ,IDamageable
         _controls.InGame.Move.started += OnMove;  //入力はじめ
         _controls.InGame.Move.performed += OnMove;//値が変わった時
         _controls.InGame.Move.canceled += OnMove; //入力終わり
-        _controls.InGame.Attack.started += OnArttack;
+        _controls.InGame.Attack.started += OnAttack;
     }
 
     private void OnDestroy()
@@ -33,7 +39,7 @@ public class PlayerMove : MonoBehaviour ,IDamageable
         _controls.InGame.Move.started -= OnMove;  //入力はじめ
         _controls.InGame.Move.performed -= OnMove;//値が変わった時
         _controls.InGame.Move.canceled -= OnMove; //入力終わり
-        _controls.InGame.Attack.started -= OnArttack;
+        _controls.InGame.Attack.started -= OnAttack;
     }
 
     private void OnEnable()
@@ -58,7 +64,7 @@ public class PlayerMove : MonoBehaviour ,IDamageable
     }
 
 
-    void OnArttack(InputAction.CallbackContext context)
+    void OnAttack(InputAction.CallbackContext context)
     {
         // 攻撃用当たり判定をアクティブにする
         _attackCollider.SetActive(true);
@@ -88,8 +94,18 @@ public class PlayerMove : MonoBehaviour ,IDamageable
     }
 
     // 攻撃されたときに呼ばれる
-    public void TakeDamage(int damage)
+    public async void TakeDamage(int damage)
     {
         Debug.Log($"プレイヤーが{damage}ダメージ受けた");
+        // 6番が無敵のレイヤー
+        this.gameObject.layer = 6;
+        Camera.main.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+        source.GenerateImpulse();
+
+        await UniTask.Delay(500);
+        // 8番が通常時プレイヤーレイヤー
+        this.gameObject.layer = 8;
     }
+
+
 }
