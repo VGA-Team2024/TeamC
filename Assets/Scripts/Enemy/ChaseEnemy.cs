@@ -62,6 +62,11 @@ public class ChaseEnemy : EnemyBase, IPlayerTarget
     {
         if (_isStop) return;
         // todo:playerへのダメージはここ
+        if(other.tag == _playerTag && other.TryGetComponent<IDamageable>(out IDamageable dmg))
+        {
+            dmg.TakeDamage(1);
+        }
+
         _isStop = true;
         ChangeState(_idleState);
         StartFreezeTimer().Forget();
