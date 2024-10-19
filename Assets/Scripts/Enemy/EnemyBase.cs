@@ -4,9 +4,10 @@ public class EnemyBase : MonoBehaviour
 {
     [SerializeField] protected float _speed;
     protected IEnemyState _currentState = default;
-    private EnemyIdleState _idleState = default;
+    protected EnemyIdleState _idleState = default;
     protected EnemyHp _hp = default;
     protected bool _isDeath = false;
+    protected Transform _playerTransform = default;
 
     private void Start()
     {
