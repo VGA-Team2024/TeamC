@@ -39,6 +39,7 @@ public class EnemyChaseState : IEnemyState
         {
             _spriteRenderer.flipX = _playerPos.x > _transform.position.x;
         }
+        
     }
 
     public void Exit()
