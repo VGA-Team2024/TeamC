@@ -11,6 +11,9 @@ public class SearchArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        _playerTarget?.GetPlayerMove(other?.GetComponent<PlayerMove>());
+        if (other.TryGetComponent<PlayerMove>(out PlayerMove pm))
+        {
+            _playerTarget?.GetPlayerMove(pm);
+        }
     }
 }
