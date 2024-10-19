@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-public class AccackCollider : MonoBehaviour
+public class AttackCollider : MonoBehaviour
 {
     // SetActiveがtrueになった0.2秒後にSetActiveをfalseに戻す
     async private void OnEnable()
