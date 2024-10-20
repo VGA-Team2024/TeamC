@@ -104,6 +104,8 @@ MonoBehaviour:
   _speed: 2
   _isFly: 1
   _patrolArea: 5
+  _freezeTime: 1
+  _playerTag: Player
 --- !u!114 &7727509406251058678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +134,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -183,7 +185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0227f112ce1ffbf41ac4581cb9d71068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerTag: Player
 --- !u!135 &7384542037602486675
 SphereCollider:
   m_ObjectHideFlags: 0
