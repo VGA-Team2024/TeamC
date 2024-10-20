@@ -104,6 +104,7 @@ MonoBehaviour:
   _speed: 2
   _isFly: 1
   _patrolArea: 5
+  _freezeTime: 1
   _playerTag: Player
 --- !u!114 &7727509406251058678
 MonoBehaviour:

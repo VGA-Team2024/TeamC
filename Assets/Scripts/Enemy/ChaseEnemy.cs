@@ -7,6 +7,7 @@ public class ChaseEnemy : EnemyBase, IPlayerTarget
 {
     [SerializeField, Header("空中か")] private bool _isFly;
     [SerializeField, Header("巡回する範囲")] private float _patrolArea;
+    [SerializeField, Header("Playerにぶつかった後止まる時間")] private int _freezeTime;
     [SerializeField, Header("Playerにつけるタグの名前")] private string _playerTag;
     private SpriteRenderer _spriteRenderer = default;
     private CancellationToken _token = default;
@@ -74,7 +75,7 @@ public class ChaseEnemy : EnemyBase, IPlayerTarget
 
     private async UniTask StartFreezeTimer()
     {
-        await UniTask.Delay(1000, cancellationToken:_token);
+        await UniTask.Delay(_freezeTime * 1000, cancellationToken:_token);
         _isStop = false;
     }
 }
