@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour ,IDamageable
 
     //プレイヤーがどちら側を向いているか
     bool _dirRight = true;
-    bool _PlayerFlip 
+    bool _playerFlip 
     {
         get => _dirRight;
         set 
@@ -69,12 +69,11 @@ public class PlayerMove : MonoBehaviour ,IDamageable
         _controls.Disable();
     }
 
-
     void OnJump(InputAction.CallbackContext context)
     {
         // 地面についているかの判定
         // タグの判定などをしていないので敵の上に居るときでもジャンプが可能になっている
-        if (Physics.Raycast(this.transform.position, Vector3.down, _rayLength))
+        if (Physics.Raycast(transform.position, Vector3.down, _rayLength))
         {
             _rb.AddForce(Vector2.up * _jumpPower, ForceMode.Impulse);
         }
@@ -98,14 +97,14 @@ public class PlayerMove : MonoBehaviour ,IDamageable
         {
             Vector3 acp = _attackCollider.transform.localPosition;
             _attackCollider.transform.localPosition = new Vector3(acp.x * - 1, acp.y, acp.z);
-            _PlayerFlip = !_PlayerFlip;
+            _playerFlip = !_playerFlip;
         }
     }
 
     private void FixedUpdate()
     {
         //ジャンプ判定用Rayの表示
-        Debug.DrawRay(this.transform.position, Vector3.down * _rayLength,Color.black);
+        Debug.DrawRay(transform.position, Vector3.down * _rayLength,Color.black);
         if (_isMove)
         {
             //左右移動
@@ -118,7 +117,7 @@ public class PlayerMove : MonoBehaviour ,IDamageable
     {
         Debug.Log($"プレイヤーが{damage}ダメージ受けた");
         // 6番が無敵のレイヤー
-        this.gameObject.layer = 6;
+        gameObject.layer = 6;
         //集中線パーティクルをPlay
         Camera.main.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         //画面を揺らす
@@ -127,11 +126,11 @@ public class PlayerMove : MonoBehaviour ,IDamageable
         _isMove = false;
         //プレイヤーを後ろに吹き飛ばす
         _rb.velocity = Vector3.zero;
-        _rb.AddForce(new Vector3((!_PlayerFlip ? 1 : -1), 0.3f, 0) * _knockbackPower, ForceMode.Impulse);
+        _rb.AddForce(new Vector3((!_playerFlip ? 1 : -1), 0.3f, 0) * _knockbackPower, ForceMode.Impulse);
 
         await UniTask.Delay(500);
         // 8番が通常時プレイヤーレイヤー
-        this.gameObject.layer = 8;
+        gameObject.layer = 8;
         _isMove = true;
     }
 }
