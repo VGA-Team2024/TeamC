@@ -5,20 +5,35 @@ public class PlayerMove : MonoBehaviour ,IDamageable
 {
     Rigidbody _rb;
     PlayerControls _controls;
+    Cinemachine.CinemachineImpulseSource _source;
+    SpriteRenderer _sr;
+
     Vector2 _dir; //ActionMapのMoveの値を保存するVector2
     [SerializeField, Header("プレイヤーの移動速度")] float _moveSpeed = 2;
     [SerializeField, Header("プレイヤーのジャンプ力")] float _jumpPower = 5;
     [SerializeField, Header("攻撃時に出すゲームオブジェクト")] GameObject _attackCollider;
     [SerializeField, Header("着地判定用Rayの長さ")] float _rayLength = 0.55f;
 
-    Cinemachine.CinemachineImpulseSource source;
+    //プレイヤーがどちら側を向いているか
+    bool _dirRight = true;
+    bool _PlayerFlip 
+    {
+        get => _dirRight;
+        set 
+        {
+            _sr.flipX = value;
+            _dirRight = value;
+        }
+    }
+    bool _isMove = true;
+
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        source = GetComponent<Cinemachine.CinemachineImpulseSource>();
-
+        _source = GetComponent<Cinemachine.CinemachineImpulseSource>();
+        _sr = GetComponent<SpriteRenderer>();
     }
 
     private void Awake()
@@ -81,6 +96,7 @@ public class PlayerMove : MonoBehaviour ,IDamageable
         {
             Vector3 acp = _attackCollider.transform.localPosition;
             _attackCollider.transform.localPosition = new Vector3(acp.x * - 1, acp.y, acp.z);
+            _PlayerFlip = !_PlayerFlip;
         }
     }
 
@@ -88,9 +104,11 @@ public class PlayerMove : MonoBehaviour ,IDamageable
     {
         //ジャンプ判定用Rayの表示
         Debug.DrawRay(this.transform.position, Vector3.down * _rayLength,Color.black);
-        
-        //左右移動
-        _rb.velocity = new Vector3(_dir.x * _moveSpeed,_rb.velocity.y ,0);
+        if (_isMove)
+        {
+            //左右移動
+            _rb.velocity = new Vector3(_dir.x * _moveSpeed, _rb.velocity.y, 0);
+        }
     }
 
     // 攻撃されたときに呼ばれる
@@ -99,12 +117,21 @@ public class PlayerMove : MonoBehaviour ,IDamageable
         Debug.Log($"プレイヤーが{damage}ダメージ受けた");
         // 6番が無敵のレイヤー
         this.gameObject.layer = 6;
+        //集中線パーティクルをPlay
         Camera.main.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-        source.GenerateImpulse();
+        //画面を揺らす
+        _source.GenerateImpulse();
+        //プレイヤーを操作不能に
+        _isMove = false;
+        //プレイヤーを後ろに吹き飛ばす
+        _rb.velocity = Vector3.zero;
+        _rb.AddForce(new Vector3((!_PlayerFlip ? 1 : -1), 0.3f, 0) * 20, ForceMode.Impulse);
 
         await UniTask.Delay(500);
         // 8番が通常時プレイヤーレイヤー
         this.gameObject.layer = 8;
+        _isMove = true;
+
     }
 
 
