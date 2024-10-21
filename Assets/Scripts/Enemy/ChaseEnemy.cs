@@ -9,30 +9,33 @@ public class ChaseEnemy : EnemyBase, IPlayerTarget
     [SerializeField, Header("巡回する範囲")] private float _patrolArea;
     [SerializeField, Header("Playerにぶつかった後止まる時間")] private int _freezeTime;
     [SerializeField, Header("Playerにつけるタグの名前")] private string _playerTag;
-    private SpriteRenderer _spriteRenderer = default;
-    private CancellationToken _token = default;
-    private bool _isStop = false;
+    private SpriteRenderer _spriteRenderer;
+    private CancellationToken _token;
+    private ParticleSystem _particle;
     
-    private EnemyWalkState _walkState = default;
-    private EnemyChaseState _chaseState = default;
-    private EnemyDeathState _deathState = default;
+    private EnemyWalkState _walkState;
+    private EnemyChaseState _chaseState;
+    private EnemyFreezeState _freezeState;
+    private EnemyDeathState _deathState;
     
     protected override void OnStart()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _playerTransform = null;
         _token = this.GetCancellationTokenOnDestroy();
+        _particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
         
         _walkState = new EnemyWalkState(this, transform, _speed, _patrolArea, transform.position, _spriteRenderer);
         _chaseState = new EnemyChaseState(this, transform, _speed, _spriteRenderer, _isFly);
-        _deathState = new EnemyDeathState(this);
+        _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime, _token);
+        _deathState = new EnemyDeathState(this, _particle, gameObject);
     }
 
     protected override void OnUpdate()
     {
         if (_playerTransform)
         {
-            if (_isStop) return;
+            if (_currentState == _freezeState) return;
             if (_currentState != _chaseState)
             {
                 ChangeState(_chaseState);
@@ -56,26 +59,18 @@ public class ChaseEnemy : EnemyBase, IPlayerTarget
     
     public void GetPlayerMove(PlayerMove playerMove)
     {
-        _playerTransform = playerMove.gameObject.transform;
+        if (playerMove == null) return;
+        _playerTransform = playerMove?.gameObject.transform;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (_isStop) return;
+        if (_currentState == _freezeState) return;
         // todo:playerへのダメージはここ
-        if(other.tag == _playerTag && other.TryGetComponent<IDamageable>(out IDamageable dmg))
+        if(other.CompareTag(_playerTag) && other.TryGetComponent(out IDamageable dmg))
         {
             dmg.TakeDamage(1);
+            ChangeState(_freezeState);
         }
-
-        _isStop = true;
-        ChangeState(_idleState);
-        StartFreezeTimer().Forget();
-    }
-
-    private async UniTask StartFreezeTimer()
-    {
-        await UniTask.Delay(_freezeTime * 1000, cancellationToken:_token);
-        _isStop = false;
     }
 }

@@ -3,9 +3,9 @@ using UnityEngine;
 public class EnemyBase : MonoBehaviour
 {
     [SerializeField] protected float _speed;
-    protected IEnemyState _currentState = default;
-    protected EnemyIdleState _idleState = default;
-    protected EnemyHp _hp = default;
+    protected IEnemyState _currentState;
+    protected EnemyIdleState _idleState;
+    protected EnemyHp _hp;
     protected bool _isDeath = false;
     protected Transform _playerTransform = default;
 
@@ -27,7 +27,7 @@ public class EnemyBase : MonoBehaviour
     
     protected virtual void OnUpdate(){}
 
-    protected void ChangeState(IEnemyState nextState)
+    public void ChangeState(IEnemyState nextState)
     {
         if (_currentState != null) _currentState.Exit();
 

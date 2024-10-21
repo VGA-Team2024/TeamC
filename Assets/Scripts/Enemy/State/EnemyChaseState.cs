@@ -3,12 +3,12 @@ using UnityEngine;
 /// <summary> 敵の追跡ステート </summary>
 public class EnemyChaseState : IEnemyState
 {
-    private EnemyBase _enemyBase = default;
-    private readonly Transform _transform = default;
-    private readonly float _speed = default;
-    private readonly SpriteRenderer _spriteRenderer = default;
-    private Vector2 _playerPos = default;
-    private readonly bool _isFly = default;
+    private EnemyBase _enemyBase;
+    private readonly Transform _transform;
+    private readonly float _speed;
+    private readonly SpriteRenderer _spriteRenderer;
+    private Vector2 _playerPos;
+    private readonly bool _isFly;
     
     public EnemyChaseState(EnemyBase enemyBase, Transform transform, float speed, SpriteRenderer renderer, bool isFly)
     {
