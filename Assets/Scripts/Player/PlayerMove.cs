@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using Cysharp.Threading.Tasks;
+
 public class PlayerMove : MonoBehaviour ,IDamageable
 {
     Rigidbody _rb;
@@ -13,6 +14,7 @@ public class PlayerMove : MonoBehaviour ,IDamageable
     [SerializeField, Header("プレイヤーのジャンプ力")] float _jumpPower = 5;
     [SerializeField, Header("攻撃時に出すゲームオブジェクト")] GameObject _attackCollider;
     [SerializeField, Header("着地判定用Rayの長さ")] float _rayLength = 0.55f;
+    [SerializeField, Header("ダメージを受けた時に吹き飛ぶ力")] float _knockbackPower = 20;
 
     //プレイヤーがどちら側を向いているか
     bool _dirRight = true;
@@ -125,14 +127,11 @@ public class PlayerMove : MonoBehaviour ,IDamageable
         _isMove = false;
         //プレイヤーを後ろに吹き飛ばす
         _rb.velocity = Vector3.zero;
-        _rb.AddForce(new Vector3((!_PlayerFlip ? 1 : -1), 0.3f, 0) * 20, ForceMode.Impulse);
+        _rb.AddForce(new Vector3((!_PlayerFlip ? 1 : -1), 0.3f, 0) * _knockbackPower, ForceMode.Impulse);
 
         await UniTask.Delay(500);
         // 8番が通常時プレイヤーレイヤー
         this.gameObject.layer = 8;
         _isMove = true;
-
     }
-
-
 }
