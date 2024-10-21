@@ -16,4 +16,12 @@ public class SearchArea : MonoBehaviour
             _playerTarget?.GetPlayerMove(pm);
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<PlayerMove>())
+        {
+            _playerTarget?.GetPlayerMove(null);
+        }
+    }
 }

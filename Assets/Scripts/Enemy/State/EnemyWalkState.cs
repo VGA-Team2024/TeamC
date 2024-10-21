@@ -5,10 +5,10 @@ public class EnemyWalkState : IEnemyState
 {
     private EnemyBase _enemyBase = default;
     private readonly Transform _transform = default;
-    private readonly float _speed = default;
-    private readonly float _patrolArea = default;
-    private readonly Vector2 _startPos = default;
-    private readonly SpriteRenderer _spriteRenderer = default;
+    private readonly float _speed;
+    private readonly float _patrolArea;
+    private readonly Vector2 _startPos;
+    private readonly SpriteRenderer _spriteRenderer;
 
     public EnemyWalkState(EnemyBase enemyBase,Transform transform, float speed, float area, Vector2 pos, SpriteRenderer renderer)
     {

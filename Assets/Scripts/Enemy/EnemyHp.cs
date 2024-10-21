@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyHp : MonoBehaviour, IDamageable
 {
     [SerializeField] private int _maxHp;
-    private int _currentHp = default;
+    private int _currentHp;
     public int CurrentHp => _currentHp;
     
     private void Start()
