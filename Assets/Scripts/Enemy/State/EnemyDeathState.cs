@@ -20,6 +20,7 @@ public class EnemyDeathState : IEnemyState
     
     public void Enter()
     {
+        _obj.transform.rotation = Quaternion.Euler(0, 0, 180); 
         _particle.Play();
         Destroy().Forget();
     }
