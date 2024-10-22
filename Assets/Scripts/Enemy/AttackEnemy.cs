@@ -36,7 +36,7 @@ public class AttackEnemy : EnemyBase, IPlayerTarget
     {
         if (_playerMove)
         {
-            if (_currentState == _idleState)
+            if (_currentState == _idleState || _currentState == _walkState)
             {
                 _attackState.GetPlayerTransform(_playerMove);
                 ChangeState(_attackState);
@@ -44,7 +44,7 @@ public class AttackEnemy : EnemyBase, IPlayerTarget
         }
         else
         {
-            if (_currentState != _walkState) ChangeState(_walkState);
+            if (_currentState == _idleState) ChangeState(_walkState);
         }
         
         if (_hp.CurrentHp <= 0)
