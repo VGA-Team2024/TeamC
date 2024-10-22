@@ -33,6 +33,7 @@ public class ChaseEnemy : EnemyBase, IPlayerTarget
 
     protected override void OnUpdate()
     {
+        if (_currentState == _deathState) return;
         if (_playerTransform)
         {
             if (_currentState == _freezeState) return;

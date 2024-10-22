@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class AttackCollider : MonoBehaviour
 {
+    [SerializeField, Header("攻撃の持続時間")] private float _attackColliderTimer = 1f;
     // SetActiveがtrueになった0.2秒後にSetActiveをfalseに戻す
     async private void OnEnable()
     {
-        await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
+        await UniTask.Delay(TimeSpan.FromSeconds(_attackColliderTimer));
         this.gameObject.SetActive(false);
     }
 
