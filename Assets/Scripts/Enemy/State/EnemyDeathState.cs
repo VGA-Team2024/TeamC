@@ -1,10 +1,12 @@
+using System;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 
 /// <summary> 敵が死んだときのステート </summary>
 public class EnemyDeathState : IEnemyState
 {
-    private EnemyBase _enemyBase;
+    private static event Action<EnemyBase> OnEnemyDestroyed;
+    private readonly EnemyBase _enemyBase;
     private readonly ParticleSystem _particle;
     private readonly GameObject _obj;
     private GameObject _generateObj;
@@ -21,6 +23,7 @@ public class EnemyDeathState : IEnemyState
     public void Enter()
     {
         _obj.transform.rotation = Quaternion.Euler(0, 0, 180); 
+        OnEnemyDestroyed?.Invoke(_enemyBase);
         _particle.Play();
         Destroy().Forget();
     }
@@ -39,5 +42,15 @@ public class EnemyDeathState : IEnemyState
     {
         await UniTask.WaitUntil(() => _particle.isStopped);
         GameObject.Destroy(_obj);
+    }
+    
+    public static void SubscribeToDestroyedEvent(Action<EnemyBase> listener)
+    {
+        OnEnemyDestroyed += listener; 
+    }
+
+    public static void UnsubscribeFromDestroyedEvent(Action<EnemyBase> listener)
+    {
+        OnEnemyDestroyed -= listener;
     }
 }
