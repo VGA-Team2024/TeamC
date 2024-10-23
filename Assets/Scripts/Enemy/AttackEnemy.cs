@@ -34,6 +34,8 @@ public class AttackEnemy : EnemyBase, IPlayerTarget
 
     protected override void OnUpdate()
     {
+        if (_isDeath) return;
+        
         if (_playerMove)
         {
             if (_currentState == _idleState || _currentState == _walkState)
@@ -49,8 +51,6 @@ public class AttackEnemy : EnemyBase, IPlayerTarget
         
         if (_hp.CurrentHp <= 0)
         {
-            if (_isDeath) return;
-            
             _isDeath = true;
             ChangeState(_deathState);
         }
