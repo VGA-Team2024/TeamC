@@ -6,22 +6,19 @@ public class EnemyAttackState : IEnemyState
 {
     private readonly EnemyBase _enemyBase;
     private readonly EnemyFreezeState _freezeState;
-    private readonly int _power;
-    private PlayerMove _playerMove;
-    private readonly string _playerTag;
     private readonly Animator _animator;
     private readonly int _attack;
+    private readonly GameObject _attackCollider;
     private bool _isAttack;
     
-    public EnemyAttackState(EnemyBase enemyBase, EnemyFreezeState freezeState, int power, 
-        Animator animator, string animationName, string playerTag)
+    public EnemyAttackState(EnemyBase enemyBase, EnemyFreezeState freezeState, 
+        Animator animator, string animationName, GameObject collider)
     {
         _enemyBase = enemyBase;
         _freezeState = freezeState;
-        _power = power;
         _animator = animator;
         _attack = Animator.StringToHash(animationName);
-        _playerTag = playerTag;
+        _attackCollider = collider;
     }
     
     public void Enter()
@@ -32,24 +29,16 @@ public class EnemyAttackState : IEnemyState
     public void Execute()
     {
         if (_isAttack) return;
-        if(_playerMove.CompareTag(_playerTag) && _playerMove.TryGetComponent(out IDamageable dmg))
-        {
-            _isAttack = true;
-            PlayAnim().Forget();
-            dmg.TakeDamage(_power);
-        }
+        _isAttack = true;
+        _attackCollider.SetActive(true);
+        PlayAnim().Forget();
     }
 
     public void Exit()
     {
         _isAttack = false;
     }
-
-    public void GetPlayerTransform(PlayerMove playerMove)
-    {
-        _playerMove = playerMove;
-    }
-
+    
     private async UniTask PlayAnim()
     {
         if (_animator) _animator.SetTrigger(_attack);
