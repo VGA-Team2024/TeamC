@@ -4,9 +4,7 @@ using System.Threading;
 /// <summary> ある範囲に入ったら攻撃をする敵 </summary>
 public class AttackEnemy : EnemyBase, IPlayerTarget
 {
-    [SerializeField, Header("攻撃力")] private int _power;
     [SerializeField, Header("巡回する範囲")] private float _patrolArea;
-    [SerializeField, Header("Playerにつけるタグの名前")] private string _playerTag;
     [SerializeField, Header("Triggerの名前")] private string _animation;
     [SerializeField, Header("Playerを攻撃した後次の攻撃が可能になるまでの時間")] private int _freezeTime;
     private SpriteRenderer _spriteRenderer;
@@ -14,6 +12,7 @@ public class AttackEnemy : EnemyBase, IPlayerTarget
     private PlayerMove _playerMove;
     private ParticleSystem _particle;
     private Animator _animator;
+    private GameObject _attackCollider;
 
     private EnemyWalkState _walkState;
     private EnemyAttackState _attackState;
@@ -23,12 +22,13 @@ public class AttackEnemy : EnemyBase, IPlayerTarget
     protected override void OnStart()
     {
         _particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
+        _attackCollider = gameObject.transform.GetChild(2).gameObject;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         
         _walkState = new EnemyWalkState(this, transform, _speed, _patrolArea, transform.position, _spriteRenderer);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime, _token);
-        _attackState = new EnemyAttackState(this, _freezeState, _power, _animator, _animation, _playerTag);
+        _attackState = new EnemyAttackState(this, _freezeState, _animator, _animation, _attackCollider);
         _deathState = new EnemyDeathState(this, _particle, gameObject);
     }
 
@@ -40,7 +40,6 @@ public class AttackEnemy : EnemyBase, IPlayerTarget
         {
             if (_currentState == _idleState || _currentState == _walkState)
             {
-                _attackState.GetPlayerTransform(_playerMove);
                 ChangeState(_attackState);
             }
         }
