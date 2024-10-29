@@ -8,8 +8,10 @@ public class MapUpdate : MonoBehaviour
     [SerializeField] private OnTriggerEvent _triggerEvent;
     [SerializeField] private GameObject _player;            // 仮:プレイヤー
     [SerializeField] private GameObject _startMapPrefab;    // 仮：最初にいるマップ
-    
+    [SerializeField, Header("セットするマップの名前")] private string _startMapName;
     private GameObject _currentMapPrefab; // 現在いるマップデータ
+
+    public string StartMapName => _startMapName;
     
     private void Start()
     {
@@ -33,7 +35,11 @@ public class MapUpdate : MonoBehaviour
             HandleTriggerExit(collider);
         }).AddTo(this);
         
-        _currentMapPrefab = _startMapPrefab; // 仮：最初にいるマップを設定
+        // マップセットしていない場合初期化
+        if (!_currentMapPrefab)
+        {
+            _currentMapPrefab = _startMapPrefab; // 仮：最初にいるマップを設定
+        }
     }
 
     // プレイヤーがポータルのトリガーに入ると呼ばれる(テレポート直後のトリガーも判定内)
@@ -50,9 +56,7 @@ public class MapUpdate : MonoBehaviour
             {
                 if (mapData.EntranceColliders.Contains(other))
                 {
-                    _currentMapPrefab.SetActive(false);     // 前までいたマップを非アクティブ化
-                    mapData.ExitMapPrefab.SetActive(true);  // ポータル先のマップをアクティブ化
-                    _currentMapPrefab = mapData.ExitMapPrefab; // 現在のマップを更新
+                    ChangeMapPrefab(mapData);
                     break;
                 }
             }
@@ -97,5 +101,46 @@ public class MapUpdate : MonoBehaviour
     private void ToTeleportPlayer(Collider targetCollider)
     {
         _player.transform.position = targetCollider.transform.position;
+    }
+
+    private void ToTeleportPlayer(Vector3 position)
+    {
+        _player.transform.position = position;
+    }
+
+    // マップの更新
+    private void ChangeMapPrefab(Map mapData)
+    {
+        if (_currentMapPrefab)
+        {
+            _currentMapPrefab.SetActive(false); // 前までいたマップを非アクティブ化
+        }
+        mapData.ExitMapPrefab.SetActive(true);  // ポータル先のマップをアクティブ化
+        _currentMapPrefab = mapData.ExitMapPrefab; // 現在のマップを更新
+    }
+
+    /// <summary> 指定のマップをセットする </summary>
+    /// <param name="mapName"> string マップのプレハブ名 </param>
+    public void SetStartMap(string mapName)
+    {
+        foreach (var mapData in _mapManager.MapData)
+        {
+            if (mapData.ExitMapPrefab.name == mapName)
+            {
+                ChangeMapPrefab(mapData);
+                ToTeleportPlayer(mapData.ExitMapPrefab.transform.position); // プレイヤーをマッププレハブのポジションへ移動
+                return;
+            }
+            mapData.ExitMapPrefab.SetActive(false); // 関係ないマップを非アクティブにする
+        }
+        Debug.LogError("有効なマップ名を入力してください");
+    }
+
+    /// <summary> マップデータリストのインデックス0番にマップとプレイヤーの位置をセットする </summary>
+    public void ResetStartMap()
+    {
+        var map = _mapManager.MapData[0];
+        ChangeMapPrefab(map);
+        ToTeleportPlayer(map.ExitMapPrefab.transform.position);
     }
 }
