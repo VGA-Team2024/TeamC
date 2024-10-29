@@ -60,7 +60,7 @@ public class MapUpdate : MonoBehaviour
                     break;
                 }
             }
-            ToTeleportPlayer(exit);
+            ToTeleportPlayer(exit.transform.position);
             _triggerEvent.LastPortalUsed = exit; // 最後に使用したポータルを記録
         }
     }
@@ -98,11 +98,6 @@ public class MapUpdate : MonoBehaviour
     }
     
     // 仮：プレイヤーをテレポートする
-    private void ToTeleportPlayer(Collider targetCollider)
-    {
-        _player.transform.position = targetCollider.transform.position;
-    }
-
     private void ToTeleportPlayer(Vector3 position)
     {
         _player.transform.position = position;
