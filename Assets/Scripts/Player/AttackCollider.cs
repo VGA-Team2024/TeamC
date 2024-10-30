@@ -15,7 +15,11 @@ public class AttackCollider : MonoBehaviour
     // 敵に当たった初めのフレームで敵のTakeDamageを呼ぶ
     private void OnTriggerEnter(Collider other)
     {
-        // if(当たったコライダーが敵の物なら～)
+        // 同じタグ同士ならダメージを与えないようreturnする
+        if(gameObject.CompareTag(other.gameObject.tag))
+        {
+            return;
+        }
 
         // 当たったコライダーのゲームオブジェクトにIDamageableがついているなら
         if(other.TryGetComponent<IDamageable>(out IDamageable damage))
