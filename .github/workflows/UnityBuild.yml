@@ -13,11 +13,9 @@ jobs:
   hook:
     uses: VGA-Team2024/Foundation/.github/workflows/UnityBuild.yaml@develop
     secrets:
-      unity_path: ${{ secrets.UNITY_BUILD_PATH }}
-      build_name: ${{ secrets.UNITY_BUILD_CMD_NAME }}
-      message_content: ${{ secrets.DISCORD_CONTENT }}
-      web_hook: ${{ secrets.DISCORD_WEBHOOK_URL }}
-  
+      secrets_key: ${{ secrets.SECRET_KEY }}
+      project_id: Team2024-Project
+
   #build:
    ## Self-hosted runnerを使用時にはruns-on: self-hostedを指定する
     #runs-on: [self-hosted, default]
