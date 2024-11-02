@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     # Self-hosted runnerを使用時にはruns-on: self-hostedを指定する
-    runs-on: self-hosted
+    runs-on: [self-hosted, default]
 
     steps:
       - name: Checkout
