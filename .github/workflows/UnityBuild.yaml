@@ -1,0 +1,47 @@
+name: Unity Build
+
+on:
+  workflow_dispatch: {}
+  workflow_call:
+    secrets:
+      secrets_key:
+        description: 秘密鍵
+        required: true
+      project_id:
+        description: Team2024-Project
+        required: true
+
+jobs:
+  # 環境変数の受け渡し
+  envSetting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+      - name: Build
+        run: ${{ secrets.UNITY_BUILD_PATH }}${{ secrets.UNITY_BUILD_CMD_NAME }}.cmd
+
+# 環境変数の受け渡しのみテストするので、コメントアウト
+#   build:
+#     runs-on: self-hosted
+
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#         with:
+#           clean: false
+#           lfs: false
+#       - name: Build
+#         run: ${{ secrets.UNITY_BUILD_PATH }}team-b-build.cmd
+
+
+#   message:
+#     runs-on: self-hosted
+#     needs: build
+#     if: ${{ failure()}}
+#     steps:
+#       - name: Discord Post
+#         run:
+#           Invoke-WebRequest -Headers @{"Content-Type"="application/json"} -Method Post -Body "{`"content`":`"Buildに失敗しました :munou:`"}" ${{ secrets.DISCORD_WEBHOOK_URL }}
