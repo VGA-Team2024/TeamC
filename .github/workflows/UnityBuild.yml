@@ -12,9 +12,9 @@ on:
 jobs:
   hook:
     uses: VGA-Team2024/Foundation/.github/workflows/UnityBuild.yaml@develop
-    secrets:
-      secrets_key: ${{ secrets.SECRET_KEY }}
-      project_id: Team2024-Project
+    # secrets:
+    #   secrets_key: ${{ secrets.SECRET_KEY }}
+    #   project_id: Team2024-Project
 
   #build:
    ## Self-hosted runnerを使用時にはruns-on: self-hostedを指定する
