@@ -5,7 +5,7 @@ on:
   workflow_call:
     secrets:
       secrets_key:
-        description: 秘密鍵
+        description: 94337306dda8180d967a56932ceb4ddcf01edae7
         required: true
       project_id:
         description: Team2024-Project
@@ -19,7 +19,7 @@ jobs:
       - name: Setup Cloud SDK
         uses: google-github-actions/setup-gcloud@v0.2.0
         with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          project_id: Team2024-Project
       - name: Build
         run: ${{ secrets.UNITY_BUILD_PATH }}${{ secrets.UNITY_BUILD_CMD_NAME }}.cmd
 
