@@ -11,6 +11,8 @@ jobs:
       - name: select build
         if: github.repository == 'VGA-Team2024/TeamC'
         run: echo "team-c-build"
+      - name: all
+        run: echo "all-build"
 
     #   - name: Build
     #     run: ${{ secrets.UNITY_BUILD_PATH }}${{ secrets.UNITY_BUILD_CMD_NAME }}.cmd
