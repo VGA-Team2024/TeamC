@@ -2,26 +2,18 @@ name: Unity Build
 
 on:
   workflow_dispatch: {}
-  workflow_call:
-    secrets:
-      secrets_key:
-        description: 94337306dda8180d967a56932ceb4ddcf01edae7
-        required: true
-      project_id:
-        description: Team2024-Project
-        required: true
+  workflow_call: {}
 
 jobs:
-  # 環境変数の受け渡し
-  envSetting:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: self-hosted
     steps:
-      - name: Setup Cloud SDK
-        uses: google-github-actions/setup-gcloud@v0.2.0
-        with:
-          project_id: Team2024-Project
-      - name: Build
-        run: ${{ secrets.UNITY_BUILD_PATH }}${{ secrets.UNITY_BUILD_CMD_NAME }}.cmd
+      - name: select build
+        if: github.repository == 'VGA-Team2024/TeamC'
+        run: echo "team-c-build"
+
+    #   - name: Build
+    #     run: ${{ secrets.UNITY_BUILD_PATH }}${{ secrets.UNITY_BUILD_CMD_NAME }}.cmd
 
 # 環境変数の受け渡しのみテストするので、コメントアウト
 #   build:
