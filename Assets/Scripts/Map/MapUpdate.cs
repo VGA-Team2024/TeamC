@@ -15,6 +15,9 @@ public class MapUpdate : MonoBehaviour
     
     private void Start()
     {
+        _mapManager = FindObjectOfType<MapManager>();
+        _triggerEvent = FindObjectOfType<OnTriggerEvent>();
+        
         if (!_player.TryGetComponent<Rigidbody>(out _))
         {
             Debug.LogError("プレイヤーをにRigidbodyをアタッチしてください(プロトではコライダーのトリガーを使っているため)");
@@ -47,6 +50,8 @@ public class MapUpdate : MonoBehaviour
     {
         // 入ったポータルから対のポータルを取得する
         GetPairPortal(other, out var exit);
+        
+        if (!exit) return; // 対応したポータルがない場合は実行しない
         
         // 一度ポータルから出ていれば処理を行う
         if (_triggerEvent.LastPortalUsed != other)
