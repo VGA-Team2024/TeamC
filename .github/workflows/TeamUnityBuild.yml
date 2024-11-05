@@ -1,17 +1,28 @@
-# このGitHub Actionsの名前定義
-name: Unity Build
+name: TeamUnityBuild
 
-# このGitHub Actionsが実行されるトリガーを定義
 on:
-  # 手動のみで実行する場合はworkflow_dispatchを指定
   workflow_dispatch: {}
   schedule:
       # UTCなので9時間引いた値 JST換算だと午前3時
       - cron: '0 18 * * *'
 
+permissions:
+  contents: write
+  actions: read
+  checks: write
+  deployments: write
+
 jobs:
   hook:
-    uses: VGA-Team2024/Foundation/.github/workflows/UnityBuild.yaml@develop
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Unity
+        uses: VGA-Team2024/Foundation/.github/workflows/UnityBuild.yml@develop
+        with:
+          unity_build_cmd_name: team-c-build
     # secrets:
     #   secrets_key: ${{ secrets.SECRET_KEY }}
     #   project_id: Team2024-Project
