@@ -2,17 +2,21 @@ name: Unity Build
 
 on:
   workflow_dispatch: {}
-  workflow_call: {}
+  workflow_call:
+    inputs:
+      unity_build_cmd_name:
+        type: string
+        description: 'Unity Build Command Name'
+        required: true
+        default: 'team-name-build'
+
 
 jobs:
   build:
     runs-on: self-hosted
     steps:
-      - name: select build
-        if: github.repository == 'VGA-Team2024/TeamC'
-        run: echo "team-c-build"
-      - name: all
-        run: echo "all-build"
+      - name: echo
+        run: echo ${{ inputs.unity_build_cmd_name }}
 
     #   - name: Build
     #     run: ${{ secrets.UNITY_BUILD_PATH }}${{ secrets.UNITY_BUILD_CMD_NAME }}.cmd
