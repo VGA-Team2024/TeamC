@@ -38,10 +38,9 @@ public class InteractText : MonoBehaviour
 
     private void HideInteractText()
     {
-        for (var i = 0; i < _interactText.transform.childCount; i++)
+        for (var i = 0; i < transform.childCount; i++)
         {
-            _interactText.transform.GetChild(i).gameObject.SetActive(false);
+            transform.GetChild(i).gameObject.SetActive(false);
         }
-        _interactText.SetActive(false);
     }
 }

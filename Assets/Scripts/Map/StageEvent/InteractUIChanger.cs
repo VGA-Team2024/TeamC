@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// <summary> 会話システム </summary>
-public class TalkSystem : MonoBehaviour
+/// <summary> 会話開始時のUI切り替え </summary>
+public class InteractUIChanger : MonoBehaviour
 {
     [SerializeField, Header("インタラクトキー")] private KeyCode _key;
     [SerializeField, Header("会話時の背景パネル")] private GameObject _panel; // 動かないのでUIでもOK
@@ -15,12 +15,14 @@ public class TalkSystem : MonoBehaviour
             ShowBackgroundPanel();
         }
         
-        // ToDo:会話の詳細がきたらシステムを作る
+        // ToDo:会話の詳細がきたらシステムを作る(パネル側に別のクラスを作る)
 
     }
 
     private void ShowBackgroundPanel()
     {
         _panel.SetActive(true);
+        // 自身(テキスト)を非表示にする
+        gameObject.SetActive(false);
     }
 }
