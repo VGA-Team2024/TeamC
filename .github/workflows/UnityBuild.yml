@@ -1,7 +1,6 @@
 name: Unity Build
 
 on:
-  workflow_dispatch: {}
   workflow_call:
     inputs:
       unity_build_cmd_name:
