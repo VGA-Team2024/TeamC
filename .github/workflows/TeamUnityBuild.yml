@@ -11,12 +11,9 @@ on:
 
 jobs:
   hook:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Hook
-        uses: VGA-Team2024/Foundation/.github/workflows/UnityBuild.yaml@develop
-        with:
-          unity_build_cmd_name: team-c-build
+    uses: VGA-Team2024/Foundation/.github/workflows/UnityBuild.yaml@develop
+    with:
+      unity_build_cmd_name: team-c-build
     # secrets:
     #   secrets_key: ${{ secrets.SECRET_KEY }}
     #   project_id: Team2024-Project
