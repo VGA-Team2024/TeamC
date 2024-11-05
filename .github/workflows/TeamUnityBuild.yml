@@ -11,7 +11,7 @@ on:
 
 jobs:
   hook:
-    uses: VGA-Team2024/Foundation/.github/workflows/UnityBuild.yaml@develop
+    uses: VGA-Team2024/Foundation/.github/workflows/UnityBuild.yml@develop
     with:
       unity_build_cmd_name: team-c-build
     # secrets:
