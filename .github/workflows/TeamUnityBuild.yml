@@ -10,14 +10,14 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
-      - name: Checkout
-        # このGitHub Actionsが実行される前に必要なアクションを指定 (今回はチェックアウトを行うアクション)
-        uses: actions/checkout@v2
-        with:
-          # クローンする際にローカルリポジトリをクリーンにするかどうかを指定
-          clean: false
-          # LFSを使用するかどうかを指定
-          lfs: false
+      # - name: Checkout
+      #   # このGitHub Actionsが実行される前に必要なアクションを指定 (今回はチェックアウトを行うアクション)
+      #   uses: actions/checkout@v2
+      #   with:
+      #     # クローンする際にローカルリポジトリをクリーンにするかどうかを指定
+      #     clean: false
+      #     # LFSを使用するかどうかを指定
+      #     lfs: false
       - name: Build
         # 指定したcmdファイルを実行する
         run: ${{ secrets.UNITY_BUILD_PATH }}team-c-build.cmd
