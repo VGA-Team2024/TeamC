@@ -7,16 +7,21 @@ on:
       - cron: '0 18 * * *'
 
 jobs:
-  hook:
-    permissions:
-      contents: write
-      actions: read
-      checks: write
-      deployments: write
+  test:
+    runs-on: self-hosted
+    steps:
+      - name: echo test
+        run: echo "test"
+  # hook:
+  #   permissions:
+  #     contents: write
+  #     actions: read
+  #     checks: write
+  #     deployments: write
 
-    uses: VGA-Team2024/Foundation/.github/workflows/UnityBuild.yml@develop
-    with:
-      unity_build_cmd_name: team-c-build
+  #   uses: VGA-Team2024/Foundation/.github/workflows/UnityBuild.yml@develop
+  #   with:
+  #     unity_build_cmd_name: team-c-build
 
     # secrets:
     #   secrets_key: ${{ secrets.SECRET_KEY }}
