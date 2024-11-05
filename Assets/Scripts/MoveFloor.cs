@@ -6,6 +6,11 @@ public class MoveFloor : MonoBehaviour
     [SerializeField,InspectorVariantName("移動スピード")] private float _moveSpeed;            //床の移動スピード
     private bool _isReturn;                                                                  //移動先の切り替えフラグ
 
+    void OnValidate()
+    {
+        transform.position = _startPosition;
+    }
+
     void FixedUpdate()
     {
         Move();
@@ -23,14 +28,15 @@ public class MoveFloor : MonoBehaviour
         {
             _isReturn = false;
         }
-
+        
+        //_isReturnがfalseの時は_returnPositionの方向に移動する
         if (!_isReturn)
         {
             transform.position =
                 Vector3.MoveTowards(transform.position, _returnPosition, _moveSpeed * Time.deltaTime);
         }
-
-        if (_isReturn)
+        //_isReturnがtrueの時は_startPositionの方向に移動する
+        else
         {
             transform.position =
                 Vector3.MoveTowards(transform.position, _startPosition, _moveSpeed * Time.deltaTime);
@@ -40,18 +46,18 @@ public class MoveFloor : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        //プレイヤータグのついたオブジェクトを子オブジェクトにする
         if (other.gameObject.CompareTag("Player"))
         {
-            // 触れたobjの親を移動床にする
             other.transform.SetParent(transform);
         }
     }
 
     private void OnCollisionExit(Collision other)
     {
+        //子オブジェクトから外す
         if (other.gameObject.CompareTag("Player"))
         {
-            // 触れたobjの親をなくす
             other.transform.SetParent(null);
         }
     }
