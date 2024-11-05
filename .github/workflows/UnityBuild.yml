@@ -11,7 +11,15 @@ on:
 
 
 jobs:
+  receive_input:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo
+        run: echo ${{ inputs.unity_build_cmd_name }}
+
   build:
+    needs: receive_input
+    if: ${{ success() }}
     runs-on: self-hosted
     steps:
       - name: echo
