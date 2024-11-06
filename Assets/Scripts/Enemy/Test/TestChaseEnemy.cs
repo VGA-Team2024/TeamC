@@ -3,15 +3,16 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 
 /// <summary> ある範囲に入ったらplayerを追いかける敵 </summary>
-public class ChaseEnemy : EnemyBase, IPlayerTarget
+public class TestChaseEnemy : EnemyBase, IPlayerTarget
 {
     [SerializeField, Header("空中か")] private bool _isFly;
     [SerializeField, Header("巡回する範囲")] private float _patrolArea;
     [SerializeField, Header("Playerにぶつかった後止まる時間")] private int _freezeTime;
     [SerializeField, Header("Playerにつけるタグの名前")] private string _playerTag;
-    private SpriteRenderer _spriteRenderer;
+    
     private CancellationToken _token;
     private ParticleSystem _particle;
+    private Animator _animator;
     
     private EnemyWalkState _walkState;
     private EnemyChaseState _chaseState;
@@ -20,13 +21,13 @@ public class ChaseEnemy : EnemyBase, IPlayerTarget
     
     protected override void OnStart()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _playerTransform = null;
+        _playerMove = null;
         _token = this.GetCancellationTokenOnDestroy();
         _particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
+        _animator = GetComponent<Animator>();
         
-        _walkState = new EnemyWalkState(this, transform, _speed, _patrolArea, transform.position, _spriteRenderer);
-        _chaseState = new EnemyChaseState(this, transform, _speed, _spriteRenderer, _isFly);
+        _walkState = new EnemyWalkState(this, _animator, transform, _speed, _patrolArea);
+        _chaseState = new EnemyChaseState(this, _animator, transform, _speed, _isFly);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime, _token);
         _deathState = new EnemyDeathState(this, _particle, gameObject);
     }
@@ -34,7 +35,7 @@ public class ChaseEnemy : EnemyBase, IPlayerTarget
     protected override void OnUpdate()
     {
         if (_isDeath) return;
-        if (_playerTransform)
+        if (_playerMove)
         {
             if (_currentState == _freezeState) return;
             if (_currentState != _chaseState)
@@ -42,7 +43,7 @@ public class ChaseEnemy : EnemyBase, IPlayerTarget
                 ChangeState(_chaseState);
                 return;
             }
-            _chaseState.GetPlayerPos(_playerTransform.position);
+            _chaseState.GetPlayerPos(_playerMove.transform.position);
         }
         else
         {
@@ -59,7 +60,7 @@ public class ChaseEnemy : EnemyBase, IPlayerTarget
     public void GetPlayerMove(PlayerMove playerMove)
     {
         if (playerMove == null) return;
-        _playerTransform = playerMove?.gameObject.transform;
+        _playerMove = playerMove;
     }
 
     private void OnTriggerStay(Collider other)
