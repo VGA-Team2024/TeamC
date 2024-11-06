@@ -7,7 +7,7 @@ public class EnemyBase : MonoBehaviour
     protected EnemyIdleState _idleState;
     protected EnemyHp _hp;
     protected bool _isDeath = false;
-    protected Transform _playerTransform = default;
+    protected PlayerMove _playerMove = default;
 
     private void Start()
     {

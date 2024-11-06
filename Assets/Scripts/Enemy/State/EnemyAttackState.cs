@@ -7,17 +7,15 @@ public class EnemyAttackState : IEnemyState
     private readonly EnemyBase _enemyBase;
     private readonly EnemyFreezeState _freezeState;
     private readonly Animator _animator;
-    private readonly int _attack;
+    private readonly int _attack = Animator.StringToHash("Attack");
     private readonly GameObject _attackCollider;
     private bool _isAttack;
     
-    public EnemyAttackState(EnemyBase enemyBase, EnemyFreezeState freezeState, 
-        Animator animator, string animationName, GameObject collider)
+    public EnemyAttackState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator, GameObject collider)
     {
         _enemyBase = enemyBase;
         _freezeState = freezeState;
         _animator = animator;
-        _attack = Animator.StringToHash(animationName);
         _attackCollider = collider;
     }
     
