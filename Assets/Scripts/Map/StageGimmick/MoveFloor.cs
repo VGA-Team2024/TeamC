@@ -23,7 +23,7 @@ public class MoveFloor : MonoBehaviour
         {
             _isReturn = true;
         }
-        //_returnPositionと自身の距離が0.1未満なら_isReturnをfalse
+        //_startPositionと自身の距離が0.1未満なら_isReturnをfalse
         else if (Vector3.Distance(_startPosition, transform.position) < 0.1f)
         {
             _isReturn = false;
