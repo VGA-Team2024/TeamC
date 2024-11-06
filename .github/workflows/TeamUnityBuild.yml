@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: [self-hosted, Windows]
     steps:
       # - name: Checkout
       #   # このGitHub Actionsが実行される前に必要なアクションを指定 (今回はチェックアウトを行うアクション)
@@ -23,7 +23,7 @@ jobs:
         run: ${{ secrets.UNITY_BUILD_PATH }}team-c-build.cmd
 
   message:
-    runs-on: self-hosted
+    runs-on: [self-hosted, Windows]
     if: ${{ failure()}}
     steps:
       - name: Discord Post
