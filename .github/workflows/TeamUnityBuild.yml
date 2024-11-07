@@ -21,7 +21,4 @@ jobs:
     steps:
       - name: Discord Post
         run:
-          Invoke-WebRequest -Headers \
-          @{"Content-Type"="application/json"} \
-          -Method Post -Body "{`"content`":`"${{ secrets.DISCORD_MESSAGE }}\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}`"}" \
-          ${{ secrets.DISCORD_WEBHOOK_URL }}
+          Invoke-WebRequest -Headers @{"Content-Type"="application/json"} -Method Post -Body "{`"content`":`"${{ secrets.DISCORD_MESSAGE }}\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}`"}" ${{ secrets.DISCORD_WEBHOOK_URL }}
