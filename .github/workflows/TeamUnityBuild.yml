@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Build
         # 指定したcmdファイルを実行する
-        run: ${{ secrets.UNITY_BUILD_PATH }}team-c-build.cmd
+        run: ${{ secrets.UNITY_BUILD_PATH }}\team-c-build.cmd
 
   message:
     runs-on: [self-hosted, Windows]
