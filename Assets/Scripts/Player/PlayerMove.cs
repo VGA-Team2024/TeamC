@@ -28,6 +28,9 @@ public class PlayerMove : MonoBehaviour,ITeleportable
     private bool _isMove = true;
     public bool IsMove { set { _isMove = value; } }
 
+    private bool _isFreeze = false;
+    public bool IsFreeze { set { _isFreeze = value; } }
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -92,10 +95,18 @@ public class PlayerMove : MonoBehaviour,ITeleportable
     {
         //ジャンプ判定用Rayの表示
         Debug.DrawRay(transform.position, Vector3.down * _rayLength, Color.black);
+
+        // 移動操作可能
         if (_isMove)
         {
             //左右移動
             _rb.velocity = new Vector3(_dir.x * _moveSpeed, _rb.velocity.y, 0);
+        }
+
+        // 完全固定
+        if(_isFreeze)
+        {
+            _rb.velocity = Vector3.zero;
         }
     }
 
