@@ -8,7 +8,7 @@ public enum KeyConditions
     MusicBox            //オルゴールを鳴らしたらドアが開く
 }
 
-public class DoorSwitch : MonoBehaviour
+public class DoorSwitch : MonoBehaviour ,IDamageable
 {
     [SerializeField] KeyConditions _keyConditions;
     [SerializeField,InspectorVariantName("trueの時、ドアが開く")] bool _doorOpen = false;
@@ -26,16 +26,11 @@ public class DoorSwitch : MonoBehaviour
         Debug.Log("ドアが開く");
     }
 
-    void OnCollisionEnter(Collision other)
+    public void TakeDamage(int damage)
     {
         if (_keyConditions == KeyConditions.Switch)
         {
-            
-            //AttackColliderの名前が付いたオブジェクトに触れたらドアを開く
-            if (other.gameObject.CompareTag("Enemy"))
-            {
-                DoorOpen();
-            }
+            DoorOpen();
         }
         else if (_keyConditions == KeyConditions.MusicBox)
         {
