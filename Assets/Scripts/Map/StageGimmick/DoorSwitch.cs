@@ -10,13 +10,8 @@ public enum KeyConditions
 
 public class DoorSwitch : MonoBehaviour ,IDamageable
 {
-    [SerializeField] KeyConditions _keyConditions;
-    [SerializeField,InspectorVariantName("trueの時、ドアが開く")] bool _doorOpen = false;
-    
-    void Start()
-    {
-        Debug.Log(_keyConditions);
-    }
+    [SerializeField,] private KeyConditions _keyConditions;
+    [SerializeField,InspectorVariantName("trueの時、ドアが開く")] private bool _doorOpen = false;
     
     /// <summary>
     /// ドアを開くメソッド
@@ -24,6 +19,7 @@ public class DoorSwitch : MonoBehaviour ,IDamageable
     void DoorOpen()
     {
         Debug.Log("ドアが開く");
+        //ドアが開く処理を書く
     }
 
     public void TakeDamage(int damage)
