@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+[RequireComponent (typeof(Selectable))]
 /// <summary>ButtonUIにアタッチするクラス </summary>
 public class UIButton : MonoBehaviour, ISubmitHandler, ISelectHandler, IDeselectHandler, IPointerClickHandler, IPointerEnterHandler
 {
