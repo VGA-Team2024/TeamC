@@ -1,4 +1,4 @@
-# This .gitignore file should be placed at the root of your Unity project directory
+﻿# This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
@@ -80,3 +80,8 @@ Assets/CRIMW.meta
 
 # UniRx Ignore
 Assets/ThirdParty/UniRx/
+
+# DoTween ignore
+Assets/Plugins/Demigiant/
+Assets/Resources/DOTweenSettings.asset
+Assets/Resources/DOTweenSettings.asset.meta
