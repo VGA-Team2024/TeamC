@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Build
         # 指定したcmdファイルを実行する
-        run: ${{ secrets.UNITY_BUILD_PATH }}team-c-build.cmd
+        run: ${{ secrets.UNITY_BUILD_PATH }}\team-c-build.cmd
 
   message:
     runs-on: [self-hosted, Windows]
@@ -21,4 +21,4 @@ jobs:
     steps:
       - name: Discord Post
         run:
-          Invoke-WebRequest -Headers @{"Content-Type"="application/json"} -Method Post -Body "{`"content`":`"${{ secrets.DISCORD_MESSAGE }}`"}" ${{ secrets.DISCORD_WEBHOOK_URL }}
+          Invoke-WebRequest -Headers @{"Content-Type"="application/json"} -Method Post -Body "{`"content`":`"${{ secrets.DISCORD_MESSAGE }} \n https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}`"}" ${{ secrets.DISCORD_WEBHOOK_URL }}
