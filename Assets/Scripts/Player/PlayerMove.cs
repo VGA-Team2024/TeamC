@@ -80,6 +80,7 @@ public class PlayerMove : MonoBehaviour,ITeleportable
 
     private async void OnJump(InputAction.CallbackContext context)
     {
+        _tokenSource = new();
         // 地面についているかの判定
         if (Physics.Raycast(transform.position, Vector3.down  ,out RaycastHit hitInfo, _rayLength))
         {
@@ -87,7 +88,6 @@ public class PlayerMove : MonoBehaviour,ITeleportable
             {
                 _rb.useGravity = false;
                 _rb.AddForce(Vector2.up * _jumpPower, ForceMode.Impulse);
-                _tokenSource = new();
                 try
                 {
                     await UniTask.Delay(TimeSpan.FromSeconds(_jumpTime), cancellationToken: _tokenSource.Token);
