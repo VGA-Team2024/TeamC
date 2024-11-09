@@ -41,19 +41,19 @@ public class EnemyWalkState : IEnemyState
     
     private void Walk()
     {
-        _transform.Translate(Vector3.right * (Time.deltaTime * _speed));
+        _transform.Translate(Vector3.right * -(Time.deltaTime * _speed));
     }
 
     private void Direction()
     {
         if (_transform.position.x <= _startPos.x + 0.01f)
         {
-            _transform.eulerAngles = new Vector2(0, 0);
+            _transform.eulerAngles = new Vector2(0, 180);
         }
 
         if (_transform.position.x >= _startPos.x + _patrolArea - 0.1f)
         {
-            _transform.eulerAngles = new Vector2(0, 180);
+            _transform.eulerAngles = new Vector2(0, 0);
         }
     }
 }
