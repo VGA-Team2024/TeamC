@@ -1,5 +1,6 @@
 using System.Threading;
 using UnityEngine;
+using Random = System.Random;
 
 /// <summary> 森ステージの敵クマ </summary>
 public class NormalBear : EnemyBase, IPlayerTarget
@@ -27,7 +28,7 @@ public class NormalBear : EnemyBase, IPlayerTarget
     {
         _particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
         _attackCollider = gameObject.transform.GetChild(2).gameObject;
-        _animator = GetComponent<Animator>();
+        _animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
         
         _walkState = new EnemyWalkState(this, _animator, transform, _speed, _patrolArea);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime, _token);
@@ -43,21 +44,33 @@ public class NormalBear : EnemyBase, IPlayerTarget
         
         if (_playerMove)
         {
-            if (_currentState == _idleState || _currentState == _walkState)
-            {
-                if (_currentState == _jumpAttackState) return;
-                ChangeState(_jumpAttackState);
-                _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
-            }
+            if (_currentState == _attackState ||
+                _currentState == _jumpAttackState ||
+                _currentState == _rushState ||
+                _currentState == _freezeState) return;
             
-            // if (_currentState == _idleState || _currentState == _walkState)
-            // {
-            //     ChangeState(_attackState);
-            // }
+            transform.eulerAngles = new Vector2(0, _playerMove.transform.position.x > transform.position.x ? 0 : 180);
+            
+            var rnd = new Random().Next(0, 3);
+            switch (rnd)
+            {
+                case 0:
+                    ChangeState(_attackState);
+                    break;
+                case 1:
+                    ChangeState(_jumpAttackState);
+                    break;
+                case 2:
+                    ChangeState(_rushState);
+                    break;
+            }
         }
         else
         {
-            if (_currentState == _idleState) ChangeState(_walkState);
+            if (_currentState == _idleState)
+            {
+                ChangeState(_walkState);
+            }
         }
         
         if (_hp.CurrentHp <= 0)
