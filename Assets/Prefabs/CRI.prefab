@@ -44,18 +44,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91f529aa944b914449d62b8c40f188fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acfFile: TGS2023.acf
+  acfFile: C_Team.acf
   cueSheets:
   - name: BGM
     acbFile: BGM.acb
     awbFile: BGM.awb
     loaderStatus: 0
-  - name: SE
-    acbFile: SE.acb
-    awbFile: 
-    loaderStatus: 0
   - name: ME
     acbFile: ME.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: SE_Player
+    acbFile: SE_Player.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: SE_UI
+    acbFile: SE_UI.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: Ambient
+    acbFile: Ambient.acb
     awbFile: 
     loaderStatus: 0
   dspBusSetting: 
@@ -109,7 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initializesFileSystem: 1
   fileSystemConfig:
-    numberOfLoaders: 16
+    numberOfLoaders: 39
     numberOfBinders: 8
     numberOfInstallers: 2
     installBufferSize: 32
