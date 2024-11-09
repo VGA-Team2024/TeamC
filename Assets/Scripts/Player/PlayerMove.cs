@@ -9,10 +9,10 @@ public class PlayerMove : MonoBehaviour,ITeleportable
     private SpriteRenderer _sr;
 
     private Vector2 _dir; //ActionMapのMoveの値を保存するVector2
-    [SerializeField, Header("プレイヤーの移動速度")] private float _moveSpeed = 2;
-    [SerializeField, Header("プレイヤーのジャンプ力")] private float _jumpPower = 5;
-    [SerializeField, Header("着地判定用Rayの長さ")] private float _rayLength = 0.55f;
-    [SerializeField, Header("ダメージを受けた時に吹き飛ぶ力")] private float _knockbackPower = 20;
+    [SerializeField, InspectorVariantName("プレイヤーの移動速度")] private float _moveSpeed = 2;
+    [SerializeField, InspectorVariantName("プレイヤーのジャンプ力")] private float _jumpPower = 5;
+    [SerializeField, InspectorVariantName("着地判定用Rayの長さ")] private float _rayLength = 0.55f;
+    [SerializeField, InspectorVariantName("ダメージを受けた時に吹き飛ぶ力")] private float _knockbackPower = 20;
 
     //プレイヤーがどちら側を向いているか
     private bool _dirRight = true;
