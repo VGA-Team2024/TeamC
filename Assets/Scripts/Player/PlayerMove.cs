@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour,ITeleportable
     [SerializeField, InspectorVariantName("プレイヤーのジャンプ力")] private float _jumpPower = 5;
     [SerializeField, InspectorVariantName("着地判定用Rayの長さ")] private float _rayLength = 0.55f;
     [SerializeField, InspectorVariantName("ダメージを受けた時に吹き飛ぶ力")] private float _knockbackPower = 20;
+    [SerializeField, InspectorVariantName("左右入力で反転するゲームオブジェクト")]private GameObject _flipObject;
 
     //プレイヤーがどちら側を向いているか
     private bool _dirRight = true;
@@ -21,7 +22,10 @@ public class PlayerMove : MonoBehaviour,ITeleportable
         get => _dirRight;
         private set
         {
-            _sr.flipX = value;
+            if(_sr)
+                _sr.flipX = value;
+            else
+                _flipObject.transform.rotation = Quaternion.Euler(0,(value ? 0 : 180),0);
             _dirRight = value;
         }
     }
@@ -36,7 +40,8 @@ public class PlayerMove : MonoBehaviour,ITeleportable
     {
         _rb = GetComponent<Rigidbody>();
         _impulseSource = GetComponent<Cinemachine.CinemachineImpulseSource>();
-        _sr = GetComponent<SpriteRenderer>();
+        if(!_flipObject)
+            _sr = GetComponent<SpriteRenderer>();
     }
 
     private void Awake()
