@@ -153,8 +153,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 20
   _jumpPower: 8
+  _jumpTime: 0.5
   _rayLength: 2.5
-  _knockbackPower: 20
   _flipObject: {fileID: 7270975046594281940}
 --- !u!114 &7768347166177622624
 MonoBehaviour:
@@ -174,7 +174,7 @@ MonoBehaviour:
   _knockBackPower: 20
   _godTime: 0.5
   _NoMoveTime: 0.5
-  _godModeLayerName: 
+  _godModeLayerName: MUTEKI
 --- !u!114 &786941735250853314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1127,7 +1127,7 @@ PrefabInstance:
     - target: {fileID: 467051544466621311, guid: 701f5dadf59fca745a8517abb3fec43e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.31
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 467051544466621311, guid: 701f5dadf59fca745a8517abb3fec43e,
         type: 3}
