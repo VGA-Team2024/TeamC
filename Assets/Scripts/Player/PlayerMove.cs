@@ -143,7 +143,6 @@ public class PlayerMove : MonoBehaviour,ITeleportable
         {
             _rb.velocity = Vector3.zero;
         }
-        Debug.Log(Mathf.Abs(_rb.velocity.x));
         _animator.SetFloat("MoveHorizontal",Mathf.Abs(_rb.velocity.x));
         _animator.SetBool("IsGround",_isGrounded);
     }
