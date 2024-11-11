@@ -1,42 +1,49 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour,ITeleportable
 {
     private Rigidbody _rb;
     private PlayerControls _controls;
-    private Cinemachine.CinemachineImpulseSource _impulseSource;
     private SpriteRenderer _sr;
 
     private Vector2 _dir; //ActionMapのMoveの値を保存するVector2
     [SerializeField, InspectorVariantName("プレイヤーの移動速度")] private float _moveSpeed = 2;
     [SerializeField, InspectorVariantName("プレイヤーのジャンプ力")] private float _jumpPower = 5;
+    [SerializeField, InspectorVariantName("ジャンプを長押しできる時間")] private float _jumpTime = 0.5f;
     [SerializeField, InspectorVariantName("着地判定用Rayの長さ")] private float _rayLength = 0.55f;
-    [SerializeField, InspectorVariantName("ダメージを受けた時に吹き飛ぶ力")] private float _knockbackPower = 20;
-
-    //プレイヤーがどちら側を向いているか
-    private bool _dirRight = true;
+    [SerializeField, InspectorVariantName("左右入力で反転するゲームオブジェクト")]private GameObject _flipObject;
+    
+    
+    private bool _dirRight = true;  //プレイヤーがどちら側を向いているか
     public bool PlayerFlip
     {
         get => _dirRight;
         private set
         {
-            _sr.flipX = value;
+            if(_sr)
+                _sr.flipX = value;
+            else
+                _flipObject.transform.rotation = Quaternion.Euler(0,(value ? 0 : 180),0);
             _dirRight = value;
         }
     }
     private bool _isMove = true;
     public bool IsMove { set { _isMove = value; } }
 
-    private bool _isFreeze = false;
+    private bool _isFreeze;
     public bool IsFreeze { set { _isFreeze = value; } }
 
+    private CancellationTokenSource _tokenSource;
     // Start is called before the first frame update
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        _impulseSource = GetComponent<Cinemachine.CinemachineImpulseSource>();
-        _sr = GetComponent<SpriteRenderer>();
+        if(!_flipObject)
+            _sr = GetComponent<SpriteRenderer>();
     }
 
     private void Awake()
@@ -44,6 +51,7 @@ public class PlayerMove : MonoBehaviour,ITeleportable
         //InputSystemで作ったPlayerControlsのインスタンスを生成
         _controls = new PlayerControls();
         _controls.InGame.Jump.started += OnJump;
+        _controls.InGame.Jump.canceled += JumpCancel;
         _controls.InGame.Move.started += OnMove;  //入力はじめ
         _controls.InGame.Move.performed += OnMove;//値が変わった時
         _controls.InGame.Move.canceled += OnMove; //入力終わり
@@ -53,6 +61,7 @@ public class PlayerMove : MonoBehaviour,ITeleportable
     {
         _controls.Dispose();
         _controls.InGame.Jump.started -= OnJump;
+        _controls.InGame.Jump.canceled -= JumpCancel;
         _controls.InGame.Move.started -= OnMove;  //入力はじめ
         _controls.InGame.Move.performed -= OnMove;//値が変わった時
         _controls.InGame.Move.canceled -= OnMove; //入力終わり
@@ -69,14 +78,32 @@ public class PlayerMove : MonoBehaviour,ITeleportable
         _controls.Disable();
     }
 
-    private void OnJump(InputAction.CallbackContext context)
+    private async void OnJump(InputAction.CallbackContext context)
     {
+        _tokenSource = new();
         // 地面についているかの判定
-        // タグの判定などをしていないので敵の上に居るときでもジャンプが可能になっている
-        if (Physics.Raycast(transform.position, Vector3.down, _rayLength))
+        if (Physics.Raycast(transform.position, Vector3.down  ,out RaycastHit hitInfo, _rayLength))
         {
-            _rb.AddForce(Vector2.up * _jumpPower, ForceMode.Impulse);
+            if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            {
+                _rb.useGravity = false;
+                _rb.AddForce(Vector2.up * _jumpPower, ForceMode.Impulse);
+                try
+                {
+                    await UniTask.Delay(TimeSpan.FromSeconds(_jumpTime), cancellationToken: _tokenSource.Token);
+                    _rb.useGravity = true;
+                }
+                catch (OperationCanceledException e)
+                {
+                    _rb.useGravity = true;
+                }
+            }
         }
+    }
+    private void JumpCancel(InputAction.CallbackContext context)
+    {
+        _tokenSource.Cancel();
+        _tokenSource.Dispose();
     }
 
 
