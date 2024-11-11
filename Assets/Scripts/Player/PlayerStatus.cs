@@ -25,6 +25,7 @@ public class PlayerStatus : MonoBehaviour,IDamageable
 
     private void Start()
     {
+        _currentHP = _maxHP; 
         _impulseSource = GetComponent<Cinemachine.CinemachineImpulseSource>();
         _pm = GetComponent<PlayerMove>();
         _rb = GetComponent<Rigidbody>();

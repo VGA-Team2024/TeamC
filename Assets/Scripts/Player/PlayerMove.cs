@@ -33,7 +33,7 @@ public class PlayerMove : MonoBehaviour,ITeleportable
         }
     }
     
-    private bool _isGrounded;
+    private bool _isGround;
     
     private bool _isMove = true;
     public bool IsMove { set { _isMove = value; } }
@@ -86,21 +86,18 @@ public class PlayerMove : MonoBehaviour,ITeleportable
     {
         _tokenSource = new();
         // 地面についているかの判定
-        if (Physics.Raycast(transform.position, Vector3.down  ,out RaycastHit hitInfo, _rayLength))
+        if (_isGround)
         {
-            if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            _rb.useGravity = false;
+            _rb.AddForce(Vector2.up * _jumpPower, ForceMode.Impulse);
+            try
             {
-                _rb.useGravity = false;
-                _rb.AddForce(Vector2.up * _jumpPower, ForceMode.Impulse);
-                try
-                {
-                    await UniTask.Delay(TimeSpan.FromSeconds(_jumpTime), cancellationToken: _tokenSource.Token);
-                    _rb.useGravity = true;
-                }
-                catch (OperationCanceledException e)
-                {
-                    _rb.useGravity = true;
-                }
+                await UniTask.Delay(TimeSpan.FromSeconds(_jumpTime), cancellationToken: _tokenSource.Token);
+                _rb.useGravity = true;
+            }
+            catch (OperationCanceledException e)
+            {
+                _rb.useGravity = true;
             }
         }
     }
@@ -125,12 +122,15 @@ public class PlayerMove : MonoBehaviour,ITeleportable
     private void FixedUpdate()
     {
         //ジャンプ判定用Rayの表示
-        Debug.DrawRay(transform.position, Vector3.down * _rayLength, Color.black);
+        Debug.DrawRay(transform.position, Vector3.down * _rayLength, Color.yellow);
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitInfo, _rayLength))
         {
-            _isGrounded = hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Ground");
+            _isGround = hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Ground");
         }
-
+        else
+        {
+            _isGround = false;
+        }
         // 移動操作可能
         if (_isMove)
         {
@@ -144,7 +144,7 @@ public class PlayerMove : MonoBehaviour,ITeleportable
             _rb.velocity = Vector3.zero;
         }
         _animator.SetFloat("MoveHorizontal",Mathf.Abs(_rb.velocity.x));
-        _animator.SetBool("IsGround",_isGrounded);
+        _animator.SetBool("IsGround",_isGround);
     }
 
     public void Teleport(Vector3 position)
