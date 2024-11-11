@@ -16,6 +16,7 @@ public class PlayerMove : MonoBehaviour,ITeleportable
     [SerializeField, InspectorVariantName("ジャンプを長押しできる時間")] private float _jumpTime = 0.5f;
     [SerializeField, InspectorVariantName("着地判定用Rayの長さ")] private float _rayLength = 0.55f;
     [SerializeField, InspectorVariantName("左右入力で反転するゲームオブジェクト")]private GameObject _flipObject;
+    [SerializeField, InspectorVariantName("Animator")] private Animator _animator;
     
     
     private bool _dirRight = true;  //プレイヤーがどちら側を向いているか
@@ -31,6 +32,9 @@ public class PlayerMove : MonoBehaviour,ITeleportable
             _dirRight = value;
         }
     }
+    
+    private bool _isGrounded;
+    
     private bool _isMove = true;
     public bool IsMove { set { _isMove = value; } }
 
@@ -122,6 +126,10 @@ public class PlayerMove : MonoBehaviour,ITeleportable
     {
         //ジャンプ判定用Rayの表示
         Debug.DrawRay(transform.position, Vector3.down * _rayLength, Color.black);
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitInfo, _rayLength))
+        {
+            _isGrounded = hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Ground");
+        }
 
         // 移動操作可能
         if (_isMove)
@@ -135,6 +143,8 @@ public class PlayerMove : MonoBehaviour,ITeleportable
         {
             _rb.velocity = Vector3.zero;
         }
+        _animator.SetFloat("MoveHorizontal",Mathf.Abs(_rb.velocity.x));
+        _animator.SetBool("IsGround",_isGrounded);
     }
 
     public void Teleport(Vector3 position)

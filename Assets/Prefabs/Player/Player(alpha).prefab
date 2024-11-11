@@ -156,6 +156,7 @@ MonoBehaviour:
   _jumpTime: 0.5
   _rayLength: 2.5
   _flipObject: {fileID: 7270975046594281940}
+  _animator: {fileID: 5882308362515958260}
 --- !u!114 &7768347166177622624
 MonoBehaviour:
   m_ObjectHideFlags: 0
