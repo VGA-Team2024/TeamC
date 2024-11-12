@@ -2,7 +2,6 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
-
 public static class SceneNavigation
 {
     [MenuItem("Scene/TitleScene")]
