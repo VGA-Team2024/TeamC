@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3395404811074269123}
   - component: {fileID: 4786352122472516516}
   - component: {fileID: 3670806197057836775}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyDeathSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4845,7 +4845,7 @@ GameObject:
   - component: {fileID: 144233556917686986}
   - component: {fileID: 7743642625370490054}
   - component: {fileID: 732279729654158529}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy001
   m_TagString: Enemy
   m_Icon: {fileID: 0}

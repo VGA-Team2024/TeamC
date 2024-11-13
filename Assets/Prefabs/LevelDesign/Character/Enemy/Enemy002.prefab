@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6194468821280732183}
   - component: {fileID: 7339136625079220785}
   - component: {fileID: 3141504708025175947}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SearchArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 8689445715896851296}
   - component: {fileID: -713622975561145388}
   - component: {fileID: 4172740969780418053}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy002
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -253,6 +253,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyDeathSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 419420460590218589, guid: f13bead1d40d3db478be0df31b3b637e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3585754646323615081, guid: f13bead1d40d3db478be0df31b3b637e,
         type: 3}
