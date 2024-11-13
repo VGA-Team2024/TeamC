@@ -180,7 +180,7 @@ MonoBehaviour:
   _jumpTime: 0.5
   _jumpPressGravity: 9
   _gravityScale: 30
-  _rayLength: 2.5
+  _rayLength: 1
   _flipObject: {fileID: 7270975046594281940}
   _animator: {fileID: 6832927427008276639}
 --- !u!114 &7768347166177622624
