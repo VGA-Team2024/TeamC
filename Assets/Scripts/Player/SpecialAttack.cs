@@ -41,10 +41,11 @@ public class SpecialAttack : MonoBehaviour
     {
         if(other.TryGetComponent<ITeleportable>(out ITeleportable tp))
         {
-            _tw.Complete();
+            Vector3 pos = other.transform.position;
             tp.Teleport(_player.transform.position);
-            _playerTp.Teleport(other.transform.position);
+            _playerTp.Teleport(pos);
             this.gameObject.SetActive(false);
+            _tw.Complete();
         }
     }
 }

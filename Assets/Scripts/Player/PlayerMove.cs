@@ -14,6 +14,8 @@ public class PlayerMove : MonoBehaviour,ITeleportable
     [SerializeField, InspectorVariantName("プレイヤーの移動速度")] private float _moveSpeed = 2;
     [SerializeField, InspectorVariantName("プレイヤーのジャンプ力")] private float _jumpPower = 5;
     [SerializeField, InspectorVariantName("ジャンプを長押しできる時間")] private float _jumpTime = 0.5f;
+    [SerializeField, InspectorVariantName("ジャンプ長押し中の重力")] private float _jumpPressGravity = 5;
+    [SerializeField, InspectorVariantName("重力")]float _gravityScale = 20;
     [SerializeField, InspectorVariantName("着地判定用Rayの長さ")] private float _rayLength = 0.55f;
     [SerializeField, InspectorVariantName("左右入力で反転するゲームオブジェクト")]private GameObject _flipObject;
     [SerializeField, InspectorVariantName("Animator")] private Animator _animator;
@@ -32,17 +34,19 @@ public class PlayerMove : MonoBehaviour,ITeleportable
             _dirRight = value;
         }
     }
+    private bool _isGround; //設置判定
     
-    private bool _isGround;
-    
-    private bool _isMove = true;
+    private bool _isMove = true; //移動不可状態の判定
     public bool IsMove { set { _isMove = value; } }
 
-    private bool _isFreeze;
+    private bool _isFreeze; //　完全固定状態の判定
     public bool IsFreeze { set { _isFreeze = value; } }
 
+    //重力を使うかの判定
+    bool _useGravity = true;
+    
     private CancellationTokenSource _tokenSource;
-    // Start is called before the first frame update
+    
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -88,16 +92,16 @@ public class PlayerMove : MonoBehaviour,ITeleportable
         // 地面についているかの判定
         if (_isGround)
         {
-            _rb.useGravity = false;
+            _useGravity = false;
             _rb.AddForce(Vector2.up * _jumpPower, ForceMode.Impulse);
             try
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(_jumpTime), cancellationToken: _tokenSource.Token);
-                _rb.useGravity = true;
+                _useGravity = true;
             }
             catch (OperationCanceledException e)
             {
-                _rb.useGravity = true;
+                _useGravity = true;
             }
         }
     }
@@ -145,6 +149,16 @@ public class PlayerMove : MonoBehaviour,ITeleportable
         }
         _animator.SetFloat("MoveHorizontal",Mathf.Abs(_rb.velocity.x));
         _animator.SetBool("IsGround",_isGround);
+
+        //重力
+        if (_useGravity)
+        {
+            _rb.AddForce(new Vector3(0, _gravityScale * -1, 0), ForceMode.Acceleration);
+        }
+        else
+        {
+            _rb.AddForce(new Vector3(0, _jumpPressGravity * -1, 0), ForceMode.Acceleration);
+        }
     }
 
     public void Teleport(Vector3 position)

@@ -35,7 +35,7 @@ public class PlayerStatus : MonoBehaviour,IDamageable
     {
         Debug.Log($"プレイヤーが{damage}ダメージ受けた");
         // 無敵のレイヤーに変更
-        string normalLayer = gameObject.layer.ToString();
+        int normalLayer = gameObject.layer;
         gameObject.layer = LayerMask.NameToLayer(_godModeLayerName);
         //集中線パーティクルをPlay
         Camera.main.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
@@ -51,11 +51,11 @@ public class PlayerStatus : MonoBehaviour,IDamageable
         IsControl();
     }
 
-    async void GodModeEnd(string layer)
+    async void GodModeEnd(int layer)
     {
         await UniTask.Delay((int)(_godTime * 1000));
-        // 8番が通常時プレイヤーレイヤー
-        gameObject.layer = LayerMask.NameToLayer(layer);
+        // 通常レイヤーに戻す
+        gameObject.layer = layer;
         
     }
 
