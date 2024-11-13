@@ -68,7 +68,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _keyConditions: 0
-  _doorPrefab: {fileID: 0}
+  _doorPrefab: {fileID: 3884011740711219504, guid: b1eff954cdc28254f9436e8680487b8b,
+    type: 3}
 --- !u!212 &7419753687607192252
 SpriteRenderer:
   m_ObjectHideFlags: 0
