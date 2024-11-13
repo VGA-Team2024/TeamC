@@ -59,10 +59,10 @@ public class AttackNormalBear : EnemyBase, IPlayerTarget
         _playerMove = playerMove;
     }
     
-    private void OnTriggerStay(Collider other)
+    private void OnCollisionStay(Collision other)
     {
         if (_currentState == _freezeState) return;
-        if(other.CompareTag(_playerTag) && other.TryGetComponent(out IDamageable dmg))
+        if(other.gameObject.CompareTag(_playerTag) && other.gameObject.TryGetComponent(out IDamageable dmg))
         {
             dmg.TakeDamage(_collideDamage);
             ChangeState(_freezeState);
