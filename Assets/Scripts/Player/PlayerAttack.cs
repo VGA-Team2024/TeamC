@@ -37,6 +37,12 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnAttack(InputAction.CallbackContext context)
     {
+        _pm.Animator.SetTrigger("Attack");
+        //AttackColliderSetActive();
+    }
+
+    public void AttackColliderSetActive()
+    {
         // 攻撃用当たり判定をアクティブにする
         Vector3 atkPos = _attackCollider.transform.localPosition;
         _attackCollider.transform.localPosition = new Vector3(Mathf.Abs(atkPos.x) * (_pm.PlayerFlip ? 1 : -1),atkPos.y, atkPos.z);
