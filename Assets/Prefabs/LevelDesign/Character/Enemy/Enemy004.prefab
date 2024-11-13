@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5839789046429029569}
   - component: {fileID: 755634036334000710}
   - component: {fileID: 192160002433942665}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 1640690984578186344}
   - component: {fileID: 4722507076611655447}
   - component: {fileID: 9223332384536882372}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cotton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 5591829549319545865}
   - component: {fileID: 7754815545338052545}
   - component: {fileID: 5391097559016585941}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: left ear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 210917934548272533}
   - component: {fileID: 3680842552664367494}
   - component: {fileID: 5878141627898921952}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bandage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: 3515438786877382681}
   - component: {fileID: 1628688599469974838}
   - component: {fileID: 1681591577228376186}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -557,7 +557,7 @@ GameObject:
   - component: {fileID: 778264884565986109}
   - component: {fileID: 7815800303694353481}
   - component: {fileID: 876065587912844569}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RushBear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -643,7 +643,7 @@ GameObject:
   - component: {fileID: 654797983496970026}
   - component: {fileID: 4352280395318750302}
   - component: {fileID: 8541515097123282061}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: left upper arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -753,7 +753,7 @@ GameObject:
   - component: {fileID: 5287048145095506858}
   - component: {fileID: 4548478193694979506}
   - component: {fileID: 5247390532226127928}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: right ear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -862,7 +862,7 @@ GameObject:
   - component: {fileID: 6653154841416523030}
   - component: {fileID: 3928652557928899936}
   - component: {fileID: 4282360557126770602}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 'root of cotton '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -973,9 +973,9 @@ GameObject:
   - component: {fileID: 4158772493804775115}
   - component: {fileID: 4680401865419593439}
   - component: {fileID: 4005417460332446224}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy004
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1074,7 +1074,7 @@ GameObject:
   - component: {fileID: 3418892891854999049}
   - component: {fileID: 3513102702644790077}
   - component: {fileID: 5157643081370808243}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1190,7 +1190,7 @@ GameObject:
   - component: {fileID: 717485684230871542}
   - component: {fileID: 8683930751043569315}
   - component: {fileID: 1690172994347304339}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1299,7 +1299,7 @@ GameObject:
   - component: {fileID: 1244646690271259444}
   - component: {fileID: 885603847862287167}
   - component: {fileID: 6055670872766899053}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1408,7 +1408,7 @@ GameObject:
   - component: {fileID: 6436854888523146534}
   - component: {fileID: 2639357774820519207}
   - component: {fileID: 8112001329932141723}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1517,7 +1517,7 @@ GameObject:
   - component: {fileID: 6394493198873373953}
   - component: {fileID: 7149068774764487750}
   - component: {fileID: 7803271447680742692}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: left lower arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1626,7 +1626,7 @@ GameObject:
   - component: {fileID: 112762475120062122}
   - component: {fileID: 4797845018699849016}
   - component: {fileID: 6883845335477748409}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1741,7 +1741,7 @@ GameObject:
   - component: {fileID: 2193887613655080199}
   - component: {fileID: 3537055479080313429}
   - component: {fileID: 6420174669753128601}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: right leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1850,7 +1850,7 @@ GameObject:
   - component: {fileID: 8357762501281520189}
   - component: {fileID: 1318556373774777629}
   - component: {fileID: 2676034015153159849}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: left leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1959,7 +1959,7 @@ GameObject:
   - component: {fileID: 3506275009690904923}
   - component: {fileID: 245882861605342861}
   - component: {fileID: 1755767645070946687}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2067,7 +2067,7 @@ GameObject:
   - component: {fileID: 1992249144349161210}
   - component: {fileID: 8952686525201082086}
   - component: {fileID: 3222418277742985490}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: right arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2176,7 +2176,7 @@ GameObject:
   - component: {fileID: 3910995061989675696}
   - component: {fileID: 1901668446767662075}
   - component: {fileID: 8739319857317607056}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SearchArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2243,6 +2243,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyDeathSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 419420460590218589, guid: f13bead1d40d3db478be0df31b3b637e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3585754646323615081, guid: f13bead1d40d3db478be0df31b3b637e,
         type: 3}

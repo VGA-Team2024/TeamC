@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7346545161964981743}
   - component: {fileID: 5173417995215267752}
   - component: {fileID: 8323991007546772690}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: right arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 6849685557437146287}
   - component: {fileID: 8161455542606915779}
   - component: {fileID: 817851030903313845}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: right ear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 3281686368107189410}
   - component: {fileID: 3448302481985542976}
   - component: {fileID: 2200628039733970109}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: left upper arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 8289151159721396425}
   - component: {fileID: 3421973872923180540}
   - component: {fileID: 3025584984574628855}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy003
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 8747531763123237943}
   - component: {fileID: 2890147091175606570}
   - component: {fileID: 3197278714993660989}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: left lower arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 7842453833408077757}
   - component: {fileID: 4200638816347709815}
   - component: {fileID: 2123474537150210418}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -665,7 +665,7 @@ GameObject:
   - component: {fileID: 3218606554264908230}
   - component: {fileID: 2848278167885862564}
   - component: {fileID: 6398108070821729722}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: right leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -774,7 +774,7 @@ GameObject:
   - component: {fileID: 6613362868849180422}
   - component: {fileID: 8516439048604563637}
   - component: {fileID: 3738951036060786205}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -883,7 +883,7 @@ GameObject:
   - component: {fileID: 3816029505203010992}
   - component: {fileID: 4533738050031559617}
   - component: {fileID: 5058355951010477028}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -999,7 +999,7 @@ GameObject:
   - component: {fileID: 7470878790389614067}
   - component: {fileID: 3612683876478633166}
   - component: {fileID: 5713458271105748929}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1108,7 +1108,7 @@ GameObject:
   - component: {fileID: 4838305942174578370}
   - component: {fileID: 7353801993987513615}
   - component: {fileID: 8866861409320111868}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1217,7 +1217,7 @@ GameObject:
   - component: {fileID: 1673245446903474818}
   - component: {fileID: 3301132341150913095}
   - component: {fileID: 1535643075551094700}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: AttackCollider
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1284,7 +1284,7 @@ GameObject:
   - component: {fileID: 6953895398557651681}
   - component: {fileID: 5728293645209290985}
   - component: {fileID: 1919593978525420194}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1393,7 +1393,7 @@ GameObject:
   - component: {fileID: 5734605263112265833}
   - component: {fileID: 999342119422267122}
   - component: {fileID: 106246880727382423}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cotton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1502,7 +1502,7 @@ GameObject:
   - component: {fileID: 8199705671095404658}
   - component: {fileID: 2108752403281134371}
   - component: {fileID: 8401317463055337728}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 'root of cotton '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1611,7 +1611,7 @@ GameObject:
   - component: {fileID: 1450473089293728751}
   - component: {fileID: 9059904705628429352}
   - component: {fileID: 1265016339380743861}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: left leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1720,7 +1720,7 @@ GameObject:
   - component: {fileID: 7820552627951013369}
   - component: {fileID: 5498613514471848426}
   - component: {fileID: 7646284730384149644}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1828,7 +1828,7 @@ GameObject:
   - component: {fileID: 2675558321490630714}
   - component: {fileID: 4766050835806484278}
   - component: {fileID: 7443800993692053131}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bandage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1937,7 +1937,7 @@ GameObject:
   - component: {fileID: 8123971043655927937}
   - component: {fileID: 4418997210647775557}
   - component: {fileID: 6737689081623224436}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2046,7 +2046,7 @@ GameObject:
   - component: {fileID: 2495716766014038340}
   - component: {fileID: 1574837814337749363}
   - component: {fileID: 4641396376400699105}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: left ear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2156,7 +2156,7 @@ GameObject:
   - component: {fileID: 1812643469089159864}
   - component: {fileID: 8008622430528007889}
   - component: {fileID: 6968591782463387546}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackBear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2242,7 +2242,7 @@ GameObject:
   - component: {fileID: 7912899484203684423}
   - component: {fileID: 3313093508333816437}
   - component: {fileID: 7565272928355471319}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SearchArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2309,6 +2309,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyDeathSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 419420460590218589, guid: f13bead1d40d3db478be0df31b3b637e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3585754646323615081, guid: f13bead1d40d3db478be0df31b3b637e,
         type: 3}

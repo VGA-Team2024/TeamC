@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1602233958191561341}
   - component: {fileID: 5666465119706353466}
   - component: {fileID: 3327760504203490036}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: AttackCollider
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 7847492073517679886}
   - component: {fileID: 9124118906685299252}
   - component: {fileID: 211827764244539935}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SearchArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 767001549516292574}
   - component: {fileID: 8122555545177203647}
   - component: {fileID: 1483356583222622009}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy006
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -343,6 +343,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyDeathSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 419420460590218589, guid: f13bead1d40d3db478be0df31b3b637e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3585754646323615081, guid: f13bead1d40d3db478be0df31b3b637e,
         type: 3}
