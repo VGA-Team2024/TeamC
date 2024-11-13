@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class BackgroundMover : MonoBehaviour
 {
     private const float MaxLength = 1f;
-    private static readonly int MainTex = Shader.PropertyToID("_MainTex");
 
     [SerializeField, Header("スクロール速度")] private Vector3 _offsetSpeed;
     [SerializeField] private GameObject _player;    // 何かしらの方法でプレイヤーを取得する
@@ -14,10 +13,20 @@ public class BackgroundMover : MonoBehaviour
 
     private void Start()
     {
-        // イメージコンポーネントからマテリアルを取得
+        // マテリアルを取得
+        // Imageの場合
         if (GetComponent<Image>() is { } i)   // is Image i // not null
         {
             _material = i.material;
+        }
+        
+        // SpriteRendererの場合
+        if (!_material)
+        {
+            if (GetComponent<SpriteRenderer>() is { } s)
+            {
+                _material = s.material;
+            }
         }
         
         // プレイヤーの初期位置を保存
@@ -35,13 +44,13 @@ public class BackgroundMover : MonoBehaviour
             Vector3 deltaPosition = currentPlayerPos - _prevPlayerPos;
 
             // 差分に基づいてテクスチャのオフセットを計算
-            var x = Mathf.Repeat(_material.GetTextureOffset(MainTex).x
+            var x = Mathf.Repeat(_material.mainTextureOffset.x
                                  + deltaPosition.x * _offsetSpeed.x, MaxLength);
-            var y = Mathf.Repeat(_material.GetTextureOffset(MainTex).y
+            var y = Mathf.Repeat(_material.mainTextureOffset.y
                                  + deltaPosition.y * _offsetSpeed.y, MaxLength);
-
+            
             // テクスチャのオフセットを更新
-            _material.SetTextureOffset(MainTex, new Vector2(x, y));
+            _material.mainTextureOffset = new Vector2(x, y);
 
             // 現在の位置を前回の位置として保存
             _prevPlayerPos = currentPlayerPos;
@@ -54,7 +63,7 @@ public class BackgroundMover : MonoBehaviour
         // ゲームをやめた後にマテリアルのOffsetを戻しておく
         if (_material)
         {
-            _material.SetTextureOffset(MainTex, Vector2.zero);
+            _material.mainTextureOffset = Vector2.zero;
         }
     }
 }
