@@ -1,0 +1,677 @@
+fileFormatVersion: 2
+guid: 5f1e0022a6fa3ca408f70ab8a53692a3
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 1
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ribbon-s
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 928
+        width: 73
+        height: 60
+      alignment: 9
+      pivot: {x: 0.49315068, y: 0.6}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2847b006db6699cd0800000000000000
+      internalID: -2550894750382459774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ribbon-L
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 918
+        width: 162
+        height: 89
+      alignment: 9
+      pivot: {x: 0.166667, y: 0.47191012}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea6329ef250f64020800000000000000
+      internalID: 2325810496832419502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ribbon-R
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 815
+        width: 163
+        height: 113
+      alignment: 9
+      pivot: {x: 0.766871, y: 0.4513274}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8bda1b0811945e20800000000000000
+      internalID: 3338452756239932302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bangs
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 891
+        width: 216
+        height: 118
+      alignment: 9
+      pivot: {x: 0.48148152, y: 0.779661}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1f2a1b1ea7b476b0800000000000000
+      internalID: -5299408903101337828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hair side-R
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 691
+        width: 72
+        height: 178
+      alignment: 9
+      pivot: {x: 0.5, y: 0.837079}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 125fc5c50ea09e570800000000000000
+      internalID: 8496334130749699361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hair back-F
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 624
+        width: 285
+        height: 263
+      alignment: 9
+      pivot: {x: 0.49824563, y: 0.828897}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d7c2c07d83c23460800000000000000
+      internalID: 7220048164877944788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hair side-L
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 833
+        width: 110
+        height: 170
+      alignment: 9
+      pivot: {x: 0.327273, y: 0.794118}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 711f166a6ae5b9f70800000000000000
+      internalID: 9195047134056018199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hair back-B
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 20
+        width: 222
+        height: 292
+      alignment: 9
+      pivot: {x: 0.5225225, y: 0.791096}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6508a74414a8f420800000000000000
+      internalID: 2664059586598143343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eyes
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 687
+        width: 174
+        height: 114
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4729f263c93dee790800000000000000
+      internalID: -7498823661647850892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: face
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 496
+        width: 225
+        height: 186
+      alignment: 9
+      pivot: {x: 0.4755556, y: 0.12903202}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe9a5d160931c01e0800000000000000
+      internalID: -2230386204617627153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: body
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 312
+        width: 56
+        height: 78
+      alignment: 9
+      pivot: {x: 0.4642857, y: 0.320513}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 261e30ab3e69c3300800000000000000
+      internalID: 233227185538982242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: best-L
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 411
+        width: 53
+        height: 92
+      alignment: 9
+      pivot: {x: 0.264151, y: 0.826087}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ef59236245d847a0800000000000000
+      internalID: -6392625189944205336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: best-R
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 410
+        width: 46
+        height: 93
+      alignment: 9
+      pivot: {x: 0.4565217, y: 0.849462}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a52d7778010ff9e0800000000000000
+      internalID: -1585547407935068766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: button
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 615
+        width: 32
+        height: 40
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a264361f4a5cd770800000000000000
+      internalID: 8636877481111216802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: string
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 543
+        width: 48
+        height: 38
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06a1cefe124574f70800000000000000
+      internalID: 9171391670899186272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sleeyve-R
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 406
+        width: 56
+        height: 58
+      alignment: 9
+      pivot: {x: 0.5714286, y: 0.724138}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 161352dd458fab200800000000000000
+      internalID: 196742577115181409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sleeyve-L
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 306
+        width: 62
+        height: 63
+      alignment: 9
+      pivot: {x: 0.4032258, y: 0.698413}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb3a235c5c665bb70800000000000000
+      internalID: 8914144037052785596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arm-R
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 381
+        width: 83
+        height: 96
+      alignment: 9
+      pivot: {x: 0.710843, y: 0.78125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca7428f6dba9eec00800000000000000
+      internalID: 931852311322576812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arm-L
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 48
+        width: 74
+        height: 114
+      alignment: 9
+      pivot: {x: 0.283784, y: 0.77193}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c9920ac5b514a870800000000000000
+      internalID: 8693097051254331840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: apron
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 279
+        width: 160
+        height: 112
+      alignment: 9
+      pivot: {x: 0.4625, y: 0.625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9720be9a3f9b35190800000000000000
+      internalID: -7974826058964073863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skirt-F
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 166
+        width: 212
+        height: 108
+      alignment: 9
+      pivot: {x: 0.48584908, y: 0.805556}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83433452ad9055ef0800000000000000
+      internalID: -120178982522768328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skirt-B
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 273
+        width: 140
+        height: 66
+      alignment: 9
+      pivot: {x: 0.45714292, y: 0.772727}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bc07633ac1fd1050800000000000000
+      internalID: 5773036148106923187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feet-R
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 134
+        width: 77
+        height: 173
+      alignment: 9
+      pivot: {x: 0.58441556, y: 0.763006}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9ba3169ae849f280800000000000000
+      internalID: -9009089407200547939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: feet-L
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 134
+        width: 90
+        height: 164
+      alignment: 9
+      pivot: {x: 0.51111114, y: 0.780488}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdd291054c24cd1a0800000000000000
+      internalID: -6783473527801958948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: needle
+      rect:
+        serializedVersion: 2
+        x: 705
+        y: 598
+        width: 274
+        height: 208
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d60a4d5016c3f7d0800000000000000
+      internalID: -2885745162627447082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      apron: -7974826058964073863
+      arm-L: 8693097051254331840
+      arm-R: 931852311322576812
+      bangs: -5299408903101337828
+      best-L: -6392625189944205336
+      best-R: -1585547407935068766
+      body: 233227185538982242
+      button: 8636877481111216802
+      eyes: -7498823661647850892
+      face: -2230386204617627153
+      feet-L: -6783473527801958948
+      feet-R: -9009089407200547939
+      hair back-B: 2664059586598143343
+      hair back-F: 7220048164877944788
+      hair side-L: 9195047134056018199
+      hair side-R: 8496334130749699361
+      needle: -2885745162627447082
+      ribbon-L: 2325810496832419502
+      ribbon-R: 3338452756239932302
+      ribbon-s: -2550894750382459774
+      skirt-B: 5773036148106923187
+      skirt-F: -120178982522768328
+      sleeyve-L: 8914144037052785596
+      sleeyve-R: 196742577115181409
+      string: 9171391670899186272
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
