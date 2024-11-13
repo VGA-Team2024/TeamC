@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class BackgroundMover : MonoBehaviour
 {
     private const float MaxLength = 1f;
-    private static readonly int MainTex = Shader.PropertyToID("_MainTex");
 
     [SerializeField, Header("スクロール速度")] private Vector3 _offsetSpeed;
     [SerializeField] private GameObject _player;    // 何かしらの方法でプレイヤーを取得する
