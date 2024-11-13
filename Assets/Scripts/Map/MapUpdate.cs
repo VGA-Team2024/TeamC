@@ -5,18 +5,19 @@ using UnityEngine;
 public class MapUpdate : MonoBehaviour
 {
     [SerializeField] private MapManager _mapManager;
-    [SerializeField] private OnTriggerEvent _triggerEvent;
-    [SerializeField] private GameObject _player;            // 仮:プレイヤー
-    [SerializeField] private GameObject _startMapPrefab;    // 仮：最初にいるマップ
+    [SerializeField, Header("プレイヤー")] private GameObject _player;            // 仮:プレイヤー
+    [SerializeField, Header("最初のステージプレハブ")] private GameObject _startMapPrefab;    // 仮：最初にいるマップ
     [SerializeField, Header("セットするマップの名前")] private string _startMapName;
+    
     private GameObject _currentMapPrefab; // 現在いるマップデータ
+    private OnTriggerEvent _triggerEvent;
 
     public string StartMapName => _startMapName;
     
     private void Start()
     {
         _mapManager = FindObjectOfType<MapManager>();
-        _triggerEvent = FindObjectOfType<OnTriggerEvent>();
+        _triggerEvent = _player.GetComponent<OnTriggerEvent>();
         
         if (!_player.TryGetComponent<Rigidbody>(out _))
         {
