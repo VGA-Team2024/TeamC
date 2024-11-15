@@ -9,10 +9,9 @@ public class EnemyJumpAttackState : IEnemyState
     private readonly int _jump = Animator.StringToHash("Jump");
     private readonly Transform _transform;
     private readonly AnimationCurve _animationCurve;
-    private float _curveRate;
     private readonly float _speed;
     private Vector2 _startPos;
-    private float _x;
+    private float _positionX;
     private readonly float _duration;
 
     public EnemyJumpAttackState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator, Transform transform, float speed, AnimationCurve animationCurve)
@@ -30,14 +29,14 @@ public class EnemyJumpAttackState : IEnemyState
     {
         if (_animator) _animator.SetTrigger(_jump);
         _startPos = _transform.position;
-        _x = 0f;
+        _positionX = 0f;
     }
 
     public void Execute()
     {
         Attack();
         
-        if (_x >= _duration)
+        if (_positionX >= _duration)
         {
             _enemyBase.ChangeState(_freezeState);
         }
@@ -50,8 +49,8 @@ public class EnemyJumpAttackState : IEnemyState
     
     private void Attack()
     {
-        _x += Time.deltaTime * Mathf.Abs(_speed);
-        var y = _animationCurve.Evaluate(_x);
-        _transform.position = (Vector3)_startPos + _transform.rotation * new Vector2(_x, y);
+        _positionX += Time.deltaTime * _speed;
+        var y = _animationCurve.Evaluate(_positionX);
+        _transform.position = (Vector3)_startPos + _transform.rotation * new Vector2(_positionX, y);
     }
 }
