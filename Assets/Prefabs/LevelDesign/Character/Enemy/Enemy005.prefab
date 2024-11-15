@@ -978,6 +978,7 @@ MonoBehaviour:
   _patrolArea: 5
   _freezeTime: 2
   _playerTag: Player
+  _jumpSpeed: 1
   _animationCurve:
     serializedVersion: 2
     m_Curve:
@@ -1043,7 +1044,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.6, y: 4, z: 0}
+  m_Size: {x: 2.6, y: 4, z: 1}
   m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!114 &7750011416008364273
 MonoBehaviour:
