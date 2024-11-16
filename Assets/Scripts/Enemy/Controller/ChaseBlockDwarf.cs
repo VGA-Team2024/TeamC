@@ -9,6 +9,7 @@ public class ChaseBlockDwarf : EnemyBase, IPlayerTarget
     [SerializeField, Header("Playerにぶつかった後止まる時間")] private int _freezeTime;
     [SerializeField, Header("Playerにつけるタグの名前")] private string _playerTag;
     [SerializeField, Header("Playerに与えるダメージ量")] private int _damage;
+    [SerializeField, Header("索敵をやめる距離")] private float _canselDis;
 
     private CancellationToken _token;
     private ParticleSystem _particle;
@@ -35,6 +36,12 @@ public class ChaseBlockDwarf : EnemyBase, IPlayerTarget
         
         if (_playerMove)
         {
+            if ((transform.position - _playerMove.transform.position).sqrMagnitude > _canselDis * _canselDis)
+            {
+                ChangeState(_freezeState);
+                _playerMove = null;
+                return;
+            }
             if (_currentState == _freezeState) return;
             if (_currentState != _chaseState)
             {
@@ -53,8 +60,7 @@ public class ChaseBlockDwarf : EnemyBase, IPlayerTarget
     
     public void GetPlayerMove(PlayerMove playerMove)
     {
-        if (playerMove == null) ChangeState(_freezeState);
-        _playerMove = playerMove;
+        if (playerMove) _playerMove = playerMove;
     }
     
     private void OnCollisionStay(Collision other)
