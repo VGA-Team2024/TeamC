@@ -175,6 +175,7 @@ MonoBehaviour:
   _freezeTime: 2
   _playerTag: Player
   _damage: 1
+  _canselDis: 15
 --- !u!114 &1338617352851844823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +208,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.6, y: 3.2, z: 0}
+  m_Size: {x: 2.6, y: 3.2, z: 1}
   m_Center: {x: 0, y: -0.3, z: 0}
 --- !u!95 &-713622975561145388
 Animator:

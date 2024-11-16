@@ -9,6 +9,7 @@ public class JumpNormalBear : EnemyBase, IPlayerTarget
     [SerializeField, Header("巡回する範囲")] private float _patrolArea;
     [SerializeField, Header("Playerを攻撃した後次の攻撃が可能になるまでの時間")] private int _freezeTime;
     [SerializeField, Header("Playerにつけるタグの名前")] private string _playerTag;
+    [SerializeField, Header("ジャンプのスピード")] private float _jumpSpeed;
     [SerializeField, Header("敵の動き方")] private AnimationCurve _animationCurve;
     
     private CancellationToken _token;
@@ -27,7 +28,7 @@ public class JumpNormalBear : EnemyBase, IPlayerTarget
         
         _walkState = new EnemyWalkState(this, _animator, transform, _speed, _patrolArea);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime, _token);
-        _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, _animator, transform, _animationCurve);
+        _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, _animator, transform, _jumpSpeed, _animationCurve);
         _deathState = new EnemyDeathState(this, _particle, gameObject);
     }
 

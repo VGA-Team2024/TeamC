@@ -19,8 +19,9 @@ public class PlayerMove : MonoBehaviour,ITeleportable
     [SerializeField, InspectorVariantName("着地判定用Rayの長さ")] private float _rayLength = 0.55f;
     [SerializeField, InspectorVariantName("左右入力で反転するゲームオブジェクト")]private GameObject _flipObject;
     [SerializeField, InspectorVariantName("Animator")] private Animator _animator;
-    
-    
+
+    public Animator Animator => _animator;
+
     private bool _dirRight = true;  //プレイヤーがどちら側を向いているか
     public bool PlayerFlip
     {

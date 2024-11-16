@@ -46,6 +46,8 @@ public class PlayerStatus : MonoBehaviour,IDamageable
         //プレイヤーを後ろに吹き飛ばす
         _rb.velocity = Vector3.zero;
         _rb.AddForce(new Vector3((!_pm.PlayerFlip ? 1 : -1), 0.3f, 0) * _knockBackPower, ForceMode.Impulse);
+        //体力を減らす
+        _currentHP -= damage;
 
         GodModeEnd(normalLayer);
         IsControl();
