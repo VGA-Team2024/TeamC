@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 283454584111659590}
   - component: {fileID: 6055033981509232875}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: WarpPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,9 +98,9 @@ GameObject:
   - component: {fileID: 4366289782479901798}
   - component: {fileID: 7114496943676665067}
   - component: {fileID: 6232286598728182761}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: DamageFloor
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,7 +189,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
