@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary> 背景用をスクロールする </summary>
 public class BackgroundMover : MonoBehaviour
 {
     private const float MaxLength = 1f;
 
     [SerializeField, Header("スクロール速度")] private Vector3 _offsetSpeed;
-    [SerializeField] private GameObject _player;    // 何かしらの方法でプレイヤーを取得する
+    [SerializeField] private GameObject _followObj;    // 何かしらの方法でプレイヤーを取得する
     
     private Material _material;
     private Vector3 _prevPlayerPos; // 1フレーム前の位置
@@ -30,7 +31,7 @@ public class BackgroundMover : MonoBehaviour
         }
         
         // プレイヤーの初期位置を保存
-        _prevPlayerPos = _player.transform.position;
+        _prevPlayerPos = _followObj.transform.position;
     }
 
     private void Update()
@@ -38,7 +39,7 @@ public class BackgroundMover : MonoBehaviour
         if (_material)
         {
             // 現在のプレイヤーの位置を取得
-            Vector3 currentPlayerPos = _player.transform.position;
+            Vector3 currentPlayerPos = _followObj.transform.position;
 
             // 前回の位置と現在の位置の差分を計算
             Vector3 deltaPosition = currentPlayerPos - _prevPlayerPos;
