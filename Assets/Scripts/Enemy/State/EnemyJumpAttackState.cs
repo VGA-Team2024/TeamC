@@ -9,18 +9,18 @@ public class EnemyJumpAttackState : IEnemyState
     private readonly int _jump = Animator.StringToHash("Jump");
     private readonly Transform _transform;
     private readonly AnimationCurve _animationCurve;
-    private float _curveRate;
-    private float _speed;
+    private readonly float _speed;
     private Vector2 _startPos;
-    private float _x;
+    private float _positionX;
     private readonly float _duration;
 
-    public EnemyJumpAttackState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator, Transform transform, AnimationCurve animationCurve)
+    public EnemyJumpAttackState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator, Transform transform, float speed, AnimationCurve animationCurve)
     {
         _enemyBase = enemyBase;
         _freezeState = freezeState;
         _animator = animator;
         _transform = transform;
+        _speed = speed;
         _animationCurve = animationCurve;
         _duration = _animationCurve.keys[_animationCurve.length - 1].time;
     }
@@ -29,15 +29,14 @@ public class EnemyJumpAttackState : IEnemyState
     {
         if (_animator) _animator.SetTrigger(_jump);
         _startPos = _transform.position;
-        _x = 0f;
-        _speed = 1f;
+        _positionX = 0f;
     }
 
     public void Execute()
     {
         Attack();
         
-        if (_x >= _duration)
+        if (_positionX >= _duration)
         {
             _enemyBase.ChangeState(_freezeState);
         }
@@ -50,13 +49,8 @@ public class EnemyJumpAttackState : IEnemyState
     
     private void Attack()
     {
-        _curveRate = Mathf.Clamp(_curveRate + _speed * Time.deltaTime, 0f, 1f);
-        _x += Time.deltaTime;
-        var y = _animationCurve.Evaluate(_curveRate);
-        _transform.position = (Vector3)_startPos + _transform.rotation * new Vector2(_x, y);
-        
-        if(Mathf.Approximately(_curveRate, 1f)){
-            _speed = -1;
-        }
+        _positionX += Time.deltaTime * _speed;
+        var y = _animationCurve.Evaluate(_positionX);
+        _transform.position = (Vector3)_startPos + _transform.rotation * new Vector2(_positionX, y);
     }
 }
