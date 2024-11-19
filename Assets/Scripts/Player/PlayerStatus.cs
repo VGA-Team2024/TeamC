@@ -20,14 +20,14 @@ public class PlayerStatus : MonoBehaviour,IDamageable
     private string _godModeLayerName;
 
     Cinemachine.CinemachineImpulseSource _impulseSource;
-    PlayerMove _pm;
+    Player _player;
     Rigidbody _rb;
 
     private void Start()
     {
         _currentHP = _maxHP; 
         _impulseSource = GetComponent<Cinemachine.CinemachineImpulseSource>();
-        _pm = GetComponent<PlayerMove>();
+        _player = GetComponent<Player>();
         _rb = GetComponent<Rigidbody>();
     }
 
@@ -37,15 +37,17 @@ public class PlayerStatus : MonoBehaviour,IDamageable
         // 無敵のレイヤーに変更
         int normalLayer = gameObject.layer;
         gameObject.layer = LayerMask.NameToLayer(_godModeLayerName);
+        //アニメーションの変更
+        _player.Animator.SetTrigger("Damage");
         //集中線パーティクルをPlay
         Camera.main.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         //画面を揺らす
         _impulseSource.GenerateImpulse();
         //プレイヤーを操作不能に
-        _pm.IsMove = false;
+        _player.PlayerMove.IsMove = false;
         //プレイヤーを後ろに吹き飛ばす
         _rb.velocity = Vector3.zero;
-        _rb.AddForce(new Vector3((!_pm.PlayerFlip ? 1 : -1), 0.3f, 0) * _knockBackPower, ForceMode.Impulse);
+        _rb.AddForce(new Vector3((!_player.PlayerMove.PlayerFlip ? 1 : -1), 0.3f, 0) * _knockBackPower, ForceMode.Impulse);
         //体力を減らす
         _currentHP -= damage;
 
@@ -64,6 +66,6 @@ public class PlayerStatus : MonoBehaviour,IDamageable
     async void IsControl()
     {
         await UniTask.Delay((int)(_NoMoveTime*1000));
-        _pm.IsMove = true;
+        _player.PlayerMove.IsMove = true;
     }
 }
