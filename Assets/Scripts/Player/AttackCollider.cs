@@ -10,7 +10,7 @@ public class AttackCollider : MonoBehaviour
     private Player _player;
     private Action _hitSoundPlay;
 
-    async private void OnEnable()
+    private async void OnEnable()
     {
         if(!_player) _player = transform.parent.GetComponent<Player>();
         _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.Attack);
