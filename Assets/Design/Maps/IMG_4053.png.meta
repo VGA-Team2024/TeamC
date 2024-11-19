@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 365d2d07325602942ba878c2f464c2bf
+guid: 0d31897eba37dba47b68ff1313cd5bc1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -39,7 +39,7 @@ TextureImporter:
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -110,22 +110,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ingame_effect_attack_02
+      name: IMG_4053_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+        x: 207
+        y: 981
+        width: 437
+        height: 484
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e6bbf7910133e74d0800000000000000
-      internalID: -3135012146362991762
+      spriteID: 8bebf8a39889b414f96e4bda87c22049
+      internalID: -2070927646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_4053_1
+      rect:
+        serializedVersion: 2
+        x: 1068
+        y: 981
+        width: 437
+        height: 484
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 820ed5c452b336140af494c801400b96
+      internalID: -1085443131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_4053_2
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 493
+        width: 437
+        height: 484
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99467602e49561a4a95b8aeb97a6dce7
+      internalID: -210003608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_4053_3
+      rect:
+        serializedVersion: 2
+        x: 1068
+        y: 493
+        width: 437
+        height: 484
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59b02033f9cf71345a5af7dad7f6ffb2
+      internalID: -1242411638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_4053_4
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 5
+        width: 437
+        height: 484
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d9b67e35bc99ab4cb067a355990106a
+      internalID: 1970864029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_4053_5
+      rect:
+        serializedVersion: 2
+        x: 1068
+        y: 5
+        width: 437
+        height: 484
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b740ccd1c7660eb4eb09e495803f6c80
+      internalID: 476772749
       vertices: []
       indices: 
       edges: []
@@ -133,7 +238,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 55cc3bfb96d094349a6f588657e8550d
     internalID: 0
     vertices: []
     indices: 
@@ -141,7 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ingame_effect_attack_02: -3135012146362991762
+      IMG_4053_0: -2070927646
+      IMG_4053_1: -1085443131
+      IMG_4053_2: -210003608
+      IMG_4053_3: -1242411638
+      IMG_4053_4: 1970864029
+      IMG_4053_5: 476772749
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
