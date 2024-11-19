@@ -9,6 +9,7 @@ public class SpecialAttack : MonoBehaviour
     private Vector3 _dir;
     [SerializeField,InspectorVariantName("行動終了までの時間")] 
     private float _timer = 1;
+    private Vector3 _originLocalPos;
     
     private Tween _tw;
     private float _currentTimer;
@@ -20,16 +21,22 @@ public class SpecialAttack : MonoBehaviour
         _pm = transform.parent.gameObject.GetComponent<PlayerMove>();
         _player = transform.parent.gameObject;
         _playerTp = _player.GetComponent<ITeleportable>();
+        _originLocalPos = this.transform.localPosition;
     }
 
     private void OnEnable()
     {
+        //位置の固定
         _pm.IsFreeze = true;
+        // 針の向きの見た目の変更
+        transform.localRotation = Quaternion.Euler(0, 0, (_pm.PlayerFlip ? 0 : 180));
+        // 動く距離と向きの設定
         _dir = new Vector3((_pm.PlayerFlip ? 1 :-1), 0, 0) * _range;
+        //DoTweenでの位置変更
         _tw = DOTween.To(() => 0f, x
             => _currentTimer = x,
             Mathf.PI, _timer
-            ).OnUpdate(() => this.transform.transform.localPosition = _dir * Mathf.Sin(_currentTimer))
+            ).OnUpdate(() => transform.transform.localPosition = _dir * Mathf.Sin(_currentTimer) + _originLocalPos)
             .OnComplete(() =>
             {
                 this.gameObject.SetActive(false);
