@@ -19,9 +19,9 @@ public class PlayerStatus : MonoBehaviour,IDamageable
     [SerializeField, InspectorVariantName("無敵時間中のレイヤーの名前")]
     private string _godModeLayerName;
 
-    Cinemachine.CinemachineImpulseSource _impulseSource;
-    Player _player;
-    Rigidbody _rb;
+    private Cinemachine.CinemachineImpulseSource _impulseSource;
+    private Player _player;
+    private Rigidbody _rb;
 
     private void Start()
     {

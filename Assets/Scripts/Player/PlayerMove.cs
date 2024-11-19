@@ -10,6 +10,8 @@ public class PlayerMove : MonoBehaviour,ITeleportable
     private PlayerControls _controls;
     private SpriteRenderer _sr;
     private Player _player;
+    private readonly int MoveHorizontal = Animator.StringToHash("MoveHorizontal");
+    private readonly int IsGround = Animator.StringToHash("IsGround");
 
     private Vector2 _dir; //ActionMapのMoveの値を保存するVector2
     [SerializeField, InspectorVariantName("プレイヤーの移動速度")] private float _moveSpeed = 2;
@@ -161,8 +163,8 @@ public class PlayerMove : MonoBehaviour,ITeleportable
         {
             _rb.velocity = Vector3.zero;
         }
-        _player.Animator.SetFloat("MoveHorizontal",Mathf.Abs(_rb.velocity.x));
-        _player.Animator.SetBool("IsGround",_isGround);
+        _player.Animator.SetFloat(MoveHorizontal,Mathf.Abs(_rb.velocity.x));
+        _player.Animator.SetBool(IsGround,_isGround);
     }
 
     public void Teleport(Vector3 position)

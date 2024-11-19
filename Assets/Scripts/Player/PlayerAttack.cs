@@ -5,13 +5,15 @@ using UnityEngine.Serialization;
 
 public class PlayerAttack : MonoBehaviour
 {
-    PlayerControls _controls;
-    Player _player;
+    private readonly int Attack = Animator.StringToHash("Attack");
+    private PlayerControls _controls;
+    private Player _player;
     [SerializeField, InspectorVariantName("通常攻撃の攻撃判定")] 
     private GameObject _attackCollider;
     [SerializeField, InspectorVariantName("特殊攻撃の攻撃判定")] 
     private GameObject _specialCollider;
     private bool _attackAnimTrigger;
+
     private void Awake()
     {
         _controls = new PlayerControls();
@@ -45,14 +47,14 @@ public class PlayerAttack : MonoBehaviour
     private void OnAttack(InputAction.CallbackContext context)
     {
         _attackAnimTrigger = true;
-        _player.Animator.SetBool("Attack",_attackAnimTrigger);
+        _player.Animator.SetBool(Attack,_attackAnimTrigger);
         _attackAnimTrigger = false;
     }
 
     private void AttackCancel(InputAction.CallbackContext context)
     {
         _attackAnimTrigger = false;
-        _player.Animator.SetBool("Attack",_attackAnimTrigger);
+        _player.Animator.SetBool(Attack,_attackAnimTrigger);
     }
 
     private void AttackColliderSetActive()

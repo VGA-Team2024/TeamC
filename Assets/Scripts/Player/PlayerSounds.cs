@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerSounds : MonoBehaviour
 {
     [SerializeField] private string _playerCueSheet;
     [SerializeField] private List<SoundCue> soundList;
-    Player _player;
+    private Player _player;
     
     public void PlayerSEPlay(PlayerSoundEnum sound)
     {

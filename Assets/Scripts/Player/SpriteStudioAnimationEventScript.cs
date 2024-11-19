@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpriteStudioAnimationEventScript : MonoBehaviour
 {
-    private Dictionary<string, Action> _eventDictionary = new Dictionary<string, Action>();
+    private Dictionary<string, Action> _eventDictionary = new ();
     public Dictionary<string, Action> EventDictionary
     {
         get => _eventDictionary;

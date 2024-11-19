@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    PlayerMove _playerMove;
+    private PlayerMove _playerMove;
     public PlayerMove PlayerMove => _playerMove;
     [SerializeField] Animator _animator;
     public Animator Animator => _animator;
