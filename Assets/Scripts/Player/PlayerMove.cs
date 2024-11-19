@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour,ITeleportable
     private Rigidbody _rb;
     private PlayerControls _controls;
     private SpriteRenderer _sr;
+    private Player _player;
 
     private Vector2 _dir; //ActionMapのMoveの値を保存するVector2
     [SerializeField, InspectorVariantName("プレイヤーの移動速度")] private float _moveSpeed = 2;
@@ -18,10 +19,7 @@ public class PlayerMove : MonoBehaviour,ITeleportable
     [SerializeField, InspectorVariantName("重力")]float _gravityScale = 20;
     [SerializeField, InspectorVariantName("着地判定用Rayの長さ")] private float _rayLength = 0.55f;
     [SerializeField, InspectorVariantName("左右入力で反転するゲームオブジェクト")]private GameObject _flipObject;
-    [SerializeField, InspectorVariantName("Animator")] private Animator _animator;
-
-    public Animator Animator => _animator;
-
+    
     private bool _dirRight = true;  //プレイヤーがどちら側を向いているか
     public bool PlayerFlip
     {
@@ -53,6 +51,7 @@ public class PlayerMove : MonoBehaviour,ITeleportable
         _rb = GetComponent<Rigidbody>();
         if(!_flipObject)
             _sr = GetComponent<SpriteRenderer>();
+        _player = GetComponent<Player>();
     }
 
     private void Awake()
@@ -74,7 +73,6 @@ public class PlayerMove : MonoBehaviour,ITeleportable
         _controls.InGame.Move.started -= OnMove;  //入力はじめ
         _controls.InGame.Move.performed -= OnMove;//値が変わった時
         _controls.InGame.Move.canceled -= OnMove; //入力終わり
-        //_controls.InGame.Attack.started -= OnAttack;
     }
 
     private void OnEnable()
@@ -95,6 +93,7 @@ public class PlayerMove : MonoBehaviour,ITeleportable
         {
             _useGravity = false;
             _rb.AddForce(Vector2.up * _jumpPower, ForceMode.Impulse);
+            _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.Jump);
             try
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(_jumpTime), cancellationToken: _tokenSource.Token);
@@ -130,6 +129,10 @@ public class PlayerMove : MonoBehaviour,ITeleportable
         Debug.DrawRay(transform.position, Vector3.down * _rayLength, Color.yellow);
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitInfo, _rayLength))
         {
+            if (!_isGround)
+            {
+                _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.JumpLandhing);
+            }
             _isGround = hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Ground");
         }
         else
@@ -143,14 +146,6 @@ public class PlayerMove : MonoBehaviour,ITeleportable
             _rb.velocity = new Vector3(_dir.x * _moveSpeed, _rb.velocity.y, 0);
         }
 
-        // 完全固定
-        if(_isFreeze)
-        {
-            _rb.velocity = Vector3.zero;
-        }
-        _animator.SetFloat("MoveHorizontal",Mathf.Abs(_rb.velocity.x));
-        _animator.SetBool("IsGround",_isGround);
-
         //重力
         if (_useGravity)
         {
@@ -160,6 +155,14 @@ public class PlayerMove : MonoBehaviour,ITeleportable
         {
             _rb.AddForce(new Vector3(0, _jumpPressGravity * -1, 0), ForceMode.Acceleration);
         }
+        
+        // 完全固定
+        if(_isFreeze)
+        {
+            _rb.velocity = Vector3.zero;
+        }
+        _player.Animator.SetFloat("MoveHorizontal",Mathf.Abs(_rb.velocity.x));
+        _player.Animator.SetBool("IsGround",_isGround);
     }
 
     public void Teleport(Vector3 position)
