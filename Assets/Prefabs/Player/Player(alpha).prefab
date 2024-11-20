@@ -407,6 +407,7 @@ GameObject:
   - component: {fileID: 4056594267393999560}
   - component: {fileID: 1710684618445599928}
   - component: {fileID: 6907902460269040805}
+  - component: {fileID: 5359576688231345561}
   m_Layer: 8
   m_Name: Player(alpha)
   m_TagString: Player
@@ -628,6 +629,18 @@ MonoBehaviour:
     Name: SE_Player_AtackHit01
   - SoundEnum: 4
     Name: SE_Player_ThrowNeedle01
+--- !u!114 &5359576688231345561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5715765838286912857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46551ff80465c264d9839f2c835e2443, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5852162842069242211
 GameObject:
   m_ObjectHideFlags: 0
