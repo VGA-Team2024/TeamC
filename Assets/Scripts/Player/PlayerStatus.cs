@@ -55,7 +55,8 @@ public class PlayerStatus : MonoBehaviour,IDamageable
         //体力を減らす
         _currentHP -= damage;
         //UIの更新
-        healthUI.PlayerHealthUpdate(_currentHP);
+        if(healthUI)
+            healthUI.PlayerHealthUpdate(_currentHP);
         GodModeEnd(normalLayer);
         IsControl();
     }
