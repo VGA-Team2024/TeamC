@@ -14,6 +14,8 @@ public class SpecialAttack : MonoBehaviour
     private float _currentTimer;
     [SerializeField, InspectorVariantName("特殊攻撃の距離")] 
     private float _range = 8;
+    [SerializeField, InspectorVariantName("Hit時ずらしVec3")]
+    private Vector3 _hitMisalignment = new Vector3(0f, 0.5f, 0f);
 
     private void Awake()
     {
@@ -49,8 +51,8 @@ public class SpecialAttack : MonoBehaviour
         if(other.TryGetComponent<ITeleportable>(out ITeleportable tp))
         {
             Vector3 pos = other.transform.position;
-            tp.Teleport(_player.transform.position);
-            _parentTp.Teleport(pos);
+            tp.Teleport(_player.transform.position + _hitMisalignment);
+            _parentTp.Teleport(pos + _hitMisalignment);
             this.gameObject.SetActive(false);
             _tw.Complete();
         }
