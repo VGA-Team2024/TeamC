@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerStatus : MonoBehaviour,IDamageable
 {
@@ -7,6 +8,8 @@ public class PlayerStatus : MonoBehaviour,IDamageable
     private int _maxHP = 5;
     [SerializeField, InspectorVariantName("現在体力")] 
     private int _currentHP;
+    [SerializeField, InspectorVariantName("体力UIScript")]
+    PlayerHealthUI healthUI;
     [SerializeField, InspectorVariantName("最大妖精ゲージ")] 
     private int _fairyGauge = 600;
     [SerializeField, InspectorVariantName("ダメージを受けた時に吹き飛ぶ力")] 
@@ -27,6 +30,7 @@ public class PlayerStatus : MonoBehaviour,IDamageable
     {
         _currentHP = _maxHP; 
         _impulseSource = GetComponent<Cinemachine.CinemachineImpulseSource>();
+        
         _player = GetComponent<Player>();
         _rb = GetComponent<Rigidbody>();
     }
@@ -50,7 +54,8 @@ public class PlayerStatus : MonoBehaviour,IDamageable
         _rb.AddForce(new Vector3((!_player.PlayerMove.PlayerFlip ? 1 : -1), 0.3f, 0) * _knockBackPower, ForceMode.Impulse);
         //体力を減らす
         _currentHP -= damage;
-
+        //UIの更新
+        healthUI.PlayerHealthUpdate(_currentHP);
         GodModeEnd(normalLayer);
         IsControl();
     }

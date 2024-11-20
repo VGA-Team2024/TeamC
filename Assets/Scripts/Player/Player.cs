@@ -10,9 +10,12 @@ public class Player : MonoBehaviour
     public SpriteStudioAnimationEventScript AnimationEvent => _animationEvent;
     PlayerSounds _playerSounds;
     public PlayerSounds PlayerSounds => _playerSounds;
+    PlayerStatus _playerStatus;
+    public PlayerStatus PlayerStatus => _playerStatus;
     private void Awake()
     {
         _playerMove = GetComponent<PlayerMove>();
         _playerSounds = GetComponent<PlayerSounds>();
+        _playerStatus = GetComponent<PlayerStatus>();
     }
 }
