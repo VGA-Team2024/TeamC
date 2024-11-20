@@ -133,6 +133,7 @@ public class PlayerMove : MonoBehaviour,ITeleportable
         {
             if (!_isGround)
             {
+
                 _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.JumpLandhing);
             }
             _isGround = hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Ground");
@@ -169,6 +170,7 @@ public class PlayerMove : MonoBehaviour,ITeleportable
 
     public void Teleport(Vector3 position)
     {
+        position.z = 0;
         this.transform.position = position;
     }
 }
