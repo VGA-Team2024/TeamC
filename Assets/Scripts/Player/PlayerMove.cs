@@ -18,7 +18,8 @@ public class PlayerMove : MonoBehaviour,ITeleportable
     [SerializeField, InspectorVariantName("プレイヤーのジャンプ力")] private float _jumpPower = 5;
     [SerializeField, InspectorVariantName("ジャンプを長押しできる時間")] private float _jumpTime = 0.5f;
     [SerializeField, InspectorVariantName("ジャンプ長押し中の重力")] private float _jumpPressGravity = 5;
-    [SerializeField, InspectorVariantName("重力")]float _gravityScale = 20;
+    [SerializeField, InspectorVariantName("重力")] private float _gravityScale = 20;
+    [SerializeField, InspectorVariantName("落下速度の上限")] private float _maxFallingSpeed = 50;
     [SerializeField, InspectorVariantName("着地判定用Rayの長さ")] private float _rayLength = 0.55f;
     [SerializeField, InspectorVariantName("左右入力で反転するゲームオブジェクト")]private GameObject _flipObject;
     
@@ -149,15 +150,7 @@ public class PlayerMove : MonoBehaviour,ITeleportable
             _rb.velocity = new Vector3(_dir.x * _moveSpeed, _rb.velocity.y, 0);
         }
 
-        //重力
-        if (_useGravity)
-        {
-            _rb.AddForce(new Vector3(0, _gravityScale * -1, 0), ForceMode.Acceleration);
-        }
-        else
-        {
-            _rb.AddForce(new Vector3(0, _jumpPressGravity * -1, 0), ForceMode.Acceleration);
-        }
+        Gravity();
         
         // 完全固定
         if(_isFreeze)
@@ -168,6 +161,25 @@ public class PlayerMove : MonoBehaviour,ITeleportable
         _player.Animator.SetBool(IsGround,_isGround);
     }
 
+    void Gravity()
+    {
+        //重力
+        if (_useGravity)
+        {
+            _rb.AddForce(new Vector3(0, _gravityScale * -1, 0), ForceMode.Acceleration);
+        }
+        else
+        {
+            _rb.AddForce(new Vector3(0, _jumpPressGravity * -1, 0), ForceMode.Acceleration);
+        }
+        
+        //落下速度に上限を設定
+        if (_rb.velocity.y < _maxFallingSpeed * -1)
+        {
+            _rb.velocity = new Vector3(_rb.velocity.x, _maxFallingSpeed * -1, _rb.velocity.z);
+        }
+    }
+    
     public void Teleport(Vector3 position)
     {
         position.z = 0;
