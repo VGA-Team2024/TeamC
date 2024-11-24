@@ -150,13 +150,16 @@ public class PlayerMove : MonoBehaviour,ITeleportable
             _rb.velocity = new Vector3(_dir.x * _moveSpeed, _rb.velocity.y, 0);
         }
 
-        Gravity();
-        
-        // 完全固定
         if(_isFreeze)
         {
             _rb.velocity = Vector3.zero;
         }
+        else
+        {
+            Gravity();
+        }
+        
+        // 完全固定
         _player.Animator.SetFloat(MoveHorizontal,Mathf.Abs(_rb.velocity.x));
         _player.Animator.SetBool(IsGround,_isGround);
     }

@@ -6,12 +6,20 @@ public class SpecialAttack : MonoBehaviour
     private Player _player;
     private ITeleportable _parentTp;
     private Vector3 _dir;
-    [SerializeField,InspectorVariantName("行動終了までの時間")] 
-    private float _timer = 1;
+    [SerializeField,InspectorVariantName("進み切るの時間")] 
+    private float _advanceTimer = 1;
+    [SerializeField, InspectorVariantName("進む時のイージング")]
+    Ease _advanceEase = Ease.Linear;
+    [SerializeField,InspectorVariantName("戻るまでの時間")] 
+    private float _returnTimer = 1;
+    [SerializeField, InspectorVariantName("戻る時のイージング")]
+    Ease _returnEase = Ease.Linear;
+
     private Vector3 _originLocalPos;
     
-    private Tween _tw;
-    private float _currentTimer;
+    private Tween _twForward;
+    private Tween _twBack;
+    private float _currentPos;
     [SerializeField, InspectorVariantName("特殊攻撃の距離")] 
     private float _range = 8;
     [SerializeField, InspectorVariantName("Hit時ずらしVec3")]
@@ -35,26 +43,52 @@ public class SpecialAttack : MonoBehaviour
         // 動く距離と向きの設定
         _dir = new Vector3((_player.PlayerMove.PlayerFlip ? 1 :-1), 0, 0) * _range;
         //DoTweenでの位置変更
-        _tw = DOTween.To(() => 0f, x
-            => _currentTimer = x,
-            Mathf.PI, _timer
-            ).OnUpdate(() => transform.transform.localPosition = _dir * Mathf.Sin(_currentTimer) + _originLocalPos)
+        NeedleForwardMove();
+    }
+
+    private void OnDisable()
+    {
+        _player.PlayerMove.IsFreeze = false;
+        _twForward.Kill();
+        _twBack.Kill();
+    }
+
+    void NeedleForwardMove()
+    {
+        //DoTweenでの位置変更
+        _twForward = DOTween.To(() => 0f, x
+                    => _currentPos = x,
+                _range, _advanceTimer
+            ).OnUpdate(() => transform.transform.localPosition = _dir * _currentPos + _originLocalPos)
+            .OnComplete(() => NeedleBackMove(_range,_returnTimer)).SetEase(_advanceEase);
+    }
+
+    void NeedleBackMove(float backRange , float time)
+    {
+        _twBack = DOTween.To(() => backRange, x
+                    => _currentPos = x,
+                0, time
+            ).OnUpdate(() => transform.transform.localPosition = _dir * _currentPos + _originLocalPos)
             .OnComplete(() =>
             {
                 this.gameObject.SetActive(false);
-                _player.PlayerMove.IsFreeze = false;
-            });
+            }).SetEase(_returnEase);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.TryGetComponent<ITeleportable>(out ITeleportable tp))
-        {
+        {// テレポート対象に当たる
             Vector3 pos = other.transform.position;
             tp.Teleport(_player.transform.position + _hitMisalignment);
             _parentTp.Teleport(pos + _hitMisalignment);
+            _twForward.Kill(false);
             this.gameObject.SetActive(false);
-            _tw.Complete();
+        }
+        else
+        {// テレポート対象以外に当たる
+            _twForward.Kill(false);
+            NeedleBackMove(_currentPos,_currentPos / _range * _returnTimer);
         }
     }
 }

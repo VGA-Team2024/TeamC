@@ -1,6 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerStatus : MonoBehaviour,IDamageable
 {
@@ -24,13 +23,14 @@ public class PlayerStatus : MonoBehaviour,IDamageable
 
     private Cinemachine.CinemachineImpulseSource _impulseSource;
     private Player _player;
+    int _normalLayer;
     private Rigidbody _rb;
 
     private void Start()
     {
         _currentHP = _maxHP; 
         _impulseSource = GetComponent<Cinemachine.CinemachineImpulseSource>();
-        
+        _normalLayer = gameObject.layer;
         _player = GetComponent<Player>();
         _rb = GetComponent<Rigidbody>();
     }
@@ -39,7 +39,6 @@ public class PlayerStatus : MonoBehaviour,IDamageable
     {
         Debug.Log($"プレイヤーが{damage}ダメージ受けた");
         // 無敵のレイヤーに変更
-        int normalLayer = gameObject.layer;
         gameObject.layer = LayerMask.NameToLayer(_godModeLayerName);
         //アニメーションの変更
         _player.Animator.SetTrigger("Damage");
@@ -57,16 +56,19 @@ public class PlayerStatus : MonoBehaviour,IDamageable
         //UIの更新
         if(healthUI)
             healthUI.PlayerHealthUpdate(_currentHP);
-        GodModeEnd(normalLayer);
+        //特殊攻撃を消す
+        _player.PlayerAttack.SpecialCancel();
+        
+        //通常状態に復帰
+        GodModeEnd();
         IsControl();
     }
 
-    async void GodModeEnd(int layer)
+    async void GodModeEnd()
     {
         await UniTask.Delay((int)(_godTime * 1000));
         // 通常レイヤーに戻す
-        gameObject.layer = layer;
-        
+        gameObject.layer = _normalLayer;
     }
 
     async void IsControl()

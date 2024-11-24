@@ -23,8 +23,6 @@ public class PlayerAttack : MonoBehaviour
         _controls.InGame.SpecialAttack.started += OnSpecialAttack;
         _player.AnimationEvent.EventDictionary.Add("Attack" ,AttackColliderSetActive);
     }
-    
-    
 
     private void OnDestroy()
     {
@@ -71,5 +69,11 @@ public class PlayerAttack : MonoBehaviour
         // 特殊攻撃用当たり判定をアクティブにする
         _specialCollider.SetActive(true);
         // 非アクティブは_specialCollider自身がする
+    }
+
+    public void SpecialCancel()
+    {
+        //攻撃食らい時などにキャンセルする
+        _specialCollider.SetActive(false);
     }
 }
