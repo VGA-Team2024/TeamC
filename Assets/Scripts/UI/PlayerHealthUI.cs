@@ -26,4 +26,9 @@ public class PlayerHealthUI : MonoBehaviour
             _playerHealthUIs[i].enabled = true;
         }
     }
+
+    public void PlayerHealthDamage()
+    {
+        _playerHealthUIs[transform.childCount - 1].enabled = false;
+    }
 }
