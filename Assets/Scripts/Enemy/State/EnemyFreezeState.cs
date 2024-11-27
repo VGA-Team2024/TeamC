@@ -6,18 +6,19 @@ public class EnemyFreezeState : IEnemyState
     private readonly EnemyBase _enemyBase;
     private readonly EnemyIdleState _idleState;
     private readonly int _freezeTime;
-    private readonly CancellationToken _token;
+    private CancellationTokenSource _tokenSource;
     
-    public EnemyFreezeState(EnemyBase enemyBase, EnemyIdleState idleState, int freezeTime, CancellationToken token)
+    public EnemyFreezeState(EnemyBase enemyBase, EnemyIdleState idleState, int freezeTime)
     {
         _enemyBase = enemyBase;
         _idleState = idleState;
         _freezeTime = freezeTime;
-        _token = token;
     }
     
     public void Enter()
     {
+        _tokenSource = new CancellationTokenSource();
+        
         StartFreezeTimer().Forget();
     }
 
@@ -28,12 +29,13 @@ public class EnemyFreezeState : IEnemyState
 
     public void Exit()
     {
-        
+        _tokenSource?.Cancel();
+        _tokenSource?.Dispose();
     }
     
     private async UniTask StartFreezeTimer()
     {
-        await UniTask.Delay(_freezeTime * 1000, cancellationToken:_token);
+        await UniTask.Delay(_freezeTime * 1000, cancellationToken:_tokenSource.Token);
         _enemyBase.ChangeState(_idleState);
     }
 }

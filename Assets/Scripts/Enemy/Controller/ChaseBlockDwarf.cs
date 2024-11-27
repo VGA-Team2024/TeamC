@@ -1,5 +1,3 @@
-using System.Threading;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 /// <summary> 追跡のみする敵 </summary>
@@ -11,7 +9,6 @@ public class ChaseBlockDwarf : EnemyBase, IPlayerTarget
     [SerializeField, Header("Playerに与えるダメージ量")] private int _damage;
     [SerializeField, Header("索敵をやめる距離")] private float _canselDis;
 
-    private CancellationToken _token;
     private ParticleSystem _particle;
     private Animator _animator;
     
@@ -21,12 +18,11 @@ public class ChaseBlockDwarf : EnemyBase, IPlayerTarget
     
     protected override void OnStart()
     {
-        _token = this.GetCancellationTokenOnDestroy();
         _particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
         _animator = GetComponent<Animator>();
 
         _chaseState = new EnemyChaseState(this, _animator, transform, _speed, _isFly);
-        _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime, _token);
+        _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _deathState = new EnemyDeathState(this, _particle, gameObject);
     }
 

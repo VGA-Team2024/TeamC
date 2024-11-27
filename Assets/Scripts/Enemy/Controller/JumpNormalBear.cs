@@ -1,5 +1,3 @@
-using System;
-using System.Threading;
 using UnityEngine;
 
 /// <summary> ある範囲に入ったらジャンプ攻撃する敵 </summary>
@@ -12,7 +10,6 @@ public class JumpNormalBear : EnemyBase, IPlayerTarget
     [SerializeField, Header("ジャンプのスピード")] private float _jumpSpeed;
     [SerializeField, Header("敵の動き方")] private AnimationCurve _animationCurve;
     
-    private CancellationToken _token;
     private ParticleSystem _particle;
     private Animator _animator;
     
@@ -27,13 +24,15 @@ public class JumpNormalBear : EnemyBase, IPlayerTarget
         _animator = gameObject.transform.GetChild(2).GetComponent<Animator>();
         
         _walkState = new EnemyWalkState(this, _animator, transform, _speed, _patrolArea);
-        _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime, _token);
+        _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, _animator, transform, _jumpSpeed, _animationCurve);
         _deathState = new EnemyDeathState(this, _particle, gameObject);
     }
 
     protected override void OnUpdate()
     {
+        if (_isDeath) return;
+        
         if (_playerMove)
         {
             if (_currentState == _jumpAttackState || _currentState == _freezeState) return;
