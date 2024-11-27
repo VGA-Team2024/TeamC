@@ -1,10 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using System.Collections.Generic;
 using System.Linq;
 using System.IO;
-using System;
-using UnityEngine.AddressableAssets;
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Build;
 
@@ -57,6 +54,14 @@ public class BuildCommand
                             platform = BuildTarget.Switch;
                             ext = "";
                             break;
+                        
+                        case "Mac":
+                            platform = BuildTarget.StandaloneOSX;
+                            ext = ".app";
+                            // Macの場合は対象CPUアーキテクチャを設定する
+                            PlayerSettings.SetArchitecture(BuildTargetGroup.Standalone, 1);
+                            break;
+                            
                     }
                     break;
                 default:
