@@ -1,4 +1,3 @@
-using System.Threading;
 using UnityEngine;
 using Random = System.Random;
 
@@ -14,7 +13,6 @@ public class BossBear : EnemyBase, IPlayerTarget
     [SerializeField, Header("突進時の移動距離")] private float _rushDistance;
     [SerializeField, Header("突進時のスピード")] private float _rushSpeed;
     
-    private CancellationToken _token;
     private ParticleSystem _particle;
     private Animator _animator;
     private GameObject _attackCollider;
@@ -33,7 +31,7 @@ public class BossBear : EnemyBase, IPlayerTarget
         _animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
         
         _walkState = new EnemyWalkState(this, _animator, transform, _speed, _patrolArea);
-        _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime, _token);
+        _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _attackState = new EnemyAttackState(this, _freezeState, _animator, _attackCollider);
         _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, _animator, transform, _jumpSpeed, _animationCurve);
         _rushState = new EnemyRushState(this, _freezeState, _animator, transform, _rushDistance, _rushSpeed);
