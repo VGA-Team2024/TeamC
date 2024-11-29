@@ -1,5 +1,3 @@
-using System.Threading;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 /// <summary> 循環のみする敵 </summary>
@@ -10,7 +8,6 @@ public class WalkBlockDwarf : EnemyBase
     [SerializeField, Header("Playerにぶつかった後止まる時間")] private int _freezeTime;
     [SerializeField, Header("Playerに与えるダメージ量")] private int _damage;
 
-    private CancellationToken _token;
     private ParticleSystem _particle;
     private Animator _animator;
 
@@ -20,12 +17,11 @@ public class WalkBlockDwarf : EnemyBase
     
     protected override void OnStart()
     {
-        _token = this.GetCancellationTokenOnDestroy();
         _particle = gameObject.transform.GetChild(0).GetComponent<ParticleSystem>();
         _animator = GetComponent<Animator>();
 
         _walkState = new EnemyWalkState(this, _animator, transform, _speed, _patrolArea);
-        _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime, _token);
+        _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _deathState = new EnemyDeathState(this, _particle, gameObject);
         ChangeState(_walkState);
     }

@@ -1,4 +1,3 @@
-using System.Threading;
 using UnityEngine;
 
 /// <summary> ある範囲に入ったら突進する敵 </summary>
@@ -11,7 +10,6 @@ public class RushNormalBear : EnemyBase, IPlayerTarget
     [SerializeField, Header("突進時の移動距離")] private float _rushDistance;
     [SerializeField, Header("突進時のスピード")] private float _rushSpeed;
     
-    private CancellationToken _token;
     private ParticleSystem _particle;
     private Animator _animator;
 
@@ -26,13 +24,15 @@ public class RushNormalBear : EnemyBase, IPlayerTarget
         _animator = gameObject.transform.GetChild(2).GetComponent<Animator>();
         
         _walkState = new EnemyWalkState(this, _animator, transform, _speed, _patrolArea);
-        _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime, _token);
+        _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _rushState = new EnemyRushState(this, _freezeState, _animator, transform, _rushDistance, _rushSpeed);
         _deathState = new EnemyDeathState(this, _particle, gameObject);
     }
 
     protected override void OnUpdate()
     {
+        if (_isDeath) return;
+        
         if (_playerMove)
         {
             if (_currentState == _rushState || _currentState == _freezeState) return;

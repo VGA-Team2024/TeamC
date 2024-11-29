@@ -12,7 +12,8 @@ jobs:
     steps:
       - name: Build
         # 指定したcmdファイルを実行する
-        run: ${{ secrets.UNITY_BUILD_PATH }}\team-c-build.cmd
+        run: cmd /c ${{ secrets.UNITY_BUILD_PATH }}\team-c-build.cmd
+        continue-on-error: false
       - name: Discord Failure Post
         if: failure()
         run:
