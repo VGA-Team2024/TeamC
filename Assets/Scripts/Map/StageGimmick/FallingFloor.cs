@@ -3,15 +3,11 @@ using UnityEngine;
 public class FallingFloor : MonoBehaviour
 {
     [SerializeField,InspectorVariantName("落下スピード")] 
-    float _fallingSpeed;
-    
-    bool _isFalling;
-    
-    void Awake()
-    {
-        _isFalling = false;
-    }
-
+    private float _fallingSpeed;
+    [SerializeField, InspectorVariantName("プレイヤーが触れてからオブジェクトが消える時間")]
+    private float _deathTime;
+    //プレイヤーが自身に触れたかの確認用フラグ
+    private bool _isFalling;
     void Update()
     {
         GroundCheck();
@@ -30,7 +26,6 @@ public class FallingFloor : MonoBehaviour
             if (!floorRay.collider.gameObject.CompareTag("Player"))
             {
                 transform.SetParent(null);
-                // Destroy(gameObject);
             }
         }
     }
@@ -49,6 +44,7 @@ public class FallingFloor : MonoBehaviour
         {
             _isFalling = true;
             other.transform.SetParent(transform);
+            Destroy(gameObject,_deathTime);
         }
     }
 

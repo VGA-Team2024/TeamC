@@ -4,7 +4,7 @@ public class JumpingPlatform : MonoBehaviour
 {
     //ジャンプ台
     [SerializeField, InspectorVariantName("ジャンプの強さ")]
-    float _jumpPower;
+    private float _jumpPower;
 
     void OnCollisionEnter(Collision other)
     {
