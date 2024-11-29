@@ -24,5 +24,6 @@ public class Player : MonoBehaviour
         _playerMove = GetComponent<PlayerMove>();
         _playerSounds = GetComponent<PlayerSounds>();
         _playerStatus = GetComponent<PlayerStatus>();
+        _playerAttack = GetComponent<PlayerAttack>();
     }
 }

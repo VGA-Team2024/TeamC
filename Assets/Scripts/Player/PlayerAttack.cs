@@ -61,6 +61,9 @@ public class PlayerAttack : MonoBehaviour
         Vector3 atkPos = _attackCollider.transform.localPosition;
         _attackCollider.transform.localPosition = new Vector3(Mathf.Abs(atkPos.x) * (_player.PlayerMove.PlayerFlip ? 1 : -1),atkPos.y, atkPos.z);
         _attackCollider.SetActive(true);
+        ParticleSystem p = _attackCollider.GetComponent<ParticleSystem>();
+        p.startRotation3D = new Vector3(0,180,0);
+        p.Play();
         // 非アクティブは_attackCollider自身がする
     }
 

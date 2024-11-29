@@ -35,7 +35,7 @@ public class SpecialAttack : MonoBehaviour
     private void OnEnable()
     {
         //位置の固定
-        _player.PlayerMove.IsFreeze = true;
+        _player.PlayerMove.IsFreeze = (true,true);
         //音の再生
         _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.ThrowNeedle);
         // 針の向きの見た目の変更
@@ -48,7 +48,7 @@ public class SpecialAttack : MonoBehaviour
 
     private void OnDisable()
     {
-        _player.PlayerMove.IsFreeze = false;
+        _player.PlayerMove.IsFreeze = (false , false);
         _twForward.Kill();
         _twBack.Kill();
     }
@@ -69,7 +69,7 @@ public class SpecialAttack : MonoBehaviour
                     => _currentPos = x,
                 0, time
             ).OnUpdate(() => transform.transform.localPosition = _dir * _currentPos + _originLocalPos)
-            .OnComplete(() =>
+            .OnComplete(() => 
             {
                 this.gameObject.SetActive(false);
             }).SetEase(_returnEase);
@@ -85,7 +85,7 @@ public class SpecialAttack : MonoBehaviour
             _twForward.Kill(false);
             this.gameObject.SetActive(false);
         }
-        else
+        else if(other.isTrigger == false)
         {// テレポート対象以外に当たる
             _twForward.Kill(false);
             NeedleBackMove(_currentPos,_currentPos / _range * _returnTimer);

@@ -1,8 +1,10 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class PlayerStatus : MonoBehaviour,IDamageable
+public class PlayerStatus : MonoBehaviour, IDamageable
 {
+    private static readonly int Damage = Animator.StringToHash("Damage");
+
     [SerializeField, InspectorVariantName("最大体力")]
     private int _maxHP = 5;
     [SerializeField, InspectorVariantName("現在体力")] 
@@ -11,6 +13,8 @@ public class PlayerStatus : MonoBehaviour,IDamageable
     PlayerHealthUI healthUI;
     [SerializeField, InspectorVariantName("最大妖精ゲージ")] 
     private int _fairyGauge = 600;
+    [SerializeField, InspectorVariantName("吹き飛ぶ向き")]
+    private Vector2 _knockBackDirection = new Vector2(1, 0.5f);
     [SerializeField, InspectorVariantName("ダメージを受けた時に吹き飛ぶ力")] 
     private float _knockBackPower = 20;
 
@@ -37,20 +41,18 @@ public class PlayerStatus : MonoBehaviour,IDamageable
 
     public void TakeDamage(int damage)
     {
-        Debug.Log($"プレイヤーが{damage}ダメージ受けた");
         // 無敵のレイヤーに変更
         gameObject.layer = LayerMask.NameToLayer(_godModeLayerName);
         //アニメーションの変更
-        _player.Animator.SetTrigger("Damage");
+        _player.Animator.SetTrigger(Damage);
         //集中線パーティクルをPlay
         Camera.main.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         //画面を揺らす
         _impulseSource.GenerateImpulse();
         //プレイヤーを操作不能に
-        _player.PlayerMove.IsMove = false;
+        _player.PlayerMove.IsFreeze = (true,true);
         //プレイヤーを後ろに吹き飛ばす
-        _rb.velocity = Vector3.zero;
-        _rb.AddForce(new Vector3((!_player.PlayerMove.PlayerFlip ? 1 : -1), 0.3f, 0) * _knockBackPower, ForceMode.Impulse);
+        _rb.AddForce(new Vector2((!_player.PlayerMove.PlayerFlip ? 1 : -1) *_knockBackDirection.x, _knockBackDirection.y) * _knockBackPower, ForceMode.Impulse);
         //体力を減らす
         _currentHP -= damage;
         //UIの更新
@@ -74,6 +76,6 @@ public class PlayerStatus : MonoBehaviour,IDamageable
     async void IsControl()
     {
         await UniTask.Delay((int)(_NoMoveTime*1000));
-        _player.PlayerMove.IsMove = true;
+        _player.PlayerMove.IsFreeze = (false,false);
     }
 }
