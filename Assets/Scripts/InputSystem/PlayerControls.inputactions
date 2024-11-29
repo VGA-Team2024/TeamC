@@ -49,6 +49,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MusicBox",
+                    "type": "Button",
+                    "id": "21bac966-a7f0-4916-9f94-4932285ffc87",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.4,pressPoint=0.5)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LongRangeAttack",
+                    "type": "Button",
+                    "id": "67e4d550-bcb6-406e-9dec-63a6117a8b7b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -186,17 +204,6 @@
                 },
                 {
                     "name": "",
-                    "id": "cc951d4a-5f36-4e3f-9044-9d49176f7f29",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";KB&Mouse",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "a335de07-fe4d-46de-b762-09898601cfa2",
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
@@ -214,6 +221,61 @@
                     "processors": "",
                     "groups": ";GamePad",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cc951d4a-5f36-4e3f-9044-9d49176f7f29",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KB&Mouse",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0ed18439-9c74-4f40-bbe7-1465f3937457",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";GamePad",
+                    "action": "MusicBox",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "71aee298-9b01-472f-94b5-3150b94561b4",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KB&Mouse",
+                    "action": "MusicBox",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3e98bc25-8d3a-4772-9ee5-8f1038b32e5e",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";GamePad",
+                    "action": "LongRangeAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8c005310-8e6f-4fe0-957d-d8995fccefc4",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KB&Mouse",
+                    "action": "LongRangeAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
