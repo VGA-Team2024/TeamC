@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 /// <summary> 敵の突進ステート </summary>
@@ -11,6 +12,7 @@ public class EnemyRushState : IEnemyState
     private readonly float _distance;
     private readonly float _speed;
     private float _destination;
+    private bool _canRush;
 
     public EnemyRushState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator,Transform transform, float dis, float speed)
     {
@@ -25,12 +27,12 @@ public class EnemyRushState : IEnemyState
     public void Enter()
     {
         _destination = _transform.position.x + _transform.right.x * _distance;
-        if (_animator) _animator.SetTrigger(_rush);
+        Set().Forget();
     }
 
     public void Execute()
     {
-        Rush();
+        if (_canRush) Rush();
         if (Mathf.Abs(_transform.position.x - _destination) < 0.1f)
         {
             _enemyBase.ChangeState(_freezeState);
@@ -39,11 +41,19 @@ public class EnemyRushState : IEnemyState
 
     public void Exit()
     {
-        
+        if (_animator) _animator.SetBool(_rush, false);
     }
     
-    private void Rush()
+    private async UniTask Set()
     {
+        _canRush = false;
+        if (_animator) _animator.SetBool(_rush, true);
+        await UniTask.WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).IsName("Rush2"));
+        _canRush = true;
+    }
+
+    private void Rush()
+    { 
         _transform.Translate(Vector3.right * (Time.deltaTime * _speed));
     }
 }
