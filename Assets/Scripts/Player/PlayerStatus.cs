@@ -50,7 +50,8 @@ public class PlayerStatus : MonoBehaviour, IDamageable
         //画面を揺らす
         _impulseSource.GenerateImpulse();
         //プレイヤーを操作不能に
-        _player.PlayerMove.IsFreeze = (true,true);
+        _player.PlayerMove.IsMove = false;
+        _rb.velocity = Vector3.zero;
         //プレイヤーを後ろに吹き飛ばす
         _rb.AddForce(new Vector2((!_player.PlayerMove.PlayerFlip ? 1 : -1) *_knockBackDirection.x, _knockBackDirection.y) * _knockBackPower, ForceMode.Impulse);
         //体力を減らす
@@ -76,6 +77,6 @@ public class PlayerStatus : MonoBehaviour, IDamageable
     async void IsControl()
     {
         await UniTask.Delay((int)(_NoMoveTime*1000));
-        _player.PlayerMove.IsFreeze = (false,false);
+        _player.PlayerMove.IsMove = true;
     }
 }

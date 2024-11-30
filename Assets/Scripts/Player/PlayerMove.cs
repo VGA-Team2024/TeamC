@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
-using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,9 +15,9 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     private static readonly int MusicBox = Animator.StringToHash("MusicBox");
 
     private Vector2 _dir; //ActionMapのMoveの値を保存するVector2
-    [SerializeField, InspectorVariantName("プレイヤーの移動速度")] private float _moveSpeed = 2;
-    [SerializeField, InspectorVariantName("プレイヤーダッシュ時間")] private float _dashTime = 10;
-    [SerializeField, InspectorVariantName("プレイヤーダッシュ速度")] private float _dashSpeed = 2;
+    [SerializeField, InspectorVariantName("プレイヤーの移動速度")] private float _moveSpeed = 20;
+    [SerializeField, InspectorVariantName("プレイヤーダッシュ時間")] private float _dashTime = 0.2f;
+    [SerializeField, InspectorVariantName("プレイヤーダッシュ速度")] private float _dashSpeed = 60;
     [SerializeField, InspectorVariantName("プレイヤーのジャンプ力")] private float _jumpPower = 5;
     [SerializeField, InspectorVariantName("ジャンプを長押しできる時間")] private float _jumpTime = 0.5f;
     [SerializeField, InspectorVariantName("ジャンプ長押し中の重力")] private float _jumpPressGravity = 5;
@@ -58,9 +56,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     //重力状態のEnum
     GravityEnum _gravityEnum = GravityEnum.JumpDown;
 
-    private readonly ReactiveProperty<bool> _musicBoxPlaying = new ReactiveProperty<bool>();
-    
-    private CancellationTokenSource _tokenSource = new CancellationTokenSource();
+    private CancellationTokenSource _jumpCancelToken = new CancellationTokenSource();
     
     private void Awake()
     {
@@ -103,19 +99,6 @@ public class PlayerMove : MonoBehaviour, ITeleportable
             _sr = GetComponent<SpriteRenderer>();
         _player = GetComponent<Player>();
         
-        _musicBoxPlaying.Subscribe(b =>
-        {
-            Debug.Log($"now {_musicBoxPlaying.Value} : new {b}");
-            if (b == true)
-            {
-                MusicBoxHeal();
-            }
-            else
-            {
-                _tokenSource.Cancel();
-            }
-            _player.Animator.SetBool(MusicBox, b);
-        }).AddTo(this);
     }
 
     private void FixedUpdate()
@@ -150,7 +133,8 @@ public class PlayerMove : MonoBehaviour, ITeleportable
 
     private async void OnJump(InputAction.CallbackContext context)
     {
-        _tokenSource = new();
+        if(!_isMove) return;
+        _jumpCancelToken = new();
         // 地面についているかの判定
         if (_isGround)
         {
@@ -159,19 +143,22 @@ public class PlayerMove : MonoBehaviour, ITeleportable
             _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.Jump);
             try
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(_jumpTime), cancellationToken: _tokenSource.Token);
+                await UniTask.Delay(TimeSpan.FromSeconds(_jumpTime), cancellationToken: _jumpCancelToken.Token);
                 _gravityEnum = GravityEnum.JumpDown;
             }
-            catch (OperationCanceledException e)
-            {
-                _gravityEnum = GravityEnum.JumpDown;
-            }
+            catch (OperationCanceledException e) { }
         }
     }
     private void JumpCancel(InputAction.CallbackContext context)
     {
-        _tokenSource.Cancel();
-        _tokenSource.Dispose();
+        if (_jumpCancelToken != null)
+        {
+            _jumpCancelToken.Cancel();
+            _jumpCancelToken.Dispose();
+            _jumpCancelToken = null;
+        }
+        if(_gravityEnum == GravityEnum.JumpUp)
+            _gravityEnum = GravityEnum.JumpDown;
     }
 
     // ActionMapのMove
@@ -187,26 +174,24 @@ public class PlayerMove : MonoBehaviour, ITeleportable
 
     private async void OnDash(InputAction.CallbackContext context)
     {
-        if (Mathf.Abs(_dir.x) > 0)
+        if (Mathf.Abs(_dir.x) > 0 && _isMove)
         {
-            _tokenSource.Cancel();
-            _tokenSource.Dispose();
-            _tokenSource = new CancellationTokenSource();
+            if (_jumpCancelToken != null)
+            {
+                _jumpCancelToken.Cancel();
+                _jumpCancelToken.Dispose();
+                _jumpCancelToken = null;
+            }
+            _jumpCancelToken = new CancellationTokenSource();
             IsFreeze = (true, true);
             _rb.velocity = new Vector3(_dir.x * _dashSpeed, 0, 0);
-            await UniTask.Delay(TimeSpan.FromSeconds(_dashTime), cancellationToken: _tokenSource.Token);
+            await UniTask.Delay(TimeSpan.FromSeconds(_dashTime));
             IsFreeze = (false, false);
         }
     }
     private void MusicBoxPlay(InputAction.CallbackContext context)
     {
-        _musicBoxPlaying.Value = true;
-    }
-
-    private async void MusicBoxHeal()
-    {
-        _tokenSource = new CancellationTokenSource();
-        await UniTask.Delay(TimeSpan.FromSeconds(_jumpTime), cancellationToken: _tokenSource.Token);
+        Debug.Log("Hold");
     }
     
     void Gravity()

@@ -1,18 +1,23 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class PlayerAttack : MonoBehaviour
 {
     private readonly int Attack = Animator.StringToHash("Attack");
     private PlayerControls _controls;
     private Player _player;
-    [SerializeField, InspectorVariantName("通常攻撃の攻撃判定")] 
+    [SerializeField, InspectorVariantName("通常攻撃のゲームオブジェクト")] 
     private GameObject _attackCollider;
-    [SerializeField, InspectorVariantName("特殊攻撃の攻撃判定")] 
+    [SerializeField, InspectorVariantName("特殊攻撃のゲームオブジェクト")] 
     private GameObject _specialCollider;
+    [SerializeField, InspectorVariantName("遠距離攻撃のプレハブ")]
+    private GameObject _rangeCollider;
+
+    [SerializeField, InspectorVariantName("遠距離攻撃速度")]
+    private float _rangeAttackSpeed = 10;
     private bool _attackAnimTrigger;
+
+    private bool MusicBoxPlaying;
 
     private void Awake()
     {
@@ -21,15 +26,19 @@ public class PlayerAttack : MonoBehaviour
         _controls.InGame.Attack.started += OnAttack;
         _controls.InGame.Attack.canceled += AttackCancel;
         _controls.InGame.SpecialAttack.started += OnSpecialAttack;
+        _controls.InGame.LongRangeAttack.canceled += OnLongRangeAttack;
+        _controls.InGame.MusicBox.performed += ((c) => MusicBoxPlaying = true);
         _player.AnimationEvent.EventDictionary.Add("Attack" ,AttackColliderSetActive);
     }
-
+    
     private void OnDestroy()
     {
         _controls.Dispose();
         _controls.InGame.Attack.started -= OnAttack;
         _controls.InGame.Attack.canceled -= AttackCancel;
         _controls.InGame.SpecialAttack.started -= OnSpecialAttack;
+        _controls.InGame.LongRangeAttack.canceled -= OnLongRangeAttack;
+        _controls.InGame.MusicBox.performed -= ((c) => MusicBoxPlaying = true);
     }
 
     private void OnEnable()
@@ -62,7 +71,8 @@ public class PlayerAttack : MonoBehaviour
         _attackCollider.transform.localPosition = new Vector3(Mathf.Abs(atkPos.x) * (_player.PlayerMove.PlayerFlip ? 1 : -1),atkPos.y, atkPos.z);
         _attackCollider.SetActive(true);
         ParticleSystem p = _attackCollider.GetComponent<ParticleSystem>();
-        p.startRotation3D = new Vector3(0,180,0);
+        var mainModule = p.main;
+        mainModule.startRotationYMultiplier = _player.PlayerMove.PlayerFlip ? 1 : -1;
         p.Play();
         // 非アクティブは_attackCollider自身がする
     }
@@ -78,5 +88,18 @@ public class PlayerAttack : MonoBehaviour
     {
         //攻撃食らい時などにキャンセルする
         _specialCollider.SetActive(false);
+    }
+
+    private void OnLongRangeAttack(InputAction.CallbackContext context)
+    {
+        if (!MusicBoxPlaying)
+        {
+            GameObject g = Instantiate(_rangeCollider);
+            g.transform.up = new Vector3(_player.PlayerMove.PlayerFlip ? 1 : -1, 0, 0);
+            g.transform.position = this.gameObject.transform.position;
+            g.GetComponent<Rigidbody>().velocity = g.transform.up * _rangeAttackSpeed;
+            Destroy(g, 5f);
+        }
+        MusicBoxPlaying = false;
     }
 }
