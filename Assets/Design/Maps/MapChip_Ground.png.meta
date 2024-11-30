@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c8bde0e436748d1469ef95e3bf402cea
+guid: 16ddf1720b135084d9d556af83a8131a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,30 +93,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Img_BackGround_Forest03_0
+      name: MapChip_Ground_0
       rect:
         serializedVersion: 2
-        x: 351
-        y: 417
-        width: 133
-        height: 117
+        x: 45
+        y: 200
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,41 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93ba986071ec0a742bf80614bc347bb1
-      internalID: 212295635
+      spriteID: 663522a5ed5bda148a12ffa18c535253
+      internalID: 1729685872
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Img_BackGround_Forest03_1
+      name: MapChip_Ground_1
       rect:
         serializedVersion: 2
-        x: 973
-        y: 453
-        width: 126
-        height: 147
-      alignment: 9
-      pivot: {x: 0.4698324, y: 0.5436543}
-      border: {x: 126, y: 0, z: 0, w: 3}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 37d37f723f704d848b965d4043005c54
-      internalID: 738788552
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Img_BackGround_Forest03_2
-      rect:
-        serializedVersion: 2
-        x: 1189
-        y: 194
-        width: 144
-        height: 136
+        x: 145
+        y: 200
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95610314511277943bad33641724b2f3
-      internalID: 1774110454
+      spriteID: 9d95de61644d571469ffcab8f69bd461
+      internalID: 1531891922
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Img_BackGround_Forest03_3
+      name: MapChip_Ground_2
       rect:
         serializedVersion: 2
-        x: 16
-        y: 41
-        width: 464
-        height: 264
+        x: 245
+        y: 200
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eea8013ed85e10d4ba8a5a9704f31b6b
-      internalID: -147368156
+      spriteID: ec11b804197fa2544a929be941216a0e
+      internalID: -127840121
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Img_BackGround_Forest03_4
+      name: MapChip_Ground_3
       rect:
         serializedVersion: 2
-        x: 549
-        y: 35
-        width: 106
-        height: 178
+        x: 345
+        y: 200
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e003e20edae8db4fb2bf66e9710b3bd
-      internalID: -1506719963
+      spriteID: aa2e0a0eb68bded4ea9055053e371b5c
+      internalID: -499889860
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Img_BackGround_Forest03_5
+      name: MapChip_Ground_4
       rect:
         serializedVersion: 2
-        x: 704
-        y: 35
-        width: 112
-        height: 162
+        x: 445
+        y: 200
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,20 +195,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 41c8f2afd31df1b4083901c8d35bc4cd
-      internalID: -208810724
+      spriteID: 2dfcd3501499a1f4e903dc74ea0d4e25
+      internalID: -1365800429
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Img_BackGround_Forest03_6
+      name: MapChip_Ground_5
       rect:
         serializedVersion: 2
-        x: 686
-        y: 459
-        width: 136
-        height: 130
+        x: 45
+        y: 100
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,20 +216,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8322be3a369db1c42b6323d7b93c4907
-      internalID: -1997269774
+      spriteID: 6c4ffa67ea67c264c9e311740d8a93b3
+      internalID: -307533220
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Img_BackGround_Forest03_7
+      name: MapChip_Ground_6
       rect:
         serializedVersion: 2
-        x: 900
-        y: 115
-        width: 83
-        height: 85
+        x: 145
+        y: 100
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,20 +237,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f52537aec6e5b6c4988981e8a6de8cf8
-      internalID: 1747543192
+      spriteID: 71c35758d09aaff45b205958919dcda5
+      internalID: -1343167098
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Img_BackGround_Forest03_8
+      name: MapChip_Ground_7
       rect:
         serializedVersion: 2
-        x: 974
-        y: 113
-        width: 59
-        height: 56
+        x: 245
+        y: 100
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,20 +258,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58c45edfa32d77642a34b1184ba5ad73
-      internalID: -223451315
+      spriteID: df9f0b4778647674caef09e8ce52475a
+      internalID: 1899162126
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Img_BackGround_Forest03_9
+      name: MapChip_Ground_8
       rect:
         serializedVersion: 2
-        x: 1040
-        y: 105
-        width: 46
-        height: 41
+        x: 345
+        y: 100
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,20 +279,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36ca6ef12c044a7418dc20b5322c4f81
-      internalID: 836698531
+      spriteID: dc528d6f715295140ba50e8b32bf7fc1
+      internalID: 728224893
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Img_BackGround_Forest03_10
+      name: MapChip_Ground_9
       rect:
         serializedVersion: 2
-        x: 40
-        y: 398
-        width: 336
-        height: 177
+        x: 445
+        y: 100
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -334,20 +300,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8abbbb2b2dab674287679b7e63632eb
-      internalID: 199237974
+      spriteID: 84c08da8226151e4b89ebdb5413b0704
+      internalID: -1275891359
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Img_BackGround_Forest03_11
+      name: MapChip_Ground_10
       rect:
         serializedVersion: 2
-        x: 545
-        y: 461
-        width: 136
-        height: 130
+        x: 45
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -355,20 +321,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a5fcf600b243ed459c933456de316f7
-      internalID: 880096737
+      spriteID: 83642e08acec6644b93e1001c58398b0
+      internalID: 412208481
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Img_BackGround_Forest03_12
+      name: MapChip_Ground_11
       rect:
         serializedVersion: 2
-        x: 549
-        y: 327
-        width: 136
-        height: 130
+        x: 145
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -376,20 +342,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62f7f2cffa815c04bbf3c88deb41d5ba
-      internalID: 590236736
+      spriteID: 67b04b97786a0fd429e5cc66310e4ca8
+      internalID: 1213342040
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Img_BackGround_Forest03_13
+      name: MapChip_Ground_12
       rect:
         serializedVersion: 2
-        x: 966
-        y: 323
-        width: 144
-        height: 130
+        x: 245
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -397,20 +363,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1045e79a7ca1d1a4e97c5bfe5694d9c7
-      internalID: 1033757129
+      spriteID: fd544dd3379be224a80f5c057bfa8445
+      internalID: 488105237
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Img_BackGround_Forest03_14
+      name: MapChip_Ground_13
       rect:
         serializedVersion: 2
-        x: 31
-        y: 428
-        width: 129
-        height: 112
+        x: 345
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -418,8 +384,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62a1468a59801404e91be3096465adbd
-      internalID: -1438856085
+      spriteID: 8970b35bb6a97174e9c7abdf78d891ea
+      internalID: 351356050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_14
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dbcf0cfbf137b64590241e80ef36e3b
+      internalID: 634281301
       vertices: []
       indices: 
       edges: []
@@ -427,7 +414,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5fc050ac8033a1b4682a2ad85a54c8d8
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -435,21 +422,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Img_BackGround_Forest03_0: 212295635
-      Img_BackGround_Forest03_1: 738788552
-      Img_BackGround_Forest03_10: 199237974
-      Img_BackGround_Forest03_11: 880096737
-      Img_BackGround_Forest03_12: 590236736
-      Img_BackGround_Forest03_13: 1033757129
-      Img_BackGround_Forest03_14: -1438856085
-      Img_BackGround_Forest03_2: 1774110454
-      Img_BackGround_Forest03_3: -147368156
-      Img_BackGround_Forest03_4: -1506719963
-      Img_BackGround_Forest03_5: -208810724
-      Img_BackGround_Forest03_6: -1997269774
-      Img_BackGround_Forest03_7: 1747543192
-      Img_BackGround_Forest03_8: -223451315
-      Img_BackGround_Forest03_9: 836698531
+      MapChip_Ground_0: 1729685872
+      MapChip_Ground_1: 1531891922
+      MapChip_Ground_10: 412208481
+      MapChip_Ground_11: 1213342040
+      MapChip_Ground_12: 488105237
+      MapChip_Ground_13: 351356050
+      MapChip_Ground_14: 634281301
+      MapChip_Ground_2: -127840121
+      MapChip_Ground_3: -499889860
+      MapChip_Ground_4: -1365800429
+      MapChip_Ground_5: -307533220
+      MapChip_Ground_6: -1343167098
+      MapChip_Ground_7: 1899162126
+      MapChip_Ground_8: 728224893
+      MapChip_Ground_9: -1275891359
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
