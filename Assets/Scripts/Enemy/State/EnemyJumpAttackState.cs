@@ -27,7 +27,7 @@ public class EnemyJumpAttackState : IEnemyState
     
     public void Enter()
     {
-        if (_animator) _animator.SetTrigger(_jump);
+        if (_animator) _animator.SetBool(_jump, true);
         _startPos = _transform.position;
         _positionX = 0f;
     }
@@ -44,7 +44,7 @@ public class EnemyJumpAttackState : IEnemyState
 
     public void Exit()
     {
-        
+        if (_animator) _animator.SetBool(_jump, false);
     }
     
     private void Attack()

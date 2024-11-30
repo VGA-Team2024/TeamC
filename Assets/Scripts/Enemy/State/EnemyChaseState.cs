@@ -31,12 +31,6 @@ public class EnemyChaseState : IEnemyState
             Vector2.MoveTowards(_transform.position, _isFly ? _playerPos : new Vector2(_playerPos.x, _transform.position.y), _speed * Time.deltaTime);
 
         Direction();
-        
-        if (_isFly)
-        {
-            var dir = (Vector2)_transform.position - _playerPos;
-            _transform.rotation = Quaternion.FromToRotation(Vector2.left, dir);
-        }
     }
 
     public void Exit()
@@ -51,6 +45,6 @@ public class EnemyChaseState : IEnemyState
 
     private void Direction()
     {
-        _transform.eulerAngles = new Vector2(0, _playerPos.x > _transform.position.x ? 0 : 180);
+        _transform.eulerAngles = new Vector2(0, _playerPos.x > _transform.position.x ? 180 : 0);
     }
 }

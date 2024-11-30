@@ -11,7 +11,7 @@ public class EnemyWalkState : IEnemyState
     private readonly float _patrolArea;
     private readonly Vector2 _startPos;
     
-    private readonly float _rayLength = 2.5f;
+    private readonly float _rayLength;
     private readonly Vector3 _rayOffset = new Vector3(0, -0.5f, 0);
     private readonly Vector2 _rightDir = new Vector2(1, -1).normalized;
     private readonly Vector2 _leftDir = new Vector2(-1, -1).normalized;
@@ -24,6 +24,7 @@ public class EnemyWalkState : IEnemyState
         _startPos = transform.position;
         _speed = speed;
         _patrolArea = area;
+        _rayLength = transform.gameObject.GetComponent<BoxCollider>().size.y / 2 + 1f;
     }
     
     
