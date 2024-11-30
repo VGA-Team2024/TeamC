@@ -1,8 +1,8 @@
 using UniRx;
 using UnityEngine;
 
-/// <summary> トリガーに入ったときにテキストを表示する </summary>
-public class InteractText : MonoBehaviour
+/// <summary> OnTriggerEventを付けた対象がトリガーに入ったときにオブジェクトを表示する </summary>
+public class ObjectActivateTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject _interactText;
     
@@ -18,7 +18,7 @@ public class InteractText : MonoBehaviour
         {
             if (collider == _collider)
             {
-                ShowInteractText();
+                ShowObject();
             }
         }).AddTo(this);
 
@@ -26,17 +26,17 @@ public class InteractText : MonoBehaviour
         {
             if (collider == _collider)
             {
-                HideInteractText();
+                HideObject();
             }
         }).AddTo(this);
     }
 
-    private void ShowInteractText()
+    private void ShowObject()
     {
         _interactText.SetActive(true);
     }
 
-    private void HideInteractText()
+    private void HideObject()
     {
         for (var i = 0; i < transform.childCount; i++)
         {
