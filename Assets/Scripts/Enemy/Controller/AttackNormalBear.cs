@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Threading;
 
 /// <summary> ある範囲に入ったら攻撃をする敵 </summary>
 public class AttackNormalBear : EnemyBase, IPlayerTarget
@@ -9,7 +8,6 @@ public class AttackNormalBear : EnemyBase, IPlayerTarget
     [SerializeField, Header("Playerを攻撃した後次の攻撃が可能になるまでの時間")] private int _freezeTime;
     [SerializeField, Header("Playerにつけるタグの名前")] private string _playerTag;
     
-    private CancellationToken _token;
     private ParticleSystem _particle;
     private Animator _animator;
     private GameObject _attackCollider;
@@ -26,7 +24,7 @@ public class AttackNormalBear : EnemyBase, IPlayerTarget
         _animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
         
         _walkState = new EnemyWalkState(this, _animator, transform, _speed, _patrolArea);
-        _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime, _token);
+        _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _attackState = new EnemyAttackState(this, _freezeState, _animator, _attackCollider);
         _deathState = new EnemyDeathState(this, _particle, gameObject);
     }

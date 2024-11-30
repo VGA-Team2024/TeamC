@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8694005569523183131}
   - component: {fileID: 9218342755475955149}
   - component: {fileID: 1632506249848366843}
-  - component: {fileID: -1989151744254486995}
   - component: {fileID: 6499533942196962358}
   m_Layer: 0
   m_Name: WarpTotem
@@ -66,18 +65,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d60dadf994e73c944ba2dd9912e14bbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-1989151744254486995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9030191122337408985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e2fd8f18f966e34eb3bd1febd0db993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &6499533942196962358
