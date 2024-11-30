@@ -22,12 +22,9 @@ public class BossBear : EnemyBase, IPlayerTarget
     private int[] _disCWeights = new int[3];
     [SerializeField, Header("歩行->攻撃時に距離Bにいたときの攻撃のそれぞれの確率")]
     private int[] _walkBWeights = new int[3];
-    
-    private ParticleSystem _particle;
-    private Animator _animator;
-    private GameObject _attackCollider;
-    private Cottons _cottons;
 
+    private Cottons _cottons;
+    
     private EnemyWalkState _walkState;
     private EnemyAttackState _attackState;
     private EnemyJumpAttackState _jumpAttackState;
@@ -38,18 +35,18 @@ public class BossBear : EnemyBase, IPlayerTarget
     
     protected override void OnStart()
     {
-        _particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
-        _attackCollider = gameObject.transform.GetChild(2).gameObject;
-        _animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
+        ParticleSystem particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
+        GameObject attackCollider = gameObject.transform.GetChild(2).gameObject;
+        Animator animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
         _cottons = gameObject.transform.GetChild(4).GetComponent<Cottons>();
         
-        _walkState = new EnemyWalkState(this, _animator, transform, _speed, _patrolArea);
+        _walkState = new EnemyWalkState(this, animator, transform, _speed, _patrolArea);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
-        _attackState = new EnemyAttackState(this, _freezeState, _animator, _attackCollider);
-        _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, _animator, transform, _jumpSpeed, _animationCurve);
-        _rushState = new EnemyRushState(this, _freezeState, _animator, transform, _rushDistance, _rushSpeed);
-        _createState = new EnemyObjectCreateState(this, _freezeState,_animator, _cottons);
-        _deathState = new EnemyDeathState(this, _particle, gameObject);
+        _attackState = new EnemyAttackState(this, _freezeState, animator, attackCollider);
+        _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, animator, transform, _jumpSpeed, _animationCurve);
+        _rushState = new EnemyRushState(this, _freezeState, animator, transform, _rushDistance, _rushSpeed);
+        _createState = new EnemyObjectCreateState(this, _freezeState, animator, _cottons);
+        _deathState = new EnemyDeathState(this, particle, gameObject);
     }
 
     protected override void OnUpdate()
