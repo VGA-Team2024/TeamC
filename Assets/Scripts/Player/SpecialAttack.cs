@@ -34,8 +34,6 @@ public class SpecialAttack : MonoBehaviour
 
     private void OnEnable()
     {
-        //位置の固定
-        _player.PlayerMove.IsFreeze = (true,true);
         //音の再生
         _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.ThrowNeedle);
         // 針の向きの見た目の変更

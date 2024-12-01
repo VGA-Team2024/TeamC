@@ -45,6 +45,8 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     private bool _isMove = true; //移動不可状態の判定
     public bool IsMove { set => _isMove = value; }
 
+    private bool _dashing;
+    public bool Dashing { get => _dashing; }
     private int _jumpCount;
     //　移動量、重力無効化
     public (bool value, bool VelocityZero) IsFreeze {
@@ -181,7 +183,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
 
     private async void OnDash(InputAction.CallbackContext context)
     {
-        if (Mathf.Abs(_dir.x) > 0 && _isMove)
+        if (_isMove)
         {
             if (_jumpCancelToken != null)
             {
@@ -189,11 +191,14 @@ public class PlayerMove : MonoBehaviour, ITeleportable
                 _jumpCancelToken.Dispose();
                 _jumpCancelToken = null;
             }
+
+            _dashing = true;
             _jumpCancelToken = new CancellationTokenSource();
             IsFreeze = (true, true);
-            _rb.velocity = new Vector3(_dir.x * _dashSpeed, 0, 0);
+            _rb.velocity = new Vector3((_dirRight ? 1 : -1) * _dashSpeed, 0, 0);
             await UniTask.Delay(TimeSpan.FromSeconds(_dashTime));
             IsFreeze = (false, false);
+            _dashing = false;
         }
     }
     private void MusicBoxPlay(InputAction.CallbackContext context)
