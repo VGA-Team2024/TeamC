@@ -21,7 +21,7 @@ public class PlayerAttack : MonoBehaviour
     private float _lifeTime = 5;
     private bool _attackAnimTrigger;
 
-    private bool MusicBoxPlaying;
+    private bool _musicBoxPlaying;
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
         _controls.InGame.Attack.canceled += AttackCancel;
         _controls.InGame.SpecialAttack.started += OnSpecialAttack;
         _controls.InGame.LongRangeAttack.canceled += OnLongRangeAttack;
-        _controls.InGame.MusicBox.performed += ((c) => MusicBoxPlaying = true);
+        _controls.InGame.MusicBox.performed += ((c) => _musicBoxPlaying = true);
         _player.AnimationEvent.EventDictionary.Add("Attack" ,AttackColliderSetActive);
     }
     
@@ -42,7 +42,7 @@ public class PlayerAttack : MonoBehaviour
         _controls.InGame.Attack.canceled -= AttackCancel;
         _controls.InGame.SpecialAttack.started -= OnSpecialAttack;
         _controls.InGame.LongRangeAttack.canceled -= OnLongRangeAttack;
-        _controls.InGame.MusicBox.performed -= ((c) => MusicBoxPlaying = true);
+        _controls.InGame.MusicBox.performed -= ((c) => _musicBoxPlaying = true);
     }
 
     private void OnEnable()
@@ -96,12 +96,12 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnLongRangeAttack(InputAction.CallbackContext context)
     {
-        if (!MusicBoxPlaying)
+        if (!_musicBoxPlaying)
         {
             // ToDo: AnimationEventで呼ぶようにする
             RangeAttackInstantiate();
         }
-        MusicBoxPlaying = false;
+        _musicBoxPlaying = false;
     }
 
     private void RangeAttackInstantiate()

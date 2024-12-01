@@ -198,6 +198,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     }
     private void MusicBoxPlay(InputAction.CallbackContext context)
     {
+        // ToDo: オルゴールの処理書く
         Debug.Log("心のきれいな人はオルゴールが聞こえます");
     }
     
