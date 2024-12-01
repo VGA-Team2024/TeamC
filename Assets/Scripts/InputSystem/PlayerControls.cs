@@ -71,6 +71,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MusicBox"",
+                    ""type"": ""Button"",
+                    ""id"": ""21bac966-a7f0-4916-9f94-4932285ffc87"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.4,pressPoint=0.5)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LongRangeAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""67e4d550-bcb6-406e-9dec-63a6117a8b7b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -208,17 +226,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""cc951d4a-5f36-4e3f-9044-9d49176f7f29"",
-                    ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";KB&Mouse"",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a335de07-fe4d-46de-b762-09898601cfa2"",
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
@@ -236,6 +243,61 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";GamePad"",
                     ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc951d4a-5f36-4e3f-9044-9d49176f7f29"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KB&Mouse"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ed18439-9c74-4f40-bbe7-1465f3937457"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";GamePad"",
+                    ""action"": ""MusicBox"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""71aee298-9b01-472f-94b5-3150b94561b4"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KB&Mouse"",
+                    ""action"": ""MusicBox"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e98bc25-8d3a-4772-9ee5-8f1038b32e5e"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";GamePad"",
+                    ""action"": ""LongRangeAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8c005310-8e6f-4fe0-957d-d8995fccefc4"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KB&Mouse"",
+                    ""action"": ""LongRangeAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -464,6 +526,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_InGame_Attack = m_InGame.FindAction("Attack", throwIfNotFound: true);
         m_InGame_SpecialAttack = m_InGame.FindAction("SpecialAttack", throwIfNotFound: true);
         m_InGame_Dash = m_InGame.FindAction("Dash", throwIfNotFound: true);
+        m_InGame_MusicBox = m_InGame.FindAction("MusicBox", throwIfNotFound: true);
+        m_InGame_LongRangeAttack = m_InGame.FindAction("LongRangeAttack", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -543,6 +607,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_InGame_Attack;
     private readonly InputAction m_InGame_SpecialAttack;
     private readonly InputAction m_InGame_Dash;
+    private readonly InputAction m_InGame_MusicBox;
+    private readonly InputAction m_InGame_LongRangeAttack;
     public struct InGameActions
     {
         private @PlayerControls m_Wrapper;
@@ -552,6 +618,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_InGame_Attack;
         public InputAction @SpecialAttack => m_Wrapper.m_InGame_SpecialAttack;
         public InputAction @Dash => m_Wrapper.m_InGame_Dash;
+        public InputAction @MusicBox => m_Wrapper.m_InGame_MusicBox;
+        public InputAction @LongRangeAttack => m_Wrapper.m_InGame_LongRangeAttack;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -576,6 +644,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @MusicBox.started += instance.OnMusicBox;
+            @MusicBox.performed += instance.OnMusicBox;
+            @MusicBox.canceled += instance.OnMusicBox;
+            @LongRangeAttack.started += instance.OnLongRangeAttack;
+            @LongRangeAttack.performed += instance.OnLongRangeAttack;
+            @LongRangeAttack.canceled += instance.OnLongRangeAttack;
         }
 
         private void UnregisterCallbacks(IInGameActions instance)
@@ -595,6 +669,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @MusicBox.started -= instance.OnMusicBox;
+            @MusicBox.performed -= instance.OnMusicBox;
+            @MusicBox.canceled -= instance.OnMusicBox;
+            @LongRangeAttack.started -= instance.OnLongRangeAttack;
+            @LongRangeAttack.performed -= instance.OnLongRangeAttack;
+            @LongRangeAttack.canceled -= instance.OnLongRangeAttack;
         }
 
         public void RemoveCallbacks(IInGameActions instance)
@@ -715,6 +795,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnSpecialAttack(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnMusicBox(InputAction.CallbackContext context);
+        void OnLongRangeAttack(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
