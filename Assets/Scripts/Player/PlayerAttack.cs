@@ -83,9 +83,14 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnSpecialAttack(InputAction.CallbackContext context)
     {
-        // 特殊攻撃用当たり判定をアクティブにする
-        _specialCollider.SetActive(true);
-        // 非アクティブは_specialCollider自身がする
+        if (!_player.PlayerMove.Dashing)
+        {
+            // 位置の固定
+            _player.PlayerMove.IsFreeze = (true, true);
+            // 特殊攻撃用当たり判定をアクティブにする
+            _specialCollider.SetActive(true);
+            // 非アクティブは_specialCollider自身がする
+        }
     }
 
     public void SpecialCancel()
