@@ -367,8 +367,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e608c639b663ddf4c996271e0368f666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timer: 1
-  _range: 20
+  _advanceTimer: 0.5
+  _advanceEase: 2
+  _returnTimer: 0.5
+  _returnEase: 2
+  _range: 5
   _hitMisalignment: {x: 0, y: 0.5, z: 0}
 --- !u!135 &3868402752421449017
 SphereCollider:
@@ -451,10 +454,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 20
-  _jumpPower: 24
-  _jumpTime: 0.5
+  _dashTime: 0.2
+  _dashSpeed: 60
+  _firstJumpPower: 30
+  _secondJumpPower: 20
+  _firstJumpTime: 0.5
+  _secondJumpTime: 0.3
   _jumpPressGravity: 9
-  _gravityScale: 60
+  _gravityScale: 170
+  _maxFallingSpeed: 50
   _rayLength: 1.2
   _flipObject: {fileID: 7270975046594281940}
 --- !u!114 &7768347166177622624
@@ -471,7 +479,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHP: 5
   _currentHP: 0
+  healthUI: {fileID: 0}
   _fairyGauge: 600
+  _knockBackDirection: {x: 1, y: 0.5}
   _knockBackPower: 20
   _godTime: 0.6
   _NoMoveTime: 0.5
@@ -490,6 +500,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackCollider: {fileID: 7499795661562170678}
   _specialCollider: {fileID: 5339820357696757217}
+  _rangeCollider: {fileID: 0}
+  _rangeAttackSpeed: 10
+  _lifeTime: 5
 --- !u!65 &985564868485557033
 BoxCollider:
   m_ObjectHideFlags: 0
