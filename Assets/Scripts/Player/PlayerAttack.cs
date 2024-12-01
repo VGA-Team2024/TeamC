@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
@@ -15,6 +16,9 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField, InspectorVariantName("遠距離攻撃速度")]
     private float _rangeAttackSpeed = 10;
+
+    [SerializeField, InspectorVariantName("遠距離攻撃が消えるまでの時間")]
+    private float _lifeTime = 5;
     private bool _attackAnimTrigger;
 
     private bool MusicBoxPlaying;
@@ -94,12 +98,18 @@ public class PlayerAttack : MonoBehaviour
     {
         if (!MusicBoxPlaying)
         {
-            GameObject g = Instantiate(_rangeCollider);
-            g.transform.up = new Vector3(_player.PlayerMove.PlayerFlip ? 1 : -1, 0, 0);
-            g.transform.position = this.gameObject.transform.position;
-            g.GetComponent<Rigidbody>().velocity = g.transform.up * _rangeAttackSpeed;
-            Destroy(g, 5f);
+            // ToDo: AnimationEventで呼ぶようにする
+            RangeAttackInstantiate();
         }
         MusicBoxPlaying = false;
+    }
+
+    private void RangeAttackInstantiate()
+    {
+        GameObject g = Instantiate(_rangeCollider);
+        g.transform.up = new Vector3(_player.PlayerMove.PlayerFlip ? 1 : -1, 0, 0);
+        g.transform.position = this.gameObject.transform.position;
+        g.GetComponent<Rigidbody>().velocity = g.transform.up * _rangeAttackSpeed;
+        Destroy(g, _lifeTime);
     }
 }

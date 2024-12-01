@@ -18,8 +18,10 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     [SerializeField, InspectorVariantName("プレイヤーの移動速度")] private float _moveSpeed = 20;
     [SerializeField, InspectorVariantName("プレイヤーダッシュ時間")] private float _dashTime = 0.2f;
     [SerializeField, InspectorVariantName("プレイヤーダッシュ速度")] private float _dashSpeed = 60;
-    [SerializeField, InspectorVariantName("プレイヤーのジャンプ力")] private float _jumpPower = 5;
-    [SerializeField, InspectorVariantName("ジャンプを長押しできる時間")] private float _jumpTime = 0.5f;
+    [SerializeField, InspectorVariantName("プレイヤーのジャンプ力(1回目)")] private float _firstJumpPower = 24;
+    [SerializeField, InspectorVariantName("プレイヤーのジャンプ力(2回目)")] private float _secondJumpPower = 15;
+    [SerializeField, InspectorVariantName("ジャンプを長押しできる時間(1回目)")] private float _firstJumpTime = 0.5f;
+    [SerializeField, InspectorVariantName("ジャンプを長押しできる時間(2回目)")] private float _secondJumpTime = 0.5f;
     [SerializeField, InspectorVariantName("ジャンプ長押し中の重力")] private float _jumpPressGravity = 5;
     [SerializeField, InspectorVariantName("重力")] private float _gravityScale = 20;
     [SerializeField, InspectorVariantName("落下速度の上限")] private float _maxFallingSpeed = 50;
@@ -43,6 +45,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     private bool _isMove = true; //移動不可状態の判定
     public bool IsMove { set => _isMove = value; }
 
+    private int _jumpCount;
     //　移動量、重力無効化
     public (bool value, bool VelocityZero) IsFreeze {
         set
@@ -110,6 +113,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
             if (!_isGround)
             {
                 _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.JumpLandhing);
+                _jumpCount = 0;
             }
             _isGround = hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Ground");
         }
@@ -133,20 +137,23 @@ public class PlayerMove : MonoBehaviour, ITeleportable
 
     private async void OnJump(InputAction.CallbackContext context)
     {
-        if(!_isMove) return;
+        if (!_isMove || _jumpCount >= 2) return;
         _jumpCancelToken = new();
         // 地面についているかの判定
-        if (_isGround)
+        float jumpPower = _jumpCount == 0 ? _firstJumpPower : _secondJumpPower;
+        float jumpTime = _jumpCount == 0 ? _firstJumpTime : _secondJumpTime;
+        _gravityEnum = GravityEnum.JumpUp;
+        _rb.velocity = new Vector3(_rb.velocity.x, 0,0);
+        _rb.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+        _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.Jump);
+        _jumpCount++;
+        try
         {
-            _gravityEnum = GravityEnum.JumpUp;
-            _rb.AddForce(Vector2.up * _jumpPower, ForceMode.Impulse);
-            _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.Jump);
-            try
-            {
-                await UniTask.Delay(TimeSpan.FromSeconds(_jumpTime), cancellationToken: _jumpCancelToken.Token);
-                _gravityEnum = GravityEnum.JumpDown;
-            }
-            catch (OperationCanceledException e) { }
+            await UniTask.Delay(TimeSpan.FromSeconds(jumpTime), cancellationToken: _jumpCancelToken.Token);
+            _gravityEnum = GravityEnum.JumpDown;
+        }
+        catch (OperationCanceledException e)
+        {
         }
     }
     private void JumpCancel(InputAction.CallbackContext context)
@@ -191,7 +198,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     }
     private void MusicBoxPlay(InputAction.CallbackContext context)
     {
-        Debug.Log("Hold");
+        Debug.Log("心のきれいな人はオルゴールが聞こえます");
     }
     
     void Gravity()

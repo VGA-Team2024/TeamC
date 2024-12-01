@@ -86,7 +86,7 @@ public class SpecialAttack : MonoBehaviour
             this.gameObject.SetActive(false);
         }
         else if(other.isTrigger == false)
-        {// テレポート対象以外に当たる
+        {// 対象外のオブジェクに当たる
             _twForward.Kill(false);
             NeedleBackMove(_currentPos,_currentPos / _range * _returnTimer);
         }
