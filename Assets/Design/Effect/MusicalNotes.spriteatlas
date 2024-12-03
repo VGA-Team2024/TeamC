@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MusicalNotes
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 352b1cffe8b440145a5c5a7568083e40, type: 3}
+    - {fileID: 2800000, guid: 595f3a6c415b1514b8e899819bb27f4b, type: 3}
+    - {fileID: 2800000, guid: 34cef276929c39f4da6bfba144460865, type: 3}
+    - {fileID: 2800000, guid: e6cd30d5b2e63b64488d5d10f0aaf626, type: 3}
+    - {fileID: 2800000, guid: 31193fe3349d5064287a5bb123d11f7a, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 31193fe3349d5064287a5bb123d11f7a: 21300000
+    - e6cd30d5b2e63b64488d5d10f0aaf626: 21300000
+    - 34cef276929c39f4da6bfba144460865: 21300000
+    - 595f3a6c415b1514b8e899819bb27f4b: 21300000
+    - 352b1cffe8b440145a5c5a7568083e40: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 31193fe3349d5064287a5bb123d11f7a, type: 3}
+  - {fileID: 21300000, guid: e6cd30d5b2e63b64488d5d10f0aaf626, type: 3}
+  - {fileID: 21300000, guid: 34cef276929c39f4da6bfba144460865, type: 3}
+  - {fileID: 21300000, guid: 595f3a6c415b1514b8e899819bb27f4b, type: 3}
+  - {fileID: 21300000, guid: 352b1cffe8b440145a5c5a7568083e40, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Efe_Player_toonkigou_01
+  - Efe_Player_8_onpu_01
+  - Efe_Player_8_2_onpu_01
+  - Efe_Player_4_onpu_03
+  - Efe_Player_2_onpu_01
+  m_RenderDataMap: {}
+  m_Tag: MusicalNotes
+  m_IsVariant: 0
