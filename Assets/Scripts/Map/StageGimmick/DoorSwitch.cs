@@ -15,8 +15,9 @@ public class DoorSwitch : MonoBehaviour ,IDamageable
     /// <summary>ドアを開くメソッド</summary>
     void DoorOpen()
     {
-        //ドアが開く処理を書く
+        // TODO ドアが開く処理を書く
         _doorPrefab.SetActive(false);
+        CRIAudioManager.BGM.Play("SE_Gimmick", "SE_Gimmick_Door01");
     }
 
     public void TakeDamage(int damage)
@@ -27,7 +28,7 @@ public class DoorSwitch : MonoBehaviour ,IDamageable
         }
         else if (_keyConditions == KeyConditions.MusicBox)
         {
-            //オルゴールの？処理を書く
+            // TODO オルゴールの？処理を書く
         }
     }
 }
