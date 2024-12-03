@@ -60,8 +60,6 @@ public class PlayerAttack : MonoBehaviour
         _attackAnimTrigger = true;
         _player.Animator.SetBool(Attack,_attackAnimTrigger);
         _attackAnimTrigger = false;
-        EffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffect,
-        Mathf.Approximately(gameObject.transform.GetChild(0).localEulerAngles.y, 180) ? 1 : 0);
     }
 
     private void AttackCancel(InputAction.CallbackContext context)
@@ -80,8 +78,11 @@ public class PlayerAttack : MonoBehaviour
         var mainModule = p.main;
         mainModule.startRotationYMultiplier = _player.PlayerMove.PlayerFlip ? 1 : -1;
         p.Play();
+        EffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffect,
+            Mathf.Approximately(gameObject.transform.GetChild(0).localEulerAngles.y, 180) ? 1 : 0);
         // 非アクティブは_attackCollider自身がする
     }
+    
 
     private void OnSpecialAttack(InputAction.CallbackContext context)
     {
