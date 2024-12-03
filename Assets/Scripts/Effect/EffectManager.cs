@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -40,7 +40,7 @@ public class EffectManager : MonoBehaviour
     //プレハブから呼び出すエフェクト
     private InstancePlayEffectName _instancePlayEffectName;
 
-    ParticleSystem _a;
+
 
     private void Awake()
     {
@@ -58,16 +58,14 @@ public class EffectManager : MonoBehaviour
     /// <summary>
     /// エフェクト全般を再生するメソッド
     /// </summary>
-    /// <param name="playEffectName">再生したいエフェクトの名前</param>
+    /// <param name="effectIndex">再生するエフェクトの番号</param>
+    /// <param name="y">0で大丈夫</param>
     public void PlayEffect(PlayEffectName playEffectName,float y)
     {
         //再生するエフェクトの番号と座標を受け取って再生する
-        // var main = _playParticleObjects[(int)_playEffectName].main;
-        // main.startRotationYMultiplier = y;
-        var renderer = _playParticleObjects[(int)_playEffectName].GetComponent<ParticleSystemRenderer>();
+        var renderer = _playParticleObjects[(int)playEffectName].GetComponent<ParticleSystemRenderer>();
         renderer.flip = new Vector3(y,0,0);
-        
-        _playParticleObjects[(int)_playEffectName].Play();
+        _playParticleObjects[(int)playEffectName].Play();
     }
 
     // TODO エフェクトが増える場合オブジェクトプールもありかも 
@@ -118,5 +116,4 @@ public class EffectManager : MonoBehaviour
             item.Pause();
         }
     }
-
 }
