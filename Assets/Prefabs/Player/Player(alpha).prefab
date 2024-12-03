@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7946663814948687218}
   - component: {fileID: 5372959391818167411}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: needle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 3679690056664897857}
   - component: {fileID: 5718957745779924799}
   - component: {fileID: 3868402752421449017}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Special
   m_TagString: Player
   m_Icon: {fileID: 0}

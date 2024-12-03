@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -16,9 +17,9 @@ TagManager:
   - Enemy
   - Player
   - Ground
-  - 
-  - 
-  - 
+  - FallingFloor
+  - Penetraing
+  - Needle
   - 
   - 
   - 
