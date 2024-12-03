@@ -16,7 +16,8 @@ public class DoorSwitch : MonoBehaviour ,IDamageable
     void DoorOpen()
     {
         //ドアが開く処理を書く
-        _doorPrefab.SetActive(false);
+            _doorPrefab.SetActive(false);
+            CRIAudioManager.BGM.Play("SE_Gimmick","SE_Gimmick_Door01");
     }
 
     public void TakeDamage(int damage)

@@ -9,5 +9,6 @@ public class ObjectTeleport : MonoBehaviour ,ITeleportable
     public void Teleport(Vector3 position)
     {
         transform.position = position;
+        CRIAudioManager.BGM.Play("SE_Gimmick", "SE_Gimmick_WarpTotem");
     }
 }
