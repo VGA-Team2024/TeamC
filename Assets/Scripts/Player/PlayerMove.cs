@@ -185,13 +185,15 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     {
         if (_isMove)
         {
+            EffectManager.Instance.PlayEffect((int)PlayEffectName.PlayerDashEffect,
+                transform.GetChild(0).localEulerAngles.y);
             if (_jumpCancelToken != null)
             {
                 _jumpCancelToken.Cancel();
                 _jumpCancelToken.Dispose();
                 _jumpCancelToken = null;
             }
-
+            
             _dashing = true;
             _jumpCancelToken = new CancellationTokenSource();
             IsFreeze = (true, true);

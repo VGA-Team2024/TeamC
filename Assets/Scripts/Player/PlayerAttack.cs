@@ -78,7 +78,7 @@ public class PlayerAttack : MonoBehaviour
         var mainModule = p.main;
         mainModule.startRotationYMultiplier = _player.PlayerMove.PlayerFlip ? 1 : -1;
         p.Play();
-        EffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffect,
+        EffectManager.Instance.PlayEffect( (int)PlayEffectName.PlayerAttackEffect,
             Mathf.Approximately(gameObject.transform.GetChild(0).localEulerAngles.y, 180) ? 1 : 0);
         // 非アクティブは_attackCollider自身がする
     }
