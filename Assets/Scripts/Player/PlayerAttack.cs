@@ -74,15 +74,10 @@ public class PlayerAttack : MonoBehaviour
         Vector3 atkPos = _attackCollider.transform.localPosition;
         _attackCollider.transform.localPosition = new Vector3(Mathf.Abs(atkPos.x) * (_player.PlayerMove.PlayerFlip ? 1 : -1),atkPos.y, atkPos.z);
         _attackCollider.SetActive(true);
-        ParticleSystem p = _attackCollider.GetComponent<ParticleSystem>();
-        var mainModule = p.main;
-        mainModule.startRotationYMultiplier = _player.PlayerMove.PlayerFlip ? 1 : -1;
-        p.Play();
-        EffectManager.Instance.PlayEffect( (int)PlayEffectName.PlayerAttackEffect,
+        EffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffect,
             Mathf.Approximately(gameObject.transform.GetChild(0).localEulerAngles.y, 180) ? 1 : 0);
         // 非アクティブは_attackCollider自身がする
     }
-    
 
     private void OnSpecialAttack(InputAction.CallbackContext context)
     {

@@ -185,7 +185,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     {
         if (_isMove)
         {
-            EffectManager.Instance.PlayEffect((int)PlayEffectName.PlayerDashEffect,
+            EffectManager.Instance.PlayEffect(PlayEffectName.PlayerDashEffect,
                 transform.GetChild(0).localEulerAngles.y);
             if (_jumpCancelToken != null)
             {

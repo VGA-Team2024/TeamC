@@ -60,12 +60,12 @@ public class EffectManager : MonoBehaviour
     /// </summary>
     /// <param name="effectIndex">再生するエフェクトの番号</param>
     /// <param name="y">0で大丈夫</param>
-    public void PlayEffect(int effectIndex,float y)
+    public void PlayEffect(PlayEffectName playEffectName,float y)
     {
         //再生するエフェクトの番号と座標を受け取って再生する
-        var renderer = _playParticleObjects[effectIndex].GetComponent<ParticleSystemRenderer>();
+        var renderer = _playParticleObjects[(int)playEffectName].GetComponent<ParticleSystemRenderer>();
         renderer.flip = new Vector3(y,0,0);
-        _playParticleObjects[effectIndex].Play();
+        _playParticleObjects[(int)playEffectName].Play();
     }
 
     // TODO エフェクトが増える場合オブジェクトプールもありかも 
