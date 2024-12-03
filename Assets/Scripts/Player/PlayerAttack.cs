@@ -60,6 +60,8 @@ public class PlayerAttack : MonoBehaviour
         _attackAnimTrigger = true;
         _player.Animator.SetBool(Attack,_attackAnimTrigger);
         _attackAnimTrigger = false;
+        EffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffect,
+        Mathf.Approximately(gameObject.transform.GetChild(0).localEulerAngles.y, 180) ? 1 : 0);
     }
 
     private void AttackCancel(InputAction.CallbackContext context)
