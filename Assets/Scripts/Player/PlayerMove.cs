@@ -41,6 +41,10 @@ public class PlayerMove : MonoBehaviour, ITeleportable
             else
                 _flipObject.transform.rotation = Quaternion.Euler(0,(value ? 0 : 180),0);
             _dirRight = value;
+            if (_isGround)
+            {
+                EffectManager.Instance.ReStartPlayEffect(PlayEffectName.PlayerDashEffect);   
+            }
         }
     }
     private bool _isGround; //設置判定
@@ -134,21 +138,29 @@ public class PlayerMove : MonoBehaviour, ITeleportable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!_isGround)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.JumpLandhing);
-            _onAirJump = true;
+            if (!_isGround)
+            {
+                _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.JumpLandhing);
+                _onAirJump = true;
+            }
+
+            _isGround = true;
         }
-        _isGround = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        _isGround = false;
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            _isGround = false;
+        }
     }
 
     private async void OnJump(InputAction.CallbackContext context)
     {
+        
         if (!_isMove || !_onAirJump) return;
         _jumpCancelToken = new();
         float jumpPower;
@@ -193,6 +205,10 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     // ActionMapのMove
     private void OnMove(InputAction.CallbackContext context)
     {
+        if (_isGround)
+        {
+            EffectManager.Instance.PlayEffect(PlayEffectName.PlayerDashEffect, 0);   
+        }
         _dir = context.ReadValue<Vector2>();
     }
 
@@ -200,7 +216,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     {
         if (_isMove)
         {
-            EffectManager.Instance.PlayEffect(PlayEffectName.PlayerDashEffect,
+            EffectManager.Instance.PlayEffect(PlayEffectName.PlayerBlinkEffect,
                 transform.GetChild(0).localEulerAngles.y);
             if (_jumpCancelToken != null)
             {
