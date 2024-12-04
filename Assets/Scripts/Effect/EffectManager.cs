@@ -9,6 +9,7 @@ public enum PlayEffectName
     // TODO PlayerAttackEffect以外は仮で書いてる変更する可能性あり
     
     PlayerAttackEffect,
+    PlayerBlinkEffect,
     PlayerDashEffect,
     PlayerGameOverEffect,
     PlayerAttackHitEffect,
@@ -20,7 +21,6 @@ public enum PlayEffectName
 /// </summary>
 public enum InstancePlayEffectName
 {
-    
 }
 
 public class EffectManager : MonoBehaviour
@@ -75,11 +75,11 @@ public class EffectManager : MonoBehaviour
     /// <param name="parentObject">再生したいエフェクトの親オブジェクト</param>
     /// <param name="playEffectName">再生したいエフェクトの名前</param>
     /// <param name="effectPosition">再生したいエフェクトの位置</param>
-    public void PlayInstanceEffect(GameObject parentObject, PlayEffectName playEffectName, Vector3 effectPosition)
+    public void PlayInstanceEffect(Transform parentObj, InstancePlayEffectName instancePlayEffectName, Vector3 effectPosition)
     {
         //再生するエフェクトの親オブジェクトとエフェクトの名前と座標を受け取って再生する
         GameObject obj = Instantiate(_instanceParticlePrefabs[(int)_playEffectName], effectPosition, Quaternion.identity);
-        obj.transform.SetParent(parentObject.transform);
+        obj.transform.SetParent(parentObj);
     }
     
     /// <summary>
@@ -115,5 +115,16 @@ public class EffectManager : MonoBehaviour
         {
             item.Pause();
         }
+    }
+
+    public void StopPlayEffect(PlayEffectName playEffectName)
+    {
+        _playParticleObjects[(int)playEffectName].Stop();
+    }
+    
+    public void ReStartPlayEffect(PlayEffectName playEffectName)
+    {
+        _playParticleObjects[(int)playEffectName].Stop();
+        _playParticleObjects[(int)playEffectName].Play();
     }
 }
