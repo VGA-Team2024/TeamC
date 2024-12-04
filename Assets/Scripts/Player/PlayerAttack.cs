@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,7 +33,7 @@ public class PlayerAttack : MonoBehaviour
         _controls.InGame.SpecialAttack.started += OnSpecialAttack;
         _controls.InGame.LongRangeAttack.canceled += OnLongRangeAttack;
         _controls.InGame.MusicBox.performed += ((c) => _musicBoxPlaying = true);
-        _player.AnimationEvent.EventDictionary.Add("Attack" ,AttackColliderSetActive);
+        //_player.AnimationEvent.EventDictionary.Add("Attack" ,AttackColliderSetActive);
     }
     
     private void OnDestroy()
@@ -55,11 +56,13 @@ public class PlayerAttack : MonoBehaviour
         _controls.Dispose();
     }
 
-    private void OnAttack(InputAction.CallbackContext context)
+    private async void OnAttack(InputAction.CallbackContext context)
     {
         _attackAnimTrigger = true;
         _player.Animator.SetBool(Attack,_attackAnimTrigger);
         _attackAnimTrigger = false;
+        await UniTask.Delay(100);
+        AttackColliderSetActive();
     }
 
     private void AttackCancel(InputAction.CallbackContext context)

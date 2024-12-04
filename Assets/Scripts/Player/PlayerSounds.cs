@@ -23,7 +23,7 @@ public class PlayerSounds : MonoBehaviour
     {
         _player = GetComponent<Player>();
         void StepPlay() => PlayerSEPlay(PlayerSoundEnum.FootSteps);
-        _player.AnimationEvent.EventDictionary.Add("Step", StepPlay);
+        //_player.AnimationEvent.EventDictionary.Add("Step", StepPlay);
     }
 }
 
