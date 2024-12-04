@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour, IDamageable
 {
-    private static readonly int Damage = Animator.StringToHash("Damage");
+    private readonly int Damage = Animator.StringToHash("Damage");
 
     [SerializeField, InspectorVariantName("最大体力")]
     private int _maxHP = 5;
