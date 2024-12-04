@@ -44,27 +44,32 @@ namespace DataManagement
 1. スプレッドシートにシートを増やします
 
 2. スプレッドシート用のデータ定義を追加します
-「SpreadSheetDataFormat.cs」に、1行のデータとその配列をDataというメンバで持つクラスの2つを定義してください
-既にあるデータを参考にするとよいです
-
+    
+    「SpreadSheetDataFormat.cs」に、1行のデータとその配列をDataというメンバで持つクラスの2つを定義してください。 
+    後に書いてあるソースコードや既にあるデータを参考にするとよいです
+    
 3. ゲーム中に使うマスターデータクラスを宣言する
-「MasterDataFormat.cs」にクラスを宣言します。
-追加の方法は、後に書いてある「クラス定義について」を読んでください
-
+    
+    「MasterDataFormat.cs」にクラスを宣言します。
+    追加の方法は、後に書いてあるソースコードを読んでください。
+    
 4. このクラスに追加したクラスを追記します。
-・マスタのプロパティの追加
-・new
-・Marshal関数の追加
-をそれぞれ行ってください。
+    ・マスタのプロパティの追加
+    ・マスターデータクラスのnew
+    ・Marshal関数の追加
+    
+    をそれぞれ行ってください。    
+    newとMarshal関数に分かれているのは、コンストラクタ内でasyncが実行されうる挙動を避けているためです。
 */
 
 namespace Sample
 {
-    // (2)でこういうクラスを追加したと仮定します
+    // (2)の例を記述します。
+    // こういうマスターデータクラスを追加したと仮定します
     namespace SpreadSheet
     {
         /// <summary>
-        /// テキストデータ
+        /// サンプルデータ
         /// </summary>
         [Serializable]
         public class SampleData
@@ -82,8 +87,10 @@ namespace Sample
         }
     }
 
-
-    // (3)でこういうクラスを追加したと仮定します
+    // (3)のデータ型の例を記述します。
+    // 実際に利用するゲーム中のデータ型を決めて宣言します。
+    // スプレッドシートの型と同じでも違っていてもかまいません。データの一部を捨てるのもOKです。
+    // NOTE: クラス内外どちらに宣言しても良いです。
     [Serializable]
     public class SampleData
     {
@@ -93,7 +100,8 @@ namespace Sample
     };
 
     /// <summary>
-    /// マスタ宣言の例です
+    /// サンプルマスタクラス
+    /// NOTE: (3)のマスタデータクラスの例です
     /// </summary>
     [Serializable] //Serializableは忘れないようにしましょう
     public class SampleMaster : MasterDataBase<int, SampleData>
@@ -140,7 +148,6 @@ namespace Sample
                 //MasterDataBaseで指定したキーとデータクラスを返却します
                 return (data.Id, sampleData);
             });
-
 
             // 整形処理は、特にデータをチェックする必要がなければ以下のように1行で書くこともできます
             //pretty(master.Data, (SpreadSheet.SampleData data) => { return (data.Id, new SampleData(){ Id = data.Id, Atk = data.Atk, Name = data.Name }); });
