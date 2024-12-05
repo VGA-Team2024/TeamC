@@ -11,4 +11,4 @@ jobs:
         env:
           DISCORD_MESSAGE: "Curl Test \n https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
         run: |
-          curl -X POST -H "Content-Type: application/json" -d "{"content": "${{env.DISCORD_MESSAGE}}"}" ${{ secrets.DISCORD_WEBHOOK_URL }}
+          curl -X POST -H "Content-Type: application/json" -d "{\"content\": \"${{env.DISCORD_MESSAGE}}\"}" ${{ secrets.DISCORD_WEBHOOK_URL }}
