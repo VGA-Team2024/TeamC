@@ -10,5 +10,7 @@ jobs:
       - name: Discord Post
         env:
           DISCORD_MESSAGE: "Curl Test \n https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-        run:
-          "curl -X POST ${{ secrets.DISCORD_WEBHOOK_URL }} -H 'Content-Type: application/json' -d '{ \"content\": \"${{ env.DISCORD_MESSAGE }}\"}'"
+        run: >
+          curl -X POST ${{ secrets.DISCORD_WEBHOOK_URL }}
+          -H "Content-Type: application/json"
+          -d '{"content":"'"${{ env.DISCORD_MESSAGE }}"'"}'
