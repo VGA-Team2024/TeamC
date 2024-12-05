@@ -18,7 +18,8 @@ jobs:
       - name: Discord Failure Post
         if: failure()
         env:
-          DISCORD_MESSAGE: "Mac ${{ secrets.DISCORD_MESSAGE }} \n https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-        run: |
-          curl -X POST -H "Content-Type: application/json" -d "{"content": "${{env.DISCORD_MESSAGE}}"}" ${{ secrets.DISCORD_WEBHOOK_URL }}
-        #curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"content\": \"Posted Via Command line\"}" discord-webhook-link
+          DISCORD_MESSAGE: "Curl Test \\n https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: >
+          curl -X POST ${{ secrets.DISCORD_WEBHOOK_URL }}
+          -H "Content-Type: application/json"
+          -d "{\"content\":\"${{ env.DISCORD_MESSAGE }}\"}"
