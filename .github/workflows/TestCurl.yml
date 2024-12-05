@@ -13,4 +13,4 @@ jobs:
         run: >
           curl -X POST ${{ secrets.DISCORD_WEBHOOK_URL }}
           -H "Content-Type: application/json"
-          -d '{"content":"'"${{ env.DISCORD_MESSAGE }}"'"}'
+          -d "{\"content\":\"${{ env.DISCORD_MESSAGE }}\"}"
