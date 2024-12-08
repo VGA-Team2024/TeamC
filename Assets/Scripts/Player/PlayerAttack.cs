@@ -1,12 +1,10 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
     private readonly int Attack = Animator.StringToHash("Attack");
-    private PlayerControls _controls;
+    private readonly int RangeAttack = Animator.StringToHash("RangeAttack");
     private Player _player;
     [SerializeField, InspectorVariantName("通常攻撃のゲームオブジェクト")] 
     private GameObject _attackCollider;
@@ -22,18 +20,20 @@ public class PlayerAttack : MonoBehaviour
     private float _lifeTime = 5;
     private bool _attackAnimTrigger;
 
+    private PlayerControls _controls;
     private bool _musicBoxPlaying;
+    public bool MusicBoxPlayingSet {set => _musicBoxPlaying = value; }
 
     private void Awake()
     {
-        _controls = new PlayerControls();
         _player = GetComponent<Player>();
+        _controls = new PlayerControls();
         _controls.InGame.Attack.started += OnAttack;
         _controls.InGame.Attack.canceled += AttackCancel;
         _controls.InGame.SpecialAttack.started += OnSpecialAttack;
         _controls.InGame.LongRangeAttack.canceled += OnLongRangeAttack;
-        _controls.InGame.MusicBox.performed += ((c) => _musicBoxPlaying = true);
-        //_player.AnimationEvent.EventDictionary.Add("Attack" ,AttackColliderSetActive);
+        _player.AnimEvent.AnimEventDic.Add(PlayerAnimationEventController.animationType.AttackColliderEnable,AttackColliderSetActive);
+        _player.AnimEvent.AnimEventDic.Add(PlayerAnimationEventController.animationType.AttackRangeEnable,RangeAttackInstantiate);
     }
     
     private void OnDestroy()
@@ -43,7 +43,6 @@ public class PlayerAttack : MonoBehaviour
         _controls.InGame.Attack.canceled -= AttackCancel;
         _controls.InGame.SpecialAttack.started -= OnSpecialAttack;
         _controls.InGame.LongRangeAttack.canceled -= OnLongRangeAttack;
-        _controls.InGame.MusicBox.performed -= ((c) => _musicBoxPlaying = true);
     }
 
     private void OnEnable()
@@ -53,16 +52,13 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnDisable()
     {
-        _controls.Dispose();
+        _controls.Disable();
     }
-
-    private async void OnAttack(InputAction.CallbackContext context)
+    private void OnAttack(InputAction.CallbackContext context)
     {
         _attackAnimTrigger = true;
         _player.Animator.SetBool(Attack,_attackAnimTrigger);
         _attackAnimTrigger = false;
-        await UniTask.Delay(100);
-        AttackColliderSetActive();
     }
 
     private void AttackCancel(InputAction.CallbackContext context)
@@ -84,6 +80,8 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnSpecialAttack(InputAction.CallbackContext context)
     {
+        if(!_player.PlayerStatus.CanSpecialAttack())
+            return; // 妖精ゲージが足りていなければ出せない
         if (!_player.PlayerMove.Dashing)
         {
             // 位置の固定
@@ -102,10 +100,9 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnLongRangeAttack(InputAction.CallbackContext context)
     {
-        if (!_musicBoxPlaying)
-        {
-            // ToDo: AnimationEventで呼ぶようにする
-            RangeAttackInstantiate();
+        if (!_musicBoxPlaying && _player.PlayerStatus.IsLongRangeAttackRelease)
+        {// 長押しではないかつ遠距離攻撃が解放されている
+            _player.Animator.SetTrigger(RangeAttack);
         }
         _musicBoxPlaying = false;
     }

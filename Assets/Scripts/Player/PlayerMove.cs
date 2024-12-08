@@ -7,15 +7,16 @@ using UnityEngine.InputSystem;
 public class PlayerMove : MonoBehaviour, ITeleportable
 {
     private Rigidbody _rb;
-    private PlayerControls _controls;
     private SpriteRenderer _sr;
     private Player _player;
+    private PlayerControls _controls;
     private readonly int MoveHorizontal = Animator.StringToHash("MoveHorizontal");
     private readonly int IsGround = Animator.StringToHash("IsGround");
     private readonly int MusicBox = Animator.StringToHash("MusicBox");
     private readonly int MoveVertical = Animator.StringToHash("MoveVertical");
     private readonly int DashingHash = Animator.StringToHash("Dashing");
     private readonly int JumpStart = Animator.StringToHash("JumpStart");
+    private readonly int DirRight = Animator.StringToHash("DirRight");
 
     private Vector2 _dir; //ActionMapのMoveの値を保存するVector2
     [SerializeField, InspectorVariantName("プレイヤーの移動速度")] private float _moveSpeed = 20;
@@ -36,11 +37,12 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         private set
         {
             if(!_isMove) return;
-            if(_sr)
-                _sr.flipX = value;
-            else
-                _flipObject.transform.rotation = Quaternion.Euler(0,(value ? 0 : 180),0);
+            // 見た目の反転はアニメーターコントローラーがする
+            // FlipShaftは残しておく
+            _flipObject.transform.rotation = Quaternion.Euler(0,(value ? 0 : 180),0);
+            
             _dirRight = value;
+            _player.Animator.SetBool(DirRight, value);
             if (_isGround)
             {
                 EffectManager.Instance.ReStartPlayEffect(PlayEffectName.PlayerDashEffect);   
@@ -48,7 +50,6 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         }
     }
     private bool _isGround; //設置判定
-    private float _colliderSizeX;
     
     private bool _isMove = true; //移動不可状態の判定
     public bool IsMove { set => _isMove = value; }
@@ -72,14 +73,12 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     
     private void Awake()
     {
-        //InputSystemで作ったPlayerControlsのインスタンスを生成
         _controls = new PlayerControls();
         _controls.InGame.Jump.started += OnJump;
         _controls.InGame.Jump.canceled += JumpCancel;
         _controls.InGame.Move.started += OnMove;  //入力はじめ
         _controls.InGame.Move.performed += OnMove;//値が変わった時
         _controls.InGame.Move.canceled += OnMove; //入力終わり
-        _controls.InGame.MusicBox.performed += MusicBoxPlay;
         _controls.InGame.Dash.started += OnDash;
     }
 
@@ -91,7 +90,6 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         _controls.InGame.Move.started -= OnMove;  //入力はじめ
         _controls.InGame.Move.performed -= OnMove;//値が変わった時
         _controls.InGame.Move.canceled -= OnMove; //入力終わり
-        _controls.InGame.MusicBox.performed -= MusicBoxPlay;
         _controls.InGame.Dash.started -= OnDash;
     }
 
@@ -104,13 +102,13 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     {
         _controls.Disable();
     }
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
         if(!_flipObject)
             _sr = GetComponent<SpriteRenderer>();
         _player = GetComponent<Player>();
-        _colliderSizeX = GetComponent<BoxCollider>().size.x;
     }
 
     private void FixedUpdate()
@@ -162,7 +160,6 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     {
         
         if (!_isMove || !_onAirJump) return;
-        _jumpCancelToken = new();
         float jumpPower;
         float jumpTime;
         if (_isGround)
@@ -172,10 +169,13 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         }
         else
         {// 空中のジャンプなら
+            if(!_player.PlayerStatus.IsSecondJumpRelease)
+                return; // 空中ジャンプが解放されていないならreturnする
             jumpPower = _secondJumpPower;
             jumpTime = _secondJumpTime;
             _onAirJump = false;
         }
+        _jumpCancelToken = new();
         _gravityEnum = GravityEnum.JumpUp;
         _rb.velocity = new Vector3(_rb.velocity.x, 0,0);
         _rb.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
@@ -188,6 +188,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         }
         catch (OperationCanceledException e)
         {
+            
         }
     }
     private void JumpCancel(InputAction.CallbackContext context)
@@ -214,6 +215,8 @@ public class PlayerMove : MonoBehaviour, ITeleportable
 
     private async void OnDash(InputAction.CallbackContext context)
     {
+        if(!_player.PlayerStatus.IsDashRelease)
+            return; //ダッシュが解放されていないならreturnする
         if (_isMove)
         {
             EffectManager.Instance.PlayEffect(PlayEffectName.PlayerBlinkEffect,
@@ -235,11 +238,6 @@ public class PlayerMove : MonoBehaviour, ITeleportable
             IsFreeze = (false, false);
             Dashing = false;
         }
-    }
-    private void MusicBoxPlay(InputAction.CallbackContext context)
-    {
-        // ToDo: オルゴールの処理書く
-        Debug.Log("心のきれいな人はオルゴールが聞こえます");
     }
     
     void Gravity()

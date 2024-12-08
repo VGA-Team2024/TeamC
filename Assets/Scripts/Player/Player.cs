@@ -8,8 +8,8 @@ public class Player : MonoBehaviour
     [SerializeField] Animator _animator;
     public Animator Animator => _animator;
     
-    [SerializeField] private SpriteStudioAnimationEventScript _animationEvent;
-    public SpriteStudioAnimationEventScript AnimationEvent => _animationEvent;
+    [SerializeField] private PlayerAnimationEventController _animEvent;
+    public PlayerAnimationEventController AnimEvent => _animEvent;
     
     private PlayerSounds _playerSounds;
     public PlayerSounds PlayerSounds => _playerSounds;
