@@ -8,4 +8,8 @@ public class EditorDebugSo : ScriptableObject
     public float FadeTime;
     public float FadeoutDelayTime;
     public float TextDuration;
+    public float OrgelFadeoutTime;
+    public float OrgelFadePosition;
+
+    public AudioClip _voiceClip;
 }

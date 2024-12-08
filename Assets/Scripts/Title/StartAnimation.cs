@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -21,19 +22,33 @@ namespace Title
         private float _fadeTime;
         private float _fadeoutDelayTime;
         private float _textDuration;
+        private float _orgelFadeoutTime;
+        private float _orgelFadePosition;
+
+        [SerializeField] private float[] _textDurations;
 
         #endregion
 
         [SerializeField, InspectorVariantName("セリフの順番")]
         private string[] _voiceQueName;
 
-        [SerializeField, InspectorVariantName("最初に落としたいオブジェクトを登録")] private FirstFallAnimation[] _openingCharacterFirstAnimation;
+        [SerializeField, InspectorVariantName("最初に落としたいオブジェクトを登録")]
+        private FallAnimation[] _openingCharacterFirstAnimation;
 
-        [SerializeField, InspectorVariantName("2番目に落としたいオブジェクトを登録")] private SecondFallAnimation[] _openingCharacterSecondAnimation;
+        [SerializeField, InspectorVariantName("2番目に落としたいオブジェクトを登録")]
+        private FallAnimation[] _openingCharacterSecondAnimation;
 
-        [SerializeField, InspectorVariantName("オルゴールを持ち去る演出時に出したいオブジェクトを登録")] private EnemySnatchAnimation[] _snatchCharacterAnimation;
+        [SerializeField, InspectorVariantName("オルゴールを持ち去る演出時に出したいオブジェクトを登録")]
+        private EnemySnatchAnimation[] _snatchCharacterAnimation;
+
+        [SerializeField, InspectorVariantName("オルゴールオブジェクト")]
+        private OrgelAnimation _orgel;
+
+        private Vector3 _targetPosition;
 
         public EditorDebugSo EditorDebugSo;
+        
+        [SerializeField] private AudioSource _audioSource;
 
         private void Awake()
         {
@@ -46,6 +61,9 @@ namespace Title
             _fadeTime = EditorDebugSo.FadeTime;
             _fadeoutDelayTime = EditorDebugSo.FadeoutDelayTime;
             _textDuration = EditorDebugSo.TextDuration;
+            _orgelFadeoutTime = EditorDebugSo.OrgelFadeoutTime;
+            _targetPosition = _snatchCharacterAnimation[1].GetCurrentPosition();
+            _orgelFadePosition = EditorDebugSo.OrgelFadePosition;
         }
 
         // Animationの組み立て
@@ -54,29 +72,36 @@ namespace Title
             // 木箱を閉める音がでる
             CRIAudioManager.SE.Play("", "");
             _fade.Fadeout(_fadeTime);
+            
             await UniTask.Delay(TimeSpan.FromSeconds(_fadeoutDelayTime));
+            
             await UniTask.WhenAll(PlayVoiceSequence(), PlayAnimation());
         }
 
         // Voiceとtextを一定間隔で実行する
         private async UniTask PlayVoiceSequence()
         {
-            if (_voiceQueName != null && _voiceText != null)
+            // ToDo : VoiceがCRI実装されたら削除
+            _audioSource.clip = EditorDebugSo._voiceClip;
+            _audioSource.Play();
+            
+            if (_voiceText != null)
             {
-                for (int i = 0; i < _voiceText.Length; i++)
+                //　セリフとDurationの数が一致していなかった場合は少ないほうに合わせる
+                int length = Math.Min(_voiceText.Length, _textDurations.Length);
+                for (int i = 0; i < length; i++)
                 {
+                    await UniTask.Delay(TimeSpan.FromSeconds(_textDurations[i]));
                     PlayVoice(i);
-                    await UniTask.Delay(TimeSpan.FromSeconds(_textDuration));
-                    Debug.Log($"{i}番目のセリフが再生されました。");
                 }
             }
+            else
+                Debug.LogError("字幕設定がされていません");
         }
 
-        // セリフとテキストを同期して表示
+        // 字幕の表示
         private void PlayVoice(int index)
         {
-            // TODO : ボイスを実装
-            //CRIAudioManager.VOICE.Play("", _voiceQueName[index]);
             _voiceTextUI.text = _voiceText[index];
         }
 
@@ -84,14 +109,31 @@ namespace Title
         private async UniTask PlayAnimation()
         {
             // 最初に落としたい人形のアニメーションを再生する
-            await UniTask.WhenAll(_openingCharacterFirstAnimation.Select(character => character.AnimationSettings()));
+            await UniTask.WhenAll(
+                _openingCharacterFirstAnimation.Select(character => character.FirstAnimationSettings()));
 
             // 2番目に落としたい人形のアニメーションを再生する
-            await UniTask.WhenAll(_openingCharacterSecondAnimation.Select(character => character.AnimationSettings()));
+            await UniTask.WhenAll(
+                _openingCharacterSecondAnimation.Select(character => character.SecondAnimationAnimationSettings()));
 
-            Debug.Log("2番目のアニメーションの再生が完了しました");
-            // オルゴールを盗むアニメーションを再生する
-            await UniTask.WhenAll(_snatchCharacterAnimation.Select(character => character.AnimationSettings()));
+            // 敵がオルゴールのもとにやってくる
+            await UniTask.WhenAll(_snatchCharacterAnimation.Select(character => character.Move()));
+
+            // 敵を傾ける
+            await UniTask.WhenAll(_snatchCharacterAnimation.Select(character => character.HeelOver()));
+
+            // オルゴールを上に上げる
+            await _orgel.OrgelUpAnimation();
+
+            // 小人たちのMoveタスクを配列として生成
+            var moveTasks =
+                _snatchCharacterAnimation.Select(character => character.Fade());
+
+            // オルゴールのフェードアウトタスク
+            var orgelFadeOutTask = _orgel.OrgelFadeOut(_orgelFadePosition);
+
+            // MoveタスクとOrgelFadeOutタスクを並列に実行
+            await UniTask.WhenAll(moveTasks.Concat(new[] { orgelFadeOutTask }));
         }
     }
 }
