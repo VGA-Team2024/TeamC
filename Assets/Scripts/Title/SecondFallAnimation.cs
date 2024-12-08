@@ -16,9 +16,10 @@ namespace Title
             Vector3 targetPosition = transform.position + _moveOffset;
 
             // 移動のAnimation
-            transform.DOMove(targetPosition, _fallDuration).SetEase(Ease.InOutQuad).OnComplete(() =>
+            await transform.DOMove(targetPosition, _duration).SetEase(Ease.InOutQuad).OnComplete(() =>
             {
                 // 移動が完了したら床にぶつかるアニメーションを発動
+                Debug.Log("完了通知");
             });
         }
     }

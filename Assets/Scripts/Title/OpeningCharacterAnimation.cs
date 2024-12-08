@@ -9,7 +9,7 @@ public abstract class OpeningCharacterAnimation : MonoBehaviour
 
     [SerializeField, InspectorVariantName("回転速度")] protected float _rotationSpeed;
 
-    [SerializeField, InspectorVariantName("落下時間")] protected float _fallDuration;
+    [SerializeField, InspectorVariantName("落下時間")] protected float _duration;
 
     [SerializeField, InspectorVariantName("移動先")] protected Vector3 _moveOffset;
 
