@@ -2,30 +2,49 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+/// <summary> 会話テキスト表示のためのスクリプト </summary>
 public class TextController : MonoBehaviour
 {
     [SerializeField, InspectorVariantName("1文字表示ごとの間隔")] private float _textSpeed = 0.15f;
-    [SerializeField, InspectorVariantName("次のテキストに切り替えるキー")] private KeyCode _skipKey = KeyCode.Space;
     [SerializeField, InspectorVariantName("セリフを表示するテキスト")] private Text _textLabel;
     [SerializeField, InspectorVariantName("名前を表示するテキスト")] private Text _nameLabel;
     [SerializeField, TextArea(1, 4), Header("セリフ(1度の表示で20文字4行が限界)")] private string[] wards;
     [SerializeField, InspectorVariantName("キャラクター名")] private string _name;
     [SerializeField, InspectorVariantName("名前を表示するかどうか")] private bool _foundName;
 
-    //private bool _isSlipping;   // 全表示中フラグ スキップ用に作ったけど機能してない
-    private bool _hasTextEnded;  // 一文表示終了フラグ
-
+    private PlayerMove _player;
+    private PlayerControls _controls;
     private CancellationTokenSource _cts;
     private CancellationToken _token;
-    
+    private bool _hasTextEnded;  // 一文表示終了フラグ
+    private bool _isPressed;
+
+    private void Awake()
+    {
+        _controls = new PlayerControls();
+        _controls.InGame.Jump.started += OnPress;
+        _controls.InGame.Jump.canceled += OnRelease;
+    }
+
+    private void OnDestroy()
+    {
+        _controls.Dispose();
+        _controls.InGame.Jump.started -= OnPress;
+        _controls.InGame.Jump.canceled -= OnRelease;
+    }
+
     private async void OnEnable()
     {
+        // プレイヤーの動きを制限
+        _player = FindObjectOfType<PlayerMove>();
+        _player.IsFreeze = (true, true);
+        
+        _controls.Enable();
         _cts = new CancellationTokenSource();
         _token = _cts.Token;
-        
-        // ToDO:プレイヤーの移動の入力を受け付けないようにする
         
         await DisplayAllTexts(_token);
     }
@@ -33,7 +52,8 @@ public class TextController : MonoBehaviour
     // 会話途中で移動したとき(仮)
     private void OnDisable()
     {
-        _cts.Cancel();
+        TalkEnd();
+        _controls.Disable();
     }
 
     void Update()
@@ -48,6 +68,15 @@ public class TextController : MonoBehaviour
         }
     }
 
+    private void OnPress(InputAction.CallbackContext callbackContext)
+    {
+        _isPressed = true;
+    }
+    private void OnRelease(InputAction.CallbackContext callbackContext)
+    {
+        _isPressed = false;
+    }
+
     private async UniTask DisplayAllTexts(CancellationToken cancellationToken)
     {
         try
@@ -59,24 +88,18 @@ public class TextController : MonoBehaviour
 
                 // 表示が終わるまで待機
                 await UniTask.WaitUntil(() => _hasTextEnded, cancellationToken: cancellationToken);
-
-                await UniTask.WaitUntil(() => Input.GetKeyDown(_skipKey), cancellationToken: cancellationToken);
-                //cts.Cancel();
-
+                // スキップキーが押されるまで待機
+                await UniTask.WaitUntil(() => _isPressed, cancellationToken: cancellationToken);
             }
-
-            // 話が終わったらテキストをCanvasごと消す
-            if (Input.GetKeyDown(_skipKey))
-            {
-                transform.parent.gameObject.SetActive(false);
-            }
+            
+            // 全ての会話が終了したとき
+            TalkEnd();
         }
         catch (OperationCanceledException)
         {
-            // 一文表示終了後に移動したとき(仮)
+            // 表示中に移動などでキャンセルしたとき
             _cts.Dispose();
         }
-        
     }
     
     private async UniTask ShowText(string text, CancellationToken cancellationToken)
@@ -84,28 +107,13 @@ public class TextController : MonoBehaviour
         try
         {
             _textLabel.text = ""; //テキストを初期化
-            //_isSlipping = false;  // スキップ状態をリセット
 
             for (int i = 0; i < text.Length; i++)
             {
-                // スキップキーが押されていたとき
-                // if (_isSlipping)
-                // {
-                //     _textLabel.text = text;
-                //     break;                
-                // }
-
                 _textLabel.text += text[i];
-
 
                 // 表示間隔をあける
                 await UniTask.Delay((int)(_textSpeed * 1000), cancellationToken: cancellationToken);
-
-                // スキップキーを押した時
-                // if (Input.GetKeyDown(_skipKey))
-                // {
-                //     _isSlipping = true;
-                // }
             }
 
             // 一文表示終了
@@ -113,10 +121,11 @@ public class TextController : MonoBehaviour
         }
         catch (OperationCanceledException)
         {
-            // 一文表示中に移動したとき(仮)
+            // 表示中に移動などでキャンセルしたとき
+            Debug.Log("bb");
+
             _cts.Dispose();
         }
-        
     }
 
     private void ShowName()
@@ -128,5 +137,15 @@ public class TextController : MonoBehaviour
     private void HideName()
     {
         _nameLabel.gameObject.SetActive(false);
+    }
+
+    private void TalkEnd()
+    {
+        _cts.Cancel();
+        
+        // プレイヤーの移動制限を解除
+        _player.IsFreeze = (false, false);
+        // テキストをCanvasごと消す
+        transform.parent.gameObject.SetActive(false);
     }
 }
