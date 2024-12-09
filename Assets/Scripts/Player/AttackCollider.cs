@@ -32,5 +32,10 @@ public class AttackCollider : MonoBehaviour
             _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.AttackHit);
             damage.TakeDamage(1);
         }
+
+        if (other.TryGetComponent<IBlowable>(out IBlowable blowable))
+        {
+            blowable.BlownAway(_player.gameObject.transform.position);
+        }
     }
 }

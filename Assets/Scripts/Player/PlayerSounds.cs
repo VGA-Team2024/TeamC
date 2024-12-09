@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CriWare;
 using UnityEngine;
 
 public class PlayerSounds : MonoBehaviour
@@ -8,22 +9,23 @@ public class PlayerSounds : MonoBehaviour
     [SerializeField] private List<SoundCue> soundList;
     private Player _player;
     
-    public void PlayerSEPlay(PlayerSoundEnum sound)
+    public CriAtomExPlayback PlayerSEPlay(PlayerSoundEnum sound)
     {
+        CriAtomExPlayback playback = default;
         foreach (SoundCue s in soundList)
         {
             if (sound == s.SoundEnum)
             {
-                CRIAudioManager.BGM.Play(_playerCueSheet, s.Name);
+                playback = CRIAudioManager.BGM.Play(_playerCueSheet, s.Name);
             }
         }
+        return playback;
     }
-
     private void Start()
     {
         _player = GetComponent<Player>();
         void StepPlay() => PlayerSEPlay(PlayerSoundEnum.FootSteps);
-        //_player.AnimationEvent.EventDictionary.Add("Step", StepPlay);
+        _player.AnimEvent.AnimEventDic.Add(PlayerAnimationEventController.animationType.StepAudio,StepPlay);
     }
 }
 
@@ -42,5 +44,6 @@ public enum PlayerSoundEnum
     Attack,
     AttackHit,
     ThrowNeedle,
-    FootSteps
+    FootSteps,
+    MusicBox
 }
