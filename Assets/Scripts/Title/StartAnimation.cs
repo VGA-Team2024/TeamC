@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Title
 {
@@ -44,11 +46,15 @@ namespace Title
         [SerializeField, InspectorVariantName("オルゴールオブジェクト")]
         private OrgelAnimation _orgel;
 
+        [FormerlySerializedAs("_fairyAnimation")] [SerializeField] private EffectAnimation _effectAnimation;
+
         private Vector3 _targetPosition;
 
         public EditorDebugSo EditorDebugSo;
         
         [SerializeField] private AudioSource _audioSource;
+
+        [SerializeField] private GameObject _flashEffect;
 
         private void Awake()
         {
@@ -126,14 +132,22 @@ namespace Title
             await _orgel.OrgelUpAnimation();
 
             // 小人たちのMoveタスクを配列として生成
-            var moveTasks =
+            IEnumerable<UniTask> moveTasks =
                 _snatchCharacterAnimation.Select(character => character.Fade());
 
             // オルゴールのフェードアウトタスク
-            var orgelFadeOutTask = _orgel.OrgelFadeOut(_orgelFadePosition);
+            UniTask orgelFadeOutTask = _orgel.OrgelFadeOut(_orgelFadePosition);
 
             // MoveタスクとOrgelFadeOutタスクを並列に実行
             await UniTask.WhenAll(moveTasks.Concat(new[] { orgelFadeOutTask }));
+            
+            // 妖精がplayerのもとに降りてくるAnimation
+            await _effectAnimation.MoveAnimation();
+            
+            // メアリーが起き上がる演出
+            await _effectAnimation.FlashAnimation(_flashEffect);
+            
+            SceneLoader.LoadSceneSimple("02_GameMain");
         }
     }
 }

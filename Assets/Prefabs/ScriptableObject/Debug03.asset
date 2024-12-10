@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfdc3bf95c81433f9fd361f608ab8c09, type: 3}
-  m_Name: Debug01
+  m_Name: Debug03
   m_EditorClassIdentifier: 
   VoiceText:
   - "\u79C1\u306D<br>\u304A\u5F15\u3063\u8D8A\u3057\u3059\u308B\u3053\u3068\u306B\u306A\u3063\u305F\u306E"
@@ -21,7 +21,7 @@ MonoBehaviour:
   - "\u307F\u3093\u306A<br>\u672C\u5F53\u306B\u3054\u3081\u3093\u306A\u3055\u3044"
   - "\u30E1\u30A2\u30EA\u30FC<br>\u307F\u3093\u306A\u306E\u3053\u3068\u304A\u9858\u3044"
   - "\u30D0\u30A4\u30D0\u30A4"
-  FadeTime: 1
+  FadeTime: 5
   FadeoutDelayTime: 2
   TextDuration: 3
   OrgelFadeoutTime: 0
