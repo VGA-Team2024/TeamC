@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -10,6 +11,9 @@ public class Player : MonoBehaviour
     
     [SerializeField] private PlayerAnimationEventController _animEvent;
     public PlayerAnimationEventController AnimEvent => _animEvent;
+    
+    [SerializeField] private PlayerStatusUI _playerStatusUI;
+    public PlayerStatusUI PlayerStatusUI => _playerStatusUI;
     
     private PlayerSounds _playerSounds;
     public PlayerSounds PlayerSounds => _playerSounds;
