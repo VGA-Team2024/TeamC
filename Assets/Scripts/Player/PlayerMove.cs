@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class PlayerMove : MonoBehaviour, ITeleportable
 {
     private Rigidbody _rb;
-    private SpriteRenderer _sr;
     private Player _player;
     private PlayerControls _controls;
     private readonly int MoveHorizontal = Animator.StringToHash("MoveHorizontal");
@@ -18,7 +17,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     private readonly int JumpStart = Animator.StringToHash("JumpStart");
     private readonly int DirRight = Animator.StringToHash("DirRight");
 
-    private Vector2 _dir; //ActionMapのMoveの値を保存するVector2
+    public Vector2 Dir {get; private set; }
     [SerializeField, InspectorVariantName("プレイヤーの移動速度")] private float _moveSpeed = 20;
     [SerializeField, InspectorVariantName("プレイヤーダッシュ時間")] private float _dashTime = 0.2f;
     [SerializeField, InspectorVariantName("プレイヤーダッシュ速度")] private float _dashSpeed = 60;
@@ -106,15 +105,13 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        if(!_flipObject)
-            _sr = GetComponent<SpriteRenderer>();
         _player = GetComponent<Player>();
     }
 
     private void FixedUpdate()
     {
         //今向いている方向と逆に向いたときに攻撃判定用ゲームオブジェクトの位置を変える
-        if ((_dir.x > 0 && !PlayerFlip) || (_dir.x < 0 && PlayerFlip))
+        if ((Dir.x > 0 && !PlayerFlip) || (Dir.x < 0 && PlayerFlip))
         {
             PlayerFlip = !PlayerFlip;
         }
@@ -123,7 +120,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         if (_isMove)
         {
             //左右移動
-            _rb.velocity = new Vector3(_dir.x * _moveSpeed, _rb.velocity.y, 0);
+            _rb.velocity = new Vector3(Dir.x * _moveSpeed, _rb.velocity.y, 0);
         }
         
         Gravity();
@@ -210,7 +207,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         {
             EffectManager.Instance.PlayEffect(PlayEffectName.PlayerDashEffect, 0);   
         }
-        _dir = context.ReadValue<Vector2>();
+        Dir = context.ReadValue<Vector2>();
     }
 
     private async void OnDash(InputAction.CallbackContext context)

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
@@ -8,6 +9,11 @@ public class PlayerAttack : MonoBehaviour
     private Player _player;
     [SerializeField, InspectorVariantName("通常攻撃のゲームオブジェクト")] 
     private GameObject _attackCollider;
+
+    [SerializeField, InspectorVariantName("上下攻撃の座標Y")]
+    private float _attackPosY;
+
+    private Vector3 _atkPos;
     [SerializeField, InspectorVariantName("特殊攻撃のゲームオブジェクト")] 
     private GameObject _specialCollider;
     [SerializeField, InspectorVariantName("遠距離攻撃のプレハブ")]
@@ -34,6 +40,7 @@ public class PlayerAttack : MonoBehaviour
         _controls.InGame.LongRangeAttack.canceled += OnLongRangeAttack;
         _player.AnimEvent.AnimEventDic.Add(PlayerAnimationEventController.animationType.AttackColliderEnable,AttackColliderSetActive);
         _player.AnimEvent.AnimEventDic.Add(PlayerAnimationEventController.animationType.AttackRangeEnable,RangeAttackInstantiate);
+        _atkPos = _attackCollider.transform.localPosition;
     }
     
     private void OnDestroy()
@@ -69,9 +76,12 @@ public class PlayerAttack : MonoBehaviour
 
     private void AttackColliderSetActive()
     {
-        // 攻撃用当たり判定をアクティブにする
-        Vector3 atkPos = _attackCollider.transform.localPosition;
-        _attackCollider.transform.localPosition = new Vector3(Mathf.Abs(atkPos.x) * (_player.PlayerMove.PlayerFlip ? 1 : -1),atkPos.y, atkPos.z);
+        // positionの設定
+            _attackCollider.transform.localPosition =
+                new Vector3(
+                    _atkPos.x * (_player.PlayerMove.PlayerFlip ? 1 : -1), //左右の向き
+                    Math.Sign(_player.PlayerMove.Dir.y) * _attackPosY + _atkPos.y, // 上下攻撃
+                    _atkPos.z);
         _attackCollider.SetActive(true);
         EffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffect,
             Mathf.Approximately(gameObject.transform.GetChild(0).localEulerAngles.y, 180) ? 1 : 0);

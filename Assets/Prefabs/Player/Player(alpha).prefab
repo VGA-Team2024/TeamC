@@ -650,12 +650,18 @@ MonoBehaviour:
   _maxHP: 5
   _currentHP: 0
   healthUI: {fileID: 0}
-  _fairyGauge: 600
+  _maxFairyGauge: 600
+  _currentFairyGauge: 0
+  _spAttackDiminution: 150
+  _fairyGaugeParSecond: 20
   _knockBackDirection: {x: 1, y: 0.5}
   _knockBackPower: 10
   _godTime: 0.6
   _NoMoveTime: 0.3
   _godModeLayerName: MUTEKI
+  _isDashRelease: 1
+  _isSecondJumpRelease: 1
+  _isLongRangeAttackRelease: 1
 --- !u!114 &786941735250853314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,6 +675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackCollider: {fileID: 7499795661562170678}
+  _attackPosY: 0
   _specialCollider: {fileID: 5339820357696757217}
   _rangeCollider: {fileID: 0}
   _rangeAttackSpeed: 10
@@ -787,7 +794,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 6007387073414369689}
-  _animationEvent: {fileID: 0}
+  _animEvent: {fileID: 7347626376516838466}
+  _playerStatusUI: {fileID: 0}
 --- !u!114 &6907902460269040805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1440,6 +1448,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6007387073414369689}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 9d84b7c3fed43d14eaa24476646e9a48,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7347626376516838466}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 9d84b7c3fed43d14eaa24476646e9a48,
     type: 3}
 --- !u!1 &1092646527793955247 stripped
@@ -1469,6 +1481,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7347626376516838466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092646527793955247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc2701efd2e33584ca24516b53e00129, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2297334913322605004 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: 9d84b7c3fed43d14eaa24476646e9a48,
