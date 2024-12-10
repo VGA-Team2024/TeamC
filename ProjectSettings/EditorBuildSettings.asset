@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Planer/testmap01.unity
+    guid: 6b24567965f35e147a37dc588f2b4b74
+  - enabled: 1
     path: Assets/Scenes/Mockup/01_Title.unity
     guid: 9d8c992fe5a7d0d40864e7dd0205bb35
   - enabled: 1
@@ -14,4 +17,45 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Mockup/03_Result.unity
     guid: c8cb7d654958e2a498466c10e7f0caba
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/Scenes/Design/Morning.unity
+    guid: 0de2f053148d51d4c8255fd5ede95194
+  - enabled: 1
+    path: Assets/Scenes/Design/Night.unity
+    guid: 3fc4caa4d09689641906dd3861daa8cf
+  - enabled: 1
+    path: Assets/Scenes/Sample/3DSoundSample.unity
+    guid: a174e69cd80e78248945d3373b6e48f0
+  - enabled: 1
+    path: Assets/Scenes/System/IngameDebug.unity
+    guid: f344c073eba28c247a464cfb6b57ff22
+  - enabled: 1
+    path: Assets/Scenes/System/IngameSystem.unity
+    guid: 28bbf92597792604b989fbdc7a1fb369
+  - enabled: 0
+    path: AssetsScenes/Mockup/01_Title.unity
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: AssetsScenes/Mockup/02_GameMain.unity
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: AssetsScenes/Mockup/03_Result.unity
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: AssetsScenes/Sample/3DSoundSample.unity
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: AssetsScenes/System/GameLauncher.unity
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: AssetsScenes/System/IngameDebug.unity
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/System/GameLauncher.unity
+    guid: 8fddd8bd6df26f84eb0ce52c7a3f43e5
+  - enabled: 1
+    path: Assets/Scenes/Planer/PlannerScene.unity
+    guid: b60cb13ff35b0c14b88b826153f27bf2
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 7366e43fa3f777f4292c2095e8b63e4c,
+      type: 2}

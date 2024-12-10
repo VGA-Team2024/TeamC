@@ -2,7 +2,6 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
-
 public static class SceneNavigation
 {
     [MenuItem("Scene/TitleScene")]
@@ -24,6 +23,13 @@ public static class SceneNavigation
     {
         EditorSceneManager.SaveOpenScenes();
         OpenScene(2);
+    }
+    
+    [MenuItem("Scene/testmap01")]
+    private static void Scene3()
+    {
+        EditorSceneManager.SaveOpenScenes();
+        OpenScene(3);
     }
     private static void OpenScene(int sceneIndex)
     {
