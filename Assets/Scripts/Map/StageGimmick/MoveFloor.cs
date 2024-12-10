@@ -5,22 +5,19 @@ public class MoveFloor : MonoBehaviour
     private Vector2 _returnPosition;
     [SerializeField,InspectorVariantName("移動スピード")] 
     private float _moveSpeed;
-    [SerializeField] 
-    private GameObject _returnObj;
     //スタート地点
     private Vector2 _startPosition;
     //移動先の切り替えフラグ
     private bool _isReturn;
 
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(_returnPosition,gameObject.transform.localScale);
+    }
+
     void OnValidate()
     {
         _startPosition = transform.position;
-        _returnObj.transform.position = _returnPosition;
-    }
-
-    void Awake()
-    {
-        _returnObj.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     void FixedUpdate()
