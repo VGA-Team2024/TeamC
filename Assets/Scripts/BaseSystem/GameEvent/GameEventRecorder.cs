@@ -1,9 +1,10 @@
 using System;
 using UnityEditor;
 using UnityEngine;
+using GameEvent;
 
 /// <summary>
-/// ゲーム
+/// ゲームのイベントを記録する
 /// </summary>
 public class GameEventRecorder
 {
@@ -19,6 +20,9 @@ public class GameEventRecorder
 
     EventRecord _currentGame = null;
 
+    /// <summary>
+    /// ゲーム開始時に呼び出す
+    /// </summary>
     static public void GameStart()
     {
         if (_instance._currentGame != null)
@@ -34,15 +38,35 @@ public class GameEventRecorder
 
     static public void GameReview(Action reviewEndCallback)
     {
+        if (_instance._currentGame == null)
+        {
+            Debug.LogWarning("プレイ中のゲームがないようです。暫定で現時点をGameStartとします");
+
+            GameStart();
+        }
+
         _instance._currentGame.IsReview = true;
+        ReviewWindow.Build(reviewEndCallback);
     }
 
     static public void GameEnd(Action reviewEndCallback)
     {
+        if (_instance._currentGame == null)
+        {
+            Debug.LogWarning("プレイ中のゲームがないようです。暫定で現時点をGameStartとします");
+
+            GameStart();
+        }
+
         if (_instance._currentGame.IsReview == false)
         {
             GameReview(reviewEndCallback);
         }
         _instance._currentGame = null;
+    }
+
+    static public void SendEventData(GameEventData data)
+    {
+
     }
 }
