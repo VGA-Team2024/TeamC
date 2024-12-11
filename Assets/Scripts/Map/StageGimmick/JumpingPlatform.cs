@@ -12,6 +12,7 @@ public class JumpingPlatform : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             // 当たった相手のRigidbodyコンポーネントを取得して、上向きの力を加える
+            other.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             other.gameObject.GetComponent<Rigidbody>().AddForce(0, _jumpPower * 10, 0, ForceMode.Impulse);
         }
     }
