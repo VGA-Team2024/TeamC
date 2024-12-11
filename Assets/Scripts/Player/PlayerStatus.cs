@@ -9,8 +9,6 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
     private int _maxHP = 5;
     [SerializeField, InspectorVariantName("現在体力")] 
     private int _currentHP;
-    [SerializeField, InspectorVariantName("体力UIScript")]
-    PlayerHealthUI healthUI;
     [SerializeField, InspectorVariantName("最大妖精ゲージ")] 
     private int _maxFairyGauge = 600;
     [SerializeField, InspectorVariantName("現在妖精ゲージ")]

@@ -113,6 +113,7 @@ public class PlayerAttack : MonoBehaviour
         if (!_musicBoxPlaying && _player.PlayerStatus.IsLongRangeAttackRelease)
         {// 長押しではないかつ遠距離攻撃が解放されている
             _player.Animator.SetTrigger(RangeAttack);
+            RangeAttackInstantiate();
         }
         _musicBoxPlaying = false;
     }
