@@ -42,10 +42,13 @@ public class PlayerMusicBox : MonoBehaviour
         _player.PlayerAttack.MusicBoxPlayingSet = true;
         // ToDo オルゴールが追加されたら鳴らす
         //_musicBoxPlayback = _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.MusicBox);
+        EffectManager.Instance.PlayEffect(PlayEffectName.PlayerMusicNoteEffect,0);
+        Debug.Log("a");
     }
 
     void MusicStop(InputAction.CallbackContext context)
     {
         _musicBoxPlayback.Stop();
+        EffectManager.Instance.PlayEffect(PlayEffectName.PlayerMusicNoteEffect,0);
     }
 }

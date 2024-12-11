@@ -9,10 +9,8 @@ public enum PlayEffectName
     // TODO PlayerAttackEffect以外は仮で書いてる変更する可能性あり
     
     PlayerAttackEffect,
-    PlayerBlinkEffect,
     PlayerDashEffect,
-    PlayerGameOverEffect,
-    PlayerAttackHitEffect,
+    PlayerMoveEffect,
     PlayerMusicNoteEffect,
 }
 
@@ -21,6 +19,9 @@ public enum PlayEffectName
 /// </summary>
 public enum InstancePlayEffectName
 {
+    PlayerAttackHitEffect,
+    PlayerSpecialAttackEffect, 
+    PlayerJumpEffect,
 }
 
 public class EffectManager : MonoBehaviour
@@ -29,10 +30,10 @@ public class EffectManager : MonoBehaviour
     public static EffectManager Instance => _instance;
     
     [SerializeField,InspectorVariantName("Scene上に配置されているエフェクトをアタッチする")] 
-    private ParticleSystem[] _playParticleObjects;
+    private ParticleSystem[] _playEffectObjects;
 
     [SerializeField, InspectorVariantName("Prefabから呼び出すエフェクトをアタッチする")]
-    private GameObject[] _instanceParticlePrefabs;
+    private GameObject[] _instanceEffectPrefabs;
     
     //Scene上に配置されているエフェクト
     private PlayEffectName _playEffectName;
@@ -54,32 +55,36 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-
     /// <summary>
-    /// エフェクト全般を再生するメソッド
+    /// エフェクトを再生したい場合に使うメソッド
     /// </summary>
-    /// <param name="effectIndex">再生するエフェクトの番号</param>
-    /// <param name="y">0で大丈夫</param>
-    public void PlayEffect(PlayEffectName playEffectName,float y)
+    /// <param name="playEffectName"></param>
+    /// <param name="effectFlip">エフェクトを反転させたい場合に使うパラメータ基本数値は０</param>
+    public void PlayEffect(PlayEffectName playEffectName,float effectFlip)
     {
         //再生するエフェクトの番号と座標を受け取って再生する
-        var renderer = _playParticleObjects[(int)playEffectName].GetComponent<ParticleSystemRenderer>();
-        renderer.flip = new Vector3(y,0,0);
-        _playParticleObjects[(int)playEffectName].Play();
+        var renderer = _playEffectObjects[(int)playEffectName].GetComponent<ParticleSystemRenderer>();
+        renderer.flip = new Vector3(effectFlip,0,0);
+        _playEffectObjects[(int)playEffectName].Play();
     }
 
     // TODO エフェクトが増える場合オブジェクトプールもありかも 
     /// <summary>
-    /// エフェクト全般を生成して再生する
+    /// オブジェクトの子オブジェクトとしてエフェクトを生成したい場合に使うメソッド
     /// </summary>
-    /// <param name="parentObject">再生したいエフェクトの親オブジェクト</param>
-    /// <param name="playEffectName">再生したいエフェクトの名前</param>
-    /// <param name="effectPosition">再生したいエフェクトの位置</param>
-    public void PlayInstanceEffect(Transform parentObj, InstancePlayEffectName instancePlayEffectName, Vector3 effectPosition)
+    /// <param name="parentObj">親オブジェクトの座標</param>
+    /// <param name="instancePlayEffectName">生成したいエフェクトの名前</param>
+    /// <param name="effectPosition">生成したいエフェクトの座標</param>
+    public void ParentInstanceEffect(Transform parentObj, InstancePlayEffectName instancePlayEffectName, Vector3 effectPosition)
     {
         //再生するエフェクトの親オブジェクトとエフェクトの名前と座標を受け取って再生する
-        GameObject obj = Instantiate(_instanceParticlePrefabs[(int)_playEffectName], effectPosition, Quaternion.identity);
-        obj.transform.SetParent(parentObj);
+        GameObject obj = Instantiate(_instanceEffectPrefabs[(int)instancePlayEffectName], effectPosition, Quaternion.identity);
+        obj.transform.SetParent(parentObj);   
+    }
+
+    public void InstanceEffect(InstancePlayEffectName effectName, Vector3 effectPosition ,Vector3 effectRotate)
+    {
+        Instantiate(_instanceEffectPrefabs[(int)effectName], effectPosition, Quaternion.Euler(effectRotate));
     }
     
     /// <summary>
@@ -119,12 +124,12 @@ public class EffectManager : MonoBehaviour
 
     public void StopPlayEffect(PlayEffectName playEffectName)
     {
-        _playParticleObjects[(int)playEffectName].Stop();
+        _playEffectObjects[(int)playEffectName].Stop();
     }
     
     public void ReStartPlayEffect(PlayEffectName playEffectName)
     {
-        _playParticleObjects[(int)playEffectName].Stop();
-        _playParticleObjects[(int)playEffectName].Play();
+        _playEffectObjects[(int)playEffectName].Stop();
+        _playEffectObjects[(int)playEffectName].Play();
     }
 }

@@ -49,7 +49,7 @@ public class TextController : MonoBehaviour
         await DisplayAllTexts(_token);
     }
 
-    // 会話途中で移動したとき(仮)
+    // 会話途中でキャンセルしたとき
     private void OnDisable()
     {
         TalkEnd();
@@ -83,7 +83,8 @@ public class TextController : MonoBehaviour
         {
             foreach (var text in wards)
             {
-                _hasTextEnded = false; // 1文表示終了フラグをリセット
+                // 1文表示終了フラグをリセット
+                _hasTextEnded = false;
                 await ShowText(text, _token);
 
                 // 表示が終わるまで待機
@@ -106,7 +107,8 @@ public class TextController : MonoBehaviour
     {
         try
         {
-            _textLabel.text = ""; //テキストを初期化
+            //テキストを初期化
+            _textLabel.text = "";
 
             for (int i = 0; i < text.Length; i++)
             {
@@ -122,8 +124,6 @@ public class TextController : MonoBehaviour
         catch (OperationCanceledException)
         {
             // 表示中に移動などでキャンセルしたとき
-            Debug.Log("bb");
-
             _cts.Dispose();
         }
     }
