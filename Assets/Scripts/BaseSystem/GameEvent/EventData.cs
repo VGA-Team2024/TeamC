@@ -3,13 +3,13 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace VTNConnect
+namespace GameEvent
 {
     /// <summary>
     /// データクラス
     /// </summary>
     [Serializable]
-    public class EventData
+    public class GameEventData
     {
         [Serializable]
         public class ParamData
