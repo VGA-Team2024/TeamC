@@ -82,6 +82,18 @@ MonoBehaviour:
     acbFile: SE_WoodenToys.acb
     awbFile: 
     loaderStatus: 0
+  - name: SE_Outgame
+    acbFile: SE_Outgame.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: Voice
+    acbFile: Voice.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: MusicBox
+    acbFile: MusicBox.acb
+    awbFile: MusicBox.awb
+    loaderStatus: 0
   dspBusSetting: 
   dontDestroyOnLoad: 0
   dontRemoveExistsCueSheet: 0
