@@ -5,10 +5,15 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     private readonly int Attack = Animator.StringToHash("Attack");
-    private PlayerControls _controls;
+    private readonly int RangeAttack = Animator.StringToHash("RangeAttack");
     private Player _player;
     [SerializeField, InspectorVariantName("通常攻撃のゲームオブジェクト")] 
     private GameObject _attackCollider;
+
+    [SerializeField, InspectorVariantName("上下攻撃の座標Y")]
+    private float _attackPosY;
+
+    private Vector3 _atkPos;
     [SerializeField, InspectorVariantName("特殊攻撃のゲームオブジェクト")] 
     private GameObject _specialCollider;
     [SerializeField, InspectorVariantName("遠距離攻撃のプレハブ")]
@@ -21,18 +26,21 @@ public class PlayerAttack : MonoBehaviour
     private float _lifeTime = 5;
     private bool _attackAnimTrigger;
 
+    private PlayerControls _controls;
     private bool _musicBoxPlaying;
+    public bool MusicBoxPlayingSet {set => _musicBoxPlaying = value; }
 
     private void Awake()
     {
-        _controls = new PlayerControls();
         _player = GetComponent<Player>();
+        _controls = new PlayerControls();
         _controls.InGame.Attack.started += OnAttack;
         _controls.InGame.Attack.canceled += AttackCancel;
         _controls.InGame.SpecialAttack.started += OnSpecialAttack;
         _controls.InGame.LongRangeAttack.canceled += OnLongRangeAttack;
-        _controls.InGame.MusicBox.performed += ((c) => _musicBoxPlaying = true);
-        _player.AnimationEvent.EventDictionary.Add("Attack" ,AttackColliderSetActive);
+        _player.AnimEvent.AnimEventDic.Add(PlayerAnimationEventController.animationType.AttackColliderEnable,AttackColliderSetActive);
+        _player.AnimEvent.AnimEventDic.Add(PlayerAnimationEventController.animationType.AttackRangeEnable,RangeAttackInstantiate);
+        _atkPos = _attackCollider.transform.localPosition;
     }
     
     private void OnDestroy()
@@ -42,7 +50,6 @@ public class PlayerAttack : MonoBehaviour
         _controls.InGame.Attack.canceled -= AttackCancel;
         _controls.InGame.SpecialAttack.started -= OnSpecialAttack;
         _controls.InGame.LongRangeAttack.canceled -= OnLongRangeAttack;
-        _controls.InGame.MusicBox.performed -= ((c) => _musicBoxPlaying = true);
     }
 
     private void OnEnable()
@@ -52,9 +59,8 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnDisable()
     {
-        _controls.Dispose();
+        _controls.Disable();
     }
-
     private void OnAttack(InputAction.CallbackContext context)
     {
         _attackAnimTrigger = true;
@@ -70,9 +76,12 @@ public class PlayerAttack : MonoBehaviour
 
     private void AttackColliderSetActive()
     {
-        // 攻撃用当たり判定をアクティブにする
-        Vector3 atkPos = _attackCollider.transform.localPosition;
-        _attackCollider.transform.localPosition = new Vector3(Mathf.Abs(atkPos.x) * (_player.PlayerMove.PlayerFlip ? 1 : -1),atkPos.y, atkPos.z);
+        // positionの設定
+            _attackCollider.transform.localPosition =
+                new Vector3(
+                    _atkPos.x * (_player.PlayerMove.PlayerFlip ? 1 : -1), //左右の向き
+                    Math.Sign(_player.PlayerMove.Dir.y) * _attackPosY + _atkPos.y, // 上下攻撃
+                    _atkPos.z);
         _attackCollider.SetActive(true);
         EffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffect,
             Mathf.Approximately(gameObject.transform.GetChild(0).localEulerAngles.y, 180) ? 1 : 0);
@@ -81,6 +90,8 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnSpecialAttack(InputAction.CallbackContext context)
     {
+        if(!_player.PlayerStatus.CanSpecialAttack())
+            return; // 妖精ゲージが足りていなければ出せない
         if (!_player.PlayerMove.Dashing)
         {
             // 位置の固定
@@ -99,10 +110,9 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnLongRangeAttack(InputAction.CallbackContext context)
     {
-        if (!_musicBoxPlaying)
-        {
-            // ToDo: AnimationEventで呼ぶようにする
-            RangeAttackInstantiate();
+        if (!_musicBoxPlaying && _player.PlayerStatus.IsLongRangeAttackRelease)
+        {// 長押しではないかつ遠距離攻撃が解放されている
+            _player.Animator.SetTrigger(RangeAttack);
         }
         _musicBoxPlaying = false;
     }

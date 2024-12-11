@@ -80,7 +80,11 @@ public class SpecialAttack : MonoBehaviour
             Vector3 pos = other.transform.position;
             tp.Teleport(_player.transform.position + _hitMisalignment);
             _parentTp.Teleport(pos + _hitMisalignment);
+            //DoTweenの停止
             _twForward.Kill(false);
+            // 妖精ゲージの消費
+            _player.PlayerStatus.UseSpecialAttack();
+            
             this.gameObject.SetActive(false);
         }
         else if(other.isTrigger == false)
