@@ -164,7 +164,6 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         if (!_isMove || !_onAirJump) return;
         float jumpPower;
         float jumpTime;
-        PlayerEffectManager.Instance.StopPlayEffect(PlayEffectName.PlayerMoveEffect);
         if (_isGround)
         {// 地上のジャンプなら
             jumpPower = _firstJumpPower;
@@ -184,7 +183,8 @@ public class PlayerMove : MonoBehaviour, ITeleportable
             jumpTime = _secondJumpTime;
             _onAirJump = false;
         }
-        
+
+        PlayerEffectManager.Instance.StopPlayEffect(PlayEffectName.PlayerMoveEffect);
         _jumpCancelToken = new();
         _gravityEnum = GravityEnum.JumpUp;
         _rb.velocity = new Vector3(_rb.velocity.x, 0,0);
@@ -217,10 +217,6 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     private void OnMove(InputAction.CallbackContext context)
     {
         Dir = context.ReadValue<Vector2>();
-        if (_isGround && Dir.x < -0.1 || Dir.x > 0.1)
-        {
-            PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerMoveEffect, 0);
-        }
     }
 
     private async void OnDash(InputAction.CallbackContext context)
