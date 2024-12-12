@@ -83,7 +83,7 @@ public class PlayerAttack : MonoBehaviour
                     Math.Sign(_player.PlayerMove.Dir.y) * _attackPosY + _atkPos.y, // 上下攻撃
                     _atkPos.z);
         _attackCollider.SetActive(true);
-        EffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffect,
+        PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffect,
             Mathf.Approximately(gameObject.transform.GetChild(0).localEulerAngles.y, 180) ? 1 : 0);
         // 非アクティブは_attackCollider自身がする
     }

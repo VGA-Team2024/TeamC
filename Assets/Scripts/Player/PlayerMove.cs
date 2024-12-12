@@ -51,7 +51,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
             _player.Animator.SetBool(DirRight, value);
             if (_isGround)
             {
-                EffectManager.Instance.ReStartPlayEffect(PlayEffectName.PlayerMoveEffect);   
+                PlayerEffectManager.Instance.ReStartPlayEffect(PlayEffectName.PlayerMoveEffect);   
             }
         }
     }
@@ -164,7 +164,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         if (!_isMove || !_onAirJump) return;
         float jumpPower;
         float jumpTime;
-        EffectManager.Instance.StopPlayEffect(PlayEffectName.PlayerMoveEffect);
+        PlayerEffectManager.Instance.StopPlayEffect(PlayEffectName.PlayerMoveEffect);
         if (_isGround)
         {// 地上のジャンプなら
             jumpPower = _firstJumpPower;
@@ -172,7 +172,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         }
         else
         {// 空中のジャンプなら
-            EffectManager.Instance.InstanceEffect(InstancePlayEffectName.PlayerJumpEffect,
+            PlayerEffectManager.Instance.InstanceEffect(InstancePlayEffectName.PlayerJumpEffect,
                 new Vector3(gameObject.transform.transform.position.x,
                     gameObject.transform.transform.position.y - 2,
                     gameObject.transform.transform.position.z)
@@ -219,7 +219,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         Dir = context.ReadValue<Vector2>();
         if (_isGround && Dir.x < -0.1 || Dir.x > 0.1)
         {
-            EffectManager.Instance.PlayEffect(PlayEffectName.PlayerMoveEffect, 0);
+            PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerMoveEffect, 0);
         }
     }
 
@@ -229,7 +229,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
             return; //ダッシュが解放されていないならreturnする
         if (_isMove)
         {
-            EffectManager.Instance.PlayEffect(PlayEffectName.PlayerDashEffect,
+            PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerDashEffect,
                 transform.GetChild(0).localEulerAngles.y);
             if (_jumpCancelToken != null)
             {
