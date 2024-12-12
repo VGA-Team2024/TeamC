@@ -639,6 +639,8 @@ MonoBehaviour:
   _gravityScale: 170
   _maxFallingSpeed: 50
   _flipObject: {fileID: 7270975046594281940}
+  _boxSize: {x: 2.9, y: 0.1, z: 1}
+  _dis: 2.2
 --- !u!114 &7768347166177622624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,7 +655,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHP: 5
   _currentHP: 0
-  healthUI: {fileID: 0}
   _maxFairyGauge: 600
   _currentFairyGauge: 0
   _spAttackDiminution: 150
@@ -681,7 +682,8 @@ MonoBehaviour:
   _attackCollider: {fileID: 7499795661562170678}
   _attackPosY: 0
   _specialCollider: {fileID: 5339820357696757217}
-  _rangeCollider: {fileID: 0}
+  _rangeCollider: {fileID: 7885275345636726080, guid: 63cff5c4e17ad2543b861cd2b3d45ff8,
+    type: 3}
   _rangeAttackSpeed: 10
   _lifeTime: 5
 --- !u!65 &985564868485557033

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,6 +31,11 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     [SerializeField, InspectorVariantName("重力")] private float _gravityScale = 20;
     [SerializeField, InspectorVariantName("落下速度の上限")] private float _maxFallingSpeed = 50;
     [SerializeField, InspectorVariantName("左右入力で反転するゲームオブジェクト")]private GameObject _flipObject;
+    
+    [SerializeField] private Vector3 _boxSize;
+    [SerializeField] private float _dis;
+    private RaycastHit _hit;
+    
     private bool _dirRight = true;  //プレイヤーがどちら側を向いているか
     public bool PlayerFlip
     {
@@ -108,8 +115,29 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         _player = GetComponent<Player>();
     }
 
+    void OnDrawGizmos()
+    {
+        Gizmos.color = _isGround ? Color.green : Color.red;
+        Gizmos.DrawCube(this.transform.position + Vector3.down * _dis, _boxSize);
+    }
+
     private void FixedUpdate()
     {
+        //bool boxHit = Physics.BoxCast(this.transform.position, _boxSize, Vector3.down, out RaycastHit _hit, Quaternion.identity, _dis);
+        if(Physics.BoxCast(this.transform.position, _boxSize / 2, Vector3.down, out RaycastHit _hit, Quaternion.identity, _dis) 
+           && _hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            if (!_isGround)
+            {
+                _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.JumpLandhing);
+            }
+            _onAirJump = true;
+            _isGround = true;
+        }
+        else
+        {
+            _isGround = false;
+        }
         //今向いている方向と逆に向いたときに攻撃判定用ゲームオブジェクトの位置を変える
         if ((Dir.x > 0 && !PlayerFlip) || (Dir.x < 0 && PlayerFlip))
         {
@@ -120,7 +148,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         if (_isMove)
         {
             //左右移動
-            _rb.velocity = new Vector3(Dir.x * _moveSpeed, _rb.velocity.y, 0);
+            _rb.velocity = new Vector3(math.sign(Dir.x) * _moveSpeed, _rb.velocity.y, 0);
         }
         
         Gravity();
@@ -129,28 +157,6 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         _player.Animator.SetFloat(MoveHorizontal,Mathf.Abs(_rb.velocity.x));
         _player.Animator.SetFloat(MoveVertical,_rb.velocity.y);
         _player.Animator.SetBool(IsGround,_isGround);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            if (!_isGround)
-            {
-                _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.JumpLandhing);
-                _onAirJump = true;
-            }
-
-            _isGround = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            _isGround = false;
-        }
     }
 
     private async void OnJump(InputAction.CallbackContext context)
