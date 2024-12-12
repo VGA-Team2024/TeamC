@@ -9,8 +9,6 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
     private int _maxHP = 5;
     [SerializeField, InspectorVariantName("現在体力")] 
     private int _currentHP;
-    [SerializeField, InspectorVariantName("体力UIScript")]
-    PlayerHealthUI healthUI;
     [SerializeField, InspectorVariantName("最大妖精ゲージ")] 
     private int _maxFairyGauge = 600;
     [SerializeField, InspectorVariantName("現在妖精ゲージ")]
@@ -65,13 +63,20 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
             _currentFairyGauge = _maxFairyGauge;
         if(_player.PlayerStatusUI)
             _player.PlayerStatusUI.FairyGaugeUpdate(_currentFairyGauge / _maxFairyGauge);
+        CanSpecialAttack();
     }
 
     /// <summary>
     /// 妖精ゲージが足りているか判定する
     /// </summary>
-    public bool CanSpecialAttack() => _currentFairyGauge >= _spAttackDiminution;
+    public bool CanSpecialAttack()
+    {
+        bool canSpecial = _currentFairyGauge >= _spAttackDiminution;
+        _player.PlayerStatusUI.CanSpecialAttackUpdate(canSpecial);
+        return canSpecial;
+    }
 
+    
     public void UseSpecialAttack() => _currentFairyGauge -= _spAttackDiminution;
     
     public void TakeDamage(int damage)

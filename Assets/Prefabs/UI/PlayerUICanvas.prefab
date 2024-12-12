@@ -685,7 +685,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6863373085427146043}
   - component: {fileID: 3409140029649584380}
-  - component: {fileID: 5405384578884940220}
   m_Layer: 5
   m_Name: Hearts
   m_TagString: Untagged
@@ -725,18 +724,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5714995111495058357}
   m_CullTransparentMesh: 1
---- !u!114 &5405384578884940220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5714995111495058357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15f50a17b9bcc9d4f98b26d7fbe158fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6100943288425008654
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,7 +929,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6552854799380093405
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1012,6 +999,7 @@ GameObject:
   - component: {fileID: 5991067404138034249}
   - component: {fileID: 5118089520006771528}
   - component: {fileID: 5734354078936056544}
+  - component: {fileID: 4838528334737284278}
   m_Layer: 5
   m_Name: PlayerUICanvas
   m_TagString: Untagged
@@ -1103,6 +1091,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4838528334737284278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6591543607976201623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d63310489036862409e11a9882980722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthUIParent: {fileID: 5714995111495058357}
+  _fairyGaugeImage: {fileID: 6265498746630112680}
+  _needleImage: {fileID: 6621543731323471136}
 --- !u!1 &6635427677872112999
 GameObject:
   m_ObjectHideFlags: 0

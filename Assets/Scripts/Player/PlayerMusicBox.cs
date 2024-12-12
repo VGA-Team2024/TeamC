@@ -3,11 +3,14 @@ using CriWare;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMusicBox : MonoBehaviour
+public class PlayerMusicBox : MonoBehaviour , ICylinderable
 {
     private CriAtomExPlayback _musicBoxPlayback;
     private PlayerControls _controls;
     private Player _player;
+    private int _cylinders;
+    public int CylinderCount => _cylinders;
+
 
     private void Awake()
     {
@@ -50,5 +53,10 @@ public class PlayerMusicBox : MonoBehaviour
     {
         _musicBoxPlayback.Stop();
         EffectManager.Instance.PlayEffect(PlayEffectName.PlayerMusicNoteEffect,0);
+    }
+    
+    public void AddCylinder()
+    {
+        _cylinders++;
     }
 }
