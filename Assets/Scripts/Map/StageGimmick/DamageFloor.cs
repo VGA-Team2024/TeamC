@@ -11,6 +11,11 @@ public class DamageFloor : MonoBehaviour
             other.gameObject.transform.position = _childObj.transform.position;
         }
 
+        if (other.TryGetComponent<IDamageable>(out IDamageable dmg))
+        {
+            dmg.TakeDamage(1);
+        }
+
         CRIAudioManager.BGM.Play("SE_Gimmick","SE_Gimmick_PoisonSwanp01");
     }
 }
