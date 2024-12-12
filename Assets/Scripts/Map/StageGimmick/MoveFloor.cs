@@ -2,20 +2,21 @@ using UnityEngine;
 public class MoveFloor : MonoBehaviour
 {
     [SerializeField, InspectorVariantName("折り返し地点")] 
-    private Vector2 _returnPosition;
+    private Vector3 _returnPosition;
     [SerializeField,InspectorVariantName("移動スピード")] 
     private float _moveSpeed;
     //スタート地点
     private Vector2 _startPosition;
     //移動先の切り替えフラグ
     private bool _isReturn;
-
+    
     void OnDrawGizmos()
     {
-        Gizmos.DrawCube(_returnPosition,gameObject.transform.localScale);
+        var gizmosCubePosition = _returnPosition + GetComponent<BoxCollider>().center;
+        Gizmos.DrawCube(gizmosCubePosition,GetComponent<BoxCollider>().size);
     }
 
-    void OnValidate()
+    void Start()
     {
         _startPosition = transform.position;
     }
