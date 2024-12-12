@@ -2366,7 +2366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc6f55a7a7509946af3ff77555e3312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackColliderTimer: 0.5
+  _attackColliderTimer: 0.1
 --- !u!4 &8205493882828500343 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 467051544466621311, guid: 701f5dadf59fca745a8517abb3fec43e,
