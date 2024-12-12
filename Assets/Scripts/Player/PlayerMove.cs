@@ -161,10 +161,10 @@ public class PlayerMove : MonoBehaviour, ITeleportable
 
     private async void OnJump(InputAction.CallbackContext context)
     {
-        
         if (!_isMove || !_onAirJump) return;
         float jumpPower;
         float jumpTime;
+        EffectManager.Instance.StopPlayEffect(PlayEffectName.PlayerMoveEffect);
         if (_isGround)
         {// 地上のジャンプなら
             jumpPower = _firstJumpPower;
@@ -184,6 +184,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
             jumpTime = _secondJumpTime;
             _onAirJump = false;
         }
+        
         _jumpCancelToken = new();
         _gravityEnum = GravityEnum.JumpUp;
         _rb.velocity = new Vector3(_rb.velocity.x, 0,0);
