@@ -11,6 +11,6 @@ public class DamageFloor : MonoBehaviour
             other.gameObject.transform.position = _childObj.transform.position;
         }
 
-        CRIAudioManager.BGM.Play("SE_Gimmick","SE_Gimmick_PoisonSwanp");
+        CRIAudioManager.BGM.Play("SE_Gimmick","SE_Gimmick_PoisonSwanp01");
     }
 }
