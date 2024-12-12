@@ -95,11 +95,11 @@ public class SpecialAttack : MonoBehaviour
 
         if (other.gameObject.CompareTag("Enemy"))
         {
-            EffectManager.Instance.ParentInstanceEffect(other.gameObject.transform,
+            PlayerEffectManager.Instance.ParentInstanceEffect(other.gameObject.transform,
                 InstancePlayEffectName.PlayerSpecialAttackEffect,
                 other.gameObject.transform.position);
             Transform parentObj = gameObject.transform.parent.gameObject.transform;
-            EffectManager.Instance.ParentInstanceEffect(parentObj, InstancePlayEffectName.PlayerSpecialAttackEffect,
+            PlayerEffectManager.Instance.ParentInstanceEffect(parentObj, InstancePlayEffectName.PlayerSpecialAttackEffect,
                 parentObj.transform.position);
         }
     }
