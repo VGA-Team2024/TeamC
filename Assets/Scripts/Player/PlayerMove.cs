@@ -44,7 +44,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
             _player.Animator.SetBool(DirRight, value);
             if (_isGround)
             {
-                EffectManager.Instance.ReStartPlayEffect(PlayEffectName.PlayerDashEffect);   
+                EffectManager.Instance.ReStartPlayEffect(PlayEffectName.PlayerMoveEffect);   
             }
         }
     }
@@ -166,6 +166,12 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         }
         else
         {// 空中のジャンプなら
+            EffectManager.Instance.InstanceEffect(InstancePlayEffectName.PlayerJumpEffect,
+                new Vector3(gameObject.transform.transform.position.x,
+                    gameObject.transform.transform.position.y - 2,
+                    gameObject.transform.transform.position.z)
+                , new Vector3(95, 0, 0)
+            );
             if(!_player.PlayerStatus.IsSecondJumpRelease)
                 return; // 空中ジャンプが解放されていないならreturnする
             jumpPower = _secondJumpPower;
@@ -203,11 +209,11 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     // ActionMapのMove
     private void OnMove(InputAction.CallbackContext context)
     {
-        if (_isGround)
-        {
-            EffectManager.Instance.PlayEffect(PlayEffectName.PlayerDashEffect, 0);   
-        }
         Dir = context.ReadValue<Vector2>();
+        if (_isGround && Dir.x < -0.1 || Dir.x > 0.1)
+        {
+            EffectManager.Instance.PlayEffect(PlayEffectName.PlayerMoveEffect, 0);
+        }
     }
 
     private async void OnDash(InputAction.CallbackContext context)
@@ -216,7 +222,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
             return; //ダッシュが解放されていないならreturnする
         if (_isMove)
         {
-            EffectManager.Instance.PlayEffect(PlayEffectName.PlayerBlinkEffect,
+            EffectManager.Instance.PlayEffect(PlayEffectName.PlayerDashEffect,
                 transform.GetChild(0).localEulerAngles.y);
             if (_jumpCancelToken != null)
             {
