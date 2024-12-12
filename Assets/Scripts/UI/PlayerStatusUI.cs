@@ -38,6 +38,9 @@ public class PlayerStatusUI : MonoBehaviour
         _fairyGaugeImage.fillAmount = value;
     }
 
+    /// <summary>
+    /// 特殊攻撃ができる状態か受け取り表示する
+    /// </summary>
     public void CanSpecialAttackUpdate(bool value)
     {
         _needleImage.enabled = value;

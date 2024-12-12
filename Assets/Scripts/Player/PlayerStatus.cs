@@ -63,13 +63,20 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
             _currentFairyGauge = _maxFairyGauge;
         if(_player.PlayerStatusUI)
             _player.PlayerStatusUI.FairyGaugeUpdate(_currentFairyGauge / _maxFairyGauge);
+        CanSpecialAttack();
     }
 
     /// <summary>
     /// 妖精ゲージが足りているか判定する
     /// </summary>
-    public bool CanSpecialAttack() => _currentFairyGauge >= _spAttackDiminution;
+    public bool CanSpecialAttack()
+    {
+        bool canSpecial = _currentFairyGauge >= _spAttackDiminution;
+        _player.PlayerStatusUI.CanSpecialAttackUpdate(canSpecial);
+        return canSpecial;
+    }
 
+    
     public void UseSpecialAttack() => _currentFairyGauge -= _spAttackDiminution;
     
     public void TakeDamage(int damage)
