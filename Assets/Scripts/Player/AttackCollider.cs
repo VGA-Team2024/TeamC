@@ -33,7 +33,7 @@ public class AttackCollider : MonoBehaviour
             damage.TakeDamage(1);
             if (other.gameObject.CompareTag("Enemy"))
             {
-                EffectManager.Instance.ParentInstanceEffect(other.gameObject.transform,
+                PlayerEffectManager.Instance.ParentInstanceEffect(other.gameObject.transform,
                     InstancePlayEffectName.PlayerAttackHitEffect,
                     other.gameObject.transform.position);
             }

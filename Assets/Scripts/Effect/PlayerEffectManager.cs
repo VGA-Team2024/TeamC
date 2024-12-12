@@ -24,10 +24,10 @@ public enum InstancePlayEffectName
     PlayerJumpEffect,
 }
 
-public class EffectManager : MonoBehaviour
+public class PlayerEffectManager : MonoBehaviour
 {
-    static EffectManager _instance;
-    public static EffectManager Instance => _instance;
+    static PlayerEffectManager _instance;
+    public static PlayerEffectManager Instance => _instance;
     
     [SerializeField,InspectorVariantName("Scene上に配置されているエフェクトをアタッチする")] 
     private ParticleSystem[] _playEffectObjects;
