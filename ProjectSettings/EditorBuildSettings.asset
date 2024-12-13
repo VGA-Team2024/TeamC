@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Mockup/03_Result.unity
     guid: c8cb7d654958e2a498466c10e7f0caba
   - enabled: 1
+    path: Assets/Scenes/Planer/Stage1_FairyForest.unity
+    guid: 2307e729182289240b24b7232782e811
+  - enabled: 1
     path: Assets/Scenes/Design/Morning.unity
     guid: 0de2f053148d51d4c8255fd5ede95194
   - enabled: 1
@@ -53,9 +56,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/System/GameLauncher.unity
     guid: 8fddd8bd6df26f84eb0ce52c7a3f43e5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Planer/PlannerScene.unity
     guid: b60cb13ff35b0c14b88b826153f27bf2
+  - enabled: 1
+    path: Assets/Scenes/Planer/TemplateMap.unity
+    guid: 5c06e856894c0d043b2d7af15195cc55
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 7366e43fa3f777f4292c2095e8b63e4c,
       type: 2}
