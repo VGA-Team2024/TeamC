@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
+// メニューバーにシーンを切り替えるGUIを表示
 public static class SceneNavigation
 {
     [MenuItem("Scene/TitleScene")]
@@ -31,6 +32,14 @@ public static class SceneNavigation
         EditorSceneManager.SaveOpenScenes();
         OpenScene(3);
     }
+    
+    [MenuItem("Scene/Stage1_FairyForest")]
+    private static void Scene4()
+    {
+        EditorSceneManager.SaveOpenScenes();
+        OpenScene(4);
+    }
+    
     private static void OpenScene(int sceneIndex)
     {
         string scenePath = SceneUtility.GetScenePathByBuildIndex(sceneIndex);
