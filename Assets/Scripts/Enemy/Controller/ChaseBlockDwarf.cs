@@ -21,14 +21,21 @@ public class ChaseBlockDwarf : EnemyBase, IPlayerTarget
         _particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
         _animator = GetComponent<Animator>();
 
-        _chaseState = new EnemyChaseState(this, _animator, transform, _speed, _isFly);
+        _chaseState = new EnemyChaseState(this, _freezeState, _animator, transform, _speed, _isFly);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
-        _deathState = new EnemyDeathState(this, _particle, gameObject);
+        _deathState = new EnemyDeathState(this, _particle, _animator, gameObject);
     }
 
     protected override void OnUpdate()
     {
         if (_isDeath) return;
+        
+        if (_hp.CurrentHp <= 0)
+        {
+            _isDeath = true;
+            ChangeState(_deathState);
+            return;
+        }
         
         if (_playerMove)
         {
@@ -46,12 +53,6 @@ public class ChaseBlockDwarf : EnemyBase, IPlayerTarget
             }
             _chaseState.GetPlayerPos(_playerMove.transform.position);
         }
-        
-        if (_hp.CurrentHp <= 0)
-        {
-            _isDeath = true;
-            ChangeState(_deathState);
-        }
     }
     
     public void GetPlayerMove(PlayerMove playerMove)
@@ -61,10 +62,11 @@ public class ChaseBlockDwarf : EnemyBase, IPlayerTarget
     
     private void OnCollisionStay(Collision other)
     {
-        if (_currentState == _freezeState) return;
-        if(other.gameObject.CompareTag(_playerTag) && other.gameObject.TryGetComponent(out IDamageable dmg))
+        if (!other.gameObject.CompareTag(_playerTag)) return;
+        if(other.gameObject.TryGetComponent(out IDamageable dmg) && other.gameObject.TryGetComponent(out IBlowable blo))
         {
             dmg.TakeDamage(_damage);
+            blo.BlownAway(transform.position);
             ChangeState(_freezeState);
         }
     }

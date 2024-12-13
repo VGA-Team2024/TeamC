@@ -23,15 +23,22 @@ public class JumpNormalBear : EnemyBase, IPlayerTarget
         _particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
         _animator = gameObject.transform.GetChild(2).GetComponent<Animator>();
         
-        _walkState = new EnemyWalkState(this, _animator, transform, _speed, _patrolArea);
+        _walkState = new EnemyWalkState(_animator, transform, _speed, _patrolArea);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, _animator, transform, _jumpSpeed, _animationCurve);
-        _deathState = new EnemyDeathState(this, _particle, gameObject);
+        _deathState = new EnemyDeathState(this, _particle, _animator, gameObject);
     }
 
     protected override void OnUpdate()
     {
         if (_isDeath) return;
+        
+        if (_hp.CurrentHp <= 0)
+        {
+            _isDeath = true;
+            ChangeState(_deathState);
+            return;
+        }
         
         if (_playerMove)
         {
@@ -44,12 +51,6 @@ public class JumpNormalBear : EnemyBase, IPlayerTarget
         {
             if (_currentState == _idleState) ChangeState(_walkState);
         }
-        
-        if (_hp.CurrentHp <= 0)
-        {
-            _isDeath = true;
-            ChangeState(_deathState);
-        }
     }
     
     public void GetPlayerMove(PlayerMove playerMove)
@@ -59,10 +60,11 @@ public class JumpNormalBear : EnemyBase, IPlayerTarget
     
     private void OnCollisionStay(Collision other)
     {
-        if (_currentState == _freezeState) return;
-        if(other.gameObject.CompareTag(_playerTag) && other.gameObject.TryGetComponent(out IDamageable dmg))
+        if (!other.gameObject.CompareTag(_playerTag)) return;
+        if(other.gameObject.TryGetComponent(out IDamageable dmg) && other.gameObject.TryGetComponent(out IBlowable blo))
         {
             dmg.TakeDamage(_collideDamage);
+            blo.BlownAway(transform.position);
             ChangeState(_freezeState);
         }
     }

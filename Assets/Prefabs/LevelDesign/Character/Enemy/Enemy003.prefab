@@ -404,8 +404,9 @@ GameObject:
   - component: {fileID: 8223471052532186658}
   - component: {fileID: 3875570744719410736}
   - component: {fileID: 8289151159721396425}
-  - component: {fileID: 3421973872923180540}
+  - component: {fileID: -7533204617283752312}
   - component: {fileID: 3025584984574628855}
+  - component: {fileID: 3421973872923180540}
   - component: {fileID: 800354928587787800}
   m_Layer: 7
   m_Name: Enemy003
@@ -463,6 +464,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHp: 3
+--- !u!114 &-7533204617283752312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555941503303813936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2376e00fd3ba5944a132796697ae68b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _blow: 2
+--- !u!114 &3025584984574628855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555941503303813936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2fd8f18f966e34eb3bd1febd0db993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &3421973872923180540
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -484,18 +510,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.6, y: 4, z: 1}
   m_Center: {x: 0, y: 0.1, z: 0}
---- !u!114 &3025584984574628855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1555941503303813936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e2fd8f18f966e34eb3bd1febd0db993, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &800354928587787800
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -521,7 +535,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!1 &1737588959954820013
 GameObject:
@@ -2086,6 +2100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0227f112ce1ffbf41ac4581cb9d71068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameObject: {fileID: 1555941503303813936}
 --- !u!135 &7565272928355471319
 SphereCollider:
   m_ObjectHideFlags: 0

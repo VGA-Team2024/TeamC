@@ -8,10 +8,9 @@ public class Bat : EnemyBase, IPlayerTarget
     [SerializeField, Header("Playerにつけるタグの名前")] private string _playerTag;
     [SerializeField, Header("索敵をやめる距離")] private float _canselDis;
     [SerializeField, Header("次の遠距離攻撃までの時間")] private float _shootTime;
+    [SerializeField, Header("飛ばすオブジェクトのOffSet")] private Vector2 _offSet;
     [SerializeField, Header("遠距離攻撃で飛ばされるオブジェクト")] private GameObject _bullet;
     
-    private ParticleSystem _particle;
-    private Animator _animator;
     private float _shootTimer;
     
     private EnemyChaseState _chaseState;
@@ -21,18 +20,25 @@ public class Bat : EnemyBase, IPlayerTarget
     
     protected override void OnStart()
     {
-        _particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
-        _animator = GetComponent<Animator>();
+        ParticleSystem particle = gameObject.transform.GetChild(2).GetComponent<ParticleSystem>();
+        Animator animator = GetComponent<Animator>();
         
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
-        _chaseState = new EnemyChaseState(this, _animator, transform, _speed, _isFly);
-        _shootState = new EnemyShootState(this, _freezeState, _animator, transform, _bullet);
-        _deathState = new EnemyDeathState(this, _particle, gameObject);
+        _chaseState = new EnemyChaseState(this, _freezeState, animator, transform, _speed, _isFly);
+        _shootState = new EnemyShootState(this, _freezeState, animator, transform, _offSet, _bullet);
+        _deathState = new EnemyDeathState(this, particle, animator, gameObject);
     }
 
     protected override void OnUpdate()
     {
         if (_isDeath) return;
+        
+        if (_hp.CurrentHp <= 0)
+        {
+            _isDeath = true;
+            ChangeState(_deathState);
+            return;
+        }
         
         if (_playerMove)
         {
@@ -60,12 +66,6 @@ public class Bat : EnemyBase, IPlayerTarget
             }
             _chaseState.GetPlayerPos(_playerMove.transform.position);
         }
-        
-        if (_hp.CurrentHp <= 0)
-        {
-            _isDeath = true;
-            ChangeState(_deathState);
-        }
     }
     
     public void GetPlayerMove(PlayerMove playerMove)
@@ -75,10 +75,11 @@ public class Bat : EnemyBase, IPlayerTarget
     
     private void OnCollisionStay(Collision other)
     {
-        if (_currentState == _freezeState) return;
-        if(other.gameObject.CompareTag(_playerTag) && other.gameObject.TryGetComponent(out IDamageable dmg))
+        if (!other.gameObject.CompareTag(_playerTag)) return;
+        if(other.gameObject.TryGetComponent(out IDamageable dmg) && other.gameObject.TryGetComponent(out IBlowable blo))
         {
             dmg.TakeDamage(_collideDamage);
+            blo.BlownAway(transform.position);
             ChangeState(_freezeState);
         }
     }

@@ -1,18 +1,16 @@
-using System.Threading;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class EnemyBullet : MonoBehaviour
+public class EnemyBullet : MonoBehaviour, IPlayerTarget
 {
     [SerializeField] private float _speed;
     [SerializeField] private int _damage;
     private const int DeleteTime = 5;
-    private CancellationTokenSource _tokenSource;
+    private Vector2 _playerPos;
     
     private void Start()
     {
-        _tokenSource = new CancellationTokenSource();
-        Destroy().Forget();
+        Direction();
+        Destroy(gameObject, DeleteTime);
     }
 
     private void Update()
@@ -30,15 +28,16 @@ public class EnemyBullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private async UniTask Destroy()
+    private void Direction()
     {
-        await UniTask.Delay(DeleteTime * 1000, cancellationToken : _tokenSource.Token);
-        Destroy(gameObject);
+        var dir = _playerPos - (Vector2)transform.position;
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        transform.eulerAngles = new Vector3(0, 0, angle);
     }
-    
-    private void OnDestroy()
+
+    public void GetPlayerPos(Vector2 playerPos)
     {
-        _tokenSource?.Cancel();
-        _tokenSource?.Dispose();
+        _playerPos = playerPos;
     }
 }
