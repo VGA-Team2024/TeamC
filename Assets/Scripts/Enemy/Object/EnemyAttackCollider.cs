@@ -23,9 +23,11 @@ public class EnemyAttackCollider : MonoBehaviour
         }
 
         // 当たったコライダーのゲームオブジェクトにIDamageableがついているなら
-        if(other.TryGetComponent<IDamageable>(out IDamageable damage))
+        if(other.TryGetComponent(out IDamageable damage))
         {
             damage.TakeDamage(1);
         }
+
+        if (other.TryGetComponent(out IBlowable blo)) blo.BlownAway(transform.position);
     }
 }

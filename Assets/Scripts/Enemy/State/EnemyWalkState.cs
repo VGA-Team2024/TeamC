@@ -3,7 +3,6 @@ using UnityEngine;
 /// <summary> 敵の巡回ステート </summary>
 public class EnemyWalkState : IEnemyState
 {
-    private EnemyBase _enemyBase;
     private readonly Animator _animator;
     private readonly int _walk = Animator.StringToHash("Walk");
     private readonly Transform _transform;
@@ -13,18 +12,23 @@ public class EnemyWalkState : IEnemyState
     
     private readonly float _rayLength;
     private readonly Vector3 _rayOffset = new Vector3(0, -0.5f, 0);
-    private readonly Vector2 _rightDir = new Vector2(1, -1).normalized;
-    private readonly Vector2 _leftDir = new Vector2(-1, -1).normalized;
+    private readonly Vector2 _rightRayDir;
+    private readonly Vector2 _leftRayDir;
+
+    private readonly Vector2 right = new Vector2(0, 180);
+    private readonly Vector2 left = new Vector2(0, 0);
     
-    public EnemyWalkState(EnemyBase enemyBase,Animator animator, Transform transform, float speed, float area)
+    public EnemyWalkState(Animator animator, Transform transform, float speed, float area)
     {
-        _enemyBase = enemyBase;
         _animator = animator;
         _transform = transform;
         _startPos = transform.position;
         _speed = speed;
         _patrolArea = area;
-        _rayLength = transform.gameObject.GetComponent<BoxCollider>().size.y / 2 + 1f;
+        var colliderSize = transform.gameObject.GetComponent<BoxCollider>().size;
+        _rayLength = colliderSize.y / 2 + 1f;
+        _rightRayDir = new Vector2(colliderSize.x, -colliderSize.y).normalized;
+        _leftRayDir = new Vector2(-colliderSize.x, -colliderSize.y).normalized;
     }
     
     
@@ -53,24 +57,24 @@ public class EnemyWalkState : IEnemyState
     {
         // 前に床がなければ引き返す
         Vector3 rayOrigin = _transform.position + _rayOffset;
-        bool hit = Physics.Raycast(rayOrigin, _transform.rotation.y > 0 ? _rightDir : _leftDir, out RaycastHit hitInfo, _rayLength);
+        bool hit = Physics.Raycast(rayOrigin, _transform.rotation.y > 0 ? _rightRayDir : _leftRayDir, out RaycastHit hitInfo, _rayLength);
 
         // 前が壁なら引き返す
         bool wallHit = Physics.Raycast(rayOrigin, -_transform.right, out RaycastHit wallHitInfo, _rayLength);
         
         if (!hit || LayerMask.LayerToName(hitInfo.transform.gameObject.layer) != "Ground" || wallHit && LayerMask.LayerToName(wallHitInfo.transform.gameObject.layer) == "Ground")
         {
-            _transform.eulerAngles = new Vector2(0, _transform.eulerAngles.y == 0 ? 180 : 0);
+            _transform.eulerAngles = new Vector2(0, _transform.eulerAngles.y == 0 ? right.y : left.y);
         }
         
         if (_transform.position.x <= _startPos.x + 0.01f)
         {
-            _transform.eulerAngles = new Vector2(0, 180);
+            _transform.eulerAngles = right;
         }
 
-        if (_transform.position.x >= _startPos.x + _patrolArea - 0.1f)
+        if (_transform.position.x >= _startPos.x + _patrolArea - 0.01f)
         {
-            _transform.eulerAngles = new Vector2(0, 0);
+            _transform.eulerAngles = left;
         }
     }
 }

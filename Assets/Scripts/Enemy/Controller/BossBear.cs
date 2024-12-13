@@ -40,18 +40,25 @@ public class BossBear : EnemyBase, IPlayerTarget
         Animator animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
         _cottons = gameObject.transform.GetChild(4).GetComponent<Cottons>();
         
-        _walkState = new EnemyWalkState(this, animator, transform, _speed, _patrolArea);
+        _walkState = new EnemyWalkState(animator, transform, _speed, _patrolArea);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _attackState = new EnemyAttackState(this, _freezeState, animator, attackCollider);
         _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, animator, transform, _jumpSpeed, _animationCurve);
         _rushState = new EnemyRushState(this, _freezeState, animator, transform, _rushDistance, _rushSpeed);
         _createState = new EnemyObjectCreateState(this, _freezeState, animator, _cottons);
-        _deathState = new EnemyDeathState(this, particle, gameObject);
+        _deathState = new EnemyDeathState(this, particle, animator, gameObject);
     }
 
     protected override void OnUpdate()
     {
         if (_isDeath) return;
+        
+        if (_hp.CurrentHp <= 0)
+        {
+            _isDeath = true;
+            ChangeState(_deathState);
+            return;
+        }
         
         if (_playerMove)
         {
@@ -140,12 +147,6 @@ public class BossBear : EnemyBase, IPlayerTarget
                 ChangeState(_walkState);
             }
         }
-        
-        if (_hp.CurrentHp <= 0)
-        {
-            _isDeath = true;
-            ChangeState(_deathState);
-        }
     }
     
     public void GetPlayerMove(PlayerMove playerMove)
@@ -155,10 +156,11 @@ public class BossBear : EnemyBase, IPlayerTarget
     
     private void OnCollisionStay(Collision other)
     {
-        if (_currentState == _freezeState) return;
-        if(other.gameObject.CompareTag(_playerTag) && other.gameObject.TryGetComponent(out IDamageable dmg))
+        if (!other.gameObject.CompareTag(_playerTag)) return;
+        if(other.gameObject.TryGetComponent(out IDamageable dmg) && other.gameObject.TryGetComponent(out IBlowable blo))
         {
             dmg.TakeDamage(_collideDamage);
+            blo.BlownAway(transform.position);
             ChangeState(_freezeState);
         }
     }

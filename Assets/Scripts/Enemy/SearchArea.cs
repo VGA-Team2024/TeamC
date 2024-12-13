@@ -2,18 +2,22 @@ using UnityEngine;
 
 public class SearchArea : MonoBehaviour
 {
-    private IPlayerTarget _playerTarget;
+    [SerializeField] private GameObject _gameObject; // IPlayerTarget を実装しているクラスがついてるオブジェクト
+    private IPlayerTarget[] _playerTargets;
 
     private void Start()
     {
-        _playerTarget = transform.parent.gameObject.GetComponent<IPlayerTarget>();
+        _playerTargets = _gameObject.GetComponents<IPlayerTarget>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<PlayerMove>(out PlayerMove pm))
         {
-            _playerTarget?.GetPlayerMove(pm);
+            foreach (var playerTarget in _playerTargets)
+            {
+                playerTarget?.GetPlayerMove(pm);
+            }
         }
     }
 
@@ -21,7 +25,10 @@ public class SearchArea : MonoBehaviour
     {
         if (other.GetComponent<PlayerMove>())
         {
-            _playerTarget?.GetPlayerMove(null);
+            foreach (var playerTarget in _playerTargets)
+            {
+                playerTarget?.GetPlayerMove(null);
+            }
         }
     }
 }

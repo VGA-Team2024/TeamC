@@ -10,13 +10,15 @@ public class EnemyShootState : IEnemyState
     private readonly Transform _transform;
     private Vector2 _playerPos;
     private readonly GameObject _obj;
+    private readonly Vector2 _offSet;
     
-    public EnemyShootState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator, Transform transform, GameObject obj)
+    public EnemyShootState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator, Transform transform,Vector2 offSet, GameObject obj)
     {
         _enemyBase = enemyBase;
         _freezeState = freezeState;
         _animator = animator;
         _transform = transform;
+        _offSet = offSet;
         _obj = obj;
     }
     
@@ -24,9 +26,8 @@ public class EnemyShootState : IEnemyState
     {
         if (_animator) _animator.SetTrigger(_shoot);
         Shoot().Forget();
-        var dir = _playerPos - (Vector2)_transform.position;
-        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        ObjectInstantiator.InstantiateObject(_obj, _transform.position, Quaternion.Euler(0, 0, angle));
+        var obj = ObjectInstantiator.InstantiateObject(_obj, GetOffSet(), Quaternion.identity);
+        if (obj.TryGetComponent(out IPlayerTarget pt)) { pt.GetPlayerPos(_playerPos); }
     }
 
     public void Execute()
@@ -49,12 +50,17 @@ public class EnemyShootState : IEnemyState
     {
         _playerPos = playerPos;
     }
-    
-    public static class ObjectInstantiator
+
+    private Vector2 GetOffSet()
     {
-        public static T InstantiateObject<T>(T obj, Vector3 pos, Quaternion rot) where T : Object
-        {
-            return Object.Instantiate(obj, pos, rot);
-        }
+        return _transform.position + _transform.right * _offSet.x + _transform.up * _offSet.y;
+    }
+}
+
+public static class ObjectInstantiator
+{
+    public static T InstantiateObject<T>(T obj, Vector3 pos, Quaternion rot) where T : Object
+    {
+        return Object.Instantiate(obj, pos, rot);
     }
 }
