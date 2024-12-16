@@ -8,6 +8,8 @@ using Cysharp.Threading.Tasks;
 /// </summary>
 public class GameEventRecorder
 {
+    const bool UnityEditorTest = false;
+
     static GameEventRecorder _instance = new GameEventRecorder();
     private GameEventRecorder() { }
 
@@ -48,11 +50,15 @@ public class GameEventRecorder
     const string baseuri = "https://jyl5w9zfz3.execute-api.ap-northeast-1.amazonaws.com/release/";
     EventRecord _currentGame = null;
 
+    static bool IsSkipAction => (UnityEditorTest == false && BuildState.BuildHash == "UNITY_EDITOR")
+
     /// <summary>
     /// ゲーム開始時に呼び出す
     /// </summary>
     static public void GameStart()
     {
+        if (IsSkipAction) return;
+
         if (_instance._currentGame != null)
         {
             Debug.LogWarning("既にプレイ中のゲームがあるようです");
@@ -68,6 +74,8 @@ public class GameEventRecorder
 
     static public void GameReview(Action reviewEndCallback)
     {
+        if (IsSkipAction) return;
+
         if (_instance._currentGame == null)
         {
             Debug.LogWarning("プレイ中のゲームがないようです。暫定で現時点をGameStartとします");
@@ -81,6 +89,8 @@ public class GameEventRecorder
 
     static public void GameEnd(Action reviewEndCallback)
     {
+        if (IsSkipAction) return;
+
         if (_instance._currentGame == null)
         {
             Debug.LogWarning("プレイ中のゲームがないようです。暫定で現時点をGameStartとします");
@@ -102,7 +112,7 @@ public class GameEventRecorder
 
     async void SendStart()
     {
-        if (BuildState.BuildHash == "UNITY_EDITOR") return;
+        if (IsSkipAction) return;
 
         var data = new GameEventData();
         data.DataPack("Time", _instance._currentGame.GameStartTime);
@@ -114,6 +124,8 @@ public class GameEventRecorder
 
     async void SendReview(int star, string comment)
     {
+        if (IsSkipAction) return;
+
         var data = new GameEventData();
         data.DataPack("StarNum", star);
         data.DataPack("Comment", comment);
@@ -128,6 +140,8 @@ public class GameEventRecorder
 
     static public async void SendEventData(string situation, GameEventData data)
     {
+        if (IsSkipAction) return;
+
         var packet = new CommonEventData(situation, data);
         await Network.WebRequest.PostRequest(baseuri + "Event", packet);
     }
