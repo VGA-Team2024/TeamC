@@ -9,13 +9,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1537132223663455103}
-  - component: {fileID: 7434546116708647575}
+  - component: {fileID: -1598442358351969823}
+  - component: {fileID: -8264788862175469649}
+  - component: {fileID: 4683911904560839400}
   - component: {fileID: 1308149502734841330}
   - component: {fileID: 2049065370857829259}
   - component: {fileID: -2136707944488368044}
   m_Layer: 13
   m_Name: Breath
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,7 +37,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7434546116708647575
+--- !u!114 &-1598442358351969823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,13 +46,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 3065034188471492711}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4eaa26b60f1237a4b8976717dc1164ca, type: 3}
+  m_Script: {fileID: 11500000, guid: a61bc5040b540b6408f52156ffb3b0f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 4
+  _damage: 1
+--- !u!114 &-8264788862175469649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3065034188471492711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1364ef6bafb62a49b657d89283bcfb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4683911904560839400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3065034188471492711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e11726af914fdfd409ab25c14562d36b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _damageFloor: {fileID: 5842079071785170563, guid: 26deaae3af7cd3149be3a1046008693b,
     type: 3}
-  _speed: 6
-  _damage: 1
 --- !u!212 &1308149502734841330
 SpriteRenderer:
   m_ObjectHideFlags: 0

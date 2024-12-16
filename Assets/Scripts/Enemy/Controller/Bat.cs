@@ -21,7 +21,7 @@ public class Bat : EnemyBase, IPlayerTarget
     protected override void OnStart()
     {
         ParticleSystem particle = gameObject.transform.GetChild(2).GetComponent<ParticleSystem>();
-        Animator animator = GetComponent<Animator>();
+        Animator animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
         
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _chaseState = new EnemyChaseState(this, _freezeState, animator, transform, _speed, _isFly);
