@@ -50,7 +50,7 @@ public class GameEventRecorder
     const string baseuri = "https://jyl5w9zfz3.execute-api.ap-northeast-1.amazonaws.com/release/";
     EventRecord _currentGame = null;
 
-    static bool IsSkipAction => (UnityEditorTest == false && BuildState.BuildHash == "UNITY_EDITOR")
+    static bool IsSkipAction => (UnityEditorTest == false && BuildState.BuildHash == "UNITY_EDITOR");
 
     /// <summary>
     /// ゲーム開始時に呼び出す
