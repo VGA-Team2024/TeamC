@@ -8,7 +8,7 @@ using Cysharp.Threading.Tasks;
 /// </summary>
 public class GameEventRecorder
 {
-    const bool UnityEditorTest = false;
+    const bool UnityEditorTest = true;
 
     static GameEventRecorder _instance = new GameEventRecorder();
     private GameEventRecorder() { }
@@ -19,6 +19,7 @@ public class GameEventRecorder
         public DateTime GameStartTime;
         public bool IsReview;
         public bool IsGameEnd;
+        public bool AlreadySend;
     };
 
     [Serializable]
@@ -46,9 +47,18 @@ public class GameEventRecorder
         }
     };
 
+    enum SEND_TYPE
+    {
+        Invalid,
+        Start,
+        Review,
+        Event
+    }
 
     const string baseuri = "https://jyl5w9zfz3.execute-api.ap-northeast-1.amazonaws.com/release/";
     EventRecord _currentGame = null;
+    DateTime _lastSend = DateTime.MinValue;
+    SEND_TYPE _lastSendType = SEND_TYPE.Invalid;
 
     static bool IsSkipAction => (UnityEditorTest == false && BuildState.BuildHash == "UNITY_EDITOR");
 
@@ -57,7 +67,11 @@ public class GameEventRecorder
     /// </summary>
     static public void GameStart()
     {
-        if (IsSkipAction) return;
+        if (IsSkipAction)
+        {
+            Debug.Log("GameEventRecorder.GameStart();");
+            return;
+        }
 
         if (_instance._currentGame != null)
         {
@@ -74,7 +88,11 @@ public class GameEventRecorder
 
     static public void GameReview(Action reviewEndCallback)
     {
-        if (IsSkipAction) return;
+        if (IsSkipAction)
+        {
+            Debug.Log("GameEventRecorder.GameReview();");
+            return;
+        }
 
         if (_instance._currentGame == null)
         {
@@ -84,12 +102,16 @@ public class GameEventRecorder
         }
 
         _instance._currentGame.IsReview = true;
-        ReviewWindow.Build(_instance.SendReview, reviewEndCallback);
+        ReviewWindow.Build(_instance, reviewEndCallback);
     }
 
     static public void GameEnd(Action reviewEndCallback)
     {
-        if (IsSkipAction) return;
+        if (IsSkipAction)
+        {
+            Debug.Log("GameEventRecorder.GameEnd();");
+            return;
+        }
 
         if (_instance._currentGame == null)
         {
@@ -112,7 +134,11 @@ public class GameEventRecorder
 
     async void SendStart()
     {
-        if (IsSkipAction) return;
+        if ((DateTime.Now - _lastSend).Seconds < 1)
+        {
+            Debug.LogWarning("リクエストが前回から1秒以内に送信されています");
+            return;
+        }
 
         var data = new GameEventData();
         data.DataPack("Time", _instance._currentGame.GameStartTime);
@@ -120,29 +146,58 @@ public class GameEventRecorder
         string json = JsonUtility.ToJson(packet);
         var res = await Network.WebRequest.PostRequest(baseuri + "Event", packet);
         Debug.Log(res);
+
+        _lastSend = DateTime.Now;
+        _lastSendType = SEND_TYPE.Start;
     }
 
-    async void SendReview(int star, string comment)
+    public async UniTask SendReview(int star, string comment)
     {
-        if (IsSkipAction) return;
+        if (_currentGame == null) return;
+        if (_currentGame.AlreadySend) return;
+
+        if ((DateTime.Now - _lastSend).Seconds < 1 && _lastSendType != SEND_TYPE.Start)
+        {
+            Debug.LogWarning("リクエストが前回から1秒以内に送信されています");
+            return;
+        }
+
+        _currentGame.AlreadySend = true;
 
         var data = new GameEventData();
         data.DataPack("StarNum", star);
         data.DataPack("Comment", comment);
         var packet = new CommonEventData("Review", data);
-        await Network.WebRequest.PostRequest(baseuri + "GameReview", packet);
+        var res = await Network.WebRequest.PostRequest(baseuri + "GameReview", packet);
+        Debug.Log(res);
 
-        if (_instance._currentGame != null && _instance._currentGame.IsGameEnd)
+        if (_currentGame != null && _currentGame.IsGameEnd)
         {
-            _instance._currentGame = null;
+            _currentGame = null;
         }
+
+        _lastSend = DateTime.Now;
+        _lastSendType = SEND_TYPE.Review;
     }
 
     static public async void SendEventData(string situation, GameEventData data)
     {
-        if (IsSkipAction) return;
+        if (IsSkipAction)
+        {
+            Debug.Log("GameEventRecorder.SendEventData();");
+            return;
+        }
+
+        if ((DateTime.Now - _instance._lastSend).Seconds < 1 && _instance._lastSendType == SEND_TYPE.Event)
+        {
+            Debug.LogWarning("リクエストが前回から1秒以内に送信されています");
+            return;
+        }
 
         var packet = new CommonEventData(situation, data);
         await Network.WebRequest.PostRequest(baseuri + "Event", packet);
+
+        _instance._lastSend = DateTime.Now;
+        _instance._lastSendType = SEND_TYPE.Event;
     }
 }
