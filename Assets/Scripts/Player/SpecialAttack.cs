@@ -14,16 +14,16 @@ public class SpecialAttack : MonoBehaviour
     private float _returnTimer = 1;
     [SerializeField, InspectorVariantName("戻る時のイージング")]
     Ease _returnEase = Ease.Linear;
+    [SerializeField, InspectorVariantName("特殊攻撃の距離")] 
+    private float _range = 8;
+    [SerializeField, InspectorVariantName("Hit時ずらしVec3")]
+    private Vector3 _hitMisalignment = new Vector3(0f, 0.5f, 0f);
 
     private Vector3 _originLocalPos;
     
     private Tween _twForward;
     private Tween _twBack;
     private float _currentPos;
-    [SerializeField, InspectorVariantName("特殊攻撃の距離")] 
-    private float _range = 8;
-    [SerializeField, InspectorVariantName("Hit時ずらしVec3")]
-    private Vector3 _hitMisalignment = new Vector3(0f, 0.5f, 0f);
 
     private void Awake()
     {
@@ -62,7 +62,7 @@ public class SpecialAttack : MonoBehaviour
     }
 
     void NeedleBackMove(float backRange , float time)
-    {
+    {// 針が戻ってくる移動
         _twBack = DOTween.To(() => backRange, x
                     => _currentPos = x,
                 0, time
@@ -77,14 +77,15 @@ public class SpecialAttack : MonoBehaviour
     {
         if(other.TryGetComponent<ITeleportable>(out ITeleportable tp))
         {// テレポート対象に当たる
+            // テレポート
             Vector3 pos = other.transform.position;
             tp.Teleport(_player.transform.position + _hitMisalignment);
             _parentTp.Teleport(pos + _hitMisalignment);
-            //DoTweenの停止
+            // DoTweenの停止
             _twForward.Kill(false);
             // 妖精ゲージの消費
-            _player.PlayerStatus.UseSpecialAttack();
-            
+            _player.PlayerStatus.UseFairyGauge(_player.PlayerAttack.SpDiminution);
+            // 針をActiveじゃない状態に
             this.gameObject.SetActive(false);
         }
         else if(other.isTrigger == false)

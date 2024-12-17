@@ -3,7 +3,7 @@ using CriWare;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMusicBox : MonoBehaviour , ICylinderable
+public class PlayerMusicBox : MonoBehaviour , ICylinderAddable
 {
     private CriAtomExPlayback _musicBoxPlayback;
     private PlayerControls _controls;

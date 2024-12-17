@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ICylinderable
+public interface ICylinderAddable
 {
     int CylinderCount { get; }
     

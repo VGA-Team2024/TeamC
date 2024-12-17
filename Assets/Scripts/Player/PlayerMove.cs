@@ -2,7 +2,6 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,16 +19,22 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     private readonly int DirRight = Animator.StringToHash("DirRight");
 
     public Vector2 Dir {get; private set; }
-    [SerializeField, InspectorVariantName("プレイヤーの移動速度")] private float _moveSpeed = 20;
-    [SerializeField, InspectorVariantName("プレイヤーダッシュ時間")] private float _dashTime = 0.2f;
-    [SerializeField, InspectorVariantName("プレイヤーダッシュ速度")] private float _dashSpeed = 60;
-    [SerializeField, InspectorVariantName("プレイヤーのジャンプ力(1回目)")] private float _firstJumpPower = 24;
-    [SerializeField, InspectorVariantName("プレイヤーのジャンプ力(2回目)")] private float _secondJumpPower = 15;
+    [Header("通常移動")]
+    [SerializeField, InspectorVariantName("移動速度")] private float _moveSpeed = 20;
+    [Header("ダッシュ")]
+    [SerializeField, InspectorVariantName("ダッシュ時間")] private float _dashTime = 0.2f;
+    [SerializeField, InspectorVariantName("ダッシュ速度")] private float _dashSpeed = 60;
+    [SerializeField, InspectorVariantName("クールタイム")] private float _dashCoolTime = 1.5f;
+    [Header("ジャンプ")]
+    [SerializeField, InspectorVariantName("ジャンプ力(1回目)")] private float _firstJumpPower = 24;
+    [SerializeField, InspectorVariantName("ジャンプ力(2回目)")] private float _secondJumpPower = 15;
     [SerializeField, InspectorVariantName("ジャンプを長押しできる時間(1回目)")] private float _firstJumpTime = 0.5f;
     [SerializeField, InspectorVariantName("ジャンプを長押しできる時間(2回目)")] private float _secondJumpTime = 0.5f;
     [SerializeField, InspectorVariantName("ジャンプ長押し中の重力")] private float _jumpPressGravity = 5;
+    [Header("重力")]
     [SerializeField, InspectorVariantName("重力")] private float _gravityScale = 20;
     [SerializeField, InspectorVariantName("落下速度の上限")] private float _maxFallingSpeed = 50;
+    [Header("プログラマー向け")]
     [SerializeField, InspectorVariantName("左右入力で反転するゲームオブジェクト")]private GameObject _flipObject;
     
     [SerializeField] private Vector3 _boxSize;
@@ -61,6 +66,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     public bool IsMove { set => _isMove = value; }
     
     public bool Dashing { get; private set; }
+    private bool _canDash = true;
     private bool _onAirJump;
     //　移動量、重力無効化
     public (bool value, bool VelocityZero) IsFreeze {
@@ -221,8 +227,8 @@ public class PlayerMove : MonoBehaviour, ITeleportable
 
     private async void OnDash(InputAction.CallbackContext context)
     {
-        if(!_player.PlayerStatus.IsDashRelease)
-            return; //ダッシュが解放されていないならreturnする
+        if(!_player.PlayerStatus.IsDashRelease || !_canDash)
+            return; //ダッシュが解放されていない or ダッシュ不可
         if (_isMove)
         {
             PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerDashEffect,
@@ -233,16 +239,21 @@ public class PlayerMove : MonoBehaviour, ITeleportable
                 _jumpCancelToken.Dispose();
                 _jumpCancelToken = null;
             }
+            _jumpCancelToken = new CancellationTokenSource();
 
             Dashing = true;
+            _canDash = false;
             _player.Animator.SetBool(DashingHash,true);
-            _jumpCancelToken = new CancellationTokenSource();
             IsFreeze = (true, true);
             _rb.velocity = new Vector3((_dirRight ? 1 : -1) * _dashSpeed, 0, 0);
-            await UniTask.Delay(TimeSpan.FromSeconds(_dashTime));
+            await UniTask.Delay(TimeSpan.FromSeconds(_dashTime), cancellationToken:_player.CancellationToken);
             _player.Animator.SetBool(DashingHash,false);
             IsFreeze = (false, false);
             Dashing = false;
+            
+            //クールタイム処理
+            await UniTask.Delay(TimeSpan.FromSeconds(_dashCoolTime - _dashTime), cancellationToken: _player.CancellationToken);
+            _canDash = true;
         }
     }
     
