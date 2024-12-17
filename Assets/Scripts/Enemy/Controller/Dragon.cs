@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Serialization;
-using Random = System.Random;
 
 public class Dragon : EnemyBase, IPlayerTarget
 {
@@ -74,7 +73,7 @@ public class Dragon : EnemyBase, IPlayerTarget
                     ChangeState(_attackState);
                     break;
                 case 2: // 距離B
-                    ChangeState(ProbabilityCalculate(_disBWeights) switch
+                    ChangeState(EnemyUtility.ProbabilityCalculate(_disBWeights) switch
                     {
                         0 => _breathState,
                         1 => _rushState,
@@ -83,7 +82,7 @@ public class Dragon : EnemyBase, IPlayerTarget
                     });
                     break;
                 case 3: // 距離C
-                    var num = ProbabilityCalculate(_disCWeights);
+                    var num = EnemyUtility.ProbabilityCalculate(_disCWeights);
                     if (num == 2) _flyState.GetPlayerPos(_playerMove.transform.position);
                     ChangeState(num switch
                     {
@@ -115,23 +114,6 @@ public class Dragon : EnemyBase, IPlayerTarget
     private int Distance()
     {
         var dis = Mathf.Abs(transform.position.x - _playerMove.transform.position.x);
-
         return dis <= _disA ? 1 : dis <= _disB ? 2 : 3;
-    }
-
-    private int ProbabilityCalculate(int[] weights)
-    {
-        var rnd = new Random().Next(1, 101);
-        var cumulative = 0;
-        var index = 0;
-        for (var i = 0; i < weights.Length; i++)
-        {
-            cumulative += weights[i];
-            if (rnd > cumulative) continue;
-            index = i;
-            break;
-        }
-
-        return index;
     }
 }

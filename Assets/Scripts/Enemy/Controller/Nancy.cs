@@ -1,5 +1,4 @@
 using UnityEngine;
-using Random = System.Random;
 
 public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
 {
@@ -11,8 +10,15 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
     [SerializeField, Header("突進時の移動距離")] private float _rushDistance;
     [SerializeField, Header("突進時のスピード")] private float _rushSpeed;
     [SerializeField, Header("何秒歩行をするか")] private int _walkTime;
+    [SerializeField, Header("距離A")] private int _disA;
+    [SerializeField, Header("距離B")] private int _disB;
+    [SerializeField, Header("距離C")] private int _disC;
+    [SerializeField, Header("距離Bにいたときの攻撃のそれぞれの確率"), Range(0, 100)]
+    private int[] _disBWeights = new int[3];
+    [SerializeField, Header("距離Cにいたときの攻撃のそれぞれの確率"), Range(0, 100)]
+    private int[] _disCWeights = new int[3];
 
-    private Animator _animator;
+    private int _attackCount; // 距離A時の前方攻撃の回数制限用
     
     private EnemyChaseState _chaseState; // 歩行ステート
     private EnemyAttackState _attackState;
@@ -27,15 +33,15 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
         ParticleSystem particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
         GameObject attackCollider = gameObject.transform.GetChild(2).gameObject;
         GameObject specialAttackCollider = gameObject.transform.GetChild(3).gameObject;
-        _animator = gameObject.transform.GetChild(4).GetComponent<Animator>();
+        Animator animator = gameObject.transform.GetChild(4).GetComponent<Animator>();
         
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
-        _chaseState = new EnemyChaseState(this, _freezeState, _animator, transform, _speed, false, _walkTime);
-        _attackState = new EnemyAttackState(this, _freezeState, _animator, attackCollider);
-        _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, _animator, transform, _jumpSpeed, _animationCurve);
-        _rushState = new EnemyRushState(this, _freezeState, _animator, transform, _rushDistance, _rushSpeed);
-        _specialAttackState = new EnemySpecialAttackState(this, _freezeState, _animator, specialAttackCollider);
-        _deathState = new EnemyDeathState(this, particle, _animator, gameObject);
+        _chaseState = new EnemyChaseState(this, _freezeState, animator, transform, _speed, false, _walkTime);
+        _attackState = new EnemyAttackState(this, _freezeState, animator, attackCollider);
+        _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, animator, transform, _jumpSpeed, _animationCurve);
+        _rushState = new EnemyRushState(this, _freezeState, animator, transform, _rushDistance, _rushSpeed);
+        _specialAttackState = new EnemySpecialAttackState(this, _freezeState, animator, specialAttackCollider);
+        _deathState = new EnemyDeathState(this, particle, animator, gameObject);
     }
 
     protected override void OnUpdate()
@@ -54,27 +60,40 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
             if (_currentState != _idleState) return;
             
             transform.eulerAngles = new Vector2(0, _playerMove.transform.position.x > transform.position.x ? 0 : 180);
-            var rnd = new Random().Next(0, 5);
-
-            switch (rnd)
+            switch (Distance())
             {
-                case 0:
-                    ChangeState(_specialAttackState);
-                    break;
-                case 1:
+                case 1 : // 距離がAの場合
+                    if (_attackCount >= 4) // 前方攻撃3回連続でやっていたら突進
+                    {
+                        ChangeState(_rushState);
+                        _attackCount = 0;
+                        return;
+                    }
+                
                     ChangeState(_attackState);
+                    _attackCount++;
                     break;
-                case 2:
-                    _chaseState.GetPlayerPos(_playerMove.transform.position);
-                    ChangeState(_chaseState);
+                case 2 : // 距離がBの場合
+                    _attackCount = 0;
+                    ChangeState(EnemyUtility.ProbabilityCalculate(_disBWeights) switch
+                    {
+                        0 => _specialAttackState,
+                        1 => _rushState,
+                        _ => _jumpAttackState
+                    });
                     break;
-                case 3:
-                    ChangeState(_jumpAttackState);
-                    break;
-                case 4:
-                    ChangeState(_rushState);
+                case 3 :
+                    _attackCount = 0;
+                    ChangeState(EnemyUtility.ProbabilityCalculate(_disCWeights) switch
+                    {
+                        0 => _specialAttackState,
+                        1 => _rushState,
+                        _ => _jumpAttackState
+                    });
                     break;
             }
+            //         _chaseState.GetPlayerPos(_playerMove.transform.position);
+            //         ChangeState(_chaseState);
         }
     }
     
@@ -93,9 +112,12 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
             ChangeState(_freezeState);
         }
     }
-
-    public void Teleport(Vector3 position)
+    
+    private int Distance()
     {
-        transform.position = position;
+        var dis = Mathf.Abs(transform.position.x - _playerMove.transform.position.x);
+        return dis <= _disA ? 1 : dis <= _disB ? 2 : 3;
     }
+
+    public void Teleport(Vector3 position) { transform.position = position; }
 }
