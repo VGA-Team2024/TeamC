@@ -24,6 +24,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     [Header("ダッシュ")]
     [SerializeField, InspectorVariantName("ダッシュ時間")] private float _dashTime = 0.2f;
     [SerializeField, InspectorVariantName("ダッシュ速度")] private float _dashSpeed = 60;
+    [SerializeField, InspectorVariantName("ダッシュ中に縦にズレる高さ")] private float _dashFloatHeight = 0.1f;
     [SerializeField, InspectorVariantName("クールタイム")] private float _dashCoolTime = 1.5f;
     [Header("ジャンプ")]
     [SerializeField, InspectorVariantName("ジャンプ力(1回目)")] private float _firstJumpPower = 24;
@@ -245,6 +246,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
             _canDash = false;
             _player.Animator.SetBool(DashingHash,true);
             IsFreeze = (true, true);
+            transform.position += Vector3.up * _dashFloatHeight; 
             _rb.velocity = new Vector3((_dirRight ? 1 : -1) * _dashSpeed, 0, 0);
             await UniTask.Delay(TimeSpan.FromSeconds(_dashTime), cancellationToken:_player.CancellationToken);
             _player.Animator.SetBool(DashingHash,false);
