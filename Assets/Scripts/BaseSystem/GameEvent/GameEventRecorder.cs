@@ -41,7 +41,7 @@ public class GameEventRecorder
             if (_instance._currentGame != null)
             {
                 GameHash = _instance._currentGame.GameHash;
-                GamePlayTime = DateTime.Compare(_instance._currentGame.GameStartTime, DateTime.Now);
+                GamePlayTime = (DateTime.Now - _instance._currentGame.GameStartTime).Milliseconds;
             }
             Payload = payload;
         }
@@ -141,7 +141,8 @@ public class GameEventRecorder
         }
 
         var data = new GameEventData();
-        data.DataPack("Time", _instance._currentGame.GameStartTime);
+        data.DataPack("StartTime", _instance._currentGame.GameStartTime);
+        data.DataPack("Time", DateTime.Now);
         var packet = new CommonEventData("GameStart", data);
         string json = JsonUtility.ToJson(packet);
         var res = await Network.WebRequest.PostRequest(baseuri + "Event", packet);
@@ -167,6 +168,7 @@ public class GameEventRecorder
         var data = new GameEventData();
         data.DataPack("StarNum", star);
         data.DataPack("Comment", comment);
+        data.DataPack("Time", DateTime.Now);
         var packet = new CommonEventData("Review", data);
         var res = await Network.WebRequest.PostRequest(baseuri + "GameReview", packet);
         Debug.Log(res);
@@ -195,6 +197,7 @@ public class GameEventRecorder
         }
 
         var packet = new CommonEventData(situation, data);
+        data.DataPack("Time", DateTime.Now);
         await Network.WebRequest.PostRequest(baseuri + "Event", packet);
 
         _instance._lastSend = DateTime.Now;
