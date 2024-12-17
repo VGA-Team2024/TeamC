@@ -83,8 +83,6 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
     {
         // 無敵のレイヤーに変更
         gameObject.layer = LayerMask.NameToLayer(_godModeLayerName);
-        //アニメーションの変更
-        _player.Animator.SetTrigger(Damage);
         //集中線パーティクルをPlay
         if(Camera.main.transform.GetChild(0).TryGetComponent<ParticleSystem>(out ParticleSystem line))
             line.Play();
@@ -121,6 +119,9 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
 
     public void BlownAway(Vector3 pos)
     {
+        // アニメーションの変更
+        _player.Animator.SetTrigger(Damage);
+        // posのxの逆方向に飛ぶ
         Vector2 dir = transform.position.x - pos.x > 0 ?
             _knockBackDirection : 
             new Vector2(_knockBackDirection.x * -1, _knockBackDirection.y );
