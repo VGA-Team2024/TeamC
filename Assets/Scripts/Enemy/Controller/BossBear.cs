@@ -1,6 +1,5 @@
 using System.Linq;
 using UnityEngine;
-using Random = System.Random;
 
 /// <summary> ボスクマ </summary>
 public class BossBear : EnemyBase, IPlayerTarget
@@ -73,7 +72,7 @@ public class BossBear : EnemyBase, IPlayerTarget
                     case 2 : // 距離B
                         if (_cottons.cottons.Any(_ => _ != null))
                         {
-                            var num = ProbabilityCalculate(_waitBWeights);
+                            var num = EnemyUtility.ProbabilityCalculate(_waitBWeights);
                             ChangeState(num switch
                             {
                                 0 => _jumpAttackState,
@@ -87,7 +86,7 @@ public class BossBear : EnemyBase, IPlayerTarget
                     case 3 : // 距離C
                         if (_cottons.cottons.Any(_ => _ != null))
                         {
-                            var num = ProbabilityCalculate(_disCWeights);
+                            var num = EnemyUtility.ProbabilityCalculate(_disCWeights);
                             ChangeState(num switch
                             {
                                 0 => _rushState,
@@ -112,7 +111,7 @@ public class BossBear : EnemyBase, IPlayerTarget
                     case 2 : // 距離B
                         if (_cottons.cottons.Any(_ => _ != null))
                         {
-                            var num = ProbabilityCalculate(_walkBWeights);
+                            var num = EnemyUtility.ProbabilityCalculate(_walkBWeights);
                             ChangeState(num switch
                             {
                                 0 => _jumpAttackState,
@@ -126,7 +125,7 @@ public class BossBear : EnemyBase, IPlayerTarget
                     case 3 : // 距離C
                         if (_cottons.cottons.Any(_ => _ != null))
                         {
-                            var num = ProbabilityCalculate(_disCWeights);
+                            var num = EnemyUtility.ProbabilityCalculate(_disCWeights);
                             ChangeState(num switch
                             {
                                 0 => _rushState,
@@ -168,26 +167,9 @@ public class BossBear : EnemyBase, IPlayerTarget
     private int Distance()
     {
         var dis = Mathf.Abs(transform.position.x - _playerMove.transform.position.x);
-
         return dis <= _disA ? 1 : dis <= _disB ? 2 : 3;
     }
 
-    private int ProbabilityCalculate(int[] weights)
-    {
-        var rnd = new Random().Next(1, 101);
-        var cumulative = 0;
-        var index = 0;
-        for (var i = 0; i < weights.Length; i++)
-        {
-            cumulative += weights[i];
-            if (rnd > cumulative) continue;
-            index = i;
-            break;
-        }
-
-        return index;
-    }
-    
     // プランナーさんの変更時用
     // void OnDrawGizmos()
     // {

@@ -20,8 +20,7 @@ public class Nutcracker : EnemyBase, IPlayerTarget
     {
         ParticleSystem particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
         GameObject attackCollider = gameObject.transform.GetChild(2).gameObject;
-        // Animator animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
-        Animator animator = GetComponent<Animator>();
+        Animator animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
         _walkState = new EnemyWalkState(animator, transform, _speed, _patrolArea);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _attackState = new EnemyAttackState(this, _freezeState, animator, attackCollider);
@@ -42,15 +41,13 @@ public class Nutcracker : EnemyBase, IPlayerTarget
         
         if (_playerMove)
         {
-            if (_currentState == _freezeState) return;
+            if (_currentState != _idleState && _currentState != _walkState) return;
             if ((transform.position - _playerMove.transform.position).sqrMagnitude < _prickArea * _prickArea)
             {
-                if (_currentState == _attackState) return;
                 ChangeState(_attackState);
             }
             else
             {
-                if (_currentState == _shootState) return;
                 transform.eulerAngles = new Vector2(0, _playerMove.gameObject.transform.position.x > transform.position.x ? 180 : 0);
                 _shootState.GetPlayerPos(_playerMove.transform.position);
                 ChangeState(_shootState);
