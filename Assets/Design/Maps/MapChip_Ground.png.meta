@@ -1,0 +1,708 @@
+fileFormatVersion: 2
+guid: 16ddf1720b135084d9d556af83a8131a
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 48
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MapChip_Ground_0
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 663522a5ed5bda148a12ffa18c535253
+      internalID: 1729685872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_1
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d95de61644d571469ffcab8f69bd461
+      internalID: 1531891922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_2
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec11b804197fa2544a929be941216a0e
+      internalID: -127840121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_3
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa2e0a0eb68bded4ea9055053e371b5c
+      internalID: -499889860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_4
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dfcd3501499a1f4e903dc74ea0d4e25
+      internalID: -1365800429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_5
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c4ffa67ea67c264c9e311740d8a93b3
+      internalID: -307533220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_6
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71c35758d09aaff45b205958919dcda5
+      internalID: -1343167098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_7
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df9f0b4778647674caef09e8ce52475a
+      internalID: 1899162126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_8
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc528d6f715295140ba50e8b32bf7fc1
+      internalID: 728224893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_9
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84c08da8226151e4b89ebdb5413b0704
+      internalID: -1275891359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_10
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83642e08acec6644b93e1001c58398b0
+      internalID: 412208481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_11
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67b04b97786a0fd429e5cc66310e4ca8
+      internalID: 1213342040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_12
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd544dd3379be224a80f5c057bfa8445
+      internalID: 488105237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_13
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8970b35bb6a97174e9c7abdf78d891ea
+      internalID: 351356050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_14
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dbcf0cfbf137b64590241e80ef36e3b
+      internalID: 634281301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_15
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 300
+        width: 101
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1874cb361c8bf42419648022915f5e62
+      internalID: -1701002256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_16
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 300
+        width: 100
+        height: 51
+      alignment: 9
+      pivot: {x: 0.49999985, y: 1.0020165}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9991bd25a463a6a47865e60f5c1376cd
+      internalID: 264608049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_17
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 300
+        width: 299
+        height: 51
+      alignment: 9
+      pivot: {x: 0.5, y: 0.97691554}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c91d6ff1102c3045a86c513fd71dd2e
+      internalID: -1397564626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_18
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 200
+        width: 50
+        height: 100
+      alignment: 9
+      pivot: {x: 0.99783325, y: 0.49589685}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 998240a9576ec8f488ebeed4e8a24f8b
+      internalID: -1329899242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_19
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 300
+        width: 137
+        height: 50
+      alignment: 9
+      pivot: {x: 0.5, y: 1.0005682}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ef4352f8a1548c4c8a8c941be1d91bb
+      internalID: 1005239703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_20
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 301
+        width: 130
+        height: 50
+      alignment: 9
+      pivot: {x: 0.5, y: 1.0035224}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60d1f5a7f9dbe814b83631c5db81937d
+      internalID: 222491683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 200
+        width: 45
+        height: 101
+      alignment: 9
+      pivot: {x: -0.0025741416, y: 0.49577528}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37359487164541e4aa591486b098e265
+      internalID: 1634618639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_22
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 0
+        width: 50
+        height: 315
+      alignment: 9
+      pivot: {x: 1.003523, y: 0.45123276}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32ee409bdcb10d649962ca3a1ef5605b
+      internalID: 1387099326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_23
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 47
+        height: 312
+      alignment: 9
+      pivot: {x: -0.012056891, y: 0.43571946}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 753729f24b2dbd0489df0060f2240243
+      internalID: 2087562208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_24
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 200
+        width: 300
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f04f30e6898bf8c42b7f35228d4d903d
+      internalID: 1306294801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_25
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 0
+        width: 100
+        height: 200
+      alignment: 9
+      pivot: {x: 0.48293138, y: 0.7496277}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09608cd5e174e5d44ae7f9389146adbe
+      internalID: -34883789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_26
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 0
+        width: 101
+        height: 200
+      alignment: 9
+      pivot: {x: 0.4999997, y: 0.7389598}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 406ef7b8253cdff408b8b28ec0f7a256
+      internalID: -578406182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      MapChip_Ground_0: 1729685872
+      MapChip_Ground_1: 1531891922
+      MapChip_Ground_10: 412208481
+      MapChip_Ground_11: 1213342040
+      MapChip_Ground_12: 488105237
+      MapChip_Ground_13: 351356050
+      MapChip_Ground_14: 634281301
+      MapChip_Ground_15: -1701002256
+      MapChip_Ground_16: 264608049
+      MapChip_Ground_17: -1397564626
+      MapChip_Ground_18: -1329899242
+      MapChip_Ground_19: 1005239703
+      MapChip_Ground_2: -127840121
+      MapChip_Ground_20: 222491683
+      MapChip_Ground_21: 1634618639
+      MapChip_Ground_22: 1387099326
+      MapChip_Ground_23: 2087562208
+      MapChip_Ground_24: 1306294801
+      MapChip_Ground_25: -34883789
+      MapChip_Ground_26: -578406182
+      MapChip_Ground_3: -499889860
+      MapChip_Ground_4: -1365800429
+      MapChip_Ground_5: -307533220
+      MapChip_Ground_6: -1343167098
+      MapChip_Ground_7: 1899162126
+      MapChip_Ground_8: 728224893
+      MapChip_Ground_9: -1275891359
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

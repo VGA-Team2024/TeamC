@@ -44,19 +44,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91f529aa944b914449d62b8c40f188fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acfFile: TGS2023.acf
+  acfFile: C_Team.acf
   cueSheets:
   - name: BGM
     acbFile: BGM.acb
     awbFile: BGM.awb
     loaderStatus: 0
-  - name: SE
-    acbFile: SE.acb
-    awbFile: 
-    loaderStatus: 0
   - name: ME
     acbFile: ME.acb
     awbFile: 
+    loaderStatus: 0
+  - name: SE_Player
+    acbFile: SE_Player.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: SE_UI
+    acbFile: SE_UI.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: Ambient
+    acbFile: Ambient.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: SE_Bear
+    acbFile: SE_Bear.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: SE_Dragon
+    acbFile: SE_Dragon.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: SE_Gimmick
+    acbFile: SE_Gimmick.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: SE_WoodenToys
+    acbFile: SE_WoodenToys.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: SE_Outgame
+    acbFile: SE_Outgame.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: Voice
+    acbFile: Voice.acb
+    awbFile: 
+    loaderStatus: 0
+  - name: MusicBox
+    acbFile: MusicBox.acb
+    awbFile: MusicBox.awb
     loaderStatus: 0
   dspBusSetting: 
   dontDestroyOnLoad: 0
@@ -109,7 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initializesFileSystem: 1
   fileSystemConfig:
-    numberOfLoaders: 16
+    numberOfLoaders: 39
     numberOfBinders: 8
     numberOfInstallers: 2
     installBufferSize: 32
