@@ -1,0 +1,642 @@
+fileFormatVersion: 2
+guid: 5b5c7f2b2541fec448e00b3a8b5503bc
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 258
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d2db4bade46eb64c83c03f550125a2c
+      internalID: -1321815462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_1
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 258
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1a67d498f39ae549841a581aa0f83b3
+      internalID: 1613569284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_2
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 258
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fa7c273a1353354481625a5fd07da09
+      internalID: 1137121371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_3
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 258
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d074144334ec9a841905bd09681ed7ca
+      internalID: 1625629777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_4
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 258
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b981f2891b9e004db75bae170d4ca61
+      internalID: 2108001846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_5
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 258
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3360daa670566254cb6a0a6ec225236c
+      internalID: 203724624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_6
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 258
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 907eaa5a37e02604abc5a142cc9404d3
+      internalID: 2031290664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_7
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 258
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c0487b3dfa210244b3a4d95da29b612
+      internalID: 765484597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_8
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 158
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35ab1ab71e1454e4db99edf1877a8d0d
+      internalID: -1346959745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_9
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 158
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 542af19efcca4094c86659314032e28a
+      internalID: 999984822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_10
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 158
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f97c99b32afe5404a9f917aba8b28e33
+      internalID: -607461839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_11
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 158
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c8b9072fd2e6be4ebd4ed9527b1213d
+      internalID: 531803742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_12
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 158
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfd7d3fd5ea0d654792581f97bf16c74
+      internalID: -751903242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_13
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 158
+        width: 100
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5049017, y: 0.5049066}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 544044726bf774b468ef8c13c9ff2e2b
+      internalID: -2071640075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_14
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 158
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e97be85444942c7478bca006943418e8
+      internalID: -957258256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_15
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 158
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bac91955013a874d9b4f7c6b59f0ff6
+      internalID: 985890494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_16
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 58
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa4203f5cb974ab4f8a8f87379cfb3ba
+      internalID: -1197816005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_17
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 58
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd0d1a534583b414ebc2fda1d52d86b6
+      internalID: 56722995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_18
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 58
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b79c385447496648a9f6e104f88a32e
+      internalID: 1596335080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_19
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 58
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a2cbdb8fae277549bdb2255cb71770f
+      internalID: 1940152946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_20
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 58
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3c72fa7cfc754841bc972d282caf4d3
+      internalID: 1356974774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_21
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 58
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e794f175d0092da4eac995fdcdc25889
+      internalID: -1013412591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_22
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 58
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6571719cc8f954f41bae72f1aaadc137
+      internalID: 948656501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle (2)_23
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 58
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 663dd49a6ff2fad4498d0317463d5b80
+      internalID: -1922937832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 2ff70827640262f48bcc1398206ca238
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Img_Maptile_Castle (2)_0: -1321815462
+      Img_Maptile_Castle (2)_1: 1613569284
+      Img_Maptile_Castle (2)_10: -607461839
+      Img_Maptile_Castle (2)_11: 531803742
+      Img_Maptile_Castle (2)_12: -751903242
+      Img_Maptile_Castle (2)_13: -2071640075
+      Img_Maptile_Castle (2)_14: -957258256
+      Img_Maptile_Castle (2)_15: 985890494
+      Img_Maptile_Castle (2)_16: -1197816005
+      Img_Maptile_Castle (2)_17: 56722995
+      Img_Maptile_Castle (2)_18: 1596335080
+      Img_Maptile_Castle (2)_19: 1940152946
+      Img_Maptile_Castle (2)_2: 1137121371
+      Img_Maptile_Castle (2)_20: 1356974774
+      Img_Maptile_Castle (2)_21: -1013412591
+      Img_Maptile_Castle (2)_22: 948656501
+      Img_Maptile_Castle (2)_23: -1922937832
+      Img_Maptile_Castle (2)_3: 1625629777
+      Img_Maptile_Castle (2)_4: 2108001846
+      Img_Maptile_Castle (2)_5: 203724624
+      Img_Maptile_Castle (2)_6: 2031290664
+      Img_Maptile_Castle (2)_7: 765484597
+      Img_Maptile_Castle (2)_8: -1346959745
+      Img_Maptile_Castle (2)_9: 999984822
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
