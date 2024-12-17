@@ -19,6 +19,7 @@ namespace GameEvent
             public string Data;
         }
 
+        [SerializeField]
         protected List<ParamData> Payload = new List<ParamData>();
 
         public void DataPack<T>(string Key, T data)
