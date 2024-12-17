@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 
@@ -9,32 +12,34 @@ public class MapUpdate : MonoBehaviour
     [SerializeField, Header("最初のステージプレハブ")] private GameObject _startMapPrefab;    // 仮：最初にいるマップ
     [SerializeField, Header("セットするマップの名前")] private string _startMapName;
     
+    [Header("マップ移動時のフェード処理")]
+    [SerializeField, InspectorVariantName("フェードにかける時間")]　private float _fadeDuration = 1f;
+    [SerializeField, InspectorVariantName("インとアウトの間の時間")]　private float _bufferTIme = 0.5f;
+    
     private GameObject _currentMapPrefab; // 現在いるマップデータ
+    private CameraSwitch _cameraSwitch;
+    private FadeController _fadeController;
     private OnTriggerEvent _triggerEvent;
+    private PlayerMove _playerMove;
+    private Collider _entrance;
 
     public string StartMapName => _startMapName;
     
     private void Start()
     {
-        _mapManager = FindObjectOfType<MapManager>();
-        _triggerEvent = _player.GetComponent<OnTriggerEvent>();
+        Initialize();
         
-        if (!_player.TryGetComponent<Rigidbody>(out _))
-        {
-            Debug.LogError("プレイヤーをにRigidbodyをアタッチしてください(プロトではコライダーのトリガーを使っているため)");
-        }
-        if (!_triggerEvent)
-        {
-            Debug.LogError("OnTriggerEventを持ったプレイヤーをアタッチしてください");
-            return;
-        }
-        
-        _triggerEvent.OnTriggerEnterAsObservable.Subscribe(collider =>
+        _triggerEvent.OnTriggerEnterAsObservable
+            .ThrottleFirst(TimeSpan.FromSeconds(_fadeDuration + _bufferTIme))
+            .Subscribe(collider =>
         {
             HandleTriggerEnter(collider);
         }).AddTo(this);
 
-        _triggerEvent.OnTriggerExitAsObservable.Subscribe(collider =>
+        _triggerEvent.OnTriggerExitAsObservable
+            .Buffer(2, 1)
+            .Select(portals => portals.Last())
+            .Subscribe(collider =>
         {
             HandleTriggerExit(collider);
         }).AddTo(this);
@@ -46,13 +51,48 @@ public class MapUpdate : MonoBehaviour
         }
     }
 
+    private void Initialize()
+    {
+        _mapManager = FindObjectOfType<MapManager>();
+        _cameraSwitch = FindObjectOfType<CameraSwitch>();
+        _fadeController = FindObjectOfType<FadeController>();
+        _triggerEvent = _player.GetComponent<OnTriggerEvent>();
+        _playerMove = _player.GetComponent<PlayerMove>();
+        
+        if (!_fadeController)
+        {
+            Debug.LogError("SystemCanvasプレハブをシーン上に配置してください");
+        }
+        if (!_cameraSwitch)
+        {
+            Debug.LogError("CameraSwitchコンポーネントが付いたオブジェクト一つをシーン上に配置してください");
+        }
+        if (!_player.TryGetComponent<Rigidbody>(out _))
+        {
+            Debug.LogError("プレイヤーをにRigidbodyをアタッチしてください(プロトではコライダーのトリガーを使っているため)");
+        }
+        if (!_triggerEvent)
+        {
+            Debug.LogError("OnTriggerEventを持ったプレイヤーをアタッチしてください");
+        }
+    }
+
     // プレイヤーがポータルのトリガーに入ると呼ばれる(テレポート直後のトリガーも判定内)
-    private void HandleTriggerEnter(Collider other)
+    private async void HandleTriggerEnter(Collider other)
     {
         // 入ったポータルから対のポータルを取得する
         GetPairPortal(other, out var exit);
         
         if (!exit) return; // 対応したポータルがない場合は実行しない
+
+        _playerMove.IsFreeze = (true, true); // プレイヤーの動きを制限
+        
+        // 画面フェードアウト(完全にフェードアウトしてからマップを切り替える)
+        if (_fadeController) // Todo:フェードパネルがない状態でも挙動を確認できるようにするため。後で消す
+        {
+            _fadeController.FadeOut(_fadeDuration);
+            await UniTask.Delay(TimeSpan.FromSeconds(_fadeDuration), cancellationToken: destroyCancellationToken);        
+        }
         
         // 一度ポータルから出ていれば処理を行う
         if (_triggerEvent.LastPortalUsed != other)
@@ -63,11 +103,21 @@ public class MapUpdate : MonoBehaviour
                 if (mapData.EntranceColliders.Contains(other))
                 {
                     ChangeMapPrefab(mapData);
+                    // ToDo:カメラのコライダーを変更する
+                    _cameraSwitch.ChangeBoundingVolume(mapData.CameraCollider);
                     break;
                 }
             }
             ToTeleportPlayer(exit.transform.position);
             _triggerEvent.LastPortalUsed = exit; // 最後に使用したポータルを記録
+            
+            // 画面フェードイン(カメラが完全に切り替わってから)
+            if (_fadeController)  // Todo:フェードパネルがない状態でも挙動を確認できるようにするため。後で消す
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(_bufferTIme), cancellationToken: destroyCancellationToken);
+                _fadeController.FadeIn(_fadeDuration);
+            }
+            _playerMove.IsFreeze = (false, false); // プレイヤーの移動制限を解除
         }
     }
 

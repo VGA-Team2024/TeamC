@@ -19,12 +19,16 @@ public struct Map
 {
     [SerializeField, Header("マップのプレハブ")] private GameObject _exitMapPrefab;
     [SerializeField, Header("マップの入り口となるポータルのリスト")] private List<Collider> _entrancePortals;    // ここにあるトリガーに入ったらexitMapをアクティブにする
-
+    [SerializeField, Header("マップに応じたカメラ制限コライダー")] private Collider _cameraCollider;
+    
     /// <summary> 出口があるマップ </summary>
     public GameObject ExitMapPrefab => _exitMapPrefab;
     
     /// <summary> 入り口となるポータルのリスト </summary>
     public List<Collider> EntranceColliders => _entrancePortals;
+
+    /// <summary> カメラの制限コライダー </summary>
+    public Collider CameraCollider => _cameraCollider;
 }
 
 /// <summary> マップの情報を保存するクラス </summary>
