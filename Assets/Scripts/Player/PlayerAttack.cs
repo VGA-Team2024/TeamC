@@ -40,8 +40,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField, InspectorVariantName("クールタイム")]
     private float _rangeCoolTime = 1;
     private bool _canRangeAttack = true;
-    
-    
+
+    private float _axisY;
     private bool _attackAnimTrigger;
     private PlayerControls _controls;
     private bool _musicBoxPlaying;
@@ -85,6 +85,11 @@ public class PlayerAttack : MonoBehaviour
         await UniTask.Delay(TimeSpan.FromSeconds(_attackCoolTime), cancellationToken: _player.CancellationToken);
         _canAttack = true;
     }
+
+    private void OnVertical(InputAction.CallbackContext context)
+    {
+        _axisY = context.ReadValue<float>();
+    }
     
     private void AttackColliderSetActive()
     {
@@ -92,7 +97,7 @@ public class PlayerAttack : MonoBehaviour
             _attackCollider.transform.localPosition =
                 new Vector3(
                     _atkPos.x * (_player.PlayerMove.PlayerFlip ? 1 : -1), //左右の向き
-                    Math.Sign(_player.PlayerMove.Dir.y) * _attackPosY + _atkPos.y, // 上下攻撃
+                    Math.Sign(_axisY) * _attackPosY + _atkPos.y, // 上下攻撃
                     _atkPos.z);
         _attackCollider.SetActive(true);
         PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffect,

@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     private readonly int JumpStart = Animator.StringToHash("JumpStart");
     private readonly int DirRight = Animator.StringToHash("DirRight");
 
-    public Vector2 Dir {get; private set; }
+    public float Horizontal {get; private set; }
     [Header("通常移動")]
     [SerializeField, InspectorVariantName("移動速度")] private float _moveSpeed = 20;
     [Header("ダッシュ")]
@@ -89,9 +89,9 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         _controls = new PlayerControls();
         _controls.InGame.Jump.started += OnJump;
         _controls.InGame.Jump.canceled += JumpCancel;
-        _controls.InGame.Move.started += OnMove;  //入力はじめ
-        _controls.InGame.Move.performed += OnMove;//値が変わった時
-        _controls.InGame.Move.canceled += OnMove; //入力終わり
+        _controls.InGame.Horizontal.started += OnHorizontal;  //入力はじめ
+        _controls.InGame.Horizontal.performed += OnHorizontal;//値が変わった時
+        _controls.InGame.Horizontal.canceled += OnHorizontal; //入力終わり
         _controls.InGame.Dash.started += OnDash;
     }
 
@@ -100,9 +100,9 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         _controls.Dispose();
         _controls.InGame.Jump.started -= OnJump;
         _controls.InGame.Jump.canceled -= JumpCancel;
-        _controls.InGame.Move.started -= OnMove;  //入力はじめ
-        _controls.InGame.Move.performed -= OnMove;//値が変わった時
-        _controls.InGame.Move.canceled -= OnMove; //入力終わり
+        _controls.InGame.Horizontal.started -= OnHorizontal;//入力はじめ
+        _controls.InGame.Horizontal.performed -= OnHorizontal; //値が変わった時
+        _controls.InGame.Horizontal.canceled -= OnHorizontal;//入力終わり
         _controls.InGame.Dash.started -= OnDash;
     }
 
@@ -146,7 +146,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
             _isGround = false;
         }
         //今向いている方向と逆に向いたときに攻撃判定用ゲームオブジェクトの位置を変える
-        if ((Dir.x > 0 && !PlayerFlip) || (Dir.x < 0 && PlayerFlip))
+        if ((Horizontal > 0 && !PlayerFlip) || (Horizontal < 0 && PlayerFlip))
         {
             PlayerFlip = !PlayerFlip;
         }
@@ -155,7 +155,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         if (_isMove)
         {
             //左右移動
-            _rb.velocity = new Vector3(math.sign(Dir.x) * _moveSpeed, _rb.velocity.y, 0);
+            _rb.velocity = new Vector3(math.sign(Horizontal) * _moveSpeed, _rb.velocity.y, 0);
         }
         
         Gravity();
@@ -219,13 +219,12 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         if(_gravityEnum == GravityEnum.JumpUp)
             _gravityEnum = GravityEnum.JumpDown;
     }
-
-    // ActionMapのMove
-    private void OnMove(InputAction.CallbackContext context)
+    
+    private void OnHorizontal(InputAction.CallbackContext context)
     {
-        Dir = context.ReadValue<Vector2>();
+        Horizontal = context.ReadValue<float>();
     }
-
+    
     private async void OnDash(InputAction.CallbackContext context)
     {
         if(!_player.PlayerStatus.IsDashRelease || !_canDash)
