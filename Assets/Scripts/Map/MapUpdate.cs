@@ -78,7 +78,7 @@ public class MapUpdate : MonoBehaviour
     }
 
     // プレイヤーがポータルのトリガーに入ると呼ばれる(テレポート直後のトリガーも判定内)
-    private async void HandleTriggerEnter(Collider other)
+    private async UniTask HandleTriggerEnter(Collider other)
     {
         // 入ったポータルから対のポータルを取得する
         GetPairPortal(other, out var exit);
