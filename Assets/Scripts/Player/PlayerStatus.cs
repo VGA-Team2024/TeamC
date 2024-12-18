@@ -73,7 +73,18 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
     /// </summary>
     /// <param name="diminution">消費量</param>
     public void UseFairyGauge(float diminution) => _currentFairyGauge -= diminution;
-    
+
+    public void Heal(int amount)
+    {
+        if (_currentHP + amount <= _maxHP)
+        {
+            _currentHP += amount;
+            if(_player.PlayerStatusUI)
+                _player.PlayerStatusUI.PlayerHealthUpdate(_currentHP);
+        }
+        
+    }
+
     public void TakeDamage(int damage)
     {
         // 無敵のレイヤーに変更

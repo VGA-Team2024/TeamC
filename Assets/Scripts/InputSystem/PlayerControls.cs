@@ -73,21 +73,21 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""MusicBox"",
-                    ""type"": ""Button"",
-                    ""id"": ""21bac966-a7f0-4916-9f94-4932285ffc87"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": ""Hold(duration=0.4,pressPoint=0.5)"",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""LongRangeAttack"",
                     ""type"": ""Button"",
                     ""id"": ""67e4d550-bcb6-406e-9dec-63a6117a8b7b"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MusicBox"",
+                    ""type"": ""Button"",
+                    ""id"": ""21bac966-a7f0-4916-9f94-4932285ffc87"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.4,pressPoint=0.5)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -632,8 +632,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_InGame_Attack = m_InGame.FindAction("Attack", throwIfNotFound: true);
         m_InGame_SpecialAttack = m_InGame.FindAction("SpecialAttack", throwIfNotFound: true);
         m_InGame_Dash = m_InGame.FindAction("Dash", throwIfNotFound: true);
-        m_InGame_MusicBox = m_InGame.FindAction("MusicBox", throwIfNotFound: true);
         m_InGame_LongRangeAttack = m_InGame.FindAction("LongRangeAttack", throwIfNotFound: true);
+        m_InGame_MusicBox = m_InGame.FindAction("MusicBox", throwIfNotFound: true);
         m_InGame_Horizontal = m_InGame.FindAction("Horizontal", throwIfNotFound: true);
         m_InGame_Vertical = m_InGame.FindAction("Vertical", throwIfNotFound: true);
         // UI
@@ -715,8 +715,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_InGame_Attack;
     private readonly InputAction m_InGame_SpecialAttack;
     private readonly InputAction m_InGame_Dash;
-    private readonly InputAction m_InGame_MusicBox;
     private readonly InputAction m_InGame_LongRangeAttack;
+    private readonly InputAction m_InGame_MusicBox;
     private readonly InputAction m_InGame_Horizontal;
     private readonly InputAction m_InGame_Vertical;
     public struct InGameActions
@@ -728,8 +728,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_InGame_Attack;
         public InputAction @SpecialAttack => m_Wrapper.m_InGame_SpecialAttack;
         public InputAction @Dash => m_Wrapper.m_InGame_Dash;
-        public InputAction @MusicBox => m_Wrapper.m_InGame_MusicBox;
         public InputAction @LongRangeAttack => m_Wrapper.m_InGame_LongRangeAttack;
+        public InputAction @MusicBox => m_Wrapper.m_InGame_MusicBox;
         public InputAction @Horizontal => m_Wrapper.m_InGame_Horizontal;
         public InputAction @Vertical => m_Wrapper.m_InGame_Vertical;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
@@ -756,12 +756,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
-            @MusicBox.started += instance.OnMusicBox;
-            @MusicBox.performed += instance.OnMusicBox;
-            @MusicBox.canceled += instance.OnMusicBox;
             @LongRangeAttack.started += instance.OnLongRangeAttack;
             @LongRangeAttack.performed += instance.OnLongRangeAttack;
             @LongRangeAttack.canceled += instance.OnLongRangeAttack;
+            @MusicBox.started += instance.OnMusicBox;
+            @MusicBox.performed += instance.OnMusicBox;
+            @MusicBox.canceled += instance.OnMusicBox;
             @Horizontal.started += instance.OnHorizontal;
             @Horizontal.performed += instance.OnHorizontal;
             @Horizontal.canceled += instance.OnHorizontal;
@@ -787,12 +787,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
-            @MusicBox.started -= instance.OnMusicBox;
-            @MusicBox.performed -= instance.OnMusicBox;
-            @MusicBox.canceled -= instance.OnMusicBox;
             @LongRangeAttack.started -= instance.OnLongRangeAttack;
             @LongRangeAttack.performed -= instance.OnLongRangeAttack;
             @LongRangeAttack.canceled -= instance.OnLongRangeAttack;
+            @MusicBox.started -= instance.OnMusicBox;
+            @MusicBox.performed -= instance.OnMusicBox;
+            @MusicBox.canceled -= instance.OnMusicBox;
             @Horizontal.started -= instance.OnHorizontal;
             @Horizontal.performed -= instance.OnHorizontal;
             @Horizontal.canceled -= instance.OnHorizontal;
@@ -919,8 +919,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnSpecialAttack(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
-        void OnMusicBox(InputAction.CallbackContext context);
         void OnLongRangeAttack(InputAction.CallbackContext context);
+        void OnMusicBox(InputAction.CallbackContext context);
         void OnHorizontal(InputAction.CallbackContext context);
         void OnVertical(InputAction.CallbackContext context);
     }

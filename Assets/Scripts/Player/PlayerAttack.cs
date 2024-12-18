@@ -44,8 +44,7 @@ public class PlayerAttack : MonoBehaviour
     private float _axisY;
     private bool _attackAnimTrigger;
     private PlayerControls _controls;
-    private bool _musicBoxPlaying;
-    public bool MusicBoxPlayingSet {set => _musicBoxPlaying = value; }
+
 
     private void Awake()
     {
@@ -127,21 +126,25 @@ public class PlayerAttack : MonoBehaviour
 
     private async void OnLongRangeAttack(InputAction.CallbackContext context)
     {
-        if (_musicBoxPlaying || // オルゴールの再生中でない
-            !_player.PlayerStatus.IsLongRangeAttackRelease || // 遠距離攻撃が解放されていない
-            !_player.PlayerStatus.CanUseFairyGauge(_rangeAttackDiminution) || // 必要な分ゲージがない
-            !_canRangeAttack) //クールタイム中
-            return;
-        _canRangeAttack = false;
-        //アニメーションの再生
-        _player.Animator.SetTrigger(RangeAttack);
-        RangeAttackInstantiate();
-        _player.PlayerStatus.UseFairyGauge(_rangeAttackDiminution);
-        
-        _musicBoxPlaying = false;
-        
-        await UniTask.Delay(TimeSpan.FromSeconds(_rangeCoolTime), cancellationToken: _player.CancellationToken);
-        _canRangeAttack = true;
+        if (!_player.PlayerMusicBox.MusicBoxPlaying && // オルゴールが再生中でない
+            _player.PlayerStatus.IsLongRangeAttackRelease && // 遠距離攻撃が解放されている
+            _player.PlayerStatus.CanUseFairyGauge(_rangeAttackDiminution) && // ゲージが十分
+            _canRangeAttack) //クールタイム中でない
+        {
+            _canRangeAttack = false;
+            //アニメーションの再生
+            _player.Animator.SetTrigger(RangeAttack);
+            RangeAttackInstantiate();
+            _player.PlayerStatus.UseFairyGauge(_rangeAttackDiminution);
+            _player.PlayerMusicBox.MusicBoxPlaying = false;
+            
+            await UniTask.Delay(TimeSpan.FromSeconds(_rangeCoolTime), cancellationToken: _player.CancellationToken);
+            _canRangeAttack = true;
+        }
+        else
+        {
+            _player.PlayerMusicBox.MusicBoxPlaying = false;
+        }
     }
 
     private void RangeAttackInstantiate()

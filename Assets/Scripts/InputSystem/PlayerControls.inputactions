@@ -51,21 +51,21 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MusicBox",
-                    "type": "Button",
-                    "id": "21bac966-a7f0-4916-9f94-4932285ffc87",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "Hold(duration=0.4,pressPoint=0.5)",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "LongRangeAttack",
                     "type": "Button",
                     "id": "67e4d550-bcb6-406e-9dec-63a6117a8b7b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MusicBox",
+                    "type": "Button",
+                    "id": "21bac966-a7f0-4916-9f94-4932285ffc87",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.4,pressPoint=0.5)",
                     "initialStateCheck": false
                 },
                 {
