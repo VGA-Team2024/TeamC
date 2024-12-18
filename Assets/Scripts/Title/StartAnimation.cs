@@ -147,7 +147,7 @@ namespace Title
             // メアリーが起き上がる演出
             await _effectAnimation.FlashAnimation(_flashEffect);
             
-            SceneLoader.LoadSceneSimple("02_GameMain");
+            SceneLoader.LoadSceneSimple("Stage1_FairyForest");
         }
     }
 }
