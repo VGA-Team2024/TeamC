@@ -65,7 +65,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 15
+  m_Radius: 24
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5006408460989063873
 GameObject:
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b6ea0657b38544b9723f34cf95c44c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackColliderTimer: 1
+  _attackColliderTimer: 0.5
 --- !u!135 &5376751473669188254
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -313,6 +313,11 @@ MonoBehaviour:
   _rushDistance: 5
   _rushSpeed: 3
   _walkTime: 3
+  _disA: 8
+  _disB: 16
+  _disC: 24
+  _disBWeights: 32000000280000001e000000
+  _disCWeights: 320000001400000014000000
 --- !u!114 &8153027696081847127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,6 +402,7 @@ GameObject:
   m_Component:
   - component: {fileID: 837207242500907}
   - component: {fileID: 7340262185843596794}
+  - component: {fileID: 415162185877524273}
   m_Layer: 7
   m_Name: EnemySpecialAttack
   m_TagString: Untagged
@@ -438,6 +444,27 @@ MonoBehaviour:
   _returnEase: 2
   _range: 5
   _hitMisalignment: {x: 0, y: 0.5, z: 0}
+--- !u!135 &415162185877524273
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5707548245682673921}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &21019014020745016
 PrefabInstance:
   m_ObjectHideFlags: 0
