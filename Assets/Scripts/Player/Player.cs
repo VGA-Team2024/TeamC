@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private PlayerMove _playerMove;
-    public PlayerMove PlayerMove => _playerMove;
-    
     [SerializeField] Animator _animator;
     public Animator Animator => _animator;
     
@@ -15,6 +12,9 @@ public class Player : MonoBehaviour
     
     [SerializeField] private PlayerStatusUI _playerStatusUI;
     public PlayerStatusUI PlayerStatusUI => _playerStatusUI;
+    
+    private PlayerMove _playerMove;
+    public PlayerMove PlayerMove => _playerMove;
     
     private PlayerSounds _playerSounds;
     public PlayerSounds PlayerSounds => _playerSounds;
@@ -25,6 +25,9 @@ public class Player : MonoBehaviour
     private PlayerAttack _playerAttack;
     public PlayerAttack PlayerAttack => _playerAttack;
     
+    private PlayerMusicBox _playerMusicBox;
+    
+    public PlayerMusicBox PlayerMusicBox => _playerMusicBox;
     public Animator AnimatorAnimator => _animator;
     
     private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
@@ -37,6 +40,7 @@ public class Player : MonoBehaviour
         _playerSounds = GetComponent<PlayerSounds>();
         _playerStatus = GetComponent<PlayerStatus>();
         _playerAttack = GetComponent<PlayerAttack>();
+        _playerMusicBox = GetComponent<PlayerMusicBox>();
     }
 
     private void Start()

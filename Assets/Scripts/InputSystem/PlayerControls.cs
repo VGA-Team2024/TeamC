@@ -73,6 +73,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""LongRangeAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""67e4d550-bcb6-406e-9dec-63a6117a8b7b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""MusicBox"",
                     ""type"": ""Button"",
                     ""id"": ""21bac966-a7f0-4916-9f94-4932285ffc87"",
@@ -82,13 +91,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""LongRangeAttack"",
-                    ""type"": ""Button"",
-                    ""id"": ""67e4d550-bcb6-406e-9dec-63a6117a8b7b"",
-                    ""expectedControlType"": """",
+                    ""name"": ""Horizontal"",
+                    ""type"": ""Value"",
+                    ""id"": ""c221ded0-1529-4e73-96b6-2a0a54fd8968"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": ""AxisDeadzone(min=0.125,max=0.925)"",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Vertical"",
+                    ""type"": ""Value"",
+                    ""id"": ""fbef787a-cd79-4a06-b1a4-8eda5da39997"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -300,6 +318,94 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""LongRangeAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""978108c1-bbda-49ae-a0f1-d4852b914e10"",
+                    ""path"": ""<Gamepad>/leftStick/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";GamePad"",
+                    ""action"": ""Horizontal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""3c554b4e-9e24-45b5-97fb-011489ca6827"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Horizontal"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""dca31913-b48c-4ba3-ab7a-b1f771cdefa6"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KB&Mouse"",
+                    ""action"": ""Horizontal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""2bce2001-cc7c-4faa-8065-ea0a0245d8ed"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KB&Mouse"",
+                    ""action"": ""Horizontal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c3eaef87-ad5c-47dc-9e87-8553d0f9261f"",
+                    ""path"": ""<Gamepad>/leftStick/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";GamePad"",
+                    ""action"": ""Vertical"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""03e5a039-cfb2-4024-971e-13b62dc2f462"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Vertical"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""ebcd6cfe-eb95-4d54-ba2c-c24b32e4f8a7"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KB&Mouse"",
+                    ""action"": ""Vertical"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""bf77164c-75a8-4e06-b75b-740130e42a73"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KB&Mouse"",
+                    ""action"": ""Vertical"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -526,8 +632,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_InGame_Attack = m_InGame.FindAction("Attack", throwIfNotFound: true);
         m_InGame_SpecialAttack = m_InGame.FindAction("SpecialAttack", throwIfNotFound: true);
         m_InGame_Dash = m_InGame.FindAction("Dash", throwIfNotFound: true);
-        m_InGame_MusicBox = m_InGame.FindAction("MusicBox", throwIfNotFound: true);
         m_InGame_LongRangeAttack = m_InGame.FindAction("LongRangeAttack", throwIfNotFound: true);
+        m_InGame_MusicBox = m_InGame.FindAction("MusicBox", throwIfNotFound: true);
+        m_InGame_Horizontal = m_InGame.FindAction("Horizontal", throwIfNotFound: true);
+        m_InGame_Vertical = m_InGame.FindAction("Vertical", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -607,8 +715,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_InGame_Attack;
     private readonly InputAction m_InGame_SpecialAttack;
     private readonly InputAction m_InGame_Dash;
-    private readonly InputAction m_InGame_MusicBox;
     private readonly InputAction m_InGame_LongRangeAttack;
+    private readonly InputAction m_InGame_MusicBox;
+    private readonly InputAction m_InGame_Horizontal;
+    private readonly InputAction m_InGame_Vertical;
     public struct InGameActions
     {
         private @PlayerControls m_Wrapper;
@@ -618,8 +728,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_InGame_Attack;
         public InputAction @SpecialAttack => m_Wrapper.m_InGame_SpecialAttack;
         public InputAction @Dash => m_Wrapper.m_InGame_Dash;
-        public InputAction @MusicBox => m_Wrapper.m_InGame_MusicBox;
         public InputAction @LongRangeAttack => m_Wrapper.m_InGame_LongRangeAttack;
+        public InputAction @MusicBox => m_Wrapper.m_InGame_MusicBox;
+        public InputAction @Horizontal => m_Wrapper.m_InGame_Horizontal;
+        public InputAction @Vertical => m_Wrapper.m_InGame_Vertical;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -644,12 +756,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
-            @MusicBox.started += instance.OnMusicBox;
-            @MusicBox.performed += instance.OnMusicBox;
-            @MusicBox.canceled += instance.OnMusicBox;
             @LongRangeAttack.started += instance.OnLongRangeAttack;
             @LongRangeAttack.performed += instance.OnLongRangeAttack;
             @LongRangeAttack.canceled += instance.OnLongRangeAttack;
+            @MusicBox.started += instance.OnMusicBox;
+            @MusicBox.performed += instance.OnMusicBox;
+            @MusicBox.canceled += instance.OnMusicBox;
+            @Horizontal.started += instance.OnHorizontal;
+            @Horizontal.performed += instance.OnHorizontal;
+            @Horizontal.canceled += instance.OnHorizontal;
+            @Vertical.started += instance.OnVertical;
+            @Vertical.performed += instance.OnVertical;
+            @Vertical.canceled += instance.OnVertical;
         }
 
         private void UnregisterCallbacks(IInGameActions instance)
@@ -669,12 +787,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
-            @MusicBox.started -= instance.OnMusicBox;
-            @MusicBox.performed -= instance.OnMusicBox;
-            @MusicBox.canceled -= instance.OnMusicBox;
             @LongRangeAttack.started -= instance.OnLongRangeAttack;
             @LongRangeAttack.performed -= instance.OnLongRangeAttack;
             @LongRangeAttack.canceled -= instance.OnLongRangeAttack;
+            @MusicBox.started -= instance.OnMusicBox;
+            @MusicBox.performed -= instance.OnMusicBox;
+            @MusicBox.canceled -= instance.OnMusicBox;
+            @Horizontal.started -= instance.OnHorizontal;
+            @Horizontal.performed -= instance.OnHorizontal;
+            @Horizontal.canceled -= instance.OnHorizontal;
+            @Vertical.started -= instance.OnVertical;
+            @Vertical.performed -= instance.OnVertical;
+            @Vertical.canceled -= instance.OnVertical;
         }
 
         public void RemoveCallbacks(IInGameActions instance)
@@ -795,8 +919,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnSpecialAttack(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
-        void OnMusicBox(InputAction.CallbackContext context);
         void OnLongRangeAttack(InputAction.CallbackContext context);
+        void OnMusicBox(InputAction.CallbackContext context);
+        void OnHorizontal(InputAction.CallbackContext context);
+        void OnVertical(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

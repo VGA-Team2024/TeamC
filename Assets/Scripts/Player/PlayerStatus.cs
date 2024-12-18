@@ -13,8 +13,6 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
     private int _maxFairyGauge = 600;
     [SerializeField, InspectorVariantName("現在妖精ゲージ")]
     private float _currentFairyGauge;
-    [SerializeField, InspectorVariantName("特殊攻撃で減るゲージ")]
-    private int _spAttackDiminution = 150;
     [SerializeField, InspectorVariantName("一秒にゲージが回復する量")]
     private float _fairyGaugeParSecond = 20;
     [SerializeField, InspectorVariantName("吹き飛ぶ向き")]
@@ -63,22 +61,30 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
             _currentFairyGauge = _maxFairyGauge;
         if(_player.PlayerStatusUI)
             _player.PlayerStatusUI.FairyGaugeUpdate(_currentFairyGauge / _maxFairyGauge);
-        CanSpecialAttack();
     }
 
     /// <summary>
     /// 妖精ゲージが足りているか判定する
     /// </summary>
-    public bool CanSpecialAttack()
+    public bool CanUseFairyGauge(float value) => _currentFairyGauge >= value;
+
+    /// <summary>
+    /// 妖精ゲージを消費する関数
+    /// </summary>
+    /// <param name="diminution">消費量</param>
+    public void UseFairyGauge(float diminution) => _currentFairyGauge -= diminution;
+
+    public void Heal(int amount)
     {
-        bool canSpecial = _currentFairyGauge >= _spAttackDiminution;
-        _player.PlayerStatusUI.CanSpecialAttackUpdate(canSpecial);
-        return canSpecial;
+        if (_currentHP + amount <= _maxHP)
+        {
+            _currentHP += amount;
+            if(_player.PlayerStatusUI)
+                _player.PlayerStatusUI.PlayerHealthUpdate(_currentHP);
+        }
+        
     }
 
-    
-    public void UseSpecialAttack() => _currentFairyGauge -= _spAttackDiminution;
-    
     public void TakeDamage(int damage)
     {
         // 無敵のレイヤーに変更
@@ -106,14 +112,14 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
 
     async void GodModeEnd()
     {
-        await UniTask.Delay((int)(_godTime * 1000));
+        await UniTask.Delay((int)(_godTime * 1000),cancellationToken: _player.CancellationToken);
         // 通常レイヤーに戻す
         gameObject.layer = _normalLayer;
     }
 
     async void IsControl()
     {
-        await UniTask.Delay((int)(_NoMoveTime*1000));
+        await UniTask.Delay((int)(_NoMoveTime*1000),cancellationToken: _player.CancellationToken);
         _player.PlayerMove.IsMove = true;
     }
 
