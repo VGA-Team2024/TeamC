@@ -173,12 +173,18 @@ public class BossBear : EnemyBase, IPlayerTarget
         return dis <= _disA ? 1 : dis <= _disB ? 2 : 3;
     }
 
-    // プランナーさんの変更時用
-    // void OnDrawGizmos()
-    // {
-    //     Gizmos.color = Color.yellow;
-    //     Gizmos.DrawSphere(new Vector3(transform.position.x + _disA, transform.position.y), 1f);
-    //     Gizmos.DrawSphere(new Vector3(transform.position.x + _disB, transform.position.y), 1f);
-    //     Gizmos.DrawSphere(new Vector3(transform.position.x + _disC, transform.position.y), 1f);
-    // }
+    //プランナーさんの変更時用
+    void OnDrawGizmos()
+    {
+        if (Application.isPlaying) return;
+        // 距離A,B,C がどのくらいか
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(new Vector3(transform.position.x + _disA, transform.position.y), 1f);
+        Gizmos.DrawSphere(new Vector3(transform.position.x + _disB, transform.position.y), 1f);
+        Gizmos.DrawSphere(new Vector3(transform.position.x + _disC, transform.position.y), 1f);
+
+        // 巡回距離
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position + new Vector3(0, 1), Vector3.right * _patrolArea);
+    }
 }

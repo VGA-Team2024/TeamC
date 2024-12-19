@@ -9,12 +9,22 @@ public class BearCotton : MonoBehaviour, ITeleportable, ITimeShorten
     [SerializeField, Header("効果時間")] private float _effectTime;
     private bool _isCollided;
     private CancellationTokenSource _tokenSource;
+    private EnemyHp _hp;
     
     private void Start()
     {
+        _hp = GetComponent<EnemyHp>();
         StartDestroyTask();
     }
-    
+
+    private void Update()
+    {
+        if (_hp.CurrentHp <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void Teleport(Vector3 position)
     {
         _isCollided = true;

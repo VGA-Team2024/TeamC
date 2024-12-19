@@ -6,7 +6,6 @@ public class FallMarionette : EnemyBase, IPlayerTarget
     [SerializeField, Header("ぶつかった後当たり判定がなくなる時間")] private int _freezeTime;
     [SerializeField, Header("Playerにつけるタグの名前")] private string _playerTag;
     [SerializeField, Header("停止位置")] private GameObject _stopPoint;
-    [SerializeField, Header("出現時のスピード")] private float _fallSpeed;
     [SerializeField, Header("親オブジェクト")] private GameObject _obj;
 
     private bool _isActed;
@@ -21,7 +20,7 @@ public class FallMarionette : EnemyBase, IPlayerTarget
         Animator animator = gameObject.transform.GetChild(1).GetComponent<Animator>();
         
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
-        _fallState = new EnemyFallState(this, _freezeState, transform, _stopPoint, _fallSpeed);
+        _fallState = new EnemyFallState(this, _freezeState, transform, _stopPoint, _speed);
         _deathState = new EnemyDeathState(this, particle, animator, _obj);
     }
 

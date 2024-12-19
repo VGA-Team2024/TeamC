@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3763924583307991734}
   - component: {fileID: 6052903151008229522}
   - component: {fileID: -1108437188274759797}
+  - component: {fileID: 8246979527777185167}
   - component: {fileID: 888690736004795940}
   - component: {fileID: 7455440731532232091}
   m_Layer: 7
@@ -55,9 +56,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 2
   _collideDamage: 1
-  _freezeTime: 5
+  _freezeTime: 2
   _playerTag: Player
   _jumpSpeed: 2
+  _jumpHeight: 10
   _rushDistance: 5
   _rushSpeed: 3
   _walkTime: 2
@@ -96,6 +98,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blow: 0
+--- !u!114 &8246979527777185167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104458898053443286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c02c58bf4df1f844a061c03c5159cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1390864505839966036}
 --- !u!65 &888690736004795940
 BoxCollider:
   m_ObjectHideFlags: 0

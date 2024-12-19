@@ -68,4 +68,11 @@ public class AttackNormalBear : EnemyBase, IPlayerTarget
             ChangeState(_freezeState);
         }
     }
+    
+    private void OnDrawGizmos()
+    {
+        if(Application.isPlaying) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position + new Vector3(0, 1), Vector3.right * _patrolArea);
+    }
 }

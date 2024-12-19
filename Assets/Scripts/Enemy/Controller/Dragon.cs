@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class Dragon : EnemyBase, IPlayerTarget
@@ -10,9 +11,9 @@ public class Dragon : EnemyBase, IPlayerTarget
     [SerializeField, Header("突進時の移動距離")] private float _rushDistance;
     [SerializeField, Header("突進時のスピード")] private float _rushSpeed;
     [SerializeField, Header("何秒歩行をするか")] private int _walkTime;
-    [SerializeField, Header("どのくらい飛ぶか")] private float _height;
+    [SerializeField, Header("飛行時にどのくらい飛ぶか")] private float _height;
     [SerializeField, Header("ブレスの弾")] private GameObject _breathBullet;
-    [SerializeField, Header("飛びブレスのoffset")] private Vector2 _offSet;
+    [SerializeField, Header("地上ブレスのoffset")] private Vector2 _offSet;
     [SerializeField, Header("距離A")] private int _disA;
     [SerializeField, Header("距離B")] private int _disB;
     [SerializeField, Header("距離C")] private int _disC;
@@ -21,6 +22,8 @@ public class Dragon : EnemyBase, IPlayerTarget
     [SerializeField, Header("距離Cにいたときの攻撃のそれぞれの確率"), Range(0, 100)]
     private int[] _disCWeights = new int[3];
 
+    private Animator _animator;
+    private readonly int _flyEnd = Animator.StringToHash("FlyEnd"); // FlyEndは着地したときにplay
     private bool _canMove; // 飛んでる間は次の攻撃ができないようにする用
     
     private EnemyChaseState _chaseState; // 歩行ステート
@@ -38,18 +41,18 @@ public class Dragon : EnemyBase, IPlayerTarget
         ParticleSystem particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
         GameObject attackCollider = gameObject.transform.GetChild(2).gameObject;
         GameObject breaths = gameObject.transform.GetChild(3).gameObject;
-        Animator animator = gameObject.transform.GetChild(4).GetComponent<Animator>();
+        _animator = gameObject.transform.GetChild(4).GetComponent<Animator>();
         Rigidbody rb = GetComponent<Rigidbody>();
 
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
-        _chaseState = new EnemyChaseState(this, _freezeState, animator, transform, _speed, false, _walkTime);
-        _attackState = new EnemyAttackState(this, _freezeState, animator, attackCollider);
-        _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, animator, transform, _jumpSpeed, _jumpHeight, rb);
-        _rushState = new EnemyRushState(this, _freezeState, animator, transform, _rushDistance, _rushSpeed);
-        _shootState = new EnemyShootState(this, _freezeState, animator, transform, _offSet, _breathBullet); // 地上ブレス
-        _breathState = new EnemyBreathState(this, _freezeState, animator, breaths); // 飛びブレス
-        _flyState = new EnemyFlyState(this, _breathState, animator, transform, rb, _height);
-        _deathState = new EnemyDeathState(this, particle, animator, gameObject);
+        _chaseState = new EnemyChaseState(this, _freezeState, _animator, transform, _speed, false, _walkTime);
+        _attackState = new EnemyAttackState(this, _freezeState, _animator, attackCollider);
+        _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, _animator, transform, _jumpSpeed, _jumpHeight, rb);
+        _rushState = new EnemyRushState(this, _freezeState, _animator, transform, _rushDistance, _rushSpeed);
+        _shootState = new EnemyShootState(this, _freezeState, _animator, transform, _offSet, _breathBullet); // 地上ブレス
+        _breathState = new EnemyBreathState(this, _freezeState, _animator, breaths); // 飛びブレス
+        _flyState = new EnemyFlyState(this, _breathState, _animator, transform, rb, _height);
+        _deathState = new EnemyDeathState(this, particle, _animator, gameObject);
         
     }
 
@@ -77,6 +80,7 @@ public class Dragon : EnemyBase, IPlayerTarget
                 {
                     var num = EnemyUtility.ProbabilityCalculate(_disBWeights);
                     if (num == 0) _shootState.GetPlayerPos(_playerMove.transform.position);
+                    if (num == 2) _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
                     ChangeState(num switch
                     {
                         0 => _shootState,
@@ -109,7 +113,6 @@ public class Dragon : EnemyBase, IPlayerTarget
     
     private void OnCollisionStay(Collision other)
     {
-        if (LayerMask.LayerToName(other.gameObject.layer) == "Ground") _canMove = true;
         if (!other.gameObject.CompareTag(_playerTag)) return;
         if(other.gameObject.TryGetComponent(out IDamageable dmg) && other.gameObject.TryGetComponent(out IBlowable blo))
         {
@@ -117,6 +120,13 @@ public class Dragon : EnemyBase, IPlayerTarget
             blo.BlownAway(transform.position);
             ChangeState(_freezeState);
         }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (LayerMask.LayerToName(other.gameObject.layer) != "Ground") return;
+        _animator.SetTrigger(_flyEnd);
+        CanMove().Forget();
     }
 
     private void OnCollisionExit(Collision other)
@@ -128,5 +138,21 @@ public class Dragon : EnemyBase, IPlayerTarget
     {
         var dis = Mathf.Abs(transform.position.x - _playerMove.transform.position.x);
         return dis <= _disA ? 1 : dis <= _disB ? 2 : 3;
+    }
+
+    private async UniTask CanMove() // 着地のアニメーションが再生し終わったら動けるように
+    {
+        await UniTask.WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+        _canMove = true;
+    }
+    
+    void OnDrawGizmos()
+    {
+        if (Application.isPlaying) return;
+        // 距離A,B,C がどのくらいか
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(new Vector3(transform.position.x + _disA, transform.position.y), 1f);
+        Gizmos.DrawSphere(new Vector3(transform.position.x + _disB, transform.position.y), 1f);
+        Gizmos.DrawSphere(new Vector3(transform.position.x + _disC, transform.position.y), 1f);
     }
 }
