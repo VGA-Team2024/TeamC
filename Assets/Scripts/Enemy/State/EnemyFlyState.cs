@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyFlyState : IEnemyState
 {
     private readonly EnemyBase _enemyBase;
-    private readonly EnemyShootState _shootState;
+    private readonly EnemyBreathState _breathState;
     private readonly Animator _animator;
     private readonly int _fly = Animator.StringToHash("Fly");
     private readonly Transform _transform;
@@ -12,12 +12,11 @@ public class EnemyFlyState : IEnemyState
     private readonly Rigidbody _rb;
     private const float Speed = 3f;
     private float _destination;
-    private Vector2 _playerPos;
 
-    public EnemyFlyState(EnemyBase enemyBase, EnemyShootState shootState, Animator animator, Transform transform, Rigidbody rb, float height)
+    public EnemyFlyState(EnemyBase enemyBase, EnemyBreathState breathState, Animator animator, Transform transform, Rigidbody rb, float height)
     {
         _enemyBase = enemyBase;
-        _shootState = shootState;
+        _breathState = breathState;
         _animator = animator;
         _transform = transform;
         _rb = rb;
@@ -46,9 +45,6 @@ public class EnemyFlyState : IEnemyState
     private async UniTask Fly()
     {
         await UniTask.WaitUntil(() => _transform.position.y >= _destination);
-        _shootState.GetPlayerPos(_playerPos);
-        _enemyBase.ChangeState(_shootState);
+        _enemyBase.ChangeState(_breathState);
     }
-    
-    public void GetPlayerPos(Vector2 playerPos) { _playerPos = playerPos; }
 }

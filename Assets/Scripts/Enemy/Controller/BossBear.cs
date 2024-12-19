@@ -9,7 +9,7 @@ public class BossBear : EnemyBase, IPlayerTarget
     [SerializeField, Header("Playerを攻撃した後次の攻撃が可能になるまでの時間")] private int _freezeTime;
     [SerializeField, Header("Playerにつけるタグの名前")] private string _playerTag;
     [SerializeField, Header("ジャンプ攻撃時のスピード")] private float _jumpSpeed;
-    [SerializeField, Header("敵の動き方")] private AnimationCurve _animationCurve;
+    [SerializeField, Header("ジャンプ攻撃時の限界高度")] private float _jumpHeight;
     [SerializeField, Header("突進時の移動距離")] private float _rushDistance;
     [SerializeField, Header("突進時のスピード")] private float _rushSpeed;
     [SerializeField, Header("距離A")] private int _disA;
@@ -37,12 +37,13 @@ public class BossBear : EnemyBase, IPlayerTarget
         ParticleSystem particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
         GameObject attackCollider = gameObject.transform.GetChild(2).gameObject;
         Animator animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
+        Rigidbody rb = GetComponent<Rigidbody>();
         _cottons = gameObject.transform.GetChild(4).GetComponent<Cottons>();
         
         _walkState = new EnemyWalkState(animator, transform, _speed, _patrolArea);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _attackState = new EnemyAttackState(this, _freezeState, animator, attackCollider);
-        _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, animator, transform, _jumpSpeed, _animationCurve);
+        _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, animator, transform, _jumpSpeed, _jumpHeight, rb);
         _rushState = new EnemyRushState(this, _freezeState, animator, transform, _rushDistance, _rushSpeed);
         _createState = new EnemyObjectCreateState(this, _freezeState, animator, _cottons);
         _deathState = new EnemyDeathState(this, particle, animator, gameObject);
@@ -73,6 +74,7 @@ public class BossBear : EnemyBase, IPlayerTarget
                         if (_cottons.cottons.Any(_ => _ != null))
                         {
                             var num = EnemyUtility.ProbabilityCalculate(_waitBWeights);
+                            if (num == 0) _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
                             ChangeState(num switch
                             {
                                 0 => _jumpAttackState,
@@ -87,6 +89,7 @@ public class BossBear : EnemyBase, IPlayerTarget
                         if (_cottons.cottons.Any(_ => _ != null))
                         {
                             var num = EnemyUtility.ProbabilityCalculate(_disCWeights);
+                            if (num == 1) _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
                             ChangeState(num switch
                             {
                                 0 => _rushState,
