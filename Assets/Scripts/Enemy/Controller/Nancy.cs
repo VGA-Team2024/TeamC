@@ -6,7 +6,7 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
     [SerializeField, Header("Playerを攻撃した後次の攻撃が可能になるまでの時間")] private int _freezeTime;
     [SerializeField, Header("Playerにつけるタグの名前")] private string _playerTag;
     [SerializeField, Header("ジャンプ攻撃時のスピード")] private float _jumpSpeed;
-    [SerializeField, Header("敵の動き方")] private AnimationCurve _animationCurve;
+    [SerializeField, Header("ジャンプ攻撃時の限界高度")] private float _jumpHeight;
     [SerializeField, Header("突進時の移動距離")] private float _rushDistance;
     [SerializeField, Header("突進時のスピード")] private float _rushSpeed;
     [SerializeField, Header("何秒歩行をするか")] private int _walkTime;
@@ -34,11 +34,12 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
         GameObject attackCollider = gameObject.transform.GetChild(2).gameObject;
         GameObject specialAttackCollider = gameObject.transform.GetChild(3).gameObject;
         Animator animator = gameObject.transform.GetChild(4).GetComponent<Animator>();
+        Rigidbody rb = GetComponent<Rigidbody>();
         
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _chaseState = new EnemyChaseState(this, _freezeState, animator, transform, _speed, false, _walkTime);
         _attackState = new EnemyAttackState(this, _freezeState, animator, attackCollider);
-        _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, animator, transform, _jumpSpeed, _animationCurve);
+        _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, animator, transform, _jumpSpeed, _jumpHeight, rb);
         _rushState = new EnemyRushState(this, _freezeState, animator, transform, _rushDistance, _rushSpeed);
         _specialAttackState = new EnemySpecialAttackState(this, _freezeState, animator, specialAttackCollider);
         _deathState = new EnemyDeathState(this, particle, animator, gameObject);
@@ -73,27 +74,37 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
                     ChangeState(_attackState);
                     _attackCount++;
                     break;
-                case 2 : // 距離がBの場合
+                case 2: // 距離がBの場合
+                {
+                    var num = EnemyUtility.ProbabilityCalculate(_disBWeights);
                     _attackCount = 0;
-                    ChangeState(EnemyUtility.ProbabilityCalculate(_disBWeights) switch
+                    if (num == 2) _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
+                    if (num == 3) _chaseState.GetPlayerPos(_playerMove.transform.position);
+                    ChangeState(num switch
                     {
                         0 => _specialAttackState,
                         1 => _rushState,
-                        _ => _jumpAttackState
+                        2 => _jumpAttackState,
+                        _ => _chaseState
                     });
                     break;
-                case 3 :
+                }
+                case 3: // 距離がCの場合
+                {
+                    var num = EnemyUtility.ProbabilityCalculate(_disCWeights);
                     _attackCount = 0;
-                    ChangeState(EnemyUtility.ProbabilityCalculate(_disCWeights) switch
+                    if (num == 2) _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
+                    if (num == 3) _chaseState.GetPlayerPos(_playerMove.transform.position);
+                    ChangeState(num switch
                     {
                         0 => _specialAttackState,
                         1 => _rushState,
-                        _ => _jumpAttackState
+                        2 => _jumpAttackState,
+                        _ => _chaseState
                     });
                     break;
+                }
             }
-            //         _chaseState.GetPlayerPos(_playerMove.transform.position);
-            //         ChangeState(_chaseState);
         }
     }
     

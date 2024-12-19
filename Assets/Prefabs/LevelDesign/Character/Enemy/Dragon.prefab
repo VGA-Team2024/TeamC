@@ -58,39 +58,6 @@ MonoBehaviour:
   _freezeTime: 5
   _playerTag: Player
   _jumpSpeed: 2
-  _animationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 2
-      inSlope: 0.0028125367
-      outSlope: 0.0028125367
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.66542715
-    - serializedVersion: 3
-      time: 2
-      value: 0
-      inSlope: -2.8546064
-      outSlope: -2.8546064
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.12002003
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   _rushDistance: 5
   _rushSpeed: 3
   _walkTime: 2
@@ -295,7 +262,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4915524360342577733}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -318,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f059fad51849746bb07a6807e8d636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _parentObj: {fileID: 1104458898053443286}
   _breath: {fileID: 3065034188471492711, guid: a4b8c3ee445947244ac14a6f09eb00e5, type: 3}
   _breathPoint:
   - {fileID: 8538111372030235092}
@@ -484,7 +452,7 @@ Transform:
   m_GameObject: {fileID: 8538111372030235092}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.95, y: 9.01, z: 0}
+  m_LocalPosition: {x: 7.64, y: 8.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
