@@ -144,10 +144,10 @@ TextureImporter:
         serializedVersion: 2
         x: 250
         y: 261
-        width: 100
+        width: 200
         height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.25, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -247,9 +247,9 @@ TextureImporter:
       name: UnderMapChip_7
       rect:
         serializedVersion: 2
-        x: 250
+        x: 280
         y: 161
-        width: 100
+        width: 70
         height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -453,6 +453,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: UnderMapChip_17
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 120
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55d583391b2523a46b6751710af3e31c
+      internalID: -1068658946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UnderMapChip_18
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 161
+        width: 200
+        height: 200
+      alignment: 9
+      pivot: {x: 0.75, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffc6536b68d1b9a4989937bf07363762
+      internalID: 1370529128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -473,6 +515,8 @@ TextureImporter:
       UnderMapChip_14: 1909254080
       UnderMapChip_15: 1063600169
       UnderMapChip_16: -172130968
+      UnderMapChip_17: -1068658946
+      UnderMapChip_18: 1370529128
       UnderMapChip_2: -428386028
       UnderMapChip_3: 563067330
       UnderMapChip_4: 127014869

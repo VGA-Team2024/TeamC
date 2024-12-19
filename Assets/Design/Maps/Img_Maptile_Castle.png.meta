@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 24
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -209,8 +209,8 @@ TextureImporter:
         y: 258
         width: 100
         height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.25, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -230,8 +230,8 @@ TextureImporter:
         y: 258
         width: 100
         height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.25, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -251,8 +251,8 @@ TextureImporter:
         y: 258
         width: 100
         height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.25, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -352,8 +352,8 @@ TextureImporter:
       name: Img_Maptile_Castle (2)_12
       rect:
         serializedVersion: 2
-        x: 422
-        y: 158
+        x: 397
+        y: 155
         width: 100
         height: 100
       alignment: 0
@@ -378,7 +378,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 9
-      pivot: {x: 0.5049017, y: 0.5049066}
+      pivot: {x: 0.25, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -398,8 +398,8 @@ TextureImporter:
         y: 158
         width: 100
         height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.25, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -419,8 +419,8 @@ TextureImporter:
         y: 158
         width: 100
         height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.25, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -520,8 +520,8 @@ TextureImporter:
       name: Img_Maptile_Castle (2)_20
       rect:
         serializedVersion: 2
-        x: 422
-        y: 58
+        x: 365
+        y: 60
         width: 100
         height: 100
       alignment: 0
@@ -545,8 +545,8 @@ TextureImporter:
         y: 58
         width: 100
         height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.25, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -566,8 +566,8 @@ TextureImporter:
         y: 58
         width: 100
         height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.25, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -587,8 +587,8 @@ TextureImporter:
         y: 58
         width: 100
         height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.25, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -596,6 +596,69 @@ TextureImporter:
       bones: []
       spriteID: 663dd49a6ff2fad4498d0317463d5b80
       internalID: -1922937832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle_0
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 258
+        width: 300
+        height: 100
+      alignment: 9
+      pivot: {x: 0.075, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 338310317dd15d04aa5b125fd3625bfb
+      internalID: 1711692895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle_1
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 158
+        width: 288
+        height: 100
+      alignment: 9
+      pivot: {x: 0.075, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d28083095b4d0f4daa35237c959db31
+      internalID: -1451911395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Img_Maptile_Castle_2
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 58
+        width: 300
+        height: 100
+      alignment: 9
+      pivot: {x: 0.075, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13354993fb066e546859c8a2e74a9d9e
+      internalID: -1020403118
       vertices: []
       indices: 
       edges: []
@@ -635,6 +698,9 @@ TextureImporter:
       Img_Maptile_Castle (2)_7: 765484597
       Img_Maptile_Castle (2)_8: -1346959745
       Img_Maptile_Castle (2)_9: 999984822
+      Img_Maptile_Castle_0: 1711692895
+      Img_Maptile_Castle_1: -1451911395
+      Img_Maptile_Castle_2: -1020403118
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
