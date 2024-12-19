@@ -82,12 +82,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f35aaa88aad4384ba0edc44d5efa215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0
+  _speed: 3
   _collideDamage: 1
   _freezeTime: 2
   _playerTag: Player
   _stopPoint: {fileID: 8654621210104761501}
-  _fallSpeed: 3
   _obj: {fileID: 1070429542875823536}
 --- !u!114 &1395143183229517899
 MonoBehaviour:

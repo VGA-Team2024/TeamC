@@ -131,4 +131,14 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
     }
 
     public void Teleport(Vector3 position) { transform.position = position; }
+    
+    void OnDrawGizmos()
+    {
+        if (Application.isPlaying) return;
+        // 距離A,B,C がどのくらいか
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(new Vector3(transform.position.x + _disA, transform.position.y), 1f);
+        Gizmos.DrawSphere(new Vector3(transform.position.x + _disB, transform.position.y), 1f);
+        Gizmos.DrawSphere(new Vector3(transform.position.x + _disC, transform.position.y), 1f);
+    }
 }

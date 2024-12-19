@@ -46,4 +46,11 @@ public class PatrolMarionette : EnemyBase
             ChangeState(_freezeState);
         }
     }
+    
+    private void OnDrawGizmos()
+    {
+        if(Application.isPlaying) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position + new Vector3(1, 0), Vector3.down * _patrolArea);
+    }
 }

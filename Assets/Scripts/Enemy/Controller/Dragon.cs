@@ -129,4 +129,14 @@ public class Dragon : EnemyBase, IPlayerTarget
         var dis = Mathf.Abs(transform.position.x - _playerMove.transform.position.x);
         return dis <= _disA ? 1 : dis <= _disB ? 2 : 3;
     }
+    
+    void OnDrawGizmos()
+    {
+        if (Application.isPlaying) return;
+        // 距離A,B,C がどのくらいか
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(new Vector3(transform.position.x + _disA, transform.position.y), 1f);
+        Gizmos.DrawSphere(new Vector3(transform.position.x + _disB, transform.position.y), 1f);
+        Gizmos.DrawSphere(new Vector3(transform.position.x + _disC, transform.position.y), 1f);
+    }
 }
