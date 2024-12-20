@@ -9,7 +9,7 @@ public class EnemyHp : MonoBehaviour
     private void Start()
     {
         _currentHp = _maxHp;
-    }
+    } // StartではなくOnEnableでないとCurrentHpの初期化が行われない
 
     public void TakeDamage(int damage)
     {

@@ -17,10 +17,21 @@ public class Dragon : EnemyBase, IPlayerTarget
     [SerializeField, Header("距離A")] private int _disA;
     [SerializeField, Header("距離B")] private int _disB;
     [SerializeField, Header("距離C")] private int _disC;
-    [SerializeField, Header("距離Bにいたときの攻撃のそれぞれの確率"), Range(0, 100)]
-    private int[] _disBWeights = new int[3];
-    [SerializeField, Header("距離Cにいたときの攻撃のそれぞれの確率"), Range(0, 100)]
-    private int[] _disCWeights = new int[3];
+    [SerializeField, Header("距離Bにいたときの攻撃のそれぞれの確率")]
+    private Weight[] _disBWeights = new Weight[4]
+    {
+        new Weight("地上ブレス"),
+        new Weight("突進"),
+        new Weight("ジャンプ攻撃"),
+        new Weight("歩行なら待機, 待機なら歩行")
+    };
+    [SerializeField, Header("距離Cにいたときの攻撃のそれぞれの確率")]
+    private Weight[] _disCWeights = new Weight[3]
+    {
+        new Weight("地上ブレス"),
+        new Weight("突進"),
+        new Weight("飛行->空中ブレス")
+    };
 
     private Animator _animator;
     private readonly int _flyEnd = Animator.StringToHash("FlyEnd"); // FlyEndは着地したときにplay

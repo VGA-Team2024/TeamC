@@ -1726,9 +1726,27 @@ MonoBehaviour:
   _disA: 8
   _disB: 16
   _disC: 24
-  _waitBWeights: 32000000140000001e000000
-  _disCWeights: 46000000140000000a000000
-  _walkBWeights: 3c0000001e0000000a000000
+  _waitBWeights:
+  - _name: "\u30B8\u30E3\u30F3\u30D7\u653B\u6483"
+    _probability: 50
+  - _name: "\u3072\u3063\u304B\u304D\u653B\u6483"
+    _probability: 20
+  - _name: "\u6B69\u884C"
+    _probability: 30
+  _disCWeights:
+  - _name: "\u7A81\u9032"
+    _probability: 70
+  - _name: "\u30B8\u30E3\u30F3\u30D7\u653B\u6483"
+    _probability: 20
+  - _name: "\u6B69\u884C"
+    _probability: 10
+  _walkBWeights:
+  - _name: "\u30B8\u30E3\u30F3\u30D7\u653B\u6483"
+    _probability: 60
+  - _name: "\u3072\u3063\u304B\u304D\u653B\u6483"
+    _probability: 30
+  - _name: "\u786C\u76F4"
+    _probability: 10
 --- !u!114 &767001549516292574
 MonoBehaviour:
   m_ObjectHideFlags: 0

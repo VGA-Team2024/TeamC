@@ -15,12 +15,28 @@ public class BossBear : EnemyBase, IPlayerTarget
     [SerializeField, Header("距離A")] private int _disA;
     [SerializeField, Header("距離B")] private int _disB;
     [SerializeField, Header("距離C")] private int _disC;
-    [SerializeField, Header("待機->攻撃時に距離Bにいたときの攻撃のそれぞれの確率"), Range(0, 100)]
-    private int[] _waitBWeights = new int[3];
+    [SerializeField, Header("待機->攻撃時に距離Bにいたときの攻撃のそれぞれの確率")]
+    private Weight[] _waitBWeights = new Weight[3]
+    {
+        new Weight("ジャンプ攻撃"),
+        new Weight("ひっかき攻撃"),
+        new Weight("歩行")
+    };
+
     [SerializeField, Header("攻撃時に距離Cにいたときの攻撃のそれぞれの確率")]
-    private int[] _disCWeights = new int[3];
+    private Weight[] _disCWeights = new Weight[3]
+    {
+        new Weight("突進"),
+        new Weight("ジャンプ攻撃"),
+        new Weight("歩行")
+    };
     [SerializeField, Header("歩行->攻撃時に距離Bにいたときの攻撃のそれぞれの確率")]
-    private int[] _walkBWeights = new int[3];
+    private Weight[] _walkBWeights = new Weight[3]
+    {
+        new Weight("ジャンプ攻撃"),
+        new Weight("ひっかき攻撃"),
+        new Weight("硬直")
+    };
 
     private Cottons _cottons;
     

@@ -13,10 +13,22 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
     [SerializeField, Header("距離A")] private int _disA;
     [SerializeField, Header("距離B")] private int _disB;
     [SerializeField, Header("距離C")] private int _disC;
-    [SerializeField, Header("距離Bにいたときの攻撃のそれぞれの確率"), Range(0, 100)]
-    private int[] _disBWeights = new int[3];
-    [SerializeField, Header("距離Cにいたときの攻撃のそれぞれの確率"), Range(0, 100)]
-    private int[] _disCWeights = new int[3];
+    [SerializeField, Header("距離Bにいたときの攻撃のそれぞれの確率")]
+    private Weight[] _disBWeights = new Weight[4]
+    {
+        new Weight("特殊攻撃"),
+        new Weight("突進"),
+        new Weight("ジャンプ攻撃"),
+        new Weight("歩行")
+    };
+    [SerializeField, Header("距離Cにいたときの攻撃のそれぞれの確率")]
+    private Weight[] _disCWeights = new Weight[4]
+    {
+        new Weight("特殊攻撃"),
+        new Weight("突進"),
+        new Weight("ジャンプ攻撃"),
+        new Weight("歩行")
+    };
 
     private int _attackCount; // 距離A時の前方攻撃の回数制限用
     
@@ -87,8 +99,8 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
                         2 => _jumpAttackState,
                         _ => _chaseState
                     });
-                    break;
                 }
+                    break;
                 case 3: // 距離がCの場合
                 {
                     var num = EnemyUtility.ProbabilityCalculate(_disCWeights);
@@ -102,8 +114,8 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
                         2 => _jumpAttackState,
                         _ => _chaseState
                     });
-                    break;
                 }
+                    break;
             }
         }
     }
