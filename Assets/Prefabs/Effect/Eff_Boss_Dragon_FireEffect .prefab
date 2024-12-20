@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6960995600790375811}
   - component: {fileID: 3255900813107423312}
   m_Layer: 0
-  m_Name: Eff_Boss_Bear_AttackEffect 2
+  m_Name: 'Eff_Boss_Dragon_FireEffect '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 999
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1358,7 +1358,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -1545,7 +1545,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 21300000, guid: 2c3b6d858929ed14db4d0e6f95330614, type: 3}
+    - sprite: {fileID: 21300000, guid: 938b4e07f6b10f64eadc4f98c95c8877, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -4835,7 +4835,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0042c4fc775042a4fbb773791b3a359f, type: 2}
+  - {fileID: 2100000, guid: 0418f6676ad4af24cbd71747189f883b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4860,7 +4860,7 @@ ParticleSystemRenderer:
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 1
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
