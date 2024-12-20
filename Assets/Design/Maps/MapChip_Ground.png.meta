@@ -663,6 +663,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: MapChip_Ground_27
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 0
+        width: 200
+        height: 200
+      alignment: 9
+      pivot: {x: 0.24823883, y: 0.753895}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c668aa33381eaaf4fb6da32d71c74004
+      internalID: 1299627339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -694,6 +715,7 @@ TextureImporter:
       MapChip_Ground_24: 1306294801
       MapChip_Ground_25: -34883789
       MapChip_Ground_26: -578406182
+      MapChip_Ground_27: 1299627339
       MapChip_Ground_3: -499889860
       MapChip_Ground_4: -1365800429
       MapChip_Ground_5: -307533220
