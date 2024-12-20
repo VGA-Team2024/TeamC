@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 24
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -95,18 +95,546 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: CastleMapChip2_0
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 274
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a393193c6542d549b159429b43348f1
+      internalID: 1615425057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_1
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 274
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e9418d17594e9b4e91d4b8ed64bc6af
+      internalID: 1078880791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_2
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 274
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e928265e038f82f4183e95eaf4bba0f7
+      internalID: -1225965060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_3
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 274
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef827d2e4f9185e47a2d7b5ac617f03e
+      internalID: 1407837445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_4
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 274
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bde6b80822c1aa41b541b3f3a8a0bcb
+      internalID: -1925361701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_5
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 274
+        width: 100
+        height: 100
+      alignment: 9
+      pivot: {x: 0.25, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 560433fd394966a408559b23bd1f6cd0
+      internalID: 1748295257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_6
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 274
+        width: 100
+        height: 100
+      alignment: 9
+      pivot: {x: 0.25, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57fa655655d30a64f94c537c5c4f4489
+      internalID: 1176884362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_7
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 274
+        width: 100
+        height: 100
+      alignment: 9
+      pivot: {x: 0.25, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dc46847585fd3a4b8eb948800841e25
+      internalID: -2027843709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_8
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 174
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b7bc7d82f72e804f84462723304a3f2
+      internalID: -1962397436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_9
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 174
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b02f063a3921b964e98c20ba7ea19c6f
+      internalID: -620438483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_10
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 174
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1c0e78346b2425478071563f6bb62cb
+      internalID: 1295397001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_11
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 174
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e302c571d217a342bcdcce984b78c63
+      internalID: -932032891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_12
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 174
+        width: 288
+        height: 100
+      alignment: 9
+      pivot: {x: 0.08, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 173ab0e45a33ba24b8bbb3c6dcfed288
+      internalID: 770561498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_13
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 174
+        width: 100
+        height: 100
+      alignment: 9
+      pivot: {x: 0.25, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46ef76e4254f9f34fb7078472df8f777
+      internalID: 1461703215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_14
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 82
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36cdf7c821968b74c99fc8377a41b124
+      internalID: 1061976078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_15
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 174
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caf7bcbaa5451564d91a19b1995d73f6
+      internalID: -165440882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_16
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 74
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1101c09b6b320044a873f5b6cc32858d
+      internalID: 795189997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_17
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 74
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcb2d11fc2637af46abfdca7a57b2ec4
+      internalID: 220239607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_18
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 74
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de5e890123b58dc4dbad119c74ac4cde
+      internalID: 916668957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_19
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 74
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab547be47dc1919459d5a5c86f5f873a
+      internalID: -156385006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_20
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 74
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6b3d0c0b8a823e45ae8af15c0801b65
+      internalID: 1086653119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_21
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 74
+        width: 100
+        height: 100
+      alignment: 9
+      pivot: {x: 0.25, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf43562ba63d1d64faeb05bb25e71343
+      internalID: 1187290399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_22
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 74
+        width: 100
+        height: 100
+      alignment: 9
+      pivot: {x: 0.25, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f84a34a9aa46abd47a137ff795bb5ce0
+      internalID: -658001517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMapChip2_23
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 74
+        width: 100
+        height: 100
+      alignment: 9
+      pivot: {x: 0.25, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcd65eed35890bb43b52c13d9c93e496
+      internalID: 310680078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 9fd67e6dac4e1be4c8cbc18015f8f762
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CastleMapChip2_0: 1615425057
+      CastleMapChip2_1: 1078880791
+      CastleMapChip2_10: 1295397001
+      CastleMapChip2_11: -932032891
+      CastleMapChip2_12: 770561498
+      CastleMapChip2_13: 1461703215
+      CastleMapChip2_14: 1061976078
+      CastleMapChip2_15: -165440882
+      CastleMapChip2_16: 795189997
+      CastleMapChip2_17: 220239607
+      CastleMapChip2_18: 916668957
+      CastleMapChip2_19: -156385006
+      CastleMapChip2_2: -1225965060
+      CastleMapChip2_20: 1086653119
+      CastleMapChip2_21: 1187290399
+      CastleMapChip2_22: -658001517
+      CastleMapChip2_23: 310680078
+      CastleMapChip2_3: 1407837445
+      CastleMapChip2_4: -1925361701
+      CastleMapChip2_5: 1748295257
+      CastleMapChip2_6: 1176884362
+      CastleMapChip2_7: -2027843709
+      CastleMapChip2_8: -1962397436
+      CastleMapChip2_9: -620438483
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
