@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6960995600790375811}
   - component: {fileID: 3255900813107423312}
   m_Layer: 0
-  m_Name: Eff_Boss_Bear_AttackEffect 2
+  m_Name: Eff_Bat_AttackEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1545,7 +1545,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 21300000, guid: 2c3b6d858929ed14db4d0e6f95330614, type: 3}
+    - sprite: {fileID: 21300000, guid: aa55c5066c7057c4aa336704b91767a3, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -4835,7 +4835,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0042c4fc775042a4fbb773791b3a359f, type: 2}
+  - {fileID: 2100000, guid: af843f1b8c34f5744bdb0acdb99a7066, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
