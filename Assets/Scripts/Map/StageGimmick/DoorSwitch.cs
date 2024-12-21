@@ -20,10 +20,10 @@ public class DoorSwitch : MonoBehaviour ,IDamageable
         _doorPrefab.SetActive(false);
         CRIAudioManager.BGM.Play("SE_Gimmick", "SE_Gimmick_Door01");
     }
-
+    /// <summary>このメソッドが呼ばれたらオブジェクトのアクティブ状態をオンにする</summary>
     void DoorClose()
     {
-        
+        _doorPrefab.SetActive(true);
     }
 
     public void TakeDamage(int damage)
@@ -31,10 +31,6 @@ public class DoorSwitch : MonoBehaviour ,IDamageable
         if (_keyConditions == KeyConditions.DoorOpen)
         {
             DoorOpen();
-        }
-        else if(_keyConditions == KeyConditions.MusicBox)
-        {
-            DoorClose();
         }
         else if (_keyConditions == KeyConditions.MusicBox)
         {
