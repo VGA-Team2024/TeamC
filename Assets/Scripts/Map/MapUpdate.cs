@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
@@ -22,26 +21,22 @@ public class MapUpdate : MonoBehaviour
     private OnTriggerEvent _triggerEvent;
     private PlayerMove _playerMove;
     private Collider _entrance;
-
+    private float _playerBoxSize_x;
+    private float _playerBoxHalfSize_y;  // 全体のサイズを入力
+    private float _portalBoxSize_x;
+    private float _portalBoxHalfSize_y;
+    
     public string StartMapName => _startMapName;
     
     private void Start()
     {
         Initialize();
         
-        _triggerEvent.OnTriggerEnterAsObservable
-            .ThrottleFirst(TimeSpan.FromSeconds(_fadeDuration + _bufferTIme))
+        _triggerEvent.OnTriggerEnterAsObservable.Where(x => x.CompareTag("Portal"))
             .Subscribe(collider =>
         {
+            Debug.Log("入った");
             HandleTriggerEnter(collider);
-        }).AddTo(this);
-
-        _triggerEvent.OnTriggerExitAsObservable
-            .Buffer(2, 1)
-            .Select(portals => portals.Last())
-            .Subscribe(collider =>
-        {
-            HandleTriggerExit(collider);
         }).AddTo(this);
         
         // マップセットしていない場合初期化
@@ -58,6 +53,9 @@ public class MapUpdate : MonoBehaviour
         _fadeController = FindObjectOfType<FadeController>();
         _triggerEvent = _player.GetComponent<OnTriggerEvent>();
         _playerMove = _player.GetComponent<PlayerMove>();
+        var playerBox = _player.GetComponent<BoxCollider>();
+        _playerBoxSize_x = playerBox.size.x;
+        _playerBoxHalfSize_y = playerBox.size.y / 2;
         
         if (!_fadeController)
         {
@@ -80,11 +78,12 @@ public class MapUpdate : MonoBehaviour
     // プレイヤーがポータルのトリガーに入ると呼ばれる(テレポート直後のトリガーも判定内)
     private async UniTask HandleTriggerEnter(Collider other)
     {
-        // 入ったポータルから対のポータルを取得する
-        GetPairPortal(other, out var exit);
+        GetPairPortal(other, out var exit); // 入ったポータルから対のポータルを取得する
         
         if (!exit) return; // 対応したポータルがない場合は実行しない
 
+        _portalBoxSize_x = exit.transform.localScale.x;
+        _portalBoxHalfSize_y = exit.transform.localScale.y / 2;
         _playerMove.IsFreeze = (true, true); // プレイヤーの動きを制限
         
         // 画面フェードアウト(完全にフェードアウトしてからマップを切り替える)
@@ -94,41 +93,25 @@ public class MapUpdate : MonoBehaviour
             await UniTask.Delay(TimeSpan.FromSeconds(_fadeDuration), cancellationToken: destroyCancellationToken);        
         }
         
-        // 一度ポータルから出ていれば処理を行う
-        if (_triggerEvent.LastPortalUsed != other)
+        // ポータルに対応するマップの生成とカメラの設定
+        foreach (var mapData in _mapManager.MapData)
         {
-            // ポータルに対応するマップの生成
-            foreach (var mapData in _mapManager.MapData)
+            if (mapData.EntranceColliders.Contains(other))
             {
-                if (mapData.EntranceColliders.Contains(other))
-                {
-                    ChangeMapPrefab(mapData);
-                    // ToDo:カメラのコライダーを変更する
-                    _cameraSwitch.ChangeBoundingVolume(mapData.CameraCollider);
-                    break;
-                }
+                ChangeMapPrefab(mapData);
+                SetCameraBoundingVolume(mapData);
+                break;
             }
-            ToTeleportPlayer(exit.transform.position);
-            _triggerEvent.LastPortalUsed = exit; // 最後に使用したポータルを記録
-            
-            // 画面フェードイン(カメラが完全に切り替わってから)
-            if (_fadeController)  // Todo:フェードパネルがない状態でも挙動を確認できるようにするため。後で消す
-            {
-                await UniTask.Delay(TimeSpan.FromSeconds(_bufferTIme), cancellationToken: destroyCancellationToken);
-                _fadeController.FadeIn(_fadeDuration);
-            }
-            _playerMove.IsFreeze = (false, false); // プレイヤーの移動制限を解除
         }
-    }
-
-    // プレイヤーがポータルのトリガーから出ると呼ばれる
-    private void HandleTriggerExit(Collider other)
-    {
-        // プレイヤーが最後に使ったポータルから離れたことを検知
-        if (other == _triggerEvent.LastPortalUsed)
+        ToTeleportPlayer(exit.transform.position);
+        
+        // 画面フェードイン(カメラが完全に切り替わってから)
+        if (_fadeController)  // Todo:フェードパネルがない状態でも挙動を確認できるようにするため。後で消す
         {
-            _triggerEvent.LastPortalUsed = null; // ポータルから離れたのでリセット
+            await UniTask.Delay(TimeSpan.FromSeconds(_bufferTIme), cancellationToken: destroyCancellationToken);
+            _fadeController.FadeIn(_fadeDuration);
         }
+        _playerMove.IsFreeze = (false, false); // プレイヤーの移動制限を解除
     }
     
     //セットになっているポータル先を取得する
@@ -148,15 +131,17 @@ public class MapUpdate : MonoBehaviour
                 return;
             }
         }
-        
-        // 対応するポータル先がない場合
-        exitCollider = null;
+        exitCollider = null; // 対応するポータル先がない場合
     }
     
-    // 仮：プレイヤーをテレポートする
+    // プレイヤーをテレポートする
     private void ToTeleportPlayer(Vector3 position)
     {
+        float diff = _playerBoxSize_x + _portalBoxSize_x;
+        position.x += _playerMove.PlayerFlip ? diff : -diff;        // ポータルから確実に抜けるように位置をずらす
+        position.y -= _portalBoxHalfSize_y - _playerBoxHalfSize_y;  // 移動した瞬間に浮かないようにする
         _player.transform.position = position;
+        Debug.Log($"Player_z:{_playerBoxSize_x}, Player_y:{_playerBoxHalfSize_y}");
     }
 
     // マップの更新
@@ -168,6 +153,12 @@ public class MapUpdate : MonoBehaviour
         }
         mapData.ExitMapPrefab.SetActive(true);  // ポータル先のマップをアクティブ化
         _currentMapPrefab = mapData.ExitMapPrefab; // 現在のマップを更新
+    }
+
+    // カメラコライダーの更新
+    private void SetCameraBoundingVolume(Map mapData)
+    {
+        _cameraSwitch.ChangeBoundingVolume(mapData.CameraCollider);
     }
 
     /// <summary> 指定のマップをセットする </summary>
