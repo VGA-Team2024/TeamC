@@ -4,7 +4,8 @@ using UnityEngine;
 /// </summary>
 public enum KeyConditions
 {
-    Switch,             //プレイヤーが武器で攻撃したらドアが開く
+    DoorOpen,           //プレイヤーが武器で攻撃したらドアが開く
+    DoorClose,          //ドアが閉まる    
     MusicBox            //オルゴールを鳴らしたらドアが開く
 }
 
@@ -20,11 +21,20 @@ public class DoorSwitch : MonoBehaviour ,IDamageable
         CRIAudioManager.BGM.Play("SE_Gimmick", "SE_Gimmick_Door01");
     }
 
+    void DoorClose()
+    {
+        
+    }
+
     public void TakeDamage(int damage)
     {
-        if (_keyConditions == KeyConditions.Switch)
+        if (_keyConditions == KeyConditions.DoorOpen)
         {
             DoorOpen();
+        }
+        else if(_keyConditions == KeyConditions.MusicBox)
+        {
+            DoorClose();
         }
         else if (_keyConditions == KeyConditions.MusicBox)
         {
