@@ -228,9 +228,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6796886132435546894}
-  - component: {fileID: 1224958200217607693}
+  - component: {fileID: 4867397298756532078}
   - component: {fileID: 8153027696081847127}
   - component: {fileID: -6367902296743140288}
+  - component: {fileID: 2813521005167284999}
   - component: {fileID: 6563645889030578224}
   - component: {fileID: 6060596065761921581}
   m_Layer: 7
@@ -260,7 +261,7 @@ Transform:
   - {fileID: 4740978626936223940}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1224958200217607693
+--- !u!114 &4867397298756532078
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -277,14 +278,31 @@ MonoBehaviour:
   _freezeTime: 2
   _playerTag: Player
   _jumpSpeed: 2
+  _jumpHeight: 10
   _rushDistance: 5
   _rushSpeed: 3
   _walkTime: 3
   _disA: 8
   _disB: 16
   _disC: 24
-  _disBWeights: 32000000280000001e00000005000000
-  _disCWeights: 320000001400000014000000
+  _disBWeights:
+  - _name: "\u7279\u6B8A\u653B\u6483"
+    _probability: 50
+  - _name: "\u7A81\u9032"
+    _probability: 40
+  - _name: "\u30B8\u30E3\u30F3\u30D7\u653B\u6483"
+    _probability: 25
+  - _name: "\u6B69\u884C"
+    _probability: 5
+  _disCWeights:
+  - _name: "\u7279\u6B8A\u653B\u6483"
+    _probability: 50
+  - _name: "\u7A81\u9032"
+    _probability: 20
+  - _name: "\u30B8\u30E3\u30F3\u30D7\u653B\u6483"
+    _probability: 15
+  - _name: "\u6B69\u884C"
+    _probability: 5
 --- !u!114 &8153027696081847127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,6 +329,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blow: 2
+--- !u!114 &2813521005167284999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5515306755728920571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c02c58bf4df1f844a061c03c5159cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1042873567489292917}
 --- !u!65 &6563645889030578224
 BoxCollider:
   m_ObjectHideFlags: 0
