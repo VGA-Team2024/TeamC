@@ -175,15 +175,15 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         }
         else
         {// 空中のジャンプなら
+            if(!_player.PlayerStatus.IsSecondJumpRelease)
+                return; // 空中ジャンプが解放されていないならreturnする
+            jumpPower = _secondJumpPower;
             PlayerEffectManager.Instance.InstanceEffect(InstancePlayEffectName.PlayerJumpEffect,
                 new Vector3(gameObject.transform.transform.position.x,
                     gameObject.transform.transform.position.y - 2,
                     gameObject.transform.transform.position.z)
                 , new Vector3(95, 0, 0)
             );
-            if(!_player.PlayerStatus.IsSecondJumpRelease)
-                return; // 空中ジャンプが解放されていないならreturnする
-            jumpPower = _secondJumpPower;
             jumpTime = _secondJumpTime;
             _onAirJump = false;
         }
