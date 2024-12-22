@@ -183,9 +183,9 @@ MonoBehaviour:
   _godTime: 0.6
   _NoMoveTime: 0.3
   _godModeLayerName: MUTEKI
-  _isDashRelease: 1
-  _isSecondJumpRelease: 1
-  _isLongRangeAttackRelease: 1
+  _isDashRelease: 0
+  _isSecondJumpRelease: 0
+  _isLongRangeAttackRelease: 0
 --- !u!114 &6624536320541392236
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,8 +7,8 @@ using Cysharp.Threading.Tasks;
 public class PlayerAttack : MonoBehaviour
 {
     private readonly int Attack = Animator.StringToHash("Attack");
-    private static readonly int Throw = Animator.StringToHash("Throw");
-    private static readonly int Vertical = Animator.StringToHash("Vertical");
+    private readonly int Throw = Animator.StringToHash("Throw");
+    private readonly int Vertical = Animator.StringToHash("Vertical");
     private readonly int RangeAttack = Animator.StringToHash("RangeAttack");
     private Player _player;
     [Header("通常攻撃")]
