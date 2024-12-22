@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     private Player _player;
     private PlayerControls _controls;
     private readonly int MoveHorizontal = Animator.StringToHash("MoveHorizontal");
-    private readonly int IsGround = Animator.StringToHash("IsGround");
+    private readonly int IsGroundAnimHash = Animator.StringToHash("IsGround");
     private readonly int DashingHash = Animator.StringToHash("Dashing");
     private readonly int JumpStart = Animator.StringToHash("JumpStart");
     private readonly int DirRight = Animator.StringToHash("DirRight");
@@ -60,7 +60,8 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         }
     }
     private bool _isGround; //設置判定
-    
+    public bool IsGround => _isGround;
+
     private bool _isMove = true; //移動不可状態の判定
     public bool IsMove { set => _isMove = value; }
     
@@ -160,7 +161,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         
         // 完全固定
         _player.Animator.SetFloat(MoveHorizontal,Mathf.Abs(_rb.velocity.x));
-        _player.Animator.SetBool(IsGround,_isGround);
+        _player.Animator.SetBool(IsGroundAnimHash,_isGround);
     }
 
     private async void OnJump(InputAction.CallbackContext context)
@@ -189,7 +190,8 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         }
 
         PlayerEffectManager.Instance.StopPlayEffect(PlayEffectName.PlayerMoveEffect);
-        _player.PlayerMusicBox.MusicBoxStop();
+        if(_player.PlayerMusicBox)
+            _player.PlayerMusicBox.MusicBoxStop();
         
         _jumpCancelToken = new();
         _gravityEnum = GravityEnum.JumpUp;
@@ -222,7 +224,8 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     private void OnHorizontal(InputAction.CallbackContext context)
     {
         Horizontal = context.ReadValue<float>();
-        _player.PlayerMusicBox.MusicBoxStop();
+        if(_player.PlayerMusicBox)
+            _player.PlayerMusicBox.MusicBoxStop();
     }
     
     private async void OnDash(InputAction.CallbackContext context)
@@ -233,7 +236,8 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         {
             PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerDashEffect,
                 transform.GetChild(0).localEulerAngles.y);
-            _player.PlayerMusicBox.MusicBoxStop();
+            if(_player.PlayerMusicBox)
+                _player.PlayerMusicBox.MusicBoxStop();
             
             if (_jumpCancelToken != null)
             {

@@ -1,7 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
+public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable,IFairyAddable
 {
     private readonly int Damage = Animator.StringToHash("Damage");
 
@@ -85,6 +85,15 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
         
     }
 
+    public void DamageHit(int amount)
+    {
+        _currentHP -= amount;
+        if(_player.PlayerStatusUI)
+            _player.PlayerStatusUI.PlayerHealthUpdate(_currentHP);
+        if(_currentHP == 0)
+            GameOverManager.I.GameOver();
+    }
+
     public void TakeDamage(int damage)
     {
         // 無敵のレイヤーに変更
@@ -98,10 +107,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
         _player.PlayerMove.IsMove = false;
         _rb.velocity = Vector3.zero;
         //体力を減らす
-        _currentHP -= damage;
-        //UIの更新
-        if(_player.PlayerStatusUI)
-            _player.PlayerStatusUI.PlayerHealthUpdate(_currentHP);
+        DamageHit(damage);
         //特殊攻撃を消す
         _player.PlayerAttack.SpecialCancel();
         
@@ -123,6 +129,13 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
         _player.PlayerMove.IsMove = true;
     }
 
+    public void GameOver()
+    {
+        _currentHP = _maxHP;
+        if(_player.PlayerStatusUI)
+            _player.PlayerStatusUI.PlayerHealthUpdate(_currentHP);
+    }
+    
     public void BlownAway(Vector3 pos)
     {
         // アニメーションの変更
@@ -148,5 +161,10 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
                 _isLongRangeAttackRelease = true;
                 break;
         }
+    }
+
+    public void AddFairy(int fairyCount)
+    {
+        _fairyGaugeParSecond += fairyCount;
     }
 }

@@ -16,6 +16,8 @@ public class PlayerAttack : MonoBehaviour
     private GameObject _attackCollider;
     [SerializeField, InspectorVariantName("自身の吹き飛び")]
     private Vector2 _hitKnockBack;
+    [SerializeField, InspectorVariantName("吹き飛び時間")]
+    private float _knockBackTimer = 0.1f;
     [SerializeField, InspectorVariantName("上下攻撃の座標Y")]
     private float _attackPosY;
     [SerializeField, InspectorVariantName("クールタイム")]
@@ -105,20 +107,39 @@ public class PlayerAttack : MonoBehaviour
     private void AttackColliderSetActive()
     {
         // positionの設定
-            _attackCollider.transform.localPosition =
-                new Vector3(
-                    _atkPos.x * (_player.PlayerMove.PlayerFlip ? 1 : -1), //左右の向き
-                    Math.Sign(_axisY) * _attackPosY + _atkPos.y, // 上下攻撃
-                    _atkPos.z);
+        _attackCollider.transform.localPosition =
+            new Vector3(
+                _atkPos.x * (_player.PlayerMove.PlayerFlip ? 1 : -1), //左右の向き
+                _atkPos.y, // 上下攻撃
+                _atkPos.z);
+
+        if (_axisY != 0)
+        {
+            if (_axisY > 0)
+            {// 上入力
+                _attackCollider.transform.localPosition = new Vector2(0, _attackPosY);
+            }
+            else if (!_player.PlayerMove.IsGround)
+            {// 下入力かつ空中
+                _attackCollider.transform.localPosition = new Vector2(0, _attackPosY * -1);
+            }
+        }
         _attackCollider.SetActive(true);
         PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffect,
             Mathf.Approximately(gameObject.transform.GetChild(1).localEulerAngles.y, 180) ? 1 : 0);
         // 非アクティブは_attackCollider自身がする
     }
 
-    public void HitKnockBack()
+    public async void HitKnockBack()
     {
-        _player.Rigidbody.AddForce(_player.PlayerMove.PlayerFlip ? _hitKnockBack : _hitKnockBack*-1, ForceMode.Impulse);
+        _player.PlayerMove.IsMove = false;
+        _player.Rigidbody.velocity = Vector3.zero;
+        _player.Rigidbody.AddForce(_player.PlayerMove.PlayerFlip ? 
+            _hitKnockBack : 
+            new Vector2( _hitKnockBack.x *-1, _hitKnockBack.y)
+            , ForceMode.Impulse);
+        await UniTask.Delay((TimeSpan.FromSeconds(_knockBackTimer)),cancellationToken: _player.CancellationToken);
+        _player.PlayerMove.IsMove = true;
     }
 
     private void OnSpecialAttack(InputAction.CallbackContext context)

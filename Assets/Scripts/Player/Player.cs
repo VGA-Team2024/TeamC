@@ -24,12 +24,13 @@ public class Player : MonoBehaviour
     public PlayerAttack PlayerAttack { get; private set; }
     
     public PlayerMusicBox PlayerMusicBox { get; private set; }
-    public Animator AnimatorAnimator => _animator;
     
     private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
     
     public CancellationToken CancellationToken => _cancellationTokenSource.Token;
-    
+
+    public GameOverManager GameOver {get; private set; }
+
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
@@ -50,6 +51,8 @@ public class Player : MonoBehaviour
         {
             Debug.LogWarning($"PlayerUICanvas can't be found \n {e.Message}");
         }
+
+        GameOverManager.I.Player = this;
     }
 
     private void OnDestroy()

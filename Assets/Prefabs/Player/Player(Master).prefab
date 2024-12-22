@@ -178,7 +178,7 @@ MonoBehaviour:
   _maxFairyGauge: 600
   _currentFairyGauge: 600
   _fairyGaugeParSecond: 20
-  _knockBackDirection: {x: 1, y: 0.5}
+  _knockBackDirection: {x: -1, y: 0.5}
   _knockBackPower: 10
   _godTime: 0.6
   _NoMoveTime: 0.3
@@ -199,8 +199,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackCollider: {fileID: 4995970217711103548}
-  _hitKnockBack: {x: 0, y: 0}
-  _attackPosY: 0
+  _hitKnockBack: {x: -5, y: 3}
+  _knockBacktimer: 0.3
+  _attackPosY: 4
   _attackCoolTime: 0.5
   _specialCollider: {fileID: 7843483065019375711}
   _spAttackDiminution: 150

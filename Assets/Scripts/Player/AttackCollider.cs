@@ -37,6 +37,7 @@ public class AttackCollider : MonoBehaviour
                     InstancePlayEffectName.PlayerAttackHitEffect,
                     other.gameObject.transform.position);
             }
+            _player.PlayerAttack.HitKnockBack();
         }
 
         if (other.TryGetComponent<IBlowable>(out IBlowable blowable))
