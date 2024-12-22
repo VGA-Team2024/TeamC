@@ -12,8 +12,6 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     private PlayerControls _controls;
     private readonly int MoveHorizontal = Animator.StringToHash("MoveHorizontal");
     private readonly int IsGround = Animator.StringToHash("IsGround");
-    private readonly int MusicBox = Animator.StringToHash("MusicBox");
-    private readonly int MoveVertical = Animator.StringToHash("MoveVertical");
     private readonly int DashingHash = Animator.StringToHash("Dashing");
     private readonly int JumpStart = Animator.StringToHash("JumpStart");
     private readonly int DirRight = Animator.StringToHash("DirRight");
@@ -131,7 +129,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     private void FixedUpdate()
     {
         //bool boxHit = Physics.BoxCast(this.transform.position, _boxSize, Vector3.down, out RaycastHit _hit, Quaternion.identity, _dis);
-        if(Physics.BoxCast(this.transform.position, _boxSize / 2, Vector3.down, out RaycastHit _hit, Quaternion.identity, _dis) 
+        if(Physics.BoxCast(this.transform.position, _boxSize / 2, Vector3.down, out _hit, Quaternion.identity, _dis) 
            && _hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             if (!_isGround)
@@ -162,7 +160,6 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         
         // 完全固定
         _player.Animator.SetFloat(MoveHorizontal,Mathf.Abs(_rb.velocity.x));
-        _player.Animator.SetFloat(MoveVertical,_rb.velocity.y);
         _player.Animator.SetBool(IsGround,_isGround);
     }
 
@@ -192,6 +189,8 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         }
 
         PlayerEffectManager.Instance.StopPlayEffect(PlayEffectName.PlayerMoveEffect);
+        _player.PlayerMusicBox.MusicBoxStop();
+        
         _jumpCancelToken = new();
         _gravityEnum = GravityEnum.JumpUp;
         _rb.velocity = new Vector3(_rb.velocity.x, 0,0);
@@ -223,6 +222,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     private void OnHorizontal(InputAction.CallbackContext context)
     {
         Horizontal = context.ReadValue<float>();
+        _player.PlayerMusicBox.MusicBoxStop();
     }
     
     private async void OnDash(InputAction.CallbackContext context)
@@ -233,6 +233,8 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         {
             PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerDashEffect,
                 transform.GetChild(0).localEulerAngles.y);
+            _player.PlayerMusicBox.MusicBoxStop();
+            
             if (_jumpCancelToken != null)
             {
                 _jumpCancelToken.Cancel();

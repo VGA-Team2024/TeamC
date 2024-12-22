@@ -7,11 +7,15 @@ using Cysharp.Threading.Tasks;
 public class PlayerAttack : MonoBehaviour
 {
     private readonly int Attack = Animator.StringToHash("Attack");
+    private readonly int Throw = Animator.StringToHash("Throw");
+    private readonly int Vertical = Animator.StringToHash("Vertical");
     private readonly int RangeAttack = Animator.StringToHash("RangeAttack");
     private Player _player;
     [Header("通常攻撃")]
     [SerializeField, InspectorVariantName("通常攻撃のゲームオブジェクト")] 
     private GameObject _attackCollider;
+    [SerializeField, InspectorVariantName("自身の吹き飛び")]
+    private Vector2 _hitKnockBack;
     [SerializeField, InspectorVariantName("上下攻撃の座標Y")]
     private float _attackPosY;
     [SerializeField, InspectorVariantName("クールタイム")]
@@ -53,8 +57,12 @@ public class PlayerAttack : MonoBehaviour
         _controls.InGame.Attack.started += OnAttack;
         _controls.InGame.SpecialAttack.started += OnSpecialAttack;
         _controls.InGame.LongRangeAttack.canceled += OnLongRangeAttack;
+        _controls.InGame.Vertical.started += OnVertical;
+        _controls.InGame.Vertical.performed += OnVertical;
+        _controls.InGame.Vertical.canceled += OnVertical;
         _player.AnimEvent.AnimEventDic.Add(PlayerAnimationEventController.animationType.AttackColliderEnable,AttackColliderSetActive);
         _player.AnimEvent.AnimEventDic.Add(PlayerAnimationEventController.animationType.AttackRangeEnable,RangeAttackInstantiate);
+        _player.AnimEvent.AnimEventDic.Add(PlayerAnimationEventController.animationType.AttackSpThrow,() => _specialCollider.SetActive(true));
         _atkPos = _attackCollider.transform.localPosition;
     }
     
@@ -64,6 +72,9 @@ public class PlayerAttack : MonoBehaviour
         _controls.InGame.Attack.started -= OnAttack;
         _controls.InGame.SpecialAttack.started -= OnSpecialAttack;
         _controls.InGame.LongRangeAttack.canceled -= OnLongRangeAttack;
+        _controls.InGame.Vertical.started -= OnVertical;
+        _controls.InGame.Vertical.performed -= OnVertical;
+        _controls.InGame.Vertical.canceled -= OnVertical;
     }
 
     private void OnEnable()
@@ -88,6 +99,7 @@ public class PlayerAttack : MonoBehaviour
     private void OnVertical(InputAction.CallbackContext context)
     {
         _axisY = context.ReadValue<float>();
+        _player.Animator.SetFloat(Vertical,_axisY);
     }
     
     private void AttackColliderSetActive()
@@ -104,16 +116,21 @@ public class PlayerAttack : MonoBehaviour
         // 非アクティブは_attackCollider自身がする
     }
 
+    public void HitKnockBack()
+    {
+        _player.Rigidbody.AddForce(_player.PlayerMove.PlayerFlip ? _hitKnockBack : _hitKnockBack*-1, ForceMode.Impulse);
+    }
+
     private void OnSpecialAttack(InputAction.CallbackContext context)
     {
-        if(!_player.PlayerStatus.CanUseFairyGauge(_spAttackDiminution))
+        if(!_player.PlayerStatus.CanUseFairyGauge(_spAttackDiminution) || _specialCollider.activeSelf)
             return; // 妖精ゲージが足りていなければ出せない
         if (!_player.PlayerMove.Dashing)
         {
             // 位置の固定
             _player.PlayerMove.IsFreeze = (true, true);
-            // 特殊攻撃用当たり判定をアクティブにする
-            _specialCollider.SetActive(true);
+            // アニメーションの再生　　　　　_specialColliderのActiveはAnimationEventで行う
+            _player.Animator.SetTrigger(Throw);
             // 非アクティブは_specialCollider自身がする
         }
     }
