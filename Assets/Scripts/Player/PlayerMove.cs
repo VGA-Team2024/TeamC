@@ -189,7 +189,8 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         }
 
         PlayerEffectManager.Instance.StopPlayEffect(PlayEffectName.PlayerMoveEffect);
-        _player.PlayerMusicBox.MusicBoxStop();
+        if(_player.PlayerMusicBox)
+            _player.PlayerMusicBox.MusicBoxStop();
         
         _jumpCancelToken = new();
         _gravityEnum = GravityEnum.JumpUp;
@@ -222,7 +223,8 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     private void OnHorizontal(InputAction.CallbackContext context)
     {
         Horizontal = context.ReadValue<float>();
-        _player.PlayerMusicBox.MusicBoxStop();
+        if(_player.PlayerMusicBox)
+            _player.PlayerMusicBox.MusicBoxStop();
     }
     
     private async void OnDash(InputAction.CallbackContext context)
@@ -233,7 +235,8 @@ public class PlayerMove : MonoBehaviour, ITeleportable
         {
             PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerDashEffect,
                 transform.GetChild(0).localEulerAngles.y);
-            _player.PlayerMusicBox.MusicBoxStop();
+            if(_player.PlayerMusicBox)
+                _player.PlayerMusicBox.MusicBoxStop();
             
             if (_jumpCancelToken != null)
             {
