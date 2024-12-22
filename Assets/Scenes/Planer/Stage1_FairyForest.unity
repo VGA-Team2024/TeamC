@@ -124296,7 +124296,7 @@ PrefabInstance:
     - target: {fileID: 7944902578894391840, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.35
+      value: 1.44
       objectReference: {fileID: 0}
     - target: {fileID: 7944902578894391840, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
@@ -153766,6 +153766,7 @@ Transform:
   - {fileID: 198763515}
   - {fileID: 733065657}
   - {fileID: 741650608}
+  - {fileID: 2051057359}
   - {fileID: 1969239075}
   - {fileID: 842912453}
   - {fileID: 1878201085}
@@ -268617,7 +268618,7 @@ PrefabInstance:
     - target: {fileID: 8694005569523183131, guid: 6eda2a09eb36a0244a826fd48a51ec1a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.56
+      value: -5.8
       objectReference: {fileID: 0}
     - target: {fileID: 8694005569523183131, guid: 6eda2a09eb36a0244a826fd48a51ec1a,
         type: 3}
@@ -430303,6 +430304,80 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &2051057358
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 566517114}
+    m_Modifications:
+    - target: {fileID: 8694005569523183131, guid: 6eda2a09eb36a0244a826fd48a51ec1a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694005569523183131, guid: 6eda2a09eb36a0244a826fd48a51ec1a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694005569523183131, guid: 6eda2a09eb36a0244a826fd48a51ec1a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694005569523183131, guid: 6eda2a09eb36a0244a826fd48a51ec1a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694005569523183131, guid: 6eda2a09eb36a0244a826fd48a51ec1a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694005569523183131, guid: 6eda2a09eb36a0244a826fd48a51ec1a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694005569523183131, guid: 6eda2a09eb36a0244a826fd48a51ec1a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694005569523183131, guid: 6eda2a09eb36a0244a826fd48a51ec1a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694005569523183131, guid: 6eda2a09eb36a0244a826fd48a51ec1a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694005569523183131, guid: 6eda2a09eb36a0244a826fd48a51ec1a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9030191122337408985, guid: 6eda2a09eb36a0244a826fd48a51ec1a,
+        type: 3}
+      propertyPath: m_Name
+      value: WarpTotem (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6eda2a09eb36a0244a826fd48a51ec1a, type: 3}
+--- !u!4 &2051057359 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8694005569523183131, guid: 6eda2a09eb36a0244a826fd48a51ec1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2051057358}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2051063196
 PrefabInstance:
   m_ObjectHideFlags: 0
