@@ -46,7 +46,10 @@ public class PlayerMusicBox : MonoBehaviour , ICylinderAddable
 
     private void Update()
     {
-        if(MusicBoxPlaying)_healTimer+=Time.deltaTime;
+        if (MusicBoxPlaying)
+        {
+            _healTimer+=Time.deltaTime;
+        }
         if (_healTimer >= _healSpeed)
         {
             _healTimer -= _healSpeed;
@@ -66,6 +69,12 @@ public class PlayerMusicBox : MonoBehaviour , ICylinderAddable
 
     void MusicStop(InputAction.CallbackContext context)
     {
+        MusicBoxStop();
+    }
+
+    public void MusicBoxStop()
+    {
+        MusicBoxPlaying = false;
         _musicBoxPlayback.Stop();
         PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerMusicNoteEffect,0);
         _player.Animator.SetBool(MusicBox,false);

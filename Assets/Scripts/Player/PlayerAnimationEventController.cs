@@ -20,6 +20,7 @@ public class PlayerAnimationEventController : MonoBehaviour
     {
         AttackColliderEnable,
         AttackRangeEnable,
+        AttackSpThrow,
         StepAudio,
     }
 }

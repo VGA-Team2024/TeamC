@@ -128,7 +128,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
         // アニメーションの変更
         _player.Animator.SetTrigger(Damage);
         // posのxの逆方向に飛ぶ
-        Vector2 dir = transform.position.x - pos.x > 0 ?
+        Vector2 dir = transform.position.x - pos.x < 0 ?
             _knockBackDirection : 
             new Vector2(_knockBackDirection.x * -1, _knockBackDirection.y );
         _rb.AddForce(dir * _knockBackPower, ForceMode.Impulse);

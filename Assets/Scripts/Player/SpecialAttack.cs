@@ -3,6 +3,7 @@ using DG.Tweening;
 
 public class SpecialAttack : MonoBehaviour
 {
+    private static readonly int Catch = Animator.StringToHash("Catch");
     private Player _player;
     private ITeleportable _parentTp;
     private Vector3 _dir;
@@ -69,6 +70,7 @@ public class SpecialAttack : MonoBehaviour
             ).OnUpdate(() => transform.transform.localPosition = _dir * _currentPos + _originLocalPos)
             .OnComplete(() => 
             {
+                _player.Animator.SetTrigger(Catch);
                 this.gameObject.SetActive(false);
             }).SetEase(_returnEase);
     }

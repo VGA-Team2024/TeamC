@@ -12,22 +12,18 @@ public class Player : MonoBehaviour
     
     [SerializeField] private PlayerStatusUI _playerStatusUI;
     public PlayerStatusUI PlayerStatusUI => _playerStatusUI;
+
+    public Rigidbody Rigidbody { get; private set; }
     
-    private PlayerMove _playerMove;
-    public PlayerMove PlayerMove => _playerMove;
+    public PlayerMove PlayerMove {get; private set; }
     
-    private PlayerSounds _playerSounds;
-    public PlayerSounds PlayerSounds => _playerSounds;
+    public PlayerSounds PlayerSounds { get; private set; }
     
-    private PlayerStatus _playerStatus;
-    public PlayerStatus PlayerStatus => _playerStatus;
+    public PlayerStatus PlayerStatus { get; private set; }
     
-    private PlayerAttack _playerAttack;
-    public PlayerAttack PlayerAttack => _playerAttack;
+    public PlayerAttack PlayerAttack { get; private set; }
     
-    private PlayerMusicBox _playerMusicBox;
-    
-    public PlayerMusicBox PlayerMusicBox => _playerMusicBox;
+    public PlayerMusicBox PlayerMusicBox { get; private set; }
     public Animator AnimatorAnimator => _animator;
     
     private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
@@ -36,11 +32,12 @@ public class Player : MonoBehaviour
     
     private void Awake()
     {
-        _playerMove = GetComponent<PlayerMove>();
-        _playerSounds = GetComponent<PlayerSounds>();
-        _playerStatus = GetComponent<PlayerStatus>();
-        _playerAttack = GetComponent<PlayerAttack>();
-        _playerMusicBox = GetComponent<PlayerMusicBox>();
+        Rigidbody = GetComponent<Rigidbody>();
+        PlayerMove = GetComponent<PlayerMove>();
+        PlayerSounds = GetComponent<PlayerSounds>();
+        PlayerStatus = GetComponent<PlayerStatus>();
+        PlayerAttack = GetComponent<PlayerAttack>();
+        PlayerMusicBox = GetComponent<PlayerMusicBox>();
     }
 
     private void Start()
