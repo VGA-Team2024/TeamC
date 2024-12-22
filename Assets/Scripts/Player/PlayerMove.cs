@@ -57,6 +57,8 @@ public class PlayerMove : MonoBehaviour, ITeleportable
             {
                 PlayerEffectManager.Instance.ReStartPlayEffect(PlayEffectName.PlayerMoveEffect);   
             }
+            if(!_player.PlayerAttack.CanAttack)
+                _player.PlayerAttack.AttackAnimFlip(value);
         }
     }
     private bool _isGround; //設置判定
