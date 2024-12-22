@@ -1,10 +1,16 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
 {
     [SerializeField, Header("接触時攻撃力")] private int _collideDamage;
-    [SerializeField, Header("Playerを攻撃した後次の攻撃が可能になるまでの時間")] private int _freezeTime;
+    [SerializeField, Header("playerにぶつかった後動けるまでの時間")] private int _freezeTime;
+    [SerializeField, Header("特殊攻撃後の待機時間")] private int _specialAttackFreezeTime;
+    [SerializeField, Header("前方攻撃後の待機時間")] private int _attackFreezeTime;
+    [SerializeField, Header("ジャンプ後の待機時間")] private int _jumpAttackFreezeTime;
+    [SerializeField, Header("突進後の待機時間")] private int _rushFreezeTime;
+    [SerializeField, Header("Attack2後の待機時間")] private int _waveFreezeTime;
+    [SerializeField, Header("Attack3後の待機時間")] private int _fallFreezeTime;
+    [SerializeField, Header("Attack4後の待機時間")] private int _crossFreezeTime;
     [SerializeField, Header("Playerにつけるタグの名前")] private string _playerTag;
     [SerializeField, Header("ジャンプ攻撃時のスピード")] private float _jumpSpeed;
     [SerializeField, Header("ジャンプ攻撃時の限界高度")] private float _jumpHeight;
@@ -20,32 +26,46 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
         new Weight("ミス")
     };
     [SerializeField, Header("距離Bにいたときの攻撃のそれぞれの確率")]
-    private Weight[] _disBWeights = new Weight[4]
+    private Weight[] _disBWeights = new Weight[6]
     {
         new Weight("突進"),
         new Weight("ジャンプ攻撃"),
+        new Weight("Attack2"),
+        new Weight("Attack3"),
         new Weight("Attack4"),
         new Weight("歩行")
     };
     [SerializeField, Header("距離Cにいたときの攻撃のそれぞれの確率")]
-    private Weight[] _disCWeights = new Weight[4]
+    private Weight[] _disCWeights = new Weight[6]
     {
         new Weight("突進"),
         new Weight("ジャンプ攻撃"),
+        new Weight("Attack2"),
+        new Weight("Attack3"),
         new Weight("Attack4"),
         new Weight("歩行")
     };
 
     private int _attackCount; // 距離A時の前方攻撃の回数制限用
     private bool _isChangePosAttacked; // 特殊攻撃済みか
+    private bool _canMove; // 飛んでる間は次の攻撃ができないようにする用
     
     private EnemyChaseState _chaseState; // 歩行ステート
     private EnemyAttackState _attackState;
     private EnemyJumpAttackState _jumpAttackState;
     private EnemyRushState _rushState;
     private EnemySpecialAttackState _changePositionState;
-    private EnemySpecialAttackState _crossNeedleState;
-    private EnemyFreezeState _freezeState;
+    private EnemySpecialAttackState _waveNeedleState; // Attack2
+    private EnemyFallNeedleState _fallNeedleState; // Attack3
+    private EnemySpecialAttackState _crossNeedleState; // Attack4
+    private EnemyFreezeState _freezeState; // 歩行とぶつかった後の待機ステート
+    private EnemyFreezeState _specialAttackFreezeState; // 特殊攻撃後の待機ステート
+    private EnemyFreezeState _attackFreezeState; // 前方攻撃後の待機ステート
+    private EnemyFreezeState _rushFreezeState; // 突進攻撃後の待機ステート
+    private EnemyFreezeState _jumpFreezeState; // ジャンプ攻撃後の待機ステート
+    private EnemyFreezeState _waveNeedleFreezeState; // Attack2後の待機ステート
+    private EnemyFreezeState _fallNeedleFreezeState; // Attack3後の待機ステート
+    private EnemyFreezeState _crossNeedleFreezeState; // Attack4後の待機ステート
     private EnemyDeathState _deathState;
     
     protected override void OnStart()
@@ -55,15 +75,27 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
         GameObject specialAttackCollider = gameObject.transform.GetChild(3).gameObject;
         Animator animator = gameObject.transform.GetChild(4).GetComponent<Animator>();
         GameObject crossNeedleCollider = gameObject.transform.GetChild(5).gameObject;
+        GameObject fallNeedle = gameObject.transform.GetChild(6).gameObject;
+        GameObject waveNeedle = gameObject.transform.GetChild(7).gameObject;
         Rigidbody rb = GetComponent<Rigidbody>();
         
-        _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
+        _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime); // 歩行とぶつかった後の待機ステート
+        _specialAttackFreezeState = new EnemyFreezeState(this, _idleState, _specialAttackFreezeTime); // 特殊攻撃後の待機ステート
+        _attackFreezeState = new EnemyFreezeState(this, _idleState, _attackFreezeTime); // 前方攻撃後の待機ステート
+        _jumpFreezeState = new EnemyFreezeState(this, _idleState, _jumpAttackFreezeTime); // ジャンプ攻撃後の待機ステート
+        _rushFreezeState = new EnemyFreezeState(this, _idleState, _rushFreezeTime); // 突進攻撃後の待機ステート
+        _waveNeedleFreezeState = new EnemyFreezeState(this, _idleState, _waveFreezeTime); // Attack2後の待機ステート
+        _fallNeedleFreezeState = new EnemyFreezeState(this, _idleState, _fallFreezeTime); // Attack3後の待機ステート
+        _crossNeedleFreezeState = new EnemyFreezeState(this, _idleState, _crossFreezeTime); // Attack4後の待機ステート
+        
         _chaseState = new EnemyChaseState(this, _freezeState, animator, transform, _speed, false, _walkTime);
-        _attackState = new EnemyAttackState(this, _freezeState, animator, attackCollider);
-        _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, animator, transform, _jumpSpeed, _jumpHeight, rb);
-        _rushState = new EnemyRushState(this, _freezeState, animator, transform, _rushDistance, _rushSpeed);
-        _changePositionState = new EnemySpecialAttackState(this, _freezeState, animator, specialAttackCollider, "SpecialAttack");
-        _crossNeedleState = new EnemySpecialAttackState(this, _freezeState, animator, crossNeedleCollider, "Attack4");
+        _attackState = new EnemyAttackState(this, _attackFreezeState, animator, attackCollider);
+        _jumpAttackState = new EnemyJumpAttackState(this, _jumpFreezeState, animator, transform, _jumpSpeed, _jumpHeight, rb);
+        _rushState = new EnemyRushState(this, _rushFreezeState, animator, transform, _rushDistance, _rushSpeed);
+        _changePositionState = new EnemySpecialAttackState(this, _specialAttackFreezeState, animator, specialAttackCollider, 0, "SpecialAttack");
+        _waveNeedleState = new EnemySpecialAttackState(this, _waveNeedleFreezeState, animator, waveNeedle, 1, "Attack2");
+        _fallNeedleState = new EnemyFallNeedleState(this, _fallNeedleFreezeState, animator, fallNeedle, gameObject.transform, rb);
+        _crossNeedleState = new EnemySpecialAttackState(this, _crossNeedleFreezeState, animator, crossNeedleCollider, 0, "Attack4");
         _deathState = new EnemyDeathState(this, particle, animator, gameObject);
     }
 
@@ -78,7 +110,7 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
             return;
         }
 
-        if (_playerMove)
+        if (_playerMove && _canMove)
         {
             if (_currentState != _idleState) return;
             
@@ -116,7 +148,9 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
                     {
                         0 => _rushState,
                         1 => _jumpAttackState,
-                        2 => _crossNeedleState,
+                        2 => _waveNeedleState,
+                        3 => _fallNeedleState,
+                        4 => _crossNeedleState,
                         _ => _chaseState
                     });
                 }
@@ -131,7 +165,9 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
                     {
                         0 => _rushState,
                         1 => _jumpAttackState,
-                        2 => _crossNeedleState,
+                        2 => _waveNeedleState,
+                        3 => _fallNeedleState,
+                        4 => _crossNeedleState,
                         _ => _chaseState
                     });
                 }
@@ -154,6 +190,16 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
             blo.BlownAway(transform.position);
             ChangeState(_freezeState);
         }
+    }
+    
+    private void OnCollisionEnter(Collision other)
+    {
+        if (LayerMask.LayerToName(other.gameObject.layer) == "Ground") _canMove = true;
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (LayerMask.LayerToName(other.gameObject.layer) == "Ground") _canMove = false;
     }
     
     private int Distance()
