@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
 {
@@ -13,34 +14,37 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
     [SerializeField, Header("距離A")] private int _disA;
     [SerializeField, Header("距離B")] private int _disB;
     [SerializeField, Header("距離C")] private int _disC;
-    [SerializeField, Header("特殊攻撃の確率")] private Weight[] _specialAttackWeights = new Weight[2]
+    [SerializeField, Header("特殊攻撃の確率")] private Weight[] _changePosAttackWeights = new Weight[2]
     {
         new Weight("特殊攻撃"),
         new Weight("ミス")
     };
     [SerializeField, Header("距離Bにいたときの攻撃のそれぞれの確率")]
-    private Weight[] _disBWeights = new Weight[3]
+    private Weight[] _disBWeights = new Weight[4]
     {
         new Weight("突進"),
         new Weight("ジャンプ攻撃"),
+        new Weight("Attack4"),
         new Weight("歩行")
     };
     [SerializeField, Header("距離Cにいたときの攻撃のそれぞれの確率")]
-    private Weight[] _disCWeights = new Weight[3]
+    private Weight[] _disCWeights = new Weight[4]
     {
         new Weight("突進"),
         new Weight("ジャンプ攻撃"),
+        new Weight("Attack4"),
         new Weight("歩行")
     };
 
     private int _attackCount; // 距離A時の前方攻撃の回数制限用
-    private bool _isSpecialAttacked; // 特殊攻撃済みか
+    private bool _isChangePosAttacked; // 特殊攻撃済みか
     
     private EnemyChaseState _chaseState; // 歩行ステート
     private EnemyAttackState _attackState;
     private EnemyJumpAttackState _jumpAttackState;
     private EnemyRushState _rushState;
-    private EnemySpecialAttackState _specialAttackState;
+    private EnemySpecialAttackState _changePositionState;
+    private EnemySpecialAttackState _crossNeedleState;
     private EnemyFreezeState _freezeState;
     private EnemyDeathState _deathState;
     
@@ -50,6 +54,7 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
         GameObject attackCollider = gameObject.transform.GetChild(2).gameObject;
         GameObject specialAttackCollider = gameObject.transform.GetChild(3).gameObject;
         Animator animator = gameObject.transform.GetChild(4).GetComponent<Animator>();
+        GameObject crossNeedleCollider = gameObject.transform.GetChild(5).gameObject;
         Rigidbody rb = GetComponent<Rigidbody>();
         
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
@@ -57,7 +62,8 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
         _attackState = new EnemyAttackState(this, _freezeState, animator, attackCollider);
         _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, animator, transform, _jumpSpeed, _jumpHeight, rb);
         _rushState = new EnemyRushState(this, _freezeState, animator, transform, _rushDistance, _rushSpeed);
-        _specialAttackState = new EnemySpecialAttackState(this, _freezeState, animator, specialAttackCollider);
+        _changePositionState = new EnemySpecialAttackState(this, _freezeState, animator, specialAttackCollider, "SpecialAttack");
+        _crossNeedleState = new EnemySpecialAttackState(this, _freezeState, animator, crossNeedleCollider, "Attack4");
         _deathState = new EnemyDeathState(this, particle, animator, gameObject);
     }
 
@@ -78,14 +84,14 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
             
             transform.eulerAngles = new Vector2(0, _playerMove.transform.position.x > transform.position.x ? 0 : 180);
 
-            if (!_isSpecialAttacked && EnemyUtility.ProbabilityCalculate(_specialAttackWeights) == 0)
+            if (!_isChangePosAttacked && EnemyUtility.ProbabilityCalculate(_changePosAttackWeights) == 0)
             {
-                ChangeState(_specialAttackState);
-                _isSpecialAttacked = true;
+                ChangeState(_changePositionState);
+                _isChangePosAttacked = true;
                 return;
             } // 特殊攻撃は毎回抽選
 
-            _isSpecialAttacked = false;
+            _isChangePosAttacked = false;
             
             switch (Distance())
             {
@@ -110,6 +116,7 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
                     {
                         0 => _rushState,
                         1 => _jumpAttackState,
+                        2 => _crossNeedleState,
                         _ => _chaseState
                     });
                 }
@@ -124,6 +131,7 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
                     {
                         0 => _rushState,
                         1 => _jumpAttackState,
+                        2 => _crossNeedleState,
                         _ => _chaseState
                     });
                 }

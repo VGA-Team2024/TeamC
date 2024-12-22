@@ -6,15 +6,16 @@ public class EnemySpecialAttackState : IEnemyState
     private readonly EnemyBase _enemyBase;
     private readonly EnemyFreezeState _freezeState;
     private readonly Animator _animator;
-    private readonly int _attack = Animator.StringToHash("SpecialAttack");
+    private readonly int _attack;
     private readonly GameObject _attackCollider;
     
-    public EnemySpecialAttackState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator, GameObject collider)
+    public EnemySpecialAttackState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator, GameObject collider, string _animName)
     {
         _enemyBase = enemyBase;
         _freezeState = freezeState;
         _animator = animator;
         _attackCollider = collider;
+        _attack = Animator.StringToHash(_animName);
     }
     
     public void Enter()
