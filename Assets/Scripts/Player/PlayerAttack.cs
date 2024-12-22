@@ -17,7 +17,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField, InspectorVariantName("自身の吹き飛び")]
     private Vector2 _hitKnockBack;
     [SerializeField, InspectorVariantName("吹き飛び時間")]
-    private float _knockBacktimer = 0.1f;
+    private float _knockBackTimer = 0.1f;
     [SerializeField, InspectorVariantName("上下攻撃の座標Y")]
     private float _attackPosY;
     [SerializeField, InspectorVariantName("クールタイム")]
