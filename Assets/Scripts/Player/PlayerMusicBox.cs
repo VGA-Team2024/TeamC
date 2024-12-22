@@ -57,7 +57,7 @@ public class PlayerMusicBox : MonoBehaviour , ICylinderAddable
         }
     }
 
-    void MusicPlay(InputAction.CallbackContext context)
+    private void MusicPlay(InputAction.CallbackContext context)
     {
         _healTimer = 0;
         MusicBoxPlaying = true;
@@ -67,7 +67,7 @@ public class PlayerMusicBox : MonoBehaviour , ICylinderAddable
         _player.Animator.SetBool(MusicBox,true);
     }
 
-    void MusicStop(InputAction.CallbackContext context)
+    private void MusicStop(InputAction.CallbackContext context)
     {
         MusicBoxStop();
     }

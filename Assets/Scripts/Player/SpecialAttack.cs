@@ -3,7 +3,7 @@ using DG.Tweening;
 
 public class SpecialAttack : MonoBehaviour
 {
-    private static readonly int Catch = Animator.StringToHash("Catch");
+    private readonly int Catch = Animator.StringToHash("Catch");
     private Player _player;
     private ITeleportable _parentTp;
     private Vector3 _dir;
