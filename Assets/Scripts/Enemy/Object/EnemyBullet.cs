@@ -4,11 +4,11 @@ public class EnemyBullet : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private int _damage;
-    private const int DeleteTime = 10;
+    [SerializeField, Header("どのくらいで消えるか")] float _deleteTime = 10;
     
     private void Start()
     {
-        Destroy(gameObject, DeleteTime);
+        Destroy(gameObject, _deleteTime);
     }
 
     private void Update()

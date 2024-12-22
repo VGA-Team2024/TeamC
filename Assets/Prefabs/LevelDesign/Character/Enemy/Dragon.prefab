@@ -67,9 +67,9 @@ MonoBehaviour:
   _breathBullet: {fileID: 3065034188471492711, guid: 5b5969803a2251143b2d359cf0bf03f0,
     type: 3}
   _offSet: {x: 3, y: 3}
-  _disA: 8
-  _disB: 16
-  _disC: 24
+  _disA: 12
+  _disB: 20
+  _disC: 28
   _disBWeights:
   - _name: "\u5730\u4E0A\u30D6\u30EC\u30B9"
     _probability: 50
@@ -419,7 +419,8 @@ Transform:
   m_LocalPosition: {x: 9, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1725050295462676794}
   m_Father: {fileID: 6205710692576008892}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2889068108887430124
@@ -487,6 +488,85 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4858256108895066341}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &761112232248475424
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8373956478870678565}
+    m_Modifications:
+    - target: {fileID: 2116867266995009050, guid: 25d2bb50c346de145bfc0bc7b3109880,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116867266995009050, guid: 25d2bb50c346de145bfc0bc7b3109880,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116867266995009050, guid: 25d2bb50c346de145bfc0bc7b3109880,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116867266995009050, guid: 25d2bb50c346de145bfc0bc7b3109880,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116867266995009050, guid: 25d2bb50c346de145bfc0bc7b3109880,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116867266995009050, guid: 25d2bb50c346de145bfc0bc7b3109880,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116867266995009050, guid: 25d2bb50c346de145bfc0bc7b3109880,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116867266995009050, guid: 25d2bb50c346de145bfc0bc7b3109880,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116867266995009050, guid: 25d2bb50c346de145bfc0bc7b3109880,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116867266995009050, guid: 25d2bb50c346de145bfc0bc7b3109880,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6960995600790375811, guid: 25d2bb50c346de145bfc0bc7b3109880,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7397584321909780807, guid: 25d2bb50c346de145bfc0bc7b3109880,
+        type: 3}
+      propertyPath: m_Name
+      value: Eff_Boss_Dragon_AttackEffect
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 25d2bb50c346de145bfc0bc7b3109880, type: 3}
+--- !u!4 &1725050295462676794 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2116867266995009050, guid: 25d2bb50c346de145bfc0bc7b3109880,
+    type: 3}
+  m_PrefabInstance: {fileID: 761112232248475424}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1532855601718350862
 PrefabInstance:
   m_ObjectHideFlags: 0
