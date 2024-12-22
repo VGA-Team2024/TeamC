@@ -118,15 +118,21 @@ public class PlayerAttack : MonoBehaviour
             if (_axisY > 0)
             {// 上入力
                 _attackCollider.transform.localPosition = new Vector2(0, _attackPosY);
+                PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffectUp,0);
             }
             else if (!_player.PlayerMove.IsGround)
             {// 下入力かつ空中
                 _attackCollider.transform.localPosition = new Vector2(0, _attackPosY * -1);
+                PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffectDown, 0);
             }
         }
+        else
+        {
+            //横入力
+            PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffect,
+                Mathf.Approximately(gameObject.transform.GetChild(1).localEulerAngles.y, 180) ? 1 : 0);
+        }
         _attackCollider.SetActive(true);
-        PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffect,
-            Mathf.Approximately(gameObject.transform.GetChild(1).localEulerAngles.y, 180) ? 1 : 0);
         // 非アクティブは_attackCollider自身がする
     }
 

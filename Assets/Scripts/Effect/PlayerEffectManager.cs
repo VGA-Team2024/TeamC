@@ -12,6 +12,8 @@ public enum PlayEffectName
     PlayerDashEffect,
     PlayerMoveEffect,
     PlayerMusicNoteEffect,
+    PlayerAttackEffectUp,
+    PlayerAttackEffectDown,
 }
 
 /// <summary>
