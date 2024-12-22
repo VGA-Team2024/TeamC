@@ -1,5 +1,6 @@
-using DG.Tweening;
+using System;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 //落ちる床を制御するスクリプト
 public class FallingFloor : MonoBehaviour
 {
@@ -11,11 +12,45 @@ public class FallingFloor : MonoBehaviour
 
     [SerializeField, InspectorVariantName("プレイヤーが触れてから落下するまでの時間")]
     private float _delayTime;
-    
-    //オブジェクトを動かすメソッド
-    void MoveFloor()
+
+    [SerializeField, InspectorVariantName("落下後の復活時間")]
+    private float _spawnTime;
+
+    bool _isFalling = false;
+    private Vector3 _startPosition;
+
+    void Awake()
     {
-        transform.DOLocalMoveY(_endPosition, _fallingSpeed).OnComplete(() => {Destroy(gameObject);}).SetDelay(_delayTime);
+        _startPosition = gameObject.transform.position;
+    }
+
+    //オブジェクトを動かすメソッド
+    private void MoveFloor()
+    {
+        // transform.DOLocalMoveY(_endPosition, _fallingSpeed).OnComplete(() => {gameObject.transform.position = _startPosition;}).SetDelay(_delayTime);
+        transform.position =
+            Vector3.MoveTowards(transform.position,
+                new Vector3(transform.position.x, _endPosition, transform.position.z)
+                , _fallingSpeed * Time.deltaTime);
+        if (transform.position.y <= _endPosition)
+        {
+            ResetPos();
+        }
+    }
+
+    async void ResetPos()
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(_spawnTime));
+        transform.position = _startPosition;
+        _isFalling = false;
+    }
+
+    void Update()
+    {
+        if (_isFalling)
+        {
+            MoveFloor();   
+        }
     }
 
     void OnCollisionEnter(Collision other)
@@ -23,7 +58,7 @@ public class FallingFloor : MonoBehaviour
         //触れたオブジェクトがPlayerタグ持っていたら少し時間をおいて_isFalling変数をtrueにする
         if (other.gameObject.CompareTag("Player"))
         {
-            MoveFloor();
+            _isFalling = true;
             other.transform.SetParent(transform);
         }
     }

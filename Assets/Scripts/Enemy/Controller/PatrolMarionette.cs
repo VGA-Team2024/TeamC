@@ -15,7 +15,7 @@ public class PatrolMarionette : EnemyBase
     protected override void OnStart()
     {
         ParticleSystem particle = gameObject.transform.GetChild(0).GetComponent<ParticleSystem>();
-        Animator animator = GetComponent<Animator>();
+        Animator animator = gameObject.transform.GetChild(1).GetComponent<Animator>();
         
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _patrolState = new EnemyPatrolState(animator, transform, _speed, _patrolArea);
@@ -45,5 +45,12 @@ public class PatrolMarionette : EnemyBase
             blo.BlownAway(transform.position);
             ChangeState(_freezeState);
         }
+    }
+    
+    private void OnDrawGizmos()
+    {
+        if(Application.isPlaying) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position + new Vector3(1, 0), Vector3.down * _patrolArea);
     }
 }

@@ -126,7 +126,7 @@ public class PlayerAttack : MonoBehaviour
         }
         _attackCollider.SetActive(true);
         PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffect,
-            Mathf.Approximately(gameObject.transform.GetChild(0).localEulerAngles.y, 180) ? 1 : 0);
+            Mathf.Approximately(gameObject.transform.GetChild(1).localEulerAngles.y, 180) ? 1 : 0);
         // 非アクティブは_attackCollider自身がする
     }
 

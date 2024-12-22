@@ -1,15 +1,13 @@
 using UnityEngine;
 
-public class EnemyBullet : MonoBehaviour, IPlayerTarget
+public class EnemyBullet : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private int _damage;
-    private const int DeleteTime = 5;
-    private Vector2 _playerPos;
+    private const int DeleteTime = 10;
     
     private void Start()
     {
-        Direction();
         Destroy(gameObject, DeleteTime);
     }
 
@@ -21,23 +19,18 @@ public class EnemyBullet : MonoBehaviour, IPlayerTarget
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag(gameObject.tag)) return;
-        if (other.gameObject.CompareTag("Player") && other.gameObject.TryGetComponent(out IDamageable damage))
+        if (other.gameObject.CompareTag("Player"))
         {
-            damage.TakeDamage(_damage);
+            if (other.gameObject.TryGetComponent(out IDamageable damage) && other.gameObject.TryGetComponent(out IBlowable blo))
+            {
+                blo.BlownAway(transform.position);
+                damage.TakeDamage(_damage);
+                Destroy(gameObject);
+            }
         }
-        Destroy(gameObject);
-    }
-
-    private void Direction()
-    {
-        var dir = _playerPos - (Vector2)transform.position;
-        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
-        transform.eulerAngles = new Vector3(0, 0, angle);
-    }
-
-    public void GetPlayerPos(Vector2 playerPos)
-    {
-        _playerPos = playerPos;
+        if (LayerMask.LayerToName(other.gameObject.layer) == "Ground")
+        {
+            Destroy(gameObject);
+        }
     }
 }

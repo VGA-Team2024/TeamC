@@ -25,25 +25,11 @@ public class Cottons : MonoBehaviour, ICreateObj
         for (var i = 0; i < _points.Count; i++)
         {
             var cotton = Instantiate(_cotton, gameObject.transform.position, Quaternion.identity);
-            Vector3 velocity = CalculateVelocity(transform.position, _points[i].transform.position, _height);
+            Vector3 velocity = EnemyUtility.CalculateVelocity(transform.position, _points[i].transform.position, _height);
             
             StartCoroutine(MoveCotton(cotton, velocity, _points[i]));
             _cottons[i] = cotton;
         }
-    }
-    
-    private Vector3 CalculateVelocity(Vector3 pointA, Vector3 pointB, float maxHeight)
-    {
-        Vector3 horizontal = new Vector3(pointB.x - pointA.x, 0, pointB.z - pointA.z);
-
-        float verticalSpeed = Mathf.Sqrt(2 * Mathf.Abs(Physics.gravity.y) * (maxHeight - pointA.y));
-
-        float timeToApex = verticalSpeed / Mathf.Abs(Physics.gravity.y);
-        float totalTime = timeToApex + Mathf.Sqrt(2 * (maxHeight - pointB.y) / Mathf.Abs(Physics.gravity.y));
-
-        Vector3 horizontalVelocity = horizontal / totalTime;
-
-        return horizontalVelocity + Vector3.up * verticalSpeed;
     }
 
     private IEnumerator MoveCotton(BearCotton cotton, Vector3 initialVelocity, GameObject targetObj)

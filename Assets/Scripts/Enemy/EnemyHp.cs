@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyHp : MonoBehaviour, IDamageable
+public class EnemyHp : MonoBehaviour
 {
     [SerializeField] private int _maxHp;
     private int _currentHp;
@@ -9,12 +9,7 @@ public class EnemyHp : MonoBehaviour, IDamageable
     private void Start()
     {
         _currentHp = _maxHp;
-    }
-
-    private void Update()
-    {
-        
-    }
+    } // StartではなくOnEnableでないとCurrentHpの初期化が行われない
 
     public void TakeDamage(int damage)
     {
