@@ -13,24 +13,28 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
     [SerializeField, Header("距離A")] private int _disA;
     [SerializeField, Header("距離B")] private int _disB;
     [SerializeField, Header("距離C")] private int _disC;
-    [SerializeField, Header("距離Bにいたときの攻撃のそれぞれの確率")]
-    private Weight[] _disBWeights = new Weight[4]
+    [SerializeField, Header("特殊攻撃の確率")] private Weight[] _specialAttackWeights = new Weight[2]
     {
         new Weight("特殊攻撃"),
+        new Weight("ミス")
+    };
+    [SerializeField, Header("距離Bにいたときの攻撃のそれぞれの確率")]
+    private Weight[] _disBWeights = new Weight[3]
+    {
         new Weight("突進"),
         new Weight("ジャンプ攻撃"),
         new Weight("歩行")
     };
     [SerializeField, Header("距離Cにいたときの攻撃のそれぞれの確率")]
-    private Weight[] _disCWeights = new Weight[4]
+    private Weight[] _disCWeights = new Weight[3]
     {
-        new Weight("特殊攻撃"),
         new Weight("突進"),
         new Weight("ジャンプ攻撃"),
         new Weight("歩行")
     };
 
     private int _attackCount; // 距離A時の前方攻撃の回数制限用
+    private bool _isSpecialAttacked; // 特殊攻撃済みか
     
     private EnemyChaseState _chaseState; // 歩行ステート
     private EnemyAttackState _attackState;
@@ -73,6 +77,16 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
             if (_currentState != _idleState) return;
             
             transform.eulerAngles = new Vector2(0, _playerMove.transform.position.x > transform.position.x ? 0 : 180);
+
+            if (!_isSpecialAttacked && EnemyUtility.ProbabilityCalculate(_specialAttackWeights) == 0)
+            {
+                ChangeState(_specialAttackState);
+                _isSpecialAttacked = true;
+                return;
+            } // 特殊攻撃は毎回抽選
+
+            _isSpecialAttacked = false;
+            
             switch (Distance())
             {
                 case 1 : // 距離がAの場合
@@ -90,13 +104,12 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
                 {
                     var num = EnemyUtility.ProbabilityCalculate(_disBWeights);
                     _attackCount = 0;
-                    if (num == 2) _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
-                    if (num == 3) _chaseState.GetPlayerPos(_playerMove.transform.position);
+                    if (num == 1) _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
+                    if (num == 2) _chaseState.GetPlayerPos(_playerMove.transform.position);
                     ChangeState(num switch
                     {
-                        0 => _specialAttackState,
-                        1 => _rushState,
-                        2 => _jumpAttackState,
+                        0 => _rushState,
+                        1 => _jumpAttackState,
                         _ => _chaseState
                     });
                 }
@@ -105,13 +118,12 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
                 {
                     var num = EnemyUtility.ProbabilityCalculate(_disCWeights);
                     _attackCount = 0;
-                    if (num == 2) _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
-                    if (num == 3) _chaseState.GetPlayerPos(_playerMove.transform.position);
+                    if (num == 1) _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
+                    if (num == 2) _chaseState.GetPlayerPos(_playerMove.transform.position);
                     ChangeState(num switch
                     {
-                        0 => _specialAttackState,
-                        1 => _rushState,
-                        2 => _jumpAttackState,
+                        0 => _rushState,
+                        1 => _jumpAttackState,
                         _ => _chaseState
                     });
                 }
