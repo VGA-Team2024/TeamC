@@ -6,7 +6,7 @@ public class EnemyHp : MonoBehaviour
     private int _currentHp;
     public int CurrentHp => _currentHp;
     
-    private void Start()
+    private void OnEnable()
     {
         _currentHp = _maxHp;
     } // StartではなくOnEnableでないとCurrentHpの初期化が行われない
