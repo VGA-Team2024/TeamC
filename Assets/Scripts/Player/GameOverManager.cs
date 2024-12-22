@@ -9,17 +9,10 @@ public class GameOverManager : SingletonMonoBehaviour<GameOverManager>
     [SerializeField]FadeController _fadeController;
     [SerializeField,InspectorVariantName("すべての処理が終わる時間")] float _fadeDuration = 1f;
     
-    private CancellationTokenSource _cts = new CancellationTokenSource();
+    private readonly CancellationTokenSource _cts = new CancellationTokenSource();
     public RespawnPoint Point
     {
-        set
-        {
-            if(_point)// 過去のリスポーン地点の無効化
-                _point.PointDisable();
-            
-            // 現在のリスポーン地点を有効化
-            _point = value;
-        }
+        set => _point = value;
     }
     
     public async void GameOver()

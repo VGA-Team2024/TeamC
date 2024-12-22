@@ -7,9 +7,6 @@ public class RespawnPoint : MonoBehaviour
 {
     [SerializeField, InspectorVariantName("最初のリス地")]
     private bool _firstPoint;
-    [SerializeField] private Sprite Enable;
-    [SerializeField] private Sprite Disable;
-
     private SpriteRenderer _spriteRenderer;
     private void Start()
     {
@@ -23,13 +20,5 @@ public class RespawnPoint : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         GameOverManager.I.Point = this;
-        if(Enable != null)
-            _spriteRenderer.sprite = Enable;
-    }
-
-    public void PointDisable()
-    {
-        if(Disable != null)
-            _spriteRenderer.sprite = Disable;
     }
 }

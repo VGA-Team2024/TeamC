@@ -138,7 +138,7 @@ public class PlayerAttack : MonoBehaviour
             _hitKnockBack : 
             new Vector2( _hitKnockBack.x *-1, _hitKnockBack.y)
             , ForceMode.Impulse);
-        await UniTask.Delay((TimeSpan.FromSeconds(_knockBacktimer)),cancellationToken: _player.CancellationToken);
+        await UniTask.Delay((TimeSpan.FromSeconds(_knockBackTimer)),cancellationToken: _player.CancellationToken);
         _player.PlayerMove.IsMove = true;
     }
 
