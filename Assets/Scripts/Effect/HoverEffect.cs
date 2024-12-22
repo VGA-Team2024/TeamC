@@ -3,11 +3,16 @@ using UnityEngine;
 
 public class HoverEffect : MonoBehaviour
 {
-    [SerializeField] GameObject _player;
+    Player _player;
     Vector3 playerVector;
     [SerializeField] float _playerSizeX = 1;
     [SerializeField] float _playerSizeY = 1;
     [SerializeField] float _effectLost = 3;
+
+    private void Start()
+    {
+        _player = GameObject.FindObjectOfType<Player>();
+    }
 
     private void FixedUpdate()
     {
