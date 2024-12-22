@@ -4,7 +4,13 @@ using UnityEngine;
 public class Dragon : EnemyBase, IPlayerTarget
 {
     [SerializeField, Header("接触時攻撃力")] private int _collideDamage;
-    [SerializeField, Header("Playerを攻撃した後次の攻撃が可能になるまでの時間")] private int _freezeTime;
+    [SerializeField, Header("playerにぶつかった後動けるまでの時間")] private int _freezeTime;
+    [SerializeField, Header("前方攻撃後の待機時間")] private int _attackFreezeTime;
+    [SerializeField, Header("地上ブレス後の待機時間")] private int _shootFreezeTime;
+    [SerializeField, Header("突進後の待機時間")] private int _rushFreezeTime;
+    [SerializeField, Header("ジャンプ後の待機時間")] private int _jumpAttackFreezeTime;
+    [SerializeField, Header("飛行ブレス後の待機時間")] private int _flyFreezeTime;
+    [SerializeField, Header("歩行後の待機時間")] private int _chaseFreezeTime;
     [SerializeField, Header("Playerにつけるタグの名前")] private string _playerTag;
     [SerializeField, Header("ジャンプ攻撃時のスピード")] private float _jumpSpeed;
     [SerializeField, Header("ジャンプ攻撃時の限界高度")] private float _jumpHeight;
@@ -45,6 +51,12 @@ public class Dragon : EnemyBase, IPlayerTarget
     private EnemyBreathState _breathState;
     private EnemyFlyState _flyState;
     private EnemyFreezeState _freezeState;
+    private EnemyFreezeState _chaseFreezeState; // 歩行後の待機ステート
+    private EnemyFreezeState _attackFreezeState; // 前方攻撃後の待機ステート
+    private EnemyFreezeState _jumpAttackFreezeState; // ジャンプ攻撃後の待機ステート
+    private EnemyFreezeState _rushFreezeState; // 突進攻撃後の待機ステート
+    private EnemyFreezeState _shootFreezeState; // 地上ブレス後の待機ステート
+    private EnemyFreezeState _flyFreezeState; // 飛行ブレス後の待機ステート
     private EnemyDeathState _deathState;
     
     protected override void OnStart()
@@ -56,12 +68,19 @@ public class Dragon : EnemyBase, IPlayerTarget
         Rigidbody rb = GetComponent<Rigidbody>();
 
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
-        _chaseState = new EnemyChaseState(this, _freezeState, _animator, transform, _speed, false, _walkTime);
-        _attackState = new EnemyAttackState(this, _freezeState, _animator, attackCollider);
-        _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, _animator, transform, _jumpSpeed, _jumpHeight, rb);
-        _rushState = new EnemyRushState(this, _freezeState, _animator, transform, _rushDistance, _rushSpeed);
-        _shootState = new EnemyShootState(this, _freezeState, _animator, transform, _offSet, _breathBullet); // 地上ブレス
-        _breathState = new EnemyBreathState(this, _freezeState, _animator, breaths); // 飛びブレス
+        _chaseFreezeState = new EnemyFreezeState(this, _idleState, _chaseFreezeTime);
+        _attackFreezeState = new EnemyFreezeState(this, _idleState, _attackFreezeTime);
+        _jumpAttackFreezeState = new EnemyFreezeState(this, _idleState, _jumpAttackFreezeTime);
+        _rushFreezeState = new EnemyFreezeState(this, _idleState, _rushFreezeTime);
+        _shootFreezeState = new EnemyFreezeState(this, _idleState, _shootFreezeTime);
+        _flyFreezeState = new EnemyFreezeState(this, _idleState, _flyFreezeTime);
+        
+        _chaseState = new EnemyChaseState(this, _chaseFreezeState, _animator, transform, _speed, false, _walkTime);
+        _attackState = new EnemyAttackState(this, _attackFreezeState, _animator, attackCollider);
+        _jumpAttackState = new EnemyJumpAttackState(this, _jumpAttackFreezeState, _animator, transform, _jumpSpeed, _jumpHeight, rb);
+        _rushState = new EnemyRushState(this, _rushFreezeState, _animator, transform, _rushDistance, _rushSpeed);
+        _shootState = new EnemyShootState(this, _shootFreezeState, _animator, transform, _offSet, _breathBullet); // 地上ブレス
+        _breathState = new EnemyBreathState(this, _flyFreezeState, _animator, breaths); // 飛びブレス
         _flyState = new EnemyFlyState(this, _breathState, _animator, transform, rb, _height);
         _deathState = new EnemyDeathState(this, particle, _animator, gameObject);
         
