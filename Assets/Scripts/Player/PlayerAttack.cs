@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Threading;
 using Cysharp.Threading.Tasks;
 
 public class PlayerAttack : MonoBehaviour
@@ -24,7 +23,7 @@ public class PlayerAttack : MonoBehaviour
     private float _attackCoolTime = 0.5f;
     private Vector3 _atkPos;
     private bool _canAttack = true;
-    
+    public bool CanAttack => _canAttack;
     
     [Header("特殊攻撃")]
     [SerializeField, InspectorVariantName("ゲームオブジェクト")] 
@@ -198,5 +197,39 @@ public class PlayerAttack : MonoBehaviour
         g.transform.position = this.gameObject.transform.position;
         g.GetComponent<Rigidbody>().velocity = g.transform.up * _rangeAttackSpeed;
         Destroy(g, _lifeTime);
+    }
+    
+    public void AttackAnimFlip(bool value)
+    {
+        if(_player.Animator.GetCurrentAnimatorClipInfo(1).Length == 0)
+            return;
+        string clipName = _player.Animator.GetCurrentAnimatorClipInfo(1)[0].clip.name;
+        float clipTime = _player.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        if (!clipName.Contains("attack"))
+            return;
+    
+        string next = string.Empty;
+        switch (clipName)
+        {
+            case "attackR_override":
+                next = "attackL_override";
+                break;
+            case "attackL_override":
+                next = "attackR_override";
+                break;
+            case "attackR_adove":
+                next = "attackL_adove";
+                break;
+            case "attackL_adove":
+                next = "attackR_adove";
+                break;
+            case "attackR_under":
+                next = "attackL_under";
+                break;
+            case "attackL_under":
+                next = "attackR_under";
+                break;
+        }
+        _player.Animator.Play(next, 1,clipTime);
     }
 }
