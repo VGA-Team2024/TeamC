@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8246979527777185167}
   - component: {fileID: 888690736004795940}
   - component: {fileID: 7455440731532232091}
+  - component: {fileID: 8889453708844741310}
   m_Layer: 7
   m_Name: Dragon
   m_TagString: Enemy
@@ -54,6 +55,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f448bc033f911549a3663a26c1fcddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hoverEffectPrefab: {fileID: 0}
+  _effectInstanceTime: 0.5
   _speed: 2
   _collideDamage: 1
   _freezeTime: 2
@@ -179,6 +182,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &8889453708844741310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104458898053443286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2fd8f18f966e34eb3bd1febd0db993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1289735682389783829
 GameObject:
   m_ObjectHideFlags: 0
