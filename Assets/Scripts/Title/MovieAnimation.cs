@@ -100,6 +100,9 @@ public class MovieAnimation : MonoBehaviour
             
             // エフェクトを再生
             await _fairy.MoveAnimation();
+            
+            // エフェクトを消す
+            _fairy.gameObject.SetActive(false);
         }
         catch (OperationCanceledException)
         {

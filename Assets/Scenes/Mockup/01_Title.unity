@@ -395,7 +395,7 @@ PrefabInstance:
     - target: {fileID: 2769530123765413738, guid: fbd51deb2c3261f4a90b1bfe36f34c32,
         type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2998213498070546112, guid: fbd51deb2c3261f4a90b1bfe36f34c32,
         type: 3}
@@ -410,12 +410,12 @@ PrefabInstance:
     - target: {fileID: 4647050559048644710, guid: fbd51deb2c3261f4a90b1bfe36f34c32,
         type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6100710058388368492, guid: fbd51deb2c3261f4a90b1bfe36f34c32,
         type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6683867245854398233, guid: fbd51deb2c3261f4a90b1bfe36f34c32,
         type: 3}
