@@ -22,10 +22,11 @@ public class AttackNormalBear : EnemyBase, IPlayerTarget
         _particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
         _attackCollider = gameObject.transform.GetChild(2).gameObject;
         _animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
+        EnemySounds sounds = GetComponent<EnemySounds>();
         
-        _walkState = new EnemyWalkState(_animator, transform, _speed, _patrolArea);
+        _walkState = new EnemyWalkState(_animator, transform, _speed, _patrolArea, sounds);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
-        _attackState = new EnemyAttackState(this, _freezeState, _animator, _attackCollider);
+        _attackState = new EnemyAttackState(this, _freezeState, _animator, _attackCollider, sounds);
         _deathState = new EnemyDeathState(this, _particle, _animator, gameObject);
     }
 

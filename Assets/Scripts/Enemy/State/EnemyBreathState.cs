@@ -9,19 +9,21 @@ public class EnemyBreathState : IEnemyState
     private readonly Animator _animator;
     private readonly int _breath = Animator.StringToHash("Breath");
     private readonly GameObject _breathObjs;
+    private readonly EnemySounds _sounds;
     
-    public EnemyBreathState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator, GameObject breathObjs)
+    public EnemyBreathState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator, GameObject breathObjs, EnemySounds sounds)
     {
         _enemyBase = enemyBase;
         _freezeState = freezeState;
         _animator = animator;
         _breathObjs = breathObjs;
+        _sounds = sounds;
     }
 
     public void Enter()
     {
         _breathObjs.SetActive(true);
-        
+        _sounds.PlayEnemySE(EnemySeEnum.Breath);
         PlayAnim().Forget();
     }
 

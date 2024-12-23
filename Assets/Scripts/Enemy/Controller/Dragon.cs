@@ -66,6 +66,7 @@ public class Dragon : EnemyBase, IPlayerTarget
         GameObject breaths = gameObject.transform.GetChild(3).gameObject;
         _animator = gameObject.transform.GetChild(4).GetComponent<Animator>();
         Rigidbody rb = GetComponent<Rigidbody>();
+        EnemySounds sounds = GetComponent<EnemySounds>();
 
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _chaseFreezeState = new EnemyFreezeState(this, _idleState, _chaseFreezeTime);
@@ -79,9 +80,9 @@ public class Dragon : EnemyBase, IPlayerTarget
         _attackState = new EnemyAttackState(this, _attackFreezeState, _animator, attackCollider);
         _jumpAttackState = new EnemyJumpAttackState(this, _jumpAttackFreezeState, _animator, transform, _jumpSpeed, _jumpHeight, rb);
         _rushState = new EnemyRushState(this, _rushFreezeState, _animator, transform, _rushDistance, _rushSpeed);
-        _shootState = new EnemyShootState(this, _shootFreezeState, _animator, transform, _offSet, _breathBullet); // 地上ブレス
-        _breathState = new EnemyBreathState(this, _flyFreezeState, _animator, breaths); // 飛びブレス
-        _flyState = new EnemyFlyState(this, _breathState, _animator, transform, rb, _height);
+        _shootState = new EnemyShootState(this, _shootFreezeState, _animator, transform, _offSet, _breathBullet, sounds); // 地上ブレス
+        _breathState = new EnemyBreathState(this, _flyFreezeState, _animator, breaths, sounds); // 飛びブレス
+        _flyState = new EnemyFlyState(this, _breathState, _animator, transform, rb, _height, sounds);
         _deathState = new EnemyDeathState(this, particle, _animator, gameObject);
         
     }

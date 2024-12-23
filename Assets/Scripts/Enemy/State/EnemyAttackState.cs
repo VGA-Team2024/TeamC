@@ -10,13 +10,15 @@ public class EnemyAttackState : IEnemyState
     private readonly int _attack = Animator.StringToHash("Attack");
     private readonly GameObject _attackCollider;
     private bool _isAttack;
+    private readonly EnemySounds _sounds;
     
-    public EnemyAttackState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator, GameObject collider)
+    public EnemyAttackState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator, GameObject collider, EnemySounds sounds = null)
     {
         _enemyBase = enemyBase;
         _freezeState = freezeState;
         _animator = animator;
         _attackCollider = collider;
+        _sounds = sounds;
     }
     
     public void Enter()
@@ -29,6 +31,7 @@ public class EnemyAttackState : IEnemyState
         if (_isAttack) return;
         _isAttack = true;
         _attackCollider.SetActive(true);
+        if (_sounds) _sounds.PlayEnemySE(EnemySeEnum.Attack1);
         PlayAnim().Forget();
     }
 
