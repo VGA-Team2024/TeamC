@@ -24,12 +24,14 @@ public class DoorSwitch : MonoBehaviour ,IDamageable
         CRIAudioManager.BGM.Play("SE_Gimmick", "SE_Gimmick_Door01");
         _isSwitch = true;
         gameObject.GetComponent<SpriteRenderer>().sprite = _switchSprite;
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
     /// <summary>このメソッドが呼ばれたらオブジェクトのアクティブ状態をオンにする</summary>
     void DoorClose()
     {
         _doorPrefab.SetActive(true);
         _isSwitch = true;
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     public void TakeDamage(int damage)
