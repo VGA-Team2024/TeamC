@@ -16,10 +16,10 @@ public class FallingFloor : MonoBehaviour
     [SerializeField, InspectorVariantName("落下後の復活時間")]
     private float _spawnTime;
 
-    bool _isFalling = false;
+    private bool _isFalling = false;
     private Vector3 _startPosition;
 
-    void Awake()
+    private void Awake()
     {
         _startPosition = gameObject.transform.position;
     }
@@ -27,7 +27,6 @@ public class FallingFloor : MonoBehaviour
     //オブジェクトを動かすメソッド
     private void MoveFloor()
     {
-        // transform.DOLocalMoveY(_endPosition, _fallingSpeed).OnComplete(() => {gameObject.transform.position = _startPosition;}).SetDelay(_delayTime);
         transform.position =
             Vector3.MoveTowards(transform.position,
                 new Vector3(transform.position.x, _endPosition, transform.position.z)
@@ -38,14 +37,14 @@ public class FallingFloor : MonoBehaviour
         }
     }
 
-    async void ResetPos()
+    private async void ResetPos()
     {
         await UniTask.Delay(TimeSpan.FromSeconds(_spawnTime));
         transform.position = _startPosition;
         _isFalling = false;
     }
 
-    void Update()
+    private void Update()
     {
         if (_isFalling)
         {
@@ -53,17 +52,18 @@ public class FallingFloor : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision other)
+    private async void OnCollisionEnter(Collision other)
     {
         //触れたオブジェクトがPlayerタグ持っていたら少し時間をおいて_isFalling変数をtrueにする
         if (other.gameObject.CompareTag("Player"))
         {
-            _isFalling = true;
             other.transform.SetParent(transform);
+            await UniTask.Delay(TimeSpan.FromSeconds(_delayTime));
+            _isFalling = true;
         }
     }
 
-    void OnCollisionExit(Collision other)
+    private void OnCollisionExit(Collision other)
     {
         //子オブジェクトから外す
         if (other.gameObject.CompareTag("Player"))
