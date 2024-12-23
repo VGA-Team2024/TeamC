@@ -57,8 +57,6 @@ public class PlayerMove : MonoBehaviour, ITeleportable
             {
                 PlayerEffectManager.Instance.ReStartPlayEffect(PlayEffectName.PlayerMoveEffect);   
             }
-            if(!_player.PlayerAttack.CanAttack)
-                _player.PlayerAttack.AttackAnimFlip(value);
         }
     }
     private bool _isGround; //設置判定
@@ -121,6 +119,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     {
         _rb = GetComponent<Rigidbody>();
         _player = GetComponent<Player>();
+        _player.Animator.SetBool(DirRight, true);
     }
 
     void OnDrawGizmos()

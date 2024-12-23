@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 
 public class PlayerAttack : MonoBehaviour
 {
+    private readonly int CanAttackAnim = Animator.StringToHash("CanAttack");
     private readonly int Attack = Animator.StringToHash("Attack");
     private readonly int Throw = Animator.StringToHash("Throw");
     private readonly int Vertical = Animator.StringToHash("Vertical");
@@ -87,13 +88,21 @@ public class PlayerAttack : MonoBehaviour
     {
         _controls.Disable();
     }
+
+    private void Start()
+    {
+        _player.Animator.SetBool(CanAttackAnim,true);
+    }
+
     private async void OnAttack(InputAction.CallbackContext context)
     {
         if(!_canAttack) return;
         _canAttack = false;
+        _player.Animator.SetBool(CanAttackAnim,false);
         _player.Animator.SetTrigger(Attack);
         
         await UniTask.Delay(TimeSpan.FromSeconds(_attackCoolTime), cancellationToken: _player.CancellationToken);
+        _player.Animator.SetBool(CanAttackAnim,true);
         _canAttack = true;
     }
 
@@ -197,39 +206,5 @@ public class PlayerAttack : MonoBehaviour
         g.transform.position = this.gameObject.transform.position;
         g.GetComponent<Rigidbody>().velocity = g.transform.up * _rangeAttackSpeed;
         Destroy(g, _lifeTime);
-    }
-    
-    public void AttackAnimFlip(bool value)
-    {
-        if(_player.Animator.GetCurrentAnimatorClipInfo(1).Length == 0)
-            return;
-        string clipName = _player.Animator.GetCurrentAnimatorClipInfo(1)[0].clip.name;
-        float clipTime = _player.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        if (!clipName.Contains("attack"))
-            return;
-    
-        string next = string.Empty;
-        switch (clipName)
-        {
-            case "attackR_override":
-                next = "attackL_override";
-                break;
-            case "attackL_override":
-                next = "attackR_override";
-                break;
-            case "attackR_adove":
-                next = "attackL_adove";
-                break;
-            case "attackL_adove":
-                next = "attackR_adove";
-                break;
-            case "attackR_under":
-                next = "attackL_under";
-                break;
-            case "attackL_under":
-                next = "attackR_under";
-                break;
-        }
-        _player.Animator.Play(next, 1,clipTime);
     }
 }
