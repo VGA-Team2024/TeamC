@@ -119,6 +119,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     {
         _rb = GetComponent<Rigidbody>();
         _player = GetComponent<Player>();
+        _player.Animator.SetBool(DirRight, true);
     }
 
     void OnDrawGizmos()

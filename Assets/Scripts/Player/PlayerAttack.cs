@@ -88,6 +88,12 @@ public class PlayerAttack : MonoBehaviour
     {
         _controls.Disable();
     }
+
+    private void Start()
+    {
+        _player.Animator.SetBool(CanAttackAnim,true);
+    }
+
     private async void OnAttack(InputAction.CallbackContext context)
     {
         if(!_canAttack) return;
