@@ -156,7 +156,7 @@ public class CRIAudioManager
         protected CriAtomExPlayer _atomExPlayer;
 
         public bool IsPlaying => _atomExPlayer.GetStatus() == CriAtomExPlayer.Status.Playing;
-
+        public CriAtomExPlayer Player => _atomExPlayer; // 追加
 
         public SoundPlayer(SoundType type)
         {
