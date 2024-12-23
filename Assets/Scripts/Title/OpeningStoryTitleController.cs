@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Video;
 
 namespace Title
 {
@@ -6,7 +7,7 @@ namespace Title
     public class OpeningStoryTitleController : MonoBehaviour
     {
         [SerializeField] private UIButton _startButton;
-        [SerializeField] private StartAnimation _startAnimation;
+        [SerializeField] private VideoPlayer _videoPlayer;
 
         private void Start()
         {
@@ -20,10 +21,10 @@ namespace Title
         }
         
         // ボタン押下時の非同期処理
-        private async void HandleStartButtonClick()
+        private void HandleStartButtonClick()
         {
             _startButton.gameObject.SetActive(false);
-            await _startAnimation.TitleAnimation();
+            _videoPlayer.gameObject.SetActive(true);
         }
     }
 }

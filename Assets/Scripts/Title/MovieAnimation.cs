@@ -1,13 +1,17 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Title;
 using UnityEngine;
 using UnityEngine.Video;
 
 public class MovieAnimation : MonoBehaviour
 {
-    [SerializeField, InspectorVariantName("Movieコンポーネント")]
-    private VideoPlayer _moviePlayer;
+    [SerializeField, InspectorVariantName("Movieコンポーネント")] private VideoPlayer _moviePlayer;
+
+    [SerializeField, InspectorVariantName("fairyのエフェクト")] private EffectAnimation _fairy;
+
+    [SerializeField,InspectorVariantName("妖精を出す間隔")] private float _duration;
 
     private CancellationTokenSource _cts;
 
@@ -42,11 +46,14 @@ public class MovieAnimation : MonoBehaviour
         }
 
         _moviePlayer.Play();
+        
+        // エフェクトの再生をスケジュール
+        _ = PlayEffectAfterDelay(_duration, ct);
 
         try
         {
             // 終了イベントを待機
-            var tcs = new UniTaskCompletionSource();
+            UniTaskCompletionSource tcs = new();
 
             // ビデオ終了時にタスクを完了する
             _moviePlayer.loopPointReached += _ => tcs.TrySetResult();
@@ -79,6 +86,24 @@ public class MovieAnimation : MonoBehaviour
             _cts.Cancel();
             _cts.Dispose();
             _cts = null;
+        }
+    }
+
+    private async UniTask PlayEffectAfterDelay(float delaySeconds,CancellationToken ct)
+    {
+        try
+        {
+            // n秒間
+            await UniTask.Delay(TimeSpan.FromSeconds(delaySeconds),cancellationToken: ct);
+            
+            _fairy.AddCreate();
+            
+            // エフェクトを再生
+            await _fairy.MoveAnimation();
+        }
+        catch (OperationCanceledException)
+        {
+            Debug.Log("エフェクト再生がキャンセルされた");
         }
     }
 }
