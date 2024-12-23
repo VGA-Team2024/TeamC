@@ -60,26 +60,26 @@ MonoBehaviour:
   _effectInstanceTime: 0.5
   _speed: 2
   _collideDamage: 1
-  _freezeTime: 2
-  _attackFreezeTime: 2
-  _shootFreezeTime: 2
-  _rushFreezeTime: 2
-  _jumpAttackFreezeTime: 2
-  _flyFreezeTime: 2
-  _chaseFreezeTime: 2
+  _freezeTime: 1
+  _attackFreezeTime: 1
+  _shootFreezeTime: 1
+  _rushFreezeTime: 1
+  _jumpAttackFreezeTime: 1
+  _flyFreezeTime: 4
+  _chaseFreezeTime: 1
   _playerTag: Player
-  _jumpSpeed: 2
+  _jumpSpeed: 4
   _jumpHeight: 10
-  _rushDistance: 5
-  _rushSpeed: 3
+  _rushDistance: 25
+  _rushSpeed: 15
   _walkTime: 2
   _height: 10
   _breathBullet: {fileID: 3065034188471492711, guid: 5b5969803a2251143b2d359cf0bf03f0,
     type: 3}
   _offSet: {x: 3, y: 3}
   _disA: 12
-  _disB: 20
-  _disC: 28
+  _disB: 29
+  _disC: 50
   _disBWeights:
   - _name: "\u5730\u4E0A\u30D6\u30EC\u30B9"
     _probability: 50
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3f5943939d931d47899f120d85186b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 3
+  _maxHp: 25
 --- !u!114 &-1108437188274759797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2376e00fd3ba5944a132796697ae68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blow: 2
+  _blow: 1
 --- !u!114 &8246979527777185167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +164,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104458898053443286}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 3
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -427,7 +427,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 24
+  m_Radius: 50
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6508464483152144653
 GameObject:
