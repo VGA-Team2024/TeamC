@@ -121,7 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f187aa897619ed949830d66d517fe8e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hoverEffectPrefab: {fileID: 0}
+  _hoverEffectPrefab: {fileID: 8727240678916479325, guid: 626ee73e5bde2e641860143a6e8c504e,
+    type: 3}
   _effectInstanceTime: 0.5
   _speed: 1
   _collideDamage: 1
