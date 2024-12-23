@@ -6,13 +6,13 @@ using UnityEditor;
 [Serializable]
 public class Weight
 {
-    [ReadOnly, SerializeField] private string _name;
+    [SerializeField] private string _name;
     [SerializeField, Range(0, 100)] private int _probability;
 
     public Weight(string name) { _name = name; }
     public int Probability => _probability;
 }
-
+#if UNITY_EDITOR
 public class ReadOnlyAttribute : PropertyAttribute { }
 
 [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
@@ -25,3 +25,4 @@ public class ProbabilityWeight : PropertyDrawer
         GUI.enabled = true;
     }
 }
+#endif
