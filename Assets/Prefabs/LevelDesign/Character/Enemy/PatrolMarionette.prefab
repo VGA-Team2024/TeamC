@@ -81,9 +81,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf6633e6c45c82498a2607bf47af557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _hoverEffectPrefab: {fileID: 0}
+  _effectInstanceTime: 0.5
+  _speed: 4
   _collideDamage: 1
-  _patrolArea: 5
+  _patrolArea: 10
   _freezeTime: 2
   _playerTag: Player
   _obj: {fileID: 481660600174651800}

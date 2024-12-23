@@ -65,7 +65,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 7
+  m_Radius: 13
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6599708426916824042
 GameObject:
@@ -174,12 +174,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e75ae4bb722394da660b20f2031803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _hoverEffectPrefab: {fileID: 0}
+  _effectInstanceTime: 0.5
+  _speed: 4
   _isFly: 0
   _freezeTime: 2
   _playerTag: Player
   _damage: 1
-  _canselDis: 15
+  _canselDis: 25
 --- !u!114 &1338617352851844823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2376e00fd3ba5944a132796697ae68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blow: 2
+  _blow: 7
 --- !u!114 &6811541260290175076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +283,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6599708426916824042}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 8
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

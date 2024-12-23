@@ -121,13 +121,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f187aa897619ed949830d66d517fe8e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hoverEffectPrefab: {fileID: 0}
+  _effectInstanceTime: 0.5
   _speed: 1
   _collideDamage: 1
   _patrolArea: 5
   _freezeTime: 2
   _playerTag: Player
-  _jumpSpeed: 2
-  _jumpHeight: 10
+  _jumpSpeed: 1
+  _jumpHeight: 5
 --- !u!114 &1385715968839163490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2376e00fd3ba5944a132796697ae68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blow: 2
+  _blow: 8
 --- !u!114 &-5339952273490791922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +210,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3150800749680220629}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

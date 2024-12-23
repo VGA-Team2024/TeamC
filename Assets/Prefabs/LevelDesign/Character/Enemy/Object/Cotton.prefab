@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5308a37930ca9ab48b16e2d29282ccbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deleteTime: 5
-  _effectTime: 10
+  _deleteTime: 6
+  _effectTime: 3
 --- !u!114 &7085799352067910994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3f5943939d931d47899f120d85186b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 5
+  _maxHp: 2
 --- !u!114 &7422479430144382211
 MonoBehaviour:
   m_ObjectHideFlags: 0

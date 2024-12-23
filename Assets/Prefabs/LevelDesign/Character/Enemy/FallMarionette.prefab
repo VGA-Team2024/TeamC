@@ -86,7 +86,7 @@ MonoBehaviour:
   _hoverEffectPrefab: {fileID: 8727240678916479325, guid: 626ee73e5bde2e641860143a6e8c504e,
     type: 3}
   _effectInstanceTime: 0.5
-  _speed: 3
+  _speed: 10
   _collideDamage: 1
   _freezeTime: 2
   _playerTag: Player
@@ -164,7 +164,7 @@ Transform:
   m_GameObject: {fileID: 8654621210104761501}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -8.21, z: 0}
+  m_LocalPosition: {x: 0, y: -30.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -235,7 +235,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 15, z: 1}
+  m_Size: {x: 8, y: 50, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6094687131240154755
 PrefabInstance:

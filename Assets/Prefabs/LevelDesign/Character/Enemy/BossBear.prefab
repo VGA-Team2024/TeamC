@@ -110,8 +110,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4801103591262155282}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -207,15 +207,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hoverEffectPrefab: {fileID: 0}
   _effectInstanceTime: 0.5
-  _speed: 1
+  _speed: 10
   _collideDamage: 1
-  _patrolArea: 5
+  _patrolArea: 30
   _freezeTime: 2
   _playerTag: Player
-  _jumpSpeed: 1
+  _jumpSpeed: 2
   _jumpHeight: 10
-  _rushDistance: 5
-  _rushSpeed: 3
+  _rushDistance: 30
+  _rushSpeed: 25
   _disA: 8
   _disB: 16
   _disC: 24
@@ -230,7 +230,7 @@ MonoBehaviour:
   - _name: "\u7A81\u9032"
     _probability: 70
   - _name: "\u30B8\u30E3\u30F3\u30D7\u653B\u6483"
-    _probability: 20
+    _probability: 35
   - _name: "\u6B69\u884C"
     _probability: 10
   _walkBWeights:
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3f5943939d931d47899f120d85186b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 3
+  _maxHp: 20
 --- !u!114 &7105129781805924234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,7 +308,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4650166495700026106}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -381,12 +381,12 @@ PrefabInstance:
     - target: {fileID: 7693001368935226090, guid: a9135530ecc9a7e4883e404619799b83,
         type: 3}
       propertyPath: _speed
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7693001368935226090, guid: a9135530ecc9a7e4883e404619799b83,
         type: 3}
       propertyPath: _points.Array.size
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8607476842703990714, guid: a9135530ecc9a7e4883e404619799b83,
         type: 3}

@@ -65,7 +65,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 24
+  m_Radius: 30
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1015169207061165043
 GameObject:
@@ -202,7 +202,7 @@ MonoBehaviour:
   - {fileID: 9091612751558199375}
   - {fileID: 1015169207061165043}
   - {fileID: 3621608826728048573}
-  _interval: 1
+  _interval: 2
 --- !u!114 &8018471720147371994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +241,7 @@ Transform:
   m_GameObject: {fileID: 3621608826728048573}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -312,7 +312,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.5
+  m_Radius: 4.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5093253671243380599
 GameObject:
@@ -456,10 +456,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df20ad1e7b0bb544faa984aa0a6dd116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hoverEffectPrefab: {fileID: 0}
+  _effectInstanceTime: 0.5
   _speed: 2
   _collideDamage: 1
-  _freezeTime: 2
-  _specialAttackFreezeTime: 2
+  _freezeTime: 1
+  _specialAttackFreezeTime: 1
   _attackFreezeTime: 2
   _jumpAttackFreezeTime: 2
   _rushFreezeTime: 2
@@ -467,43 +469,43 @@ MonoBehaviour:
   _fallFreezeTime: 2
   _crossFreezeTime: 2
   _playerTag: Player
-  _jumpSpeed: 2
+  _jumpSpeed: 4
   _jumpHeight: 10
-  _rushDistance: 5
-  _rushSpeed: 2
-  _walkTime: 3
+  _rushDistance: 30
+  _rushSpeed: 30
+  _walkTime: 1
   _disA: 8
   _disB: 16
-  _disC: 24
+  _disC: 30
   _changePosAttackWeights:
   - _name: "\u7279\u6B8A\u653B\u6483"
-    _probability: 50
+    _probability: 100
   - _name: "\u30DF\u30B9"
     _probability: 50
   _disBWeights:
   - _name: "\u7A81\u9032"
-    _probability: 40
+    _probability: 12
   - _name: "\u30B8\u30E3\u30F3\u30D7\u653B\u6483"
     _probability: 25
   - _name: Attack2
-    _probability: 10
+    _probability: 0
   - _name: Attack3
-    _probability: 10
+    _probability: 0
   - _name: Attack4
     _probability: 10
   - _name: "\u6B69\u884C"
     _probability: 5
   _disCWeights:
   - _name: "\u7A81\u9032"
-    _probability: 20
+    _probability: 10
   - _name: "\u30B8\u30E3\u30F3\u30D7\u653B\u6483"
-    _probability: 15
+    _probability: 0
   - _name: Attack2
-    _probability: 20
+    _probability: 0
   - _name: Attack3
-    _probability: 20
+    _probability: 0
   - _name: Attack4
-    _probability: 20
+    _probability: 25
   - _name: "\u6B69\u884C"
     _probability: 5
 --- !u!114 &8153027696081847127
@@ -518,7 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3f5943939d931d47899f120d85186b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 3
+  _maxHp: 33
 --- !u!114 &-6367902296743140288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -743,7 +745,7 @@ Transform:
   m_GameObject: {fileID: 9091612751558199375}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
