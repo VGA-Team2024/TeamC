@@ -1,5 +1,4 @@
 using System;
-using Unity.Mathematics;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 
@@ -43,7 +42,7 @@ public class EnemyBase : MonoBehaviour
             await UniTask.Delay(TimeSpan.FromSeconds(_effectInstanceTime));
             if (_hoverEffectPrefab)
             {
-                Instantiate(_hoverEffectPrefab, transform.position, quaternion.identity);   
+                Instantiate(_hoverEffectPrefab, transform.position, Quaternion.identity);   
             }
         }
     }
