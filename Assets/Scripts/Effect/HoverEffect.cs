@@ -1,30 +1,42 @@
-using DG.Tweening;
 using UnityEngine;
 
 public class HoverEffect : MonoBehaviour
 {
-    Player _player;
-    Vector3 playerVector;
-    [SerializeField] float _playerSizeX = 1;
-    [SerializeField] float _playerSizeY = 1;
-    [SerializeField] float _effectLost = 3;
-    [SerializeField] int _fairyNums = 1;
+    [SerializeField,InspectorVariantName("fairyAddableの値")] 
+    private int _fairyAddableValue = 1;
+
+    [SerializeField, InspectorVariantName("自身の移動スピード")]
+    float _effectSpeed = 2;
+    
+    private GameObject _player;
+
     private void Start()
     {
-        _player = GameObject.FindObjectOfType<Player>();
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void FixedUpdate()
     {
-        playerVector = _player.transform.position;
-        this.transform.DOLocalMove(playerVector, 1f).SetEase(Ease.Linear);
-        if (playerVector.x - transform.position.x <= _playerSizeX && playerVector.y - transform.position.y <= _playerSizeY)
+        MoveHoverEffect();
+    }
+
+    /// <summary>
+    /// 自身をプレイヤーの方向に移動させるメソッド
+    /// </summary>
+    private void MoveHoverEffect()
+    {
+        //プレイヤーに向かう処理
+        transform.position =
+            Vector3.MoveTowards(transform.position, _player.transform.position
+                , _effectSpeed * Time.deltaTime);
+        if (Vector3.Distance(gameObject.transform.position, _player.transform.position) <= 0.1)
         {
-            if(TryGetComponent<IFairyAddable>(out IFairyAddable fairyAddable)) 
+            if (_player.TryGetComponent<IFairyAddable>(out IFairyAddable fairyAddable))
             {
-                fairyAddable.AddFairy(_fairyNums);
+                fairyAddable.AddFairy(1);
             }
-            Destroy(this.gameObject, _effectLost);
+
+            Destroy(gameObject);
         }
     }
 }
