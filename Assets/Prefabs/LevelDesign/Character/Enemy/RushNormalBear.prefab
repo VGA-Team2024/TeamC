@@ -54,6 +54,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fbae224cba59bb4cbbdb1bacf94b738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hoverEffectPrefab: {fileID: 0}
+  _effectInstanceTime: 0.5
   _speed: 1
   _collideDamage: 1
   _patrolArea: 5

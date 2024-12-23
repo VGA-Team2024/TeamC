@@ -121,11 +121,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7610d78fcd5d0a544a69090f27a49b8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hoverEffectPrefab: {fileID: 0}
+  _effectInstanceTime: 0.5
   _speed: 2
   _collideDamage: 1
   _patrolArea: 5
   _prickArea: 8
-  _freezeTime: 3
+  _freezeTime: 2
   _playerTag: Player
   _offSet: {x: -3, y: 6}
   _bullet: {fileID: 7412050535890470045, guid: 11a74f44076cdc64ba68a343b297a9b0, type: 3}
@@ -154,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2376e00fd3ba5944a132796697ae68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blow: 2
+  _blow: 3
 --- !u!114 &5025562295295163220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +211,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6919708317503550998}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 8
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
