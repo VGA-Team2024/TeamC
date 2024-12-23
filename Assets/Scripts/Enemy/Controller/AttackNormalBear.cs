@@ -11,6 +11,7 @@ public class AttackNormalBear : EnemyBase, IPlayerTarget
     private ParticleSystem _particle;
     private Animator _animator;
     private GameObject _attackCollider;
+    private int _turn = Animator.StringToHash("Turn");
 
     private EnemyWalkState _walkState;
     private EnemyAttackState _attackState;
@@ -50,7 +51,10 @@ public class AttackNormalBear : EnemyBase, IPlayerTarget
         }
         else
         {
-            if (_currentState == _idleState) ChangeState(_walkState);
+            if (_currentState == _idleState)
+            {
+                ChangeState(_walkState);
+            }
         }
     }
     
