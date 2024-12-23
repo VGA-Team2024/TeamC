@@ -85,6 +85,7 @@ public class SpecialAttack : MonoBehaviour
             _parentTp.Teleport(pos + _hitMisalignment);
             // DoTweenの停止
             _twForward.Kill(false);
+            _player.Animator.SetTrigger(Catch);
             // 妖精ゲージの消費
             _player.PlayerStatus.UseFairyGauge(_player.PlayerAttack.SpDiminution);
             // 針をActiveじゃない状態に
