@@ -47,6 +47,7 @@ public class RushNormalBear : EnemyBase, IPlayerTarget
             
             transform.eulerAngles = new Vector2(0, _playerMove.transform.position.x > transform.position.x ? 0 : 180);
             ChangeState(_rushState);
+            gameObject.transform.GetChild(3).GetComponent<ParticleSystem>().Play();
         }
         else
         {
