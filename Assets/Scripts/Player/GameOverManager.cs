@@ -26,7 +26,6 @@ public class GameOverManager : SingletonMonoBehaviour<GameOverManager>
         }
         Player.PlayerStatus.GameOver();
         _fadeController.FadeIn(_fadeDuration/2);
-        await UniTask.Delay((TimeSpan.FromSeconds(_fadeDuration/2)),cancellationToken: _cts.Token);
         Player.PlayerMove.IsFreeze = (false, false);
     }
 
