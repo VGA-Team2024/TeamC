@@ -16,6 +16,11 @@ public class EnemyRushState : IEnemyState
     private float _destination;
     private bool _canRush;
     private CancellationTokenSource _tokenSource;
+    
+    private readonly float _rayLength;
+    private readonly Vector3 _rayOffset = new Vector3(0, -0.5f, 0);
+    private readonly Vector2 _rightRayDir;
+    private readonly Vector2 _leftRayDir;
 
     public EnemyRushState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator,Transform transform, float dis, float speed, EnemySounds sounds = null)
     {
@@ -26,6 +31,10 @@ public class EnemyRushState : IEnemyState
         _distance = dis;
         _speed = speed;
         _sounds = sounds;
+        var colliderSize = transform.gameObject.GetComponent<BoxCollider>().size;
+        _rayLength = colliderSize.y / 2 + 1f;
+        _rightRayDir = new Vector2(colliderSize.x, -colliderSize.y).normalized;
+        _leftRayDir = new Vector2(-colliderSize.x, -colliderSize.y).normalized;
     }
     
     public void Enter()
@@ -38,7 +47,11 @@ public class EnemyRushState : IEnemyState
     public void Execute()
     {
         if (_canRush) Rush();
-        if (Mathf.Abs(_transform.position.x - _destination) < 0.1f)
+        
+        float direction = Mathf.Sign(_destination - _transform.position.x);
+        float currentDirection = Mathf.Sign(_transform.right.x);
+        
+        if (!Mathf.Approximately(direction, currentDirection))
         {
             _enemyBase.ChangeState(_freezeState);
         }
@@ -64,5 +77,20 @@ public class EnemyRushState : IEnemyState
     private void Rush()
     { 
         _transform.Translate(Vector3.right * (Time.deltaTime * _speed));
+    }
+    
+    private void Cansel()
+    {
+        // 前に床がなければ止まる
+        Vector3 rayOrigin = _transform.position + _rayOffset;
+        bool hit = Physics.Raycast(rayOrigin, _transform.rotation.y > 0 ? _rightRayDir : _leftRayDir, out RaycastHit hitInfo, _rayLength);
+
+        // 前が壁なら止まる
+        bool wallHit = Physics.Raycast(rayOrigin, -_transform.right, out RaycastHit wallHitInfo, _rayLength);
+        
+        if (!hit || LayerMask.LayerToName(hitInfo.transform.gameObject.layer) != "Ground" || wallHit && LayerMask.LayerToName(wallHitInfo.transform.gameObject.layer) == "Ground")
+        {
+            _enemyBase.ChangeState(_freezeState);
+        }
     }
 }

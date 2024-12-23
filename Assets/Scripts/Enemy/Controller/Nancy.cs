@@ -144,6 +144,7 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
                     _attackCount = 0;
                     if (num == 1) _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
                     if (num == 2) _chaseState.GetPlayerPos(_playerMove.transform.position);
+                    if (num == 3) _canMove = false;
                     ChangeState(num switch
                     {
                         0 => _rushState,
@@ -161,6 +162,7 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
                     _attackCount = 0;
                     if (num == 1) _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
                     if (num == 2) _chaseState.GetPlayerPos(_playerMove.transform.position);
+                    if (num == 3) _canMove = false;
                     ChangeState(num switch
                     {
                         0 => _rushState,
@@ -194,12 +196,8 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
     
     private void OnCollisionEnter(Collision other)
     {
+        if (_canMove) return;
         if (LayerMask.LayerToName(other.gameObject.layer) == "Ground") _canMove = true;
-    }
-
-    private void OnCollisionExit(Collision other)
-    {
-        if (LayerMask.LayerToName(other.gameObject.layer) == "Ground") _canMove = false;
     }
     
     private int Distance()

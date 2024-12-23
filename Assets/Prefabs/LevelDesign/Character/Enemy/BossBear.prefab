@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 1483356583222622009}
   - component: {fileID: 5283812498075603065}
   - component: {fileID: 2834630758788398114}
+  - component: {fileID: -2580984229865919346}
   m_Layer: 7
   m_Name: BossBear
   m_TagString: Enemy
@@ -204,6 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f257dae98f80d846aadc7304ddf8464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hoverEffectPrefab: {fileID: 0}
+  _effectInstanceTime: 0.5
   _speed: 1
   _collideDamage: 1
   _patrolArea: 5
@@ -350,6 +353,18 @@ MonoBehaviour:
     seName: SE_Bear_Rush01
   - seEnum: 5
     seName: SE_Bear_JumpAtack01
+--- !u!114 &-2580984229865919346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4650166495700026106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2fd8f18f966e34eb3bd1febd0db993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2532863022209244182
 PrefabInstance:
   m_ObjectHideFlags: 0

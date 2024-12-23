@@ -131,6 +131,7 @@ public class Dragon : EnemyBase, IPlayerTarget
                         1 => _rushState,
                         _ => _flyState
                     });
+                    if (num == 2) _canMove = false;
                 }
                     break;
             }
@@ -155,16 +156,12 @@ public class Dragon : EnemyBase, IPlayerTarget
 
     private void OnCollisionEnter(Collision other)
     {
+        if (_canMove) return;
         if (LayerMask.LayerToName(other.gameObject.layer) != "Ground") return;
         _animator.SetTrigger(_flyEnd);
         CanMove().Forget();
     }
-
-    private void OnCollisionExit(Collision other)
-    {
-        if (LayerMask.LayerToName(other.gameObject.layer) == "Ground") _canMove = false;
-    }
-
+    
     private int Distance()
     {
         var dis = Mathf.Abs(transform.position.x - _playerMove.transform.position.x);

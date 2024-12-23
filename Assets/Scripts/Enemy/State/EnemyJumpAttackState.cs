@@ -14,7 +14,7 @@ public class EnemyJumpAttackState : IEnemyState, IPlayerTarget
     private Vector2 _startPos;
     private Vector2 _playerPos;
     private Vector3 _velocity;
-
+  
     public EnemyJumpAttackState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator, Transform transform, float speed, float height, Rigidbody rb)
     {
         _enemyBase = enemyBase;
