@@ -11,8 +11,8 @@ public class EnemyJumpAttackState : IEnemyState, IPlayerTarget
     private readonly Rigidbody _rb;
     private readonly float _speed;
     private readonly float _height;
-    private Vector2 _startPos;
-    private Vector2 _playerPos;
+    private Vector3 _startPos;
+    private Vector3 _playerPos;
     private Vector3 _velocity;
   
     public EnemyJumpAttackState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator, Transform transform, float speed, float height, Rigidbody rb)
@@ -32,6 +32,7 @@ public class EnemyJumpAttackState : IEnemyState, IPlayerTarget
         _rb.useGravity = false;
         _startPos = _transform.position;
         _velocity = EnemyUtility.CalculateVelocity(_transform.position, _playerPos, _height);
+        _velocity.z = 0;
     }
 
     public void Execute()
@@ -56,5 +57,5 @@ public class EnemyJumpAttackState : IEnemyState, IPlayerTarget
         _velocity += Physics.gravity * (Time.deltaTime * _speed);
     }
 
-    public void GetPlayerPos(Vector2 playerPos) { _playerPos = playerPos; }
+    public void GetPlayerPos(Vector3 playerPos) { _playerPos = playerPos; }
 }
