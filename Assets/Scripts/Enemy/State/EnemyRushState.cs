@@ -75,8 +75,10 @@ public class EnemyRushState : IEnemyState
     }
 
     private void Rush()
-    { 
-        _transform.Translate(Vector3.right * (Time.deltaTime * _speed));
+    {
+        Vector3 newPos = _transform.position + -Vector3.right * (Time.deltaTime * _speed);
+        // _transform.Translate(Vector3.right * (Time.deltaTime * _speed));
+        _transform.position = new Vector3(newPos.x, newPos.y, 0);
     }
     
     private void Cansel()

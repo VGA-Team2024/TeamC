@@ -11,7 +11,7 @@ public class EnemyChaseState : IEnemyState
     private readonly int _chase = Animator.StringToHash("Chase");
     private readonly Transform _transform;
     private readonly float _speed;
-    private Vector2 _playerPos;
+    private Vector3 _playerPos;
     private readonly bool _isFly;
     private CancellationTokenSource _tokenSource;
     private readonly int _time;
@@ -53,20 +53,20 @@ public class EnemyChaseState : IEnemyState
         }
     }
 
-    public void GetPlayerPos(Vector2 pos)
+    public void GetPlayerPos(Vector3 pos)
     {
         _playerPos = pos;
     }
 
     private void Chase()
     {
-        _transform.position = 
-            Vector2.MoveTowards(_transform.position, _isFly ? _playerPos : new Vector2(_playerPos.x, _transform.position.y), _speed * Time.deltaTime);
+        var pos = Vector2.MoveTowards(_transform.position, _isFly ? _playerPos : new Vector2(_playerPos.x, _transform.position.y), _speed * Time.deltaTime);
+        _transform.position = new Vector3(pos.x, pos.y, 0);
     }
 
     private void Direction()
     {
-        _transform.eulerAngles = new Vector2(0, _playerPos.x > _transform.position.x ? 0 : 180);
+        _transform.eulerAngles = new Vector3(0, _playerPos.x > _transform.position.x ? 0 : 180, 0);
     }
     
     private async UniTask ChaseTimer()

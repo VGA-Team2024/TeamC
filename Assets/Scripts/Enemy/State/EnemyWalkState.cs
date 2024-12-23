@@ -10,7 +10,7 @@ public class EnemyWalkState : IEnemyState
     private readonly Transform _transform;
     private readonly float _speed;
     private readonly float _patrolArea;
-    private readonly Vector2 _startPos;
+    private readonly Vector3 _startPos;
     private readonly EnemySounds _sounds;
     private bool _isPlaying;
     private const int Interval = 1;
@@ -21,8 +21,8 @@ public class EnemyWalkState : IEnemyState
     private readonly Vector2 _rightRayDir;
     private readonly Vector2 _leftRayDir;
 
-    private readonly Vector2 right = new Vector2(0, 180);
-    private readonly Vector2 left = new Vector2(0, 0);
+    private readonly Vector3 right = new Vector3(0, 180, 0);
+    private readonly Vector3 left = new Vector3(0, 0, 0);
     
     public EnemyWalkState(Animator animator, Transform transform, float speed, float area, EnemySounds sounds = null)
     {
@@ -62,7 +62,8 @@ public class EnemyWalkState : IEnemyState
     
     private void Walk()
     {
-        _transform.Translate(Vector3.right * -(Time.deltaTime * _speed));
+        Vector3 newPos = _transform.position + -_transform.right * (Time.deltaTime * _speed);
+        _transform.position = new Vector3(newPos.x, newPos.y, 0);
     }
 
     private void Direction()
@@ -76,7 +77,7 @@ public class EnemyWalkState : IEnemyState
         
         if (!hit || LayerMask.LayerToName(hitInfo.transform.gameObject.layer) != "Ground" || wallHit && LayerMask.LayerToName(wallHitInfo.transform.gameObject.layer) == "Ground")
         {
-            _transform.eulerAngles = new Vector2(0, _transform.eulerAngles.y == 0 ? right.y : left.y);
+            _transform.eulerAngles = new Vector3(0, _transform.eulerAngles.y == 0 ? right.y : left.y);
         }
         
         if (_transform.position.x <= _startPos.x + 0.01f)

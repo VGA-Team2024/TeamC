@@ -21,7 +21,7 @@ public class JumpNormalBear : EnemyBase, IPlayerTarget
         Animator animator = gameObject.transform.GetChild(2).GetComponent<Animator>();
         Rigidbody rb = GetComponent<Rigidbody>();
         
-        _walkState = new EnemyWalkState(animator, transform, _speed, _patrolArea, gameObject.GetComponent<EnemySounds>());
+        _walkState = new EnemyWalkState(animator, transform, _speed, _patrolArea);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, animator, transform, _jumpSpeed, _jumpHeight, rb);
         _deathState = new EnemyDeathState(this, particle, animator, gameObject);

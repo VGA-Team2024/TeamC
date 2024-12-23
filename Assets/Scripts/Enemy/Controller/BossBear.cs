@@ -55,13 +55,12 @@ public class BossBear : EnemyBase, IPlayerTarget
         Animator animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
         Rigidbody rb = GetComponent<Rigidbody>();
         _cottons = gameObject.transform.GetChild(4).GetComponent<Cottons>();
-        EnemySounds sounds = GetComponent<EnemySounds>();
         
-        _walkState = new EnemyWalkState(animator, transform, _speed, _patrolArea, sounds);
+        _walkState = new EnemyWalkState(animator, transform, _speed, _patrolArea);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
-        _attackState = new EnemyAttackState(this, _freezeState, animator, attackCollider, sounds);
+        _attackState = new EnemyAttackState(this, _freezeState, animator, attackCollider);
         _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, animator, transform, _jumpSpeed, _jumpHeight, rb);
-        _rushState = new EnemyRushState(this, _freezeState, animator, transform, _rushDistance, _rushSpeed, sounds);
+        _rushState = new EnemyRushState(this, _freezeState, animator, transform, _rushDistance, _rushSpeed);
         _createState = new EnemyObjectCreateState(this, _freezeState, animator, _cottons);
         _deathState = new EnemyDeathState(this, particle, animator, gameObject);
     }
@@ -81,7 +80,7 @@ public class BossBear : EnemyBase, IPlayerTarget
         {
             if (_currentState == _idleState) // 待機ステート
             {
-                transform.eulerAngles = new Vector2(0, _playerMove.transform.position.x > transform.position.x ? 0 : 180);
+                transform.eulerAngles = new Vector3(0, _playerMove.transform.position.x > transform.position.x ? 0 : 180, 0);
                 switch (Distance())
                 {
                     case 1 : // 距離A
@@ -122,7 +121,7 @@ public class BossBear : EnemyBase, IPlayerTarget
 
             if (_currentState == _walkState) // 歩行ステート
             {
-                transform.eulerAngles = new Vector2(0, _playerMove.transform.position.x > transform.position.x ? 0 : 180);
+                transform.eulerAngles = new Vector3(0, _playerMove.transform.position.x > transform.position.x ? 0 : 180, 0);
                 switch (Distance())
                 {
                     case 1 : // 距離A
