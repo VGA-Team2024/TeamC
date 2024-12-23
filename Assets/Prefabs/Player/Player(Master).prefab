@@ -340,6 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerCueSheet: SE_Player
+  _musicBoxCueSheet: MusicBox
   soundList:
   - SoundEnum: 0
     Name: SE_Player_Jump01
@@ -353,6 +354,8 @@ MonoBehaviour:
     Name: SE_Player_AtackHit01
   - SoundEnum: 4
     Name: SE_Player_ThrowNeedle01
+  - SoundEnum: 6
+    Name: BGM_Musicbox_Musicbox01
 --- !u!114 &7318656465683930029
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,3 @@
-using System;
 using CriWare;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,7 +13,6 @@ public class PlayerMusicBox : MonoBehaviour , ICylinderAddable
     private float _healTimer;
     private int _cylinders;
     public int CylinderCount => _cylinders;
-
 
     private void Awake()
     {
@@ -60,13 +58,17 @@ public class PlayerMusicBox : MonoBehaviour , ICylinderAddable
     private void MusicPlay(InputAction.CallbackContext context)
     {
         _healTimer = 0;
+        if (!MusicBoxPlaying)
+        {
+            _player.PlayerSounds.MusicBoxPlayer.Player.SetFirstBlockIndex(_cylinders);
+            _musicBoxPlayback = _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.MusicBox);
+            
+            //PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerMusicNoteEffect,0);
+        }
         MusicBoxPlaying = true;
-        // ToDo オルゴールが追加されたら鳴らす
-        //_musicBoxPlayback = _player.PlayerSounds.PlayerSEPlay(PlayerSoundEnum.MusicBox);
-        PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerMusicNoteEffect,0);
         _player.Animator.SetBool(MusicBox,true);
     }
-
+    
     private void MusicStop(InputAction.CallbackContext context)
     {
         MusicBoxStop();
