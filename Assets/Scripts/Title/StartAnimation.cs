@@ -84,6 +84,12 @@ namespace Title
             await UniTask.WhenAll(PlayVoiceSequence(), PlayAnimation());
         }
 
+        // ムービーを流す
+        private void PlayMovie()
+        {
+            
+        }
+
         // Voiceとtextを一定間隔で実行する
         private async UniTask PlayVoiceSequence()
         {
