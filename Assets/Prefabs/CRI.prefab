@@ -94,6 +94,10 @@ MonoBehaviour:
     acbFile: MusicBox.acb
     awbFile: MusicBox.awb
     loaderStatus: 0
+  - name: SE_Nancy
+    acbFile: SE_Nancy.acb
+    awbFile: 
+    loaderStatus: 0
   dspBusSetting: 
   dontDestroyOnLoad: 0
   dontRemoveExistsCueSheet: 0
