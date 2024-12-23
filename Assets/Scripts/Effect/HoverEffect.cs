@@ -33,7 +33,7 @@ public class HoverEffect : MonoBehaviour
         {
             if (_player.TryGetComponent<IFairyAddable>(out IFairyAddable fairyAddable))
             {
-                fairyAddable.AddFairy(1);
+                fairyAddable.AddFairy(_fairyAddableValue);
             }
 
             Destroy(gameObject);
