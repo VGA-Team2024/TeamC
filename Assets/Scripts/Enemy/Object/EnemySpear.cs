@@ -32,10 +32,14 @@ public class EnemySpear : MonoBehaviour, IPlayerTarget
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Player") && other.gameObject.TryGetComponent(out IDamageable dmg))
+        if (other.gameObject.CompareTag("Player"))
         {
-            dmg.TakeDamage(_damage);
-            Destroy(gameObject);
+            if (other.gameObject.TryGetComponent(out IDamageable dmg) && other.gameObject.TryGetComponent(out IBlowable blo))
+            {
+                dmg.TakeDamage(_damage);
+                blo.BlownAway(gameObject.transform.position);
+                Destroy(gameObject);
+            }
         }
 
         if (LayerMask.LayerToName(other.gameObject.layer) == "Ground")

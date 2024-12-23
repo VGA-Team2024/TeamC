@@ -12,8 +12,9 @@ public class EnemyFlyState : IEnemyState
     private readonly Rigidbody _rb;
     private const float Speed = 3f;
     private float _destination;
+    private readonly EnemySounds _sounds;
 
-    public EnemyFlyState(EnemyBase enemyBase, EnemyBreathState breathState, Animator animator, Transform transform, Rigidbody rb, float height)
+    public EnemyFlyState(EnemyBase enemyBase, EnemyBreathState breathState, Animator animator, Transform transform, Rigidbody rb, float height, EnemySounds sounds)
     {
         _enemyBase = enemyBase;
         _breathState = breathState;
@@ -21,11 +22,13 @@ public class EnemyFlyState : IEnemyState
         _transform = transform;
         _rb = rb;
         _height = height;
+        _sounds = sounds;
     }
     
     public void Enter()
     {
         _animator.SetBool(_fly, true);
+        _sounds.PlayEnemySE(EnemySeEnum.Fly);
         _destination = _transform.position.y + _height;
         _rb.useGravity = false;
         Fly().Forget();

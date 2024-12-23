@@ -1,3 +1,5 @@
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 /// <summary> 敵の巡回ステート </summary>
@@ -9,6 +11,10 @@ public class EnemyWalkState : IEnemyState
     private readonly float _speed;
     private readonly float _patrolArea;
     private readonly Vector2 _startPos;
+    private readonly EnemySounds _sounds;
+    private bool _isPlaying;
+    private const int Interval = 1;
+    private CancellationTokenSource _tokenSource;
     
     private readonly float _rayLength;
     private readonly Vector3 _rayOffset = new Vector3(0, -0.5f, 0);
@@ -18,13 +24,14 @@ public class EnemyWalkState : IEnemyState
     private readonly Vector2 right = new Vector2(0, 180);
     private readonly Vector2 left = new Vector2(0, 0);
     
-    public EnemyWalkState(Animator animator, Transform transform, float speed, float area)
+    public EnemyWalkState(Animator animator, Transform transform, float speed, float area, EnemySounds sounds = null)
     {
         _animator = animator;
         _transform = transform;
         _startPos = transform.position;
         _speed = speed;
         _patrolArea = area;
+        _sounds = sounds;
         var colliderSize = transform.gameObject.GetComponent<BoxCollider>().size;
         _rayLength = colliderSize.y / 2 + 1f;
         _rightRayDir = new Vector2(colliderSize.x, -colliderSize.y).normalized;
@@ -34,7 +41,9 @@ public class EnemyWalkState : IEnemyState
     
     public void Enter()
     {
+        _tokenSource = new CancellationTokenSource();
         _animator.SetBool(_walk, true);
+        PlaySe().Forget();
     }
 
     public void Execute()
@@ -45,7 +54,10 @@ public class EnemyWalkState : IEnemyState
 
     public void Exit()
     {
+        _isPlaying = false;
         _animator.SetBool(_walk, false);
+        _tokenSource?.Cancel();
+        _tokenSource?.Dispose();
     }
     
     private void Walk()
@@ -75,6 +87,18 @@ public class EnemyWalkState : IEnemyState
         if (_transform.position.x >= _startPos.x + _patrolArea - 0.01f)
         {
             _transform.eulerAngles = left;
+        }
+    }
+
+    private async UniTask PlaySe()
+    {
+        _isPlaying = true;
+
+        while (_isPlaying)
+        {
+            if (_sounds != null) _sounds.PlayEnemySE(EnemySeEnum.Walk);
+
+            await UniTask.Delay(Interval * 1000, cancellationToken : _tokenSource.Token);
         }
     }
 }

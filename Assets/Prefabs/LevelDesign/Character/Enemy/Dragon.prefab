@@ -57,6 +57,12 @@ MonoBehaviour:
   _speed: 2
   _collideDamage: 1
   _freezeTime: 2
+  _attackFreezeTime: 2
+  _shootFreezeTime: 2
+  _rushFreezeTime: 2
+  _jumpAttackFreezeTime: 2
+  _flyFreezeTime: 2
+  _chaseFreezeTime: 2
   _playerTag: Player
   _jumpSpeed: 2
   _jumpHeight: 10
@@ -111,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2376e00fd3ba5944a132796697ae68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blow: 0
+  _blow: 2
 --- !u!114 &8246979527777185167
 MonoBehaviour:
   m_ObjectHideFlags: 0

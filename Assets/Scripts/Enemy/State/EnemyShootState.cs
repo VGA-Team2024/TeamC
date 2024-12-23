@@ -11,8 +11,9 @@ public class EnemyShootState : IEnemyState
     private Vector2 _playerPos;
     private readonly GameObject _obj;
     private readonly Vector2 _offSet;
+    private readonly EnemySounds _sounds;
     
-    public EnemyShootState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator, Transform transform,Vector2 offSet, GameObject obj)
+    public EnemyShootState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator, Transform transform,Vector2 offSet, GameObject obj, EnemySounds sounds = null)
     {
         _enemyBase = enemyBase;
         _freezeState = freezeState;
@@ -20,11 +21,13 @@ public class EnemyShootState : IEnemyState
         _transform = transform;
         _offSet = offSet;
         _obj = obj;
+        _sounds = sounds;
     }
     
     public void Enter()
     {
         if (_animator) _animator.SetTrigger(_shoot);
+        if (_sounds) _sounds.PlayEnemySE(EnemySeEnum.Breath);
         Shoot().Forget();
         var obj = ObjectInstantiator.InstantiateObject(_obj, GetOffSet(), Quaternion.identity);
         if (obj.TryGetComponent(out IPlayerTarget pt)) { pt.GetPlayerPos(_playerPos); }

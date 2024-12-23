@@ -424,6 +424,7 @@ GameObject:
   - component: {fileID: 3025584984574628855}
   - component: {fileID: 3421973872923180540}
   - component: {fileID: 800354928587787800}
+  - component: {fileID: 2215096048711418777}
   m_Layer: 7
   m_Name: AttackNormalBear
   m_TagString: Enemy
@@ -566,6 +567,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &2215096048711418777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555941503303813936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a2fc75ef4f6194d803f2ff4fe853e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cueSheet: SE_Bear
+  _cueName:
+  - seEnum: 0
+    seName: SE_Bear_Atack01
+  - seEnum: 1
+    seName: SE_Bear_Walk01
+  - seEnum: 2
+    seName: SE_Bear_Attack02
+  - seEnum: 3
+    seName: SE_Bear_Brake01
+  - seEnum: 4
+    seName: SE_Bear_Rush01
+  - seEnum: 5
+    seName: SE_Bear_JumpAtack01
 --- !u!1 &1737588959954820013
 GameObject:
   m_ObjectHideFlags: 0

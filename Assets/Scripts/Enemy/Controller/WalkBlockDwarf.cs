@@ -20,7 +20,7 @@ public class WalkBlockDwarf : EnemyBase
         _particle = gameObject.transform.GetChild(0).GetComponent<ParticleSystem>();
         _animator = GetComponent<Animator>();
 
-        _walkState = new EnemyWalkState(_animator, transform, _speed, _patrolArea);
+        _walkState = new EnemyWalkState(_animator, transform, _speed, _patrolArea, gameObject.GetComponent<EnemySounds>());
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _deathState = new EnemyDeathState(this, _particle, _animator, gameObject);
         ChangeState(_walkState);

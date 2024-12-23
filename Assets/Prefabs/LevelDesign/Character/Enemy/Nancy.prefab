@@ -98,6 +98,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1782528507310307648}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1059126203935755846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4783966633315773149}
+  - component: {fileID: 7826313220653384067}
+  m_Layer: 7
+  m_Name: FallNeedleAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4783966633315773149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059126203935755846}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6796886132435546894}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7826313220653384067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059126203935755846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51b92e32b7aa144282ca20d9ce7af13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _needle: {fileID: 3174918282279452935, guid: 167d89141d1ffb64bb2db18dec4c51c3, type: 3}
+  _points:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _interval: 2
+  _num: 2
 --- !u!1 &3438037975447950515
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,6 +440,8 @@ Transform:
   - {fileID: 837207242500907}
   - {fileID: 4740978626936223940}
   - {fileID: 1782528507310307648}
+  - {fileID: 4783966633315773149}
+  - {fileID: 844637247108827566}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1037201481339910616
@@ -406,25 +459,36 @@ MonoBehaviour:
   _speed: 2
   _collideDamage: 1
   _freezeTime: 2
+  _specialAttackFreezeTime: 2
+  _attackFreezeTime: 2
+  _jumpAttackFreezeTime: 2
+  _rushFreezeTime: 2
+  _waveFreezeTime: 2
+  _fallFreezeTime: 2
+  _crossFreezeTime: 2
   _playerTag: Player
   _jumpSpeed: 2
   _jumpHeight: 10
   _rushDistance: 5
-  _rushSpeed: 3
+  _rushSpeed: 2
   _walkTime: 3
   _disA: 8
   _disB: 16
   _disC: 24
   _changePosAttackWeights:
   - _name: "\u7279\u6B8A\u653B\u6483"
-    _probability: 0
+    _probability: 50
   - _name: "\u30DF\u30B9"
-    _probability: 0
+    _probability: 50
   _disBWeights:
   - _name: "\u7A81\u9032"
     _probability: 40
   - _name: "\u30B8\u30E3\u30F3\u30D7\u653B\u6483"
     _probability: 25
+  - _name: Attack2
+    _probability: 10
+  - _name: Attack3
+    _probability: 10
   - _name: Attack4
     _probability: 10
   - _name: "\u6B69\u884C"
@@ -434,6 +498,10 @@ MonoBehaviour:
     _probability: 20
   - _name: "\u30B8\u30E3\u30F3\u30D7\u653B\u6483"
     _probability: 15
+  - _name: Attack2
+    _probability: 20
+  - _name: Attack3
+    _probability: 20
   - _name: Attack4
     _probability: 20
   - _name: "\u6B69\u884C"
@@ -598,6 +666,58 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7423384308993344660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 844637247108827566}
+  - component: {fileID: 3166783821179337109}
+  m_Layer: 7
+  m_Name: WaveNeedleAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &844637247108827566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7423384308993344660}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6796886132435546894}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3166783821179337109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7423384308993344660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb32503e44bdfb445902fc38180ea69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentObj: {fileID: 5515306755728920571}
+  _groundY: -4.5
+  _rightSide: {fileID: 0}
+  _leftSide: {fileID: 0}
+  _waveNeedle: {fileID: 7578376548558219693, guid: 5af0f4f5a26d54f4ab2a9716e435a210,
+    type: 3}
+  _distance: 2
+  _interval: 0.4
 --- !u!1 &9091612751558199375
 GameObject:
   m_ObjectHideFlags: 0

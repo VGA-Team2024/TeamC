@@ -55,12 +55,13 @@ public class BossBear : EnemyBase, IPlayerTarget
         Animator animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
         Rigidbody rb = GetComponent<Rigidbody>();
         _cottons = gameObject.transform.GetChild(4).GetComponent<Cottons>();
+        EnemySounds sounds = GetComponent<EnemySounds>();
         
-        _walkState = new EnemyWalkState(animator, transform, _speed, _patrolArea);
+        _walkState = new EnemyWalkState(animator, transform, _speed, _patrolArea, sounds);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
-        _attackState = new EnemyAttackState(this, _freezeState, animator, attackCollider);
+        _attackState = new EnemyAttackState(this, _freezeState, animator, attackCollider, sounds);
         _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, animator, transform, _jumpSpeed, _jumpHeight, rb);
-        _rushState = new EnemyRushState(this, _freezeState, animator, transform, _rushDistance, _rushSpeed);
+        _rushState = new EnemyRushState(this, _freezeState, animator, transform, _rushDistance, _rushSpeed, sounds);
         _createState = new EnemyObjectCreateState(this, _freezeState, animator, _cottons);
         _deathState = new EnemyDeathState(this, particle, animator, gameObject);
     }

@@ -12,11 +12,12 @@ public class EnemyRushState : IEnemyState
     private readonly Transform _transform;
     private readonly float _distance;
     private readonly float _speed;
+    private readonly EnemySounds _sounds;
     private float _destination;
     private bool _canRush;
     private CancellationTokenSource _tokenSource;
 
-    public EnemyRushState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator,Transform transform, float dis, float speed)
+    public EnemyRushState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator,Transform transform, float dis, float speed, EnemySounds sounds = null)
     {
         _enemyBase = enemyBase;
         _freezeState = freezeState;
@@ -24,6 +25,7 @@ public class EnemyRushState : IEnemyState
         _transform = transform;
         _distance = dis;
         _speed = speed;
+        _sounds = sounds;
     }
     
     public void Enter()
@@ -45,6 +47,7 @@ public class EnemyRushState : IEnemyState
     public void Exit()
     {
         if (_animator) _animator.SetBool(_rush, false);
+        if (_sounds) _sounds.PlayEnemySE(EnemySeEnum.Brake);
         _tokenSource?.Cancel();
         _tokenSource?.Dispose();
     }
@@ -53,6 +56,7 @@ public class EnemyRushState : IEnemyState
     {
         _canRush = false;
         if (_animator) _animator.SetBool(_rush, true);
+        if (_sounds) _sounds.PlayEnemySE(EnemySeEnum.Rush);
         await UniTask.WaitUntil(() => _animator && _animator.GetCurrentAnimatorStateInfo(0).IsName("Rush2"), cancellationToken : _tokenSource.Token);
         _canRush = true;
     }

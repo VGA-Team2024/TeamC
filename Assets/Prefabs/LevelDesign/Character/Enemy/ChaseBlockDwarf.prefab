@@ -85,6 +85,7 @@ GameObject:
   - component: {fileID: 8689445715896851296}
   - component: {fileID: -713622975561145388}
   - component: {fileID: 340806046666185978}
+  - component: {fileID: 5888873632442929121}
   m_Layer: 7
   m_Name: ChaseBlockDwarf
   m_TagString: Enemy
@@ -299,6 +300,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &5888873632442929121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6599708426916824042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a2fc75ef4f6194d803f2ff4fe853e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cueSheet: SE_WoodenToys
+  _cueName:
+  - seEnum: 1
+    seName: SE_WoodenToys_Walk01
+  - seEnum: 0
+    seName: SE_WoodenToys_Attack01
 --- !u!1001 &6345867291046979879
 PrefabInstance:
   m_ObjectHideFlags: 0
