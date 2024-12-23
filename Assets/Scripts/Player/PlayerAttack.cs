@@ -166,6 +166,8 @@ public class PlayerAttack : MonoBehaviour
             _player.PlayerMove.IsFreeze = (true, true);
             // アニメーションの再生　　　　　_specialColliderのActiveはAnimationEventで行う
             _player.Animator.SetTrigger(Throw);
+            // ジャンプのキャンセル
+            _player.PlayerMove.JumpTokenCancel();
             // 非アクティブは_specialCollider自身がする
         }
     }

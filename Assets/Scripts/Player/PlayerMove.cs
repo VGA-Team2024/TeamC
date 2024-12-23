@@ -212,6 +212,11 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     }
     private void JumpCancel(InputAction.CallbackContext context)
     {
+        JumpTokenCancel();
+    }
+
+    public void JumpTokenCancel()
+    {
         if (_jumpCancelToken != null)
         {
             _jumpCancelToken.Cancel();
