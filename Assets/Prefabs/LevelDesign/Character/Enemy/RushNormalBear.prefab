@@ -55,15 +55,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fbae224cba59bb4cbbdb1bacf94b738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hoverEffectPrefab: {fileID: 0}
+  _hoverEffectPrefab: {fileID: 8727240678916479325, guid: 626ee73e5bde2e641860143a6e8c504e,
+    type: 3}
   _effectInstanceTime: 0.5
   _speed: 1
   _collideDamage: 1
   _patrolArea: 5
   _freezeTime: 2
   _playerTag: Player
-  _rushDistance: 5
-  _rushSpeed: 3
+  _rushDistance: 10
+  _rushSpeed: 10
 --- !u!114 &4158772493804775115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +255,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 7
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4226385671012319915
 PrefabInstance:
