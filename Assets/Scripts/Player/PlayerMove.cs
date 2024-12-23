@@ -255,12 +255,11 @@ public class PlayerMove : MonoBehaviour, ITeleportable
 
             Dashing = true;
             _canDash = false;
-            _player.Animator.SetBool(DashingHash,true);
+            _player.Animator.SetTrigger(DashingHash);
             IsFreeze = (true, true);
             transform.position += Vector3.up * _dashFloatHeight; 
             _rb.velocity = new Vector3((_dirRight ? 1 : -1) * _dashSpeed, 0, 0);
             await UniTask.Delay(TimeSpan.FromSeconds(_dashTime), cancellationToken:_player.CancellationToken);
-            _player.Animator.SetBool(DashingHash,false);
             IsFreeze = (false, false);
             Dashing = false;
             
