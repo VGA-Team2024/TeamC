@@ -22,11 +22,10 @@ public class RushNormalBear : EnemyBase, IPlayerTarget
     {
         _particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
         _animator = gameObject.transform.GetChild(2).GetComponent<Animator>();
-        EnemySounds sounds = GetComponent<EnemySounds>();
         
-        _walkState = new EnemyWalkState(_animator, transform, _speed, _patrolArea, sounds);
+        _walkState = new EnemyWalkState(_animator, transform, _speed, _patrolArea);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
-        _rushState = new EnemyRushState(this, _freezeState, _animator, transform, _rushDistance, _rushSpeed, sounds);
+        _rushState = new EnemyRushState(this, _freezeState, _animator, transform, _rushDistance, _rushSpeed);
         _deathState = new EnemyDeathState(this, _particle, _animator, gameObject);
     }
 
