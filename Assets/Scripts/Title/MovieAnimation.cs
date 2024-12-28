@@ -53,10 +53,11 @@ public class MovieAnimation : MonoBehaviour
         }
 
         _moviePlayer.Play();
-        // await _titleText.ShowTitle();
         
         // エフェクトの再生をスケジュール
         _ = PlayEffectAfterDelay(_duration, ct);
+        
+        await _titleText.ShowTitle();
 
         try
         {
