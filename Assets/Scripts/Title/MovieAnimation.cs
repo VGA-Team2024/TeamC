@@ -17,6 +17,17 @@ public class MovieAnimation : MonoBehaviour
 
     private CancellationTokenSource _cts;
     
+    private bool _isPlaying;
+
+    private void Update()
+    {
+        if (_isPlaying && Input.GetKeyDown(KeyCode.A))
+        {
+            Cancel();
+            SceneLoader.LoadSceneSimple("Stage1_FairyForest");
+        }
+    }
+    
     /// <summary>動画を読み込む</summary>
     public async UniTask PrepareMovie()
     {
@@ -34,6 +45,8 @@ public class MovieAnimation : MonoBehaviour
     {
         // キャンセル用のトークンソースを作成
         _cts = CancellationTokenSource.CreateLinkedTokenSource(ct);
+        // 再生中フラグをたてる
+        _isPlaying = true;
         // ビデオ再生
         _moviePlayer.loopPointReached += FinishMovie;
         
@@ -42,6 +55,8 @@ public class MovieAnimation : MonoBehaviour
 
         // イベントを解除
         _moviePlayer.loopPointReached -= FinishMovie;
+        
+        _isPlaying = false;
     }
 
     // ビデオ再生を開始し、終了またはキャンセルを待機
