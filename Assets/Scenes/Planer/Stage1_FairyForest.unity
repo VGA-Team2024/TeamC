@@ -412409,8 +412409,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6, y: 6, z: 2}
-  m_Center: {x: 171, y: -111, z: 0}
+  m_Size: {x: 24, y: 6, z: 2}
+  m_Center: {x: 180, y: -111, z: 0}
 --- !u!65 &1933781957
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -412430,8 +412430,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 18, y: 50, z: 2}
-  m_Center: {x: 183, y: -133, z: 0}
+  m_Size: {x: 18, y: 44, z: 2}
+  m_Center: {x: 183, y: -136, z: 0}
 --- !u!65 &1933781958
 BoxCollider:
   m_ObjectHideFlags: 0
