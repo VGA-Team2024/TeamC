@@ -35,7 +35,6 @@ public class MapUpdate : MonoBehaviour
         _triggerEvent.OnTriggerEnterAsObservable.Where(x => x.CompareTag("Portal"))
             .Subscribe(collider =>
         {
-            Debug.Log("入った");
             HandleTriggerEnter(collider);
         }).AddTo(this);
         
