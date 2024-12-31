@@ -6,6 +6,7 @@ public class EnemyAttackCollider : MonoBehaviour
 {
     [SerializeField, Header("攻撃の持続時間")] private float _attackColliderTimer = 1f;
     // SetActiveがtrueになった_attackColliderTimer秒後にSetActiveをfalseに戻す
+    private const int Damage = 1;
 
     private async void OnEnable()
     {
@@ -17,17 +18,11 @@ public class EnemyAttackCollider : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // 同じタグ同士ならダメージを与えないようreturnする
-        if(gameObject.CompareTag(other.gameObject.tag))
-        {
-            return;
-        }
-
+        if(gameObject.CompareTag(other.gameObject.tag)) return;
+    
         // 当たったコライダーのゲームオブジェクトにIDamageableがついているなら
-        if(other.TryGetComponent(out IDamageable damage))
-        {
-            damage.TakeDamage(1);
-        }
-
+        if(other.TryGetComponent(out IDamageable damage)) damage.TakeDamage(Damage);
+    
         if (other.TryGetComponent(out IBlowable blo)) blo.BlownAway(transform.position);
     }
 }

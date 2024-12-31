@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 8739319857317607056}
   m_Layer: 7
   m_Name: SearchArea
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -247,6 +247,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 419420460590218589, guid: f13bead1d40d3db478be0df31b3b637e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 3585754646323615081, guid: f13bead1d40d3db478be0df31b3b637e,
         type: 3}
@@ -400,6 +405,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RushBear
+      objectReference: {fileID: 0}
+    - target: {fileID: 1570445706171391218, guid: 3e0c1f6a6d1798748a12a50bf3242075,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 1789338446015130346, guid: 3e0c1f6a6d1798748a12a50bf3242075,
         type: 3}
