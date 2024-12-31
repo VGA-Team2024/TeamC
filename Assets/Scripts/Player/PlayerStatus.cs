@@ -116,14 +116,14 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
         IsControl();
     }
 
-    async void GodModeEnd()
+    public async void GodModeEnd()
     {
         await UniTask.Delay((int)(_godTime * 1000),cancellationToken: _player.CancellationToken);
         // 通常レイヤーに戻す
         gameObject.layer = _normalLayer;
     }
 
-    async void IsControl()
+    public async void IsControl()
     {
         await UniTask.Delay((int)(_NoMoveTime*1000),cancellationToken: _player.CancellationToken);
         _player.PlayerMove.IsMove = true;
@@ -132,6 +132,7 @@ public class PlayerStatus : MonoBehaviour, IDamageable, IBlowable,ITechnicalable
     public void GameOver()
     {
         _currentHP = _maxHP;
+        gameObject.layer = LayerMask.NameToLayer(_godModeLayerName);
         if(_player.PlayerStatusUI)
             _player.PlayerStatusUI.PlayerHealthUpdate(_currentHP);
     }
