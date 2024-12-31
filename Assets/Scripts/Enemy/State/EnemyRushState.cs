@@ -31,6 +31,7 @@ public class EnemyRushState : IEnemyState
         _distance = dis;
         _speed = speed;
         _sounds = sounds;
+        
         var colliderSize = transform.gameObject.GetComponent<BoxCollider>().size;
         _rayLength = colliderSize.y / 2 + 1f;
         _rightRayDir = new Vector2(colliderSize.x, -colliderSize.y).normalized;
@@ -46,7 +47,8 @@ public class EnemyRushState : IEnemyState
 
     public void Execute()
     {
-        if (_canRush) Rush();
+        if (_canRush) Cansel();
+        if (_canRush) Rush(); // Cancelで_canRushがfalseになってなかったら入るため分けた
         
         float direction = Mathf.Sign(_destination - _transform.position.x);
         float currentDirection = Mathf.Sign(_transform.right.x);
@@ -76,8 +78,7 @@ public class EnemyRushState : IEnemyState
 
     private void Rush()
     {
-        Vector3 newPos = _transform.position + -Vector3.right * (Time.deltaTime * _speed);
-        // _transform.Translate(Vector3.right * (Time.deltaTime * _speed));
+        Vector3 newPos = _transform.position + _transform.right * (Time.deltaTime * _speed);
         _transform.position = new Vector3(newPos.x, newPos.y, 0);
     }
     
@@ -85,13 +86,14 @@ public class EnemyRushState : IEnemyState
     {
         // 前に床がなければ止まる
         Vector3 rayOrigin = _transform.position + _rayOffset;
-        bool hit = Physics.Raycast(rayOrigin, _transform.rotation.y > 0 ? _rightRayDir : _leftRayDir, out RaycastHit hitInfo, _rayLength);
+        bool hit = Physics.Raycast(rayOrigin, _transform.rotation.y > 0 ? _leftRayDir : _rightRayDir, out RaycastHit hitInfo, _rayLength);
 
         // 前が壁なら止まる
-        bool wallHit = Physics.Raycast(rayOrigin, -_transform.right, out RaycastHit wallHitInfo, _rayLength);
+        bool wallHit = Physics.Raycast(rayOrigin, _transform.right, out RaycastHit wallHitInfo, _rayLength);
         
         if (!hit || LayerMask.LayerToName(hitInfo.transform.gameObject.layer) != "Ground" || wallHit && LayerMask.LayerToName(wallHitInfo.transform.gameObject.layer) == "Ground")
         {
+            _canRush = false;
             _enemyBase.ChangeState(_freezeState);
         }
     }
