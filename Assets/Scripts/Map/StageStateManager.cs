@@ -4,7 +4,7 @@ using UnityEngine;
 public class StageStateManager : MonoBehaviour
 {
     private OnTriggerEvent _triggerEvent;
-    private ReactiveProperty<StageEnum> _currentStageState = new ReactiveProperty<StageEnum>(StageEnum.Forest);
+    private ReactiveProperty<StageEnum> _currentStageState = new ReactiveProperty<StageEnum>();
 
     public IReadOnlyReactiveProperty<StageEnum> CurrentStageState => _currentStageState;
 
