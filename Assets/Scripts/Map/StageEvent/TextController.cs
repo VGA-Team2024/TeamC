@@ -11,9 +11,11 @@ public class TextController : MonoBehaviour
     [SerializeField, InspectorVariantName("1文字表示ごとの間隔")] private float _textSpeed = 0.15f;
     [SerializeField, InspectorVariantName("セリフを表示するテキスト")] private Text _textLabel;
     [SerializeField, InspectorVariantName("名前を表示するテキスト")] private Text _nameLabel;
-    [SerializeField, TextArea(1, 4), Header("セリフ(1度の表示で20文字4行が限界)")] private string[] wards;
+    [SerializeField, TextArea(1, 4), Header("セリフ(1度の表示で20文字4行が限界)")] private string[] _wards;
     [SerializeField, InspectorVariantName("キャラクター名")] private string _name;
     [SerializeField, InspectorVariantName("名前を表示するかどうか")] private bool _foundName;
+
+    [SerializeField, InspectorVariantName("鳴らしたいボイス")] private string _voiceName;
 
     private PlayerMove _player;
     private PlayerControls _controls;
@@ -56,7 +58,7 @@ public class TextController : MonoBehaviour
         _controls.Disable();
     }
 
-    void Update()
+    private void Update()
     {
         if (_foundName)
         {
@@ -79,9 +81,11 @@ public class TextController : MonoBehaviour
 
     private async UniTask DisplayAllTexts(CancellationToken cancellationToken)
     {
+        // Voiceの再生
+        CRIAudioManager.VOICE.Play("Voice", _voiceName);
         try
         {
-            foreach (var text in wards)
+            foreach (var text in _wards)
             {
                 // 1文表示終了フラグをリセット
                 _hasTextEnded = false;

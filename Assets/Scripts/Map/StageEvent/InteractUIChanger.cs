@@ -7,8 +7,8 @@ public class InteractUIChanger : MonoBehaviour
     [SerializeField, Header("会話時の背景パネル")] private GameObject _panel; // 動かないのでUIでもOK
     
     private PlayerControls _controls;
-    private Vector2 _dir; //ActionMapのMoveの値を保存するVector2
-    private const float Threshold = 0.1f;
+    private Vector2 _dir; // ActionMapのMoveの値を保存するVector2
+    private const float _threshold = 0.1f;
     
     private void Awake()
     {
@@ -36,7 +36,7 @@ public class InteractUIChanger : MonoBehaviour
     {
         _dir = callbackContext.ReadValue<Vector2>();
         
-        if (_dir.x is < Threshold and > -Threshold && _dir.y > Threshold)
+        if (_dir.x is < _threshold and > -_threshold && _dir.y > _threshold)
         { 
              _panel.SetActive(true);
              
