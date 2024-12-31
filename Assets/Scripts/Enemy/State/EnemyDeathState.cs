@@ -12,15 +12,17 @@ public class EnemyDeathState : IEnemyState
     private readonly int _death = Animator.StringToHash("Death");
     private readonly GameObject _obj;
     private GameObject _generateObj;
+    private Transform _transform;
     
     /// <param name="generateObj"> 死んだときに生成する敵などがいたら入れる </param>
-    public EnemyDeathState(EnemyBase enemyBase,ParticleSystem particle, Animator animator, GameObject obj, GameObject generateObj = null)
+    public EnemyDeathState(EnemyBase enemyBase,ParticleSystem particle, Animator animator, GameObject obj, GameObject generateObj = null, Transform transform = null)
     {
         _enemyBase = enemyBase;
         _particle = particle;
         _animator = animator;
         _obj = obj;
         _generateObj = generateObj;
+        _transform = transform;
     }
     
     public void Enter()
@@ -47,6 +49,7 @@ public class EnemyDeathState : IEnemyState
         OnEnemyDestroyed?.Invoke(_enemyBase);
         _particle.Play();
         await UniTask.WaitUntil(() => _particle.isStopped);
+        if (_generateObj) ObjectInstantiator.InstantiateObject(_generateObj, _transform.position, Quaternion.identity);
         GameObject.Destroy(_obj);
     }
     
