@@ -45,4 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startButton: {fileID: 0}
-  _startAnimation: {fileID: 0}
+  _videoPlayer: {fileID: 0}
+  _movieAnimation: {fileID: 0}
