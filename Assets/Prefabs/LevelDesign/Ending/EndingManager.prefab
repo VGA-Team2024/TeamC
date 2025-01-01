@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7359336341893155867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 657291728496911514}
+  - component: {fileID: 6664340075611941053}
+  m_Layer: 0
+  m_Name: EndingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &657291728496911514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7359336341893155867}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6664340075611941053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7359336341893155867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95bdf9d3bd5066441ab723185c528b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _talkPoint: {fileID: 0}
+  _fadeController: {fileID: 0}
+  _backGround: {fileID: 0}
+  _endingDuration:
+  - 1
+  - 1
+  - 1
+  - 1
+  _bgmName: BGM_Outgame_Ending01
+  _creditBgmName: BGM_Musicbox_Musicbox01
+  _endingSpriteLists:
+  - {fileID: 21300000, guid: 2e67d0533b1e58946966e5a0761073f9, type: 3}
+  - {fileID: 21300000, guid: 44bc77ff0f39db24f96c8183abd95cf4, type: 3}
+  - {fileID: 21300000, guid: 9012eb4d9a4580941a060571cf9ed274, type: 3}
+  - {fileID: 21300000, guid: 8c35c3c48a2e7684b97d4816d4cea385, type: 3}
+  _creditSpriteLists:
+  - {fileID: 21300000, guid: 814daad57ae13f94e8176404f8b49a8f, type: 3}
+  - {fileID: 21300000, guid: 7962bc04a48454e4ea7d8886ef974171, type: 3}
+  - {fileID: 21300000, guid: 0030374ebd320914ab4cff205de2680a, type: 3}
+  - {fileID: 21300000, guid: 3c16d219e3d86e34fba653a1ed69bcfc, type: 3}
+  - {fileID: 21300000, guid: 26786d650ae84914994ab644a52818f6, type: 3}
+  - {fileID: 21300000, guid: 04e40b6e13e434c4bbcf277d4b44c5ec, type: 3}
+  _delay: 0
+  _fadeDuration: 3
