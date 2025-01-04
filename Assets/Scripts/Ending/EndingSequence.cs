@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 namespace Ending
 {
-    public class EndingSequence : MonoBehaviour,ITextDisplayController
+    public class EndingSequence : MonoBehaviour
     {
-        [SerializeField, InspectorVariantName("Bossを倒すと表示されるテキスト")] private ObjectActivateTrigger _talkPoint;
         [SerializeField] private FadeController _fadeController;
         [SerializeField, InspectorVariantName("BackGround")] private Image _backGround;
 
@@ -42,12 +41,6 @@ namespace Ending
             _musicBoxPlayer.Setup();
             _musicBoxPlayer.SetVolume(1.0f);
             _musicBoxPlayer.Player.SetFirstBlockIndex(_musicIndex);
-        }
-
-        // ナンシーの上にテキストを表示させる
-        public void PopText()
-        {
-            _talkPoint.gameObject.SetActive(true);
         }
 
         public async UniTask PlayEnding()
