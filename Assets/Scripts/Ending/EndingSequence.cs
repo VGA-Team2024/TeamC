@@ -1,7 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Ending
@@ -9,25 +8,35 @@ namespace Ending
     public class EndingSequence : MonoBehaviour
     {
         [SerializeField] private FadeController _fadeController;
+
         [SerializeField, InspectorVariantName("BackGround")] private Image _backGround;
 
         #region Editorで編集
-        
+
         [SerializeField, InspectorVariantName("エンディングを表示する間隔")] private float[] _endingFadeDuration;
-        [SerializeField,InspectorVariantName("クレジットを表示する間隔")] private float[] _fadeCreditDuration;
+
+        [SerializeField, InspectorVariantName("クレジットを表示する間隔")] private float[] _fadeCreditDuration;
+
         [SerializeField, InspectorVariantName("Ending再生時に流したいBGM")] private string _endingBgmName;
+
         [SerializeField, InspectorVariantName("Credit再生時に流したいBGM")] private string _creditBgmName;
+
         [SerializeField, InspectorVariantName("表示させたい一枚絵のリスト")] private Sprite[] _endingSpriteLists;
+
         [SerializeField, InspectorVariantName("表示させたいクレジットイラストのリスト")] private Sprite[] _creditSpriteLists;
 
         [SerializeField, InspectorVariantName("エンディングとクレジットの間")] private float _delay;
-        
-        [SerializeField,InspectorVariantName("EndingのFadeoutの時間")] private float _fadeoutDuration;
-        [SerializeField,InspectorVariantName("EndingのFadeinの時間")] private float _fadeinDuration;
-        [SerializeField,InspectorVariantName("クレジット画面のFadeoutの時間")] private float _fadeOutCreditDuration;
-        [SerializeField,InspectorVariantName("クレジット画面のFadeinの時間")] private float _fadeInCreditDuration;
+
+        [SerializeField, InspectorVariantName("EndingのFadeoutの時間")] private float _fadeoutDuration;
+
+        [SerializeField, InspectorVariantName("EndingのFadeinの時間")] private float _fadeinDuration;
+
+        [SerializeField, InspectorVariantName("クレジット画面のFadeoutの時間")] private float _fadeOutCreditDuration;
+
+        [SerializeField, InspectorVariantName("クレジット画面のFadeinの時間")] private float _fadeInCreditDuration;
 
         [SerializeField, InspectorVariantName("タイトル遷移前のFade時間")] private float _finalDuration;
+
         #endregion
 
         private const int _musicIndex = 3;
@@ -43,7 +52,8 @@ namespace Ending
         {
             CRIAudioManager.Initialize();
             _credit = new Credit();
-            _credit.Initialize(_fadeController,_fadeOutCreditDuration,_fadeInCreditDuration, _backGround, _creditSpriteLists);
+            _credit.Initialize(_fadeController, _fadeOutCreditDuration, _fadeInCreditDuration, _backGround,
+                _creditSpriteLists);
             _musicBoxPlayer = new CRIAudioManager.SoundPlayer(SoundType.BGM);
             _musicBoxPlayer.Setup();
             _musicBoxPlayer.SetVolume(1.0f);
@@ -79,7 +89,7 @@ namespace Ending
                     // 始まりでFadeをしているので2回目から
                     await StartFadeOut(_fadeoutDuration);
                 }
-                
+
                 _backGround.sprite = _endingSpriteLists[i];
                 // 表示間隔分待つ
                 await UniTask.Delay(TimeSpan.FromSeconds(_endingFadeDuration[i]));
@@ -89,12 +99,12 @@ namespace Ending
 
             await StartFadeOut(_fadeoutDuration);
         }
-        
+
         private async UniTask StartFadeIn(float duration)
         {
             await _fadeController.FadeInAsync(duration);
         }
-        
+
         private async UniTask StartFadeOut(float duration)
         {
             await _fadeController.FadeOutAsync(duration);
