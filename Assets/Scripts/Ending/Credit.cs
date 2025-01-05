@@ -8,10 +8,12 @@ namespace Ending
     public class Credit
     {
         private FadeController _fadeController;
+        private float _fadeoutCreditDuration;
+        private float _fadeinCreditDuration;
         private Sprite[] _creditSpriteLists;
         private Image _backGround;
         
-        public void Initialize(FadeController fadeController,Image backGround,Sprite[] creditSpriteLists)
+        public void Initialize(FadeController fadeController,float fadeCreditDuration,float fadeinCreditDuration,Image backGround,Sprite[] creditSpriteLists)
         {
             if (fadeController == null)
                 throw new ArgumentNullException(nameof(fadeController));
@@ -23,21 +25,22 @@ namespace Ending
             _fadeController = fadeController;
             _creditSpriteLists = creditSpriteLists;
             _backGround = backGround;
+            _fadeoutCreditDuration = fadeCreditDuration;
+            _fadeinCreditDuration = fadeinCreditDuration;
         }
         
-        public async UniTask ShowCredit(float delay,float[] duration)
+        public async UniTask ShowCredit(float[] duration)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(delay));
             for (int i = 0; i < _creditSpriteLists.Length; i++)
             {
                 if (i != 0)
                 {
-                    await _fadeController.FadeOutAsync(duration[i]);
+                    await _fadeController.FadeOutAsync(_fadeoutCreditDuration);
                 }
                 
                 _backGround.sprite = _creditSpriteLists[i];
                 await UniTask.Delay(TimeSpan.FromSeconds(duration[i]));
-                await _fadeController.FadeInAsync(duration[i]);
+                await _fadeController.FadeInAsync(_fadeinCreditDuration);
             }
         }
     }
