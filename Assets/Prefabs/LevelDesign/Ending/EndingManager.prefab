@@ -44,15 +44,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95bdf9d3bd5066441ab723185c528b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _talkPoint: {fileID: 0}
   _fadeController: {fileID: 0}
   _backGround: {fileID: 0}
-  _endingDuration:
-  - 1
-  - 1
-  - 1
-  - 1
-  _bgmName: BGM_Outgame_Ending01
+  _endingFadeDuration:
+  - 5
+  - 5
+  - 5
+  - 5
+  _fadeCreditDuration:
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  _endingBgmName: BGM_Outgame_Ending01
   _creditBgmName: BGM_Musicbox_Musicbox01
   _endingSpriteLists:
   - {fileID: 21300000, guid: 2e67d0533b1e58946966e5a0761073f9, type: 3}
@@ -66,5 +72,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3c16d219e3d86e34fba653a1ed69bcfc, type: 3}
   - {fileID: 21300000, guid: 26786d650ae84914994ab644a52818f6, type: 3}
   - {fileID: 21300000, guid: 04e40b6e13e434c4bbcf277d4b44c5ec, type: 3}
-  _delay: 0
-  _fadeDuration: 3
+  _delay: 2
+  _fadeoutDuration: 2
+  _fadeinDuration: 2
+  _fadeOutCreditDuration: 2
+  _fadeInCreditDuration: 2
+  _finalDuration: 8
