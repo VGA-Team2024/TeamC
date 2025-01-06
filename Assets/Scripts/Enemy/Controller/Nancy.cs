@@ -1,7 +1,9 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
 {
+    [SerializeField, Header("死亡時置き換えるメアリーのprefab")] private GameObject _nancy;
     [SerializeField, Header("接触時攻撃力")] private int _collideDamage;
     [SerializeField, Header("playerにぶつかった後動けるまでの時間")] private int _freezeTime;
     [SerializeField, Header("特殊攻撃後の待機時間")] private int _specialAttackFreezeTime;
@@ -96,7 +98,7 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
         _waveNeedleState = new EnemySpecialAttackState(this, _waveNeedleFreezeState, animator, waveNeedle, 1, "Attack2");
         _fallNeedleState = new EnemyFallNeedleState(this, _fallNeedleFreezeState, animator, fallNeedle, gameObject.transform, rb);
         _crossNeedleState = new EnemySpecialAttackState(this, _crossNeedleFreezeState, animator, crossNeedleCollider, 0, "Attack4");
-        _deathState = new EnemyDeathState(this, particle, animator, gameObject);
+        _deathState = new EnemyDeathState(this, particle, animator, gameObject, _nancy, transform);
     }
 
     protected override void OnUpdate()
@@ -106,7 +108,8 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
         if (_hp.CurrentHp <= 0)
         {
             _isDeath = true;
-            ChangeState(_deathState);
+            gameObject.layer = LayerMask.NameToLayer("EnemyDeath"); // _deathState に入るまでの間もplayerとの接触はできないようにする
+            Death().Forget();
             return;
         }
 
@@ -142,7 +145,11 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
                 {
                     var num = EnemyUtility.ProbabilityCalculate(_disBWeights);
                     _attackCount = 0;
-                    if (num == 1) _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
+                    if (num == 1)
+                    {
+                        _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
+                        _canMove = false;
+                    }
                     if (num == 2) _chaseState.GetPlayerPos(_playerMove.transform.position);
                     if (num == 3) _canMove = false;
                     ChangeState(num switch
@@ -160,7 +167,11 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
                 {
                     var num = EnemyUtility.ProbabilityCalculate(_disCWeights);
                     _attackCount = 0;
-                    if (num == 1) _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
+                    if (num == 1)
+                    {
+                        _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
+                        _canMove = false;
+                    }
                     if (num == 2) _chaseState.GetPlayerPos(_playerMove.transform.position);
                     if (num == 3) _canMove = false;
                     ChangeState(num switch
@@ -177,7 +188,7 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
             }
         }
     }
-    
+
     public void GetPlayerMove(PlayerMove playerMove)
     {
         if (playerMove) _playerMove = playerMove;
@@ -199,6 +210,12 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
         if (_canMove) return;
         if (LayerMask.LayerToName(other.gameObject.layer) == "Ground") _canMove = true;
     }
+
+    private async UniTask Death()
+    {
+        await UniTask.WaitUntil(() => _canMove, cancellationToken : destroyCancellationToken);
+        ChangeState(_deathState);
+    } // 床に触れるまで死なないようにする
     
     private int Distance()
     {
@@ -208,7 +225,7 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
 
     public void Teleport(Vector3 position) { transform.position = position; }
     
-    void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         if (Application.isPlaying) return;
         // 距離A,B,C がどのくらいか

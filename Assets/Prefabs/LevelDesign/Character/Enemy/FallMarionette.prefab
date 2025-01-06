@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 1718605387975309377}
   m_Layer: 7
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 7056912839090354411}
   m_Layer: 7
   m_Name: SearchArea
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -254,6 +254,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 419420460590218589, guid: f13bead1d40d3db478be0df31b3b637e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 3585754646323615081, guid: f13bead1d40d3db478be0df31b3b637e,
         type: 3}
@@ -333,6 +338,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: marionette
+      objectReference: {fileID: 0}
+    - target: {fileID: -8653719598885068355, guid: e58b7b2d25e9ccb4f95a0b7bd57d2e04,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: e58b7b2d25e9ccb4f95a0b7bd57d2e04,
         type: 3}

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
@@ -20,5 +21,15 @@ public class FadeController : MonoBehaviour
     public void FadeOut(float duration)
     {
         _img.DOFade(1f, duration);
+    }
+
+    public async UniTask FadeInAsync(float duration)
+    {
+        await _img.DOFade(0f,duration);
+    }
+
+    public async UniTask FadeOutAsync(float duration)
+    {
+        await _img.DOFade(1f, duration);
     }
 }

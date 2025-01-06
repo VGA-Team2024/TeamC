@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2210422265178068310}
   m_Layer: 7
   m_Name: SearchArea
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -461,6 +461,7 @@ MonoBehaviour:
   _hoverEffectPrefab: {fileID: 0}
   _effectInstanceTime: 0.5
   _speed: 2
+  _nancy: {fileID: 5950564751109964429, guid: c547ea8ba41e4ae4482eb40b28fbe862, type: 3}
   _collideDamage: 1
   _freezeTime: 1
   _specialAttackFreezeTime: 1
@@ -610,7 +611,7 @@ GameObject:
   - component: {fileID: 415162185877524273}
   m_Layer: 7
   m_Name: EnemySpecialAttack
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -801,6 +802,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 419420460590218589, guid: f13bead1d40d3db478be0df31b3b637e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 3585754646323615081, guid: f13bead1d40d3db478be0df31b3b637e,
         type: 3}
@@ -1016,6 +1022,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8653719598885068355, guid: 6bf842f6537b3b94bb0fe446d1044d2f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: -8567087277595827052, guid: 6bf842f6537b3b94bb0fe446d1044d2f,
         type: 3}

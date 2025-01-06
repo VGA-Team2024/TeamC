@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1399880122361627275}
   - component: {fileID: 4997509890859212639}
+  - component: {fileID: 2350230273165081121}
   m_Layer: 0
   m_Name: Video
   m_TagString: Untagged
@@ -53,7 +54,7 @@ VideoPlayer:
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
+  m_AudioOutputMode: 1
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
@@ -62,9 +63,25 @@ VideoPlayer:
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
-  m_SkipOnDrop: 1
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 0
   m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
+--- !u!114 &2350230273165081121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2994950427417388212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33689b00f4b84904d8fa5478bd9e1241, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moviePlayer: {fileID: 4997509890859212639}
+  _fairy: {fileID: 0}
+  _duration: 1
+  _titleText: {fileID: 0}
