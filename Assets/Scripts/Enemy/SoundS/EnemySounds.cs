@@ -11,7 +11,9 @@ public enum EnemySeEnum
     Rush,
     JumpAttack,
     Breath,
-    Fly
+    Fly,
+    Voice_Mary,
+    Voice_Laughter
 }
 
 [Serializable]

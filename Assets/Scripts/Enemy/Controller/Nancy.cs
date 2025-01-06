@@ -51,6 +51,8 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
     private int _attackCount; // 距離A時の前方攻撃の回数制限用
     private bool _isChangePosAttacked; // 特殊攻撃済みか
     private bool _canMove; // 飛んでる間は次の攻撃ができないようにする用
+    private EnemySounds _sounds;
+    private bool _soundsPlayed; // すでに登場時のsoundが再生されているか
     
     private EnemyChaseState _chaseState; // 歩行ステート
     private EnemyAttackState _attackState;
@@ -80,6 +82,7 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
         GameObject fallNeedle = gameObject.transform.GetChild(6).gameObject;
         GameObject waveNeedle = gameObject.transform.GetChild(7).gameObject;
         Rigidbody rb = GetComponent<Rigidbody>();
+        _sounds = GetComponent<EnemySounds>();
         
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime); // 歩行とぶつかった後の待機ステート
         _specialAttackFreezeState = new EnemyFreezeState(this, _idleState, _specialAttackFreezeTime); // 特殊攻撃後の待機ステート
@@ -96,7 +99,7 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
         _rushState = new EnemyRushState(this, _rushFreezeState, animator, transform, _rushDistance, _rushSpeed);
         _changePositionState = new EnemySpecialAttackState(this, _specialAttackFreezeState, animator, specialAttackCollider, 0, "SpecialAttack");
         _waveNeedleState = new EnemySpecialAttackState(this, _waveNeedleFreezeState, animator, waveNeedle, 1, "Attack2");
-        _fallNeedleState = new EnemyFallNeedleState(this, _fallNeedleFreezeState, animator, fallNeedle, gameObject.transform, rb);
+        _fallNeedleState = new EnemyFallNeedleState(this, _fallNeedleFreezeState, animator, fallNeedle, gameObject.transform, rb, _sounds, gameObject);
         _crossNeedleState = new EnemySpecialAttackState(this, _crossNeedleFreezeState, animator, crossNeedleCollider, 0, "Attack4");
         _deathState = new EnemyDeathState(this, particle, animator, gameObject, _nancy, transform);
     }
@@ -191,6 +194,11 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
 
     public void GetPlayerMove(PlayerMove playerMove)
     {
+        if (!_soundsPlayed)
+        {
+            _soundsPlayed = true;
+            _sounds.PlayEnemySE(EnemySeEnum.Voice_Mary);
+        }
         if (playerMove) _playerMove = playerMove;
     }
     
