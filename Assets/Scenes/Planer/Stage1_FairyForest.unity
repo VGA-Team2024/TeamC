@@ -316569,6 +316569,71 @@ PrefabInstance:
       propertyPath: _fadeController
       value: 
       objectReference: {fileID: 106037927}
+    - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
+        type: 3}
+      propertyPath: _fadeinDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
+        type: 3}
+      propertyPath: _fadeoutDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
+        type: 3}
+      propertyPath: _fadeInCreditDuration
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
+        type: 3}
+      propertyPath: _fadeOutCreditDuration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
+        type: 3}
+      propertyPath: _endingFadeDuration.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
+        type: 3}
+      propertyPath: _endingFadeDuration.Array.data[1]
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
+        type: 3}
+      propertyPath: _endingFadeDuration.Array.data[2]
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
+        type: 3}
+      propertyPath: _endingFadeDuration.Array.data[3]
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
+        type: 3}
+      propertyPath: _fadeCreditDuration.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
+        type: 3}
+      propertyPath: _fadeCreditDuration.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
+        type: 3}
+      propertyPath: _fadeCreditDuration.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
+        type: 3}
+      propertyPath: _fadeCreditDuration.Array.data[3]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
+        type: 3}
+      propertyPath: _fadeCreditDuration.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7359336341893155867, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
       propertyPath: m_Name
@@ -447651,6 +447716,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _foundName
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Nansoor01
       objectReference: {fileID: 0}
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
