@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
@@ -107,7 +108,8 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
         if (_hp.CurrentHp <= 0)
         {
             _isDeath = true;
-            ChangeState(_deathState);
+            gameObject.layer = LayerMask.NameToLayer("EnemyDeath"); // _deathState に入るまでの間もplayerとの接触はできないようにする
+            Death().Forget();
             return;
         }
 
@@ -143,7 +145,11 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
                 {
                     var num = EnemyUtility.ProbabilityCalculate(_disBWeights);
                     _attackCount = 0;
-                    if (num == 1) _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
+                    if (num == 1)
+                    {
+                        _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
+                        _canMove = false;
+                    }
                     if (num == 2) _chaseState.GetPlayerPos(_playerMove.transform.position);
                     if (num == 3) _canMove = false;
                     ChangeState(num switch
@@ -161,7 +167,11 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
                 {
                     var num = EnemyUtility.ProbabilityCalculate(_disCWeights);
                     _attackCount = 0;
-                    if (num == 1) _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
+                    if (num == 1)
+                    {
+                        _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
+                        _canMove = false;
+                    }
                     if (num == 2) _chaseState.GetPlayerPos(_playerMove.transform.position);
                     if (num == 3) _canMove = false;
                     ChangeState(num switch
@@ -200,6 +210,12 @@ public class Nancy : EnemyBase,IPlayerTarget, ITeleportable
         if (_canMove) return;
         if (LayerMask.LayerToName(other.gameObject.layer) == "Ground") _canMove = true;
     }
+
+    private async UniTask Death()
+    {
+        await UniTask.WaitUntil(() => _canMove, cancellationToken : destroyCancellationToken);
+        ChangeState(_deathState);
+    } // 床に触れるまで死なないようにする
     
     private int Distance()
     {
