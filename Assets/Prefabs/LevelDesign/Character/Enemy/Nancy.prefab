@@ -416,6 +416,7 @@ GameObject:
   - component: {fileID: 2813521005167284999}
   - component: {fileID: 6563645889030578224}
   - component: {fileID: 6060596065761921581}
+  - component: {fileID: 6003642756547153098}
   m_Layer: 7
   m_Name: Nancy
   m_TagString: Enemy
@@ -598,6 +599,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &6003642756547153098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5515306755728920571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a2fc75ef4f6194d803f2ff4fe853e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cueSheet: Voice
+  _cueName:
+  - seEnum: 8
+    seName: Voice_Nancy_Mary01
+  - seEnum: 9
+    seName: Voice_Nancy_LoudLaughter01
 --- !u!1 &5707548245682673921
 GameObject:
   m_ObjectHideFlags: 0

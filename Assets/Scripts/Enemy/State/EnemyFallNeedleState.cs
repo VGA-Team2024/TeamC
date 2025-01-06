@@ -13,8 +13,11 @@ public class EnemyFallNeedleState : IEnemyState
     private readonly Rigidbody _rb;
     private readonly float _height = 10f;
     private CancellationTokenSource _tokenSource;
+    private readonly EnemySounds _sounds;
+    private BoxCollider _boxCollider; // このステート中はplayerとぶつからないようにした
     
-    public EnemyFallNeedleState(EnemyBase enemyBase, EnemyFreezeState freezeState, Animator animator, GameObject obj, Transform transform, Rigidbody rb)
+    public EnemyFallNeedleState(EnemyBase enemyBase, EnemyFreezeState freezeState, 
+        Animator animator, GameObject obj, Transform transform, Rigidbody rb, EnemySounds sounds, GameObject gameObject)
     {
         _enemyBase = enemyBase;
         _freezeState = freezeState;
@@ -22,12 +25,16 @@ public class EnemyFallNeedleState : IEnemyState
         _fallNeedleCollider = obj;
         _transform = transform;
         _rb = rb;
+        _sounds = sounds;
+        _boxCollider = gameObject.GetComponent<BoxCollider>();
     }
 
     public void Enter()
     {
         _tokenSource = new CancellationTokenSource();
         _rb.useGravity = false;
+        _boxCollider.enabled = false;
+        if (_sounds) _sounds.PlayEnemySE(EnemySeEnum.Voice_Laughter);
         Attack().Forget();
     }
 
@@ -38,6 +45,7 @@ public class EnemyFallNeedleState : IEnemyState
 
     public void Exit()
     {
+        _boxCollider.enabled = true;
         _rb.useGravity = true;
         _tokenSource?.Cancel();
         _tokenSource?.Dispose();
