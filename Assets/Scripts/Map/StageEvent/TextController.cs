@@ -15,6 +15,8 @@ public class TextController : MonoBehaviour
     [SerializeField, InspectorVariantName("キャラクター名")] private string _name;
     [SerializeField, InspectorVariantName("名前を表示するかどうか")] private bool _foundName;
 
+    [SerializeField, InspectorVariantName("鳴らしたいボイス")] private string _voiceName;
+
     private PlayerMove _player;
     private PlayerControls _controls;
     private CancellationTokenSource _cts;
@@ -79,6 +81,7 @@ public class TextController : MonoBehaviour
 
     private async UniTask DisplayAllTexts(CancellationToken cancellationToken)
     {
+        CRIAudioManager.VOICE.Play("Voice", _voiceName);
         try
         {
             foreach (var text in wards)
