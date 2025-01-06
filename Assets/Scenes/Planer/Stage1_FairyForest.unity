@@ -451,6 +451,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Nansoor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -1122,6 +1127,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -1328,7 +1338,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.6443062, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -33411,7 +33421,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: f42c3d9b4f7733b47a2bbd08e65d8d2e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -35456,6 +35466,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -35801,7 +35816,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: f42c3d9b4f7733b47a2bbd08e65d8d2e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -35821,6 +35836,61 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 19801010886218912, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 91
+      objectReference: {fileID: 0}
+    - target: {fileID: 188391071496152543, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 63
+      objectReference: {fileID: 0}
+    - target: {fileID: 486141392849756448, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 101
+      objectReference: {fileID: 0}
+    - target: {fileID: 519300722600889597, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 636102472648764754, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 86
+      objectReference: {fileID: 0}
+    - target: {fileID: 672978912369544296, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 71
+      objectReference: {fileID: 0}
+    - target: {fileID: 834519278244374681, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 78
+      objectReference: {fileID: 0}
+    - target: {fileID: 943489951037610239, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 104
+      objectReference: {fileID: 0}
+    - target: {fileID: 1074208868845958591, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 105
+      objectReference: {fileID: 0}
+    - target: {fileID: 1079206944993799070, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 96
+      objectReference: {fileID: 0}
+    - target: {fileID: 1861439748845500657, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 67
+      objectReference: {fileID: 0}
     - target: {fileID: 1912080927617612223, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
         type: 3}
       propertyPath: _isDashRelease
@@ -35836,20 +35906,135 @@ PrefabInstance:
       propertyPath: _isLongRangeAttackRelease
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2322442112158338770, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2684307453428709400, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 74
+      objectReference: {fileID: 0}
+    - target: {fileID: 2837628180683665076, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 107
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228089281184006545, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237670748113724613, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 3600308918265567327, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 3681519226352748576, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 3785560194795579560, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927265618609271876, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 73
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957726858225105190, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 108
+      objectReference: {fileID: 0}
     - target: {fileID: 3998133306925299716, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
         type: 3}
       propertyPath: m_Name
       value: Player(Master)
       objectReference: {fileID: 0}
+    - target: {fileID: 4134093553551404953, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: _dashCoolTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4243659822101337780, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 98
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673655610329806257, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 62
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835687551473448538, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 94
+      objectReference: {fileID: 0}
+    - target: {fileID: 5276544210013897749, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620887216091724987, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 95
+      objectReference: {fileID: 0}
+    - target: {fileID: 5798838518077295744, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 114
+      objectReference: {fileID: 0}
+    - target: {fileID: 6115917502708104293, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6421300260020379512, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 109
+      objectReference: {fileID: 0}
+    - target: {fileID: 6636637108382340263, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701723641180159306, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 83
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927654868193024215, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 103
+      objectReference: {fileID: 0}
+    - target: {fileID: 7175025396815919466, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 89
+      objectReference: {fileID: 0}
     - target: {fileID: 7255367940088641687, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -483
+      value: 5463
       objectReference: {fileID: 0}
     - target: {fileID: 7255367940088641687, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 7255367940088641687, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
         type: 3}
@@ -35890,6 +36075,96 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7282748424668370010, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 102
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296957272815001627, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 84
+      objectReference: {fileID: 0}
+    - target: {fileID: 7455992753868268948, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 106
+      objectReference: {fileID: 0}
+    - target: {fileID: 7482403824433816450, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 93
+      objectReference: {fileID: 0}
+    - target: {fileID: 7856948315123191799, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 113
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885455815995149631, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 79
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033081186391770813, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 92
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092019664374627131, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162498700572100742, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 61
+      objectReference: {fileID: 0}
+    - target: {fileID: 8235941281217131195, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 66
+      objectReference: {fileID: 0}
+    - target: {fileID: 8240934324431924690, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 68
+      objectReference: {fileID: 0}
+    - target: {fileID: 8721525003233131704, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 8743351832845559577, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 111
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783886978919517844, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860181931842096227, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 76
+      objectReference: {fileID: 0}
+    - target: {fileID: 9026283797404820495, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 9064099174271111567, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135151548764013144, guid: 9e9dfe65f34177640b97bfcfd97d9f33,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 82
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36114,6 +36389,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2008162229}
     m_Modifications:
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Ganeayoor01
+      objectReference: {fileID: 0}
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
       propertyPath: wards.Array.size
@@ -37672,6 +37952,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -38209,7 +38494,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.6443062, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -72763,7 +73048,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_Sprite: {fileID: 21300000, guid: 5e1824e85c98dfe4f8797808830faa2f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -73073,7 +73358,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000022780828, y: -0.000000014832132, z: -3.3788825e-16,
     w: 1}
-  m_LocalPosition: {x: -483, y: 22, z: -10}
+  m_LocalPosition: {x: -426.23486, y: 23, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -73617,7 +73902,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 6.758597, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -87391,6 +87676,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.data[0]
       value: "\u306A\u3093\u3060\u304B\u307C\u308D\u307C\u308D\u306A\u3086\u304B\u3060\u306D"
       objectReference: {fileID: 0}
@@ -89724,7 +90014,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: f42c3d9b4f7733b47a2bbd08e65d8d2e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -90228,7 +90518,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.6443062, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -116678,6 +116968,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Nansoor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.data[0]
       value: "\u307C\u304F\u305F\u3061\u304A\u3082\u3061\u3083\u3067\u3042\u305D\u3093\u305F\u3093\u3060"
       objectReference: {fileID: 0}
@@ -117490,7 +117785,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.6443062, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -125659,6 +125954,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -125838,7 +126138,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.6712449, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -154735,12 +155035,12 @@ PrefabInstance:
     - target: {fileID: 580883074158583314, guid: 13eddd0d3462ffa458bf2413c6d751fe,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -483
+      value: 5463
       objectReference: {fileID: 0}
     - target: {fileID: 580883074158583314, guid: 13eddd0d3462ffa458bf2413c6d751fe,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 580883074158583314, guid: 13eddd0d3462ffa458bf2413c6d751fe,
         type: 3}
@@ -155701,7 +156001,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 61
+  m_SortingOrder: 121
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 10.6, y: 2.625, z: 0}
   m_MaxChunkCount: 16
@@ -157060,6 +157360,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -158010,6 +158315,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Nansoor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -158281,14 +158591,29 @@ PrefabInstance:
       objectReference: {fileID: 822014044}
     - target: {fileID: 662740303121963681, guid: 1401dee6d3a43a04fa25f41a16a72996,
         type: 3}
+      propertyPath: _retryButton
+      value: 
+      objectReference: {fileID: 1990914884}
+    - target: {fileID: 662740303121963681, guid: 1401dee6d3a43a04fa25f41a16a72996,
+        type: 3}
       propertyPath: _fadeDuration
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 662740303121963681, guid: 1401dee6d3a43a04fa25f41a16a72996,
         type: 3}
+      propertyPath: _reviewButton
+      value: 
+      objectReference: {fileID: 1990914883}
+    - target: {fileID: 662740303121963681, guid: 1401dee6d3a43a04fa25f41a16a72996,
+        type: 3}
       propertyPath: _fadeController
       value: 
       objectReference: {fileID: 106037927}
+    - target: {fileID: 662740303121963681, guid: 1401dee6d3a43a04fa25f41a16a72996,
+        type: 3}
+      propertyPath: _gameOverCanvas
+      value: 
+      objectReference: {fileID: 962123822}
     - target: {fileID: 4343730238795227818, guid: 1401dee6d3a43a04fa25f41a16a72996,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -158421,7 +158746,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: 781f56339fc4d644da27272124aeb1ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -159293,7 +159618,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 6.758597, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -183465,6 +183790,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -184259,7 +184589,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.6443062, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -198600,8 +198930,12 @@ PrefabInstance:
         type: 3}
       propertyPath: _hoverEffectPrefab
       value: 
-      objectReference: {fileID: 5950564751109964429, guid: c547ea8ba41e4ae4482eb40b28fbe862,
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884727180741235353, guid: 01925da888ec53d488a02a230150d1aa,
         type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5515306755728920571, guid: 01925da888ec53d488a02a230150d1aa,
         type: 3}
       propertyPath: m_Name
@@ -199341,6 +199675,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Nansoor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -199538,6 +199877,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 631791919}
     m_Modifications:
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
       propertyPath: wards.Array.size
@@ -200979,6 +201323,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -202310,7 +202659,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 6.758597, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -213340,7 +213689,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -99
   m_Sprite: {fileID: 21300000, guid: 3180829be7afcd44ab156e98c35a7f30, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -213846,6 +214195,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1327550843}
     m_Modifications:
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
       propertyPath: wards.Array.size
@@ -214405,6 +214759,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7182974009765840714, guid: 72685a3b550de834b807a537917ffd8f,
     type: 3}
   m_PrefabInstance: {fileID: 960553475}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &962123822 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8445569646641387856, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1990914882}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &964587160 stripped
 Transform:
@@ -215157,7 +215517,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 62
+  m_SortingOrder: 122
   m_Sprite: {fileID: 21300000, guid: f8a92af163989634b914f8128fabeefe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -215595,7 +215955,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.6443062, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -222655,6 +223015,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -226064,6 +226429,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Nansoor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -226406,7 +226776,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_Sprite: {fileID: 21300000, guid: 3180829be7afcd44ab156e98c35a7f30, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -226548,6 +226918,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1245204433}
     m_Modifications:
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
       propertyPath: wards.Array.size
@@ -228837,7 +229212,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.6443062, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -254147,7 +254522,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.6443062, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -270548,7 +270923,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: 26936e00502b96747a4a08174229f9f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -270997,7 +271372,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: f42c3d9b4f7733b47a2bbd08e65d8d2e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -271414,7 +271789,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_Sprite: {fileID: 21300000, guid: 3180829be7afcd44ab156e98c35a7f30, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -272560,7 +272935,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_Sprite: {fileID: 21300000, guid: 7df1a1cb46da8df49818b3ce40c1a269, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -272669,6 +273044,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1356231198}
     m_Modifications:
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
       propertyPath: wards.Array.size
@@ -272964,6 +273344,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -273055,6 +273440,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1485505022}
     m_Modifications:
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Nansoor01
+      objectReference: {fileID: 0}
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
       propertyPath: wards.Array.data[0]
@@ -274646,6 +275036,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -274867,7 +275262,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 6.758597, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -315019,7 +315414,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -99
   m_Sprite: {fileID: 21300000, guid: 3180829be7afcd44ab156e98c35a7f30, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -315115,7 +315510,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: f42c3d9b4f7733b47a2bbd08e65d8d2e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -316561,6 +316956,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
+      propertyPath: _delay
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
+        type: 3}
       propertyPath: _backGround
       value: 
       objectReference: {fileID: 187142090}
@@ -316572,7 +316972,7 @@ PrefabInstance:
     - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
       propertyPath: _fadeinDuration
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
@@ -316582,12 +316982,12 @@ PrefabInstance:
     - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
       propertyPath: _fadeInCreditDuration
-      value: 3.5
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
       propertyPath: _fadeOutCreditDuration
-      value: 1.5
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
@@ -316597,17 +316997,17 @@ PrefabInstance:
     - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
       propertyPath: _endingFadeDuration.Array.data[1]
-      value: 2.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
       propertyPath: _endingFadeDuration.Array.data[2]
-      value: 2.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
       propertyPath: _endingFadeDuration.Array.data[3]
-      value: 2.2
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
@@ -316919,7 +317319,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.6712449, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -332512,6 +332912,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -332687,6 +333092,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 802c8d8ddfae21d4eb9388ab330a440a,
         type: 3}
+    - target: {fileID: 933264616366980459, guid: 771dcb3f80beaa74c9125b543d0a877b,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -120
+      objectReference: {fileID: 0}
     - target: {fileID: 1178501688321874365, guid: 771dcb3f80beaa74c9125b543d0a877b,
         type: 3}
       propertyPath: m_Name
@@ -333056,7 +333466,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 120
   m_Sprite: {fileID: 21300000, guid: 11f15b7029e153b40b79008cdff1dd93, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -333899,6 +334309,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Nansoor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -334488,7 +334903,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.6443062, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -351968,7 +352383,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.6443062, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -363889,6 +364304,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Ganeayoor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -364458,6 +364878,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Nansoor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -364678,7 +365103,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.6712449, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -388136,7 +388561,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.6712449, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -407698,7 +408123,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -99
   m_Sprite: {fileID: 21300000, guid: 3180829be7afcd44ab156e98c35a7f30, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -408173,7 +408598,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: f42c3d9b4f7733b47a2bbd08e65d8d2e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -408414,6 +408839,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1566897668}
     m_Modifications:
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
       propertyPath: wards.Array.size
@@ -408665,7 +409095,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 61
+  m_SortingOrder: 121
   m_Sprite: {fileID: 21300000, guid: 44020ea1e9bc73042bf628bced873d35, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -411089,7 +411519,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: d0867a03d917c394893aa64ea71e2643, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -411239,7 +411669,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: f42c3d9b4f7733b47a2bbd08e65d8d2e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -411769,6 +412199,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1424367385}
     m_Modifications:
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
       propertyPath: wards.Array.size
@@ -420739,6 +421174,148 @@ Transform:
   - {fileID: 502381173}
   m_Father: {fileID: 800376629}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1990914882
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294378148757205271, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8445569646641387856, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+        type: 3}
+      propertyPath: m_Name
+      value: GameOverCanvas
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 97958e05d94518740b9d3fb4d1f4d6fc, type: 3}
+--- !u!114 &1990914883 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6059964007327400923, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1990914882}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709fddb4ef3cdd64ebca37cb69c23f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1990914884 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2682417561095746081, guid: 97958e05d94518740b9d3fb4d1f4d6fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1990914882}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709fddb4ef3cdd64ebca37cb69c23f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1997882146
 GameObject:
   m_ObjectHideFlags: 0
@@ -420813,7 +421390,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 25.25, y: 47.66743, z: 0}
   m_MaxChunkCount: 16
@@ -421030,7 +421607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2008162229
 Transform:
   m_ObjectHideFlags: 0
@@ -421717,7 +422294,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.625, y: 0.5416666, z: 0}
   m_MaxChunkCount: 16
@@ -435661,6 +436238,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Cuwowor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -436169,6 +436751,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
         type: 3}
+      propertyPath: _voiceName
+      value: Voice_Fairy_Ganeayoor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715363996440873332, guid: e147296ee199b0742886ce87bd4e1c5e,
+        type: 3}
       propertyPath: wards.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -436324,7 +436911,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -99
   m_Sprite: {fileID: 21300000, guid: 3180829be7afcd44ab156e98c35a7f30, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -436552,7 +437139,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 120
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.6443062, y: 3.1678233, z: 0}
   m_MaxChunkCount: 16
@@ -447228,7 +447815,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: e450882a090d1644d94aa925c6135db1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -447828,3 +448415,4 @@ SceneRoots:
   - {fileID: 2026817398}
   - {fileID: 143490916}
   - {fileID: 413835319}
+  - {fileID: 1990914882}
