@@ -9,9 +9,11 @@ namespace Title
     public class OpeningStoryTitleController : MonoBehaviour
     {
         [SerializeField] private UIButton _startButton;
+        [SerializeField] private UIButton _optionButton;
         [SerializeField] private VideoPlayer _videoPlayer;
 
         [SerializeField] private MovieAnimation _movieAnimation;
+        [SerializeField] private GameObject _optionsPanel;
         private CancellationTokenSource _cts;
 
         private async void Start()
@@ -25,6 +27,7 @@ namespace Title
         {
             _cts = new CancellationTokenSource();
             _startButton.OnClickAddListener(() => UniTask.Void(async () => await HandleStartButtonClick()));
+            _optionButton.OnClickAddListener(OnClickOptionButton);
         }
         
         // ボタン押下時の非同期処理
@@ -32,6 +35,11 @@ namespace Title
         {
             _startButton.gameObject.SetActive(false);
             await _movieAnimation.StartMovieAnimation(_cts.Token);
+        }
+
+        private void OnClickOptionButton()
+        {
+            _optionsPanel.SetActive(true);
         }
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Ending
 {
@@ -6,34 +7,44 @@ namespace Ending
     {
         [SerializeField] private GameObject _nancyObject;
         
+        private PlayerControls _playerControls;
         private EndingSequence _endingSequence;
+        
+        private bool _isEnding;
         
         private void Awake()
         {
             if (!_endingSequence)
                 _endingSequence = FindAnyObjectByType<EndingSequence>();
+
+            _playerControls = new PlayerControls();
+            _isEnding = false;
         }
 
-        private void Update()
+        private void OnEnable()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _nancyObject.SetActive(false);
-                if (_endingSequence == null)
-                {
-                    Debug.LogError("Ending Sequence is null");
-                }
-                else
-                {
-                    Show();
-                }
-            }
+            _playerControls.Enable();
         }
 
-        private async void Show()
+        private void OnDisable()
         {
+            _playerControls.Disable();
+            _playerControls.InGame.Jump.started -= Show;
+        }
+
+        private void Start()
+        {
+            _playerControls.InGame.Jump.started += Show;
+        }
+
+        private async void Show(InputAction.CallbackContext callbackContext)
+        {
+            if (_isEnding) return;
+            
+            _isEnding = true;
+            _nancyObject.SetActive(false);
             CRIAudioManager.BGM.Stop();
-           await _endingSequence.PlayEnding();
+            await _endingSequence.PlayEnding();
         }
     }
 }

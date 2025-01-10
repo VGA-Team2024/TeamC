@@ -28,6 +28,9 @@ namespace Title
                 await UniTask.Delay(TimeSpan.FromSeconds(_textDuration[i]));
                 _text.text = _subTitle[i]; 
             }
+
+            await UniTask.Delay(1000);
+            _text.gameObject.SetActive(false);
         }
     }
 }
