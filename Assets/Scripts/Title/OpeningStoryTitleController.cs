@@ -1,4 +1,7 @@
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Video;
 
 namespace Title
 {
@@ -6,24 +9,29 @@ namespace Title
     public class OpeningStoryTitleController : MonoBehaviour
     {
         [SerializeField] private UIButton _startButton;
-        [SerializeField] private StartAnimation _startAnimation;
+        [SerializeField] private VideoPlayer _videoPlayer;
 
-        private void Start()
+        [SerializeField] private MovieAnimation _movieAnimation;
+        private CancellationTokenSource _cts;
+
+        private async void Start()
         {
+            await _movieAnimation.PrepareMovie();
             Initialize();
         }
 
         // 初期化
         private void Initialize()
         {
-            _startButton.OnClickAddListener(HandleStartButtonClick);
+            _cts = new CancellationTokenSource();
+            _startButton.OnClickAddListener(() => UniTask.Void(async () => await HandleStartButtonClick()));
         }
         
         // ボタン押下時の非同期処理
-        private async void HandleStartButtonClick()
+        private async UniTask HandleStartButtonClick()
         {
             _startButton.gameObject.SetActive(false);
-            await _startAnimation.TitleAnimation();
+            await _movieAnimation.StartMovieAnimation(_cts.Token);
         }
     }
 }

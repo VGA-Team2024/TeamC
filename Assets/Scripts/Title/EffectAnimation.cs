@@ -12,11 +12,11 @@ namespace Title
         [SerializeField] private AnimationCurve _animationCurveY;
         [SerializeField] private AnimationCurve _animationCurveZ;
 
-        [SerializeField, InspectorVariantName("目標地点")]
-        private GameObject _targetObject;
+        [SerializeField, InspectorVariantName("目標地点")] private GameObject _targetObject;
 
-        [SerializeField, InspectorVariantName("指定した位置に向かうまでの時間")]
-        private float _duration;
+        [SerializeField, InspectorVariantName("指定した位置に向かうまでの時間")] private float _duration;
+        
+        [SerializeField] private ParticleSystem _particleSystem;
 
         private Vector3 _startPosition;
 
@@ -66,8 +66,11 @@ namespace Title
 
             // particleの拡大アニメーション
             await particleTransform.DOScale(Vector3.one * 200f, 1f).SetEase(Ease.OutQuad);
-            
-            
+        }
+
+        public void AddCreate()
+        {
+            _particleSystem.Play();
         }
     }
 }

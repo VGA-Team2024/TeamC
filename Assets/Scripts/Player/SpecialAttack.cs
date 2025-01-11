@@ -3,6 +3,7 @@ using DG.Tweening;
 
 public class SpecialAttack : MonoBehaviour
 {
+    private readonly int Catch = Animator.StringToHash("Catch");
     private Player _player;
     private ITeleportable _parentTp;
     private Vector3 _dir;
@@ -14,16 +15,16 @@ public class SpecialAttack : MonoBehaviour
     private float _returnTimer = 1;
     [SerializeField, InspectorVariantName("戻る時のイージング")]
     Ease _returnEase = Ease.Linear;
+    [SerializeField, InspectorVariantName("特殊攻撃の距離")] 
+    private float _range = 8;
+    [SerializeField, InspectorVariantName("Hit時ずらしVec3")]
+    private Vector3 _hitMisalignment = new Vector3(0f, 0.5f, 0f);
 
     private Vector3 _originLocalPos;
     
     private Tween _twForward;
     private Tween _twBack;
     private float _currentPos;
-    [SerializeField, InspectorVariantName("特殊攻撃の距離")] 
-    private float _range = 8;
-    [SerializeField, InspectorVariantName("Hit時ずらしVec3")]
-    private Vector3 _hitMisalignment = new Vector3(0f, 0.5f, 0f);
 
     private void Awake()
     {
@@ -62,13 +63,14 @@ public class SpecialAttack : MonoBehaviour
     }
 
     void NeedleBackMove(float backRange , float time)
-    {
+    {// 針が戻ってくる移動
         _twBack = DOTween.To(() => backRange, x
                     => _currentPos = x,
                 0, time
             ).OnUpdate(() => transform.transform.localPosition = _dir * _currentPos + _originLocalPos)
             .OnComplete(() => 
             {
+                _player.Animator.SetTrigger(Catch);
                 this.gameObject.SetActive(false);
             }).SetEase(_returnEase);
     }
@@ -77,16 +79,32 @@ public class SpecialAttack : MonoBehaviour
     {
         if(other.TryGetComponent<ITeleportable>(out ITeleportable tp))
         {// テレポート対象に当たる
+            // テレポート
             Vector3 pos = other.transform.position;
             tp.Teleport(_player.transform.position + _hitMisalignment);
             _parentTp.Teleport(pos + _hitMisalignment);
+            // DoTweenの停止
             _twForward.Kill(false);
+            _player.Animator.SetTrigger(Catch);
+            // 妖精ゲージの消費
+            _player.PlayerStatus.UseFairyGauge(_player.PlayerAttack.SpDiminution);
+            // 針をActiveじゃない状態に
             this.gameObject.SetActive(false);
         }
         else if(other.isTrigger == false)
         {// 対象外のオブジェクに当たる
             _twForward.Kill(false);
             NeedleBackMove(_currentPos,_currentPos / _range * _returnTimer);
+        }
+
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            PlayerEffectManager.Instance.ParentInstanceEffect(other.gameObject.transform,
+                InstancePlayEffectName.PlayerSpecialAttackEffect,
+                other.gameObject.transform.position);
+            Transform parentObj = gameObject.transform.parent.gameObject.transform;
+            PlayerEffectManager.Instance.ParentInstanceEffect(parentObj, InstancePlayEffectName.PlayerSpecialAttackEffect,
+                parentObj.transform.position);
         }
     }
 }

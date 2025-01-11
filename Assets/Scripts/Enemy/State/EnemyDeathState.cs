@@ -8,23 +8,27 @@ public class EnemyDeathState : IEnemyState
     private static event Action<EnemyBase> OnEnemyDestroyed;
     private readonly EnemyBase _enemyBase;
     private readonly ParticleSystem _particle;
+    private readonly Animator _animator;
+    private readonly int _death = Animator.StringToHash("Death");
     private readonly GameObject _obj;
     private GameObject _generateObj;
+    private Transform _transform;
     
     /// <param name="generateObj"> 死んだときに生成する敵などがいたら入れる </param>
-    public EnemyDeathState(EnemyBase enemyBase,ParticleSystem particle, GameObject obj, GameObject generateObj = null)
+    public EnemyDeathState(EnemyBase enemyBase,ParticleSystem particle, Animator animator, GameObject obj, GameObject generateObj = null, Transform transform = null)
     {
         _enemyBase = enemyBase;
         _particle = particle;
+        _animator = animator;
         _obj = obj;
         _generateObj = generateObj;
+        _transform = transform;
     }
     
     public void Enter()
     {
-        _obj.transform.rotation = Quaternion.Euler(0, 0, 180); 
-        OnEnemyDestroyed?.Invoke(_enemyBase);
-        _particle.Play();
+        _obj.layer = LayerMask.NameToLayer("EnemyDeath");
+        if (_animator) _animator.Play(_death, 0, 0);
         Destroy().Forget();
     }
 
@@ -40,7 +44,12 @@ public class EnemyDeathState : IEnemyState
 
     private async UniTask Destroy()
     {
+        await UniTask.WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+        _obj.transform.rotation = Quaternion.Euler(0, 0, 180); 
+        OnEnemyDestroyed?.Invoke(_enemyBase);
+        _particle.Play();
         await UniTask.WaitUntil(() => _particle.isStopped);
+        if (_generateObj) ObjectInstantiator.InstantiateObject(_generateObj, _transform.position, Quaternion.identity);
         GameObject.Destroy(_obj);
     }
     

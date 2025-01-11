@@ -1,49 +1,82 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cysharp.Threading.Tasks;
 
 public class PlayerAttack : MonoBehaviour
 {
+    private readonly int CanAttackAnim = Animator.StringToHash("CanAttack");
     private readonly int Attack = Animator.StringToHash("Attack");
-    private PlayerControls _controls;
+    private readonly int Throw = Animator.StringToHash("Throw");
+    private readonly int Vertical = Animator.StringToHash("Vertical");
+    private readonly int RangeAttack = Animator.StringToHash("RangeAttack");
     private Player _player;
+    [Header("通常攻撃")]
     [SerializeField, InspectorVariantName("通常攻撃のゲームオブジェクト")] 
     private GameObject _attackCollider;
-    [SerializeField, InspectorVariantName("特殊攻撃のゲームオブジェクト")] 
+    [SerializeField, InspectorVariantName("自身の吹き飛び")]
+    private Vector2 _hitKnockBack;
+    [SerializeField, InspectorVariantName("吹き飛び時間")]
+    private float _knockBackTimer = 0.1f;
+    [SerializeField, InspectorVariantName("上下攻撃の座標Y")]
+    private float _attackPosY;
+    [SerializeField, InspectorVariantName("クールタイム")]
+    private float _attackCoolTime = 0.5f;
+    private Vector3 _atkPos;
+    private bool _canAttack = true;
+    public bool CanAttack => _canAttack;
+    
+    [Header("特殊攻撃")]
+    [SerializeField, InspectorVariantName("ゲームオブジェクト")] 
     private GameObject _specialCollider;
-    [SerializeField, InspectorVariantName("遠距離攻撃のプレハブ")]
+    [SerializeField, InspectorVariantName("減る妖精ゲージ")]
+    private float _spAttackDiminution = 150;
+
+    public float SpDiminution => _spAttackDiminution;
+
+    [Header("遠距離攻撃")]
+    [SerializeField, InspectorVariantName("プレハブ")]
     private GameObject _rangeCollider;
-
-    [SerializeField, InspectorVariantName("遠距離攻撃速度")]
+    [SerializeField, InspectorVariantName("弾速")]
     private float _rangeAttackSpeed = 10;
-
-    [SerializeField, InspectorVariantName("遠距離攻撃が消えるまでの時間")]
+    [SerializeField, InspectorVariantName("消えるまでの時間")]
     private float _lifeTime = 5;
-    private bool _attackAnimTrigger;
+    [SerializeField, InspectorVariantName("消費妖精ゲージ")]
+    private float _rangeAttackDiminution = 100;
+    [SerializeField, InspectorVariantName("クールタイム")]
+    private float _rangeCoolTime = 1;
+    private bool _canRangeAttack = true;
 
-    private bool _musicBoxPlaying;
+    private float _axisY;
+    private bool _attackAnimTrigger;
+    private PlayerControls _controls;
+
 
     private void Awake()
     {
-        _controls = new PlayerControls();
         _player = GetComponent<Player>();
+        _controls = new PlayerControls();
         _controls.InGame.Attack.started += OnAttack;
-        _controls.InGame.Attack.canceled += AttackCancel;
         _controls.InGame.SpecialAttack.started += OnSpecialAttack;
         _controls.InGame.LongRangeAttack.canceled += OnLongRangeAttack;
-        _controls.InGame.MusicBox.performed += ((c) => _musicBoxPlaying = true);
-        //_player.AnimationEvent.EventDictionary.Add("Attack" ,AttackColliderSetActive);
+        _controls.InGame.Vertical.started += OnVertical;
+        _controls.InGame.Vertical.performed += OnVertical;
+        _controls.InGame.Vertical.canceled += OnVertical;
+        _player.AnimEvent.AnimEventDic.Add(PlayerAnimationEventController.animationType.AttackColliderEnable,AttackColliderSetActive);
+        _player.AnimEvent.AnimEventDic.Add(PlayerAnimationEventController.animationType.AttackRangeEnable,RangeAttackInstantiate);
+        _player.AnimEvent.AnimEventDic.Add(PlayerAnimationEventController.animationType.AttackSpThrow,() => _specialCollider.SetActive(true));
+        _atkPos = _attackCollider.transform.localPosition;
     }
     
     private void OnDestroy()
     {
         _controls.Dispose();
         _controls.InGame.Attack.started -= OnAttack;
-        _controls.InGame.Attack.canceled -= AttackCancel;
         _controls.InGame.SpecialAttack.started -= OnSpecialAttack;
         _controls.InGame.LongRangeAttack.canceled -= OnLongRangeAttack;
-        _controls.InGame.MusicBox.performed -= ((c) => _musicBoxPlaying = true);
+        _controls.InGame.Vertical.started -= OnVertical;
+        _controls.InGame.Vertical.performed -= OnVertical;
+        _controls.InGame.Vertical.canceled -= OnVertical;
     }
 
     private void OnEnable()
@@ -53,43 +86,88 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnDisable()
     {
-        _controls.Dispose();
+        _controls.Disable();
+    }
+
+    private void Start()
+    {
+        _player.Animator.SetBool(CanAttackAnim,true);
     }
 
     private async void OnAttack(InputAction.CallbackContext context)
     {
-        _attackAnimTrigger = true;
-        _player.Animator.SetBool(Attack,_attackAnimTrigger);
-        _attackAnimTrigger = false;
-        await UniTask.Delay(100);
-        AttackColliderSetActive();
+        if(!_canAttack) return;
+        _canAttack = false;
+        _player.Animator.SetBool(CanAttackAnim,false);
+        _player.Animator.SetTrigger(Attack);
+        
+        await UniTask.Delay(TimeSpan.FromSeconds(_attackCoolTime), cancellationToken: _player.CancellationToken);
+        _player.Animator.SetBool(CanAttackAnim,true);
+        _canAttack = true;
     }
 
-    private void AttackCancel(InputAction.CallbackContext context)
+    private void OnVertical(InputAction.CallbackContext context)
     {
-        _attackAnimTrigger = false;
-        _player.Animator.SetBool(Attack,_attackAnimTrigger);
+        _axisY = context.ReadValue<float>();
+        _player.Animator.SetFloat(Vertical,_axisY);
     }
-
+    
     private void AttackColliderSetActive()
     {
-        // 攻撃用当たり判定をアクティブにする
-        Vector3 atkPos = _attackCollider.transform.localPosition;
-        _attackCollider.transform.localPosition = new Vector3(Mathf.Abs(atkPos.x) * (_player.PlayerMove.PlayerFlip ? 1 : -1),atkPos.y, atkPos.z);
+        // positionの設定
+        _attackCollider.transform.localPosition =
+            new Vector3(
+                _atkPos.x * (_player.PlayerMove.PlayerFlip ? 1 : -1), //左右の向き
+                _atkPos.y, // 上下攻撃
+                _atkPos.z);
+
+        if (_axisY != 0)
+        {
+            if (_axisY > 0)
+            {// 上入力
+                _attackCollider.transform.localPosition = new Vector2(0, _attackPosY);
+                PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffectUp,0);
+            }
+            else if (!_player.PlayerMove.IsGround)
+            {// 下入力かつ空中
+                _attackCollider.transform.localPosition = new Vector2(0, _attackPosY * -1);
+                PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffectDown, 0);
+            }
+        }
+        else
+        {
+            //横入力
+            PlayerEffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffect,
+                Mathf.Approximately(gameObject.transform.GetChild(1).localEulerAngles.y, 180) ? 1 : 0);
+        }
         _attackCollider.SetActive(true);
-        EffectManager.Instance.PlayEffect(PlayEffectName.PlayerAttackEffect,
-            Mathf.Approximately(gameObject.transform.GetChild(0).localEulerAngles.y, 180) ? 1 : 0);
         // 非アクティブは_attackCollider自身がする
+    }
+
+    public async void HitKnockBack()
+    {
+        _player.PlayerMove.IsMove = false;
+        _player.Rigidbody.velocity = Vector3.zero;
+        _player.Rigidbody.AddForce(_player.PlayerMove.PlayerFlip ? 
+            _hitKnockBack : 
+            new Vector2( _hitKnockBack.x *-1, _hitKnockBack.y)
+            , ForceMode.Impulse);
+        await UniTask.Delay((TimeSpan.FromSeconds(_knockBackTimer)),cancellationToken: _player.CancellationToken);
+        _player.PlayerMove.IsMove = true;
     }
 
     private void OnSpecialAttack(InputAction.CallbackContext context)
     {
+        if(!_player.PlayerStatus.CanUseFairyGauge(_spAttackDiminution) || _specialCollider.activeSelf)
+            return; // 妖精ゲージが足りていなければ出せない
         if (!_player.PlayerMove.Dashing)
         {
             // 位置の固定
             _player.PlayerMove.IsFreeze = (true, true);
-            // 特殊攻撃用当たり判定をアクティブにする
-            _specialCollider.SetActive(true);
+            // アニメーションの再生　　　　　_specialColliderのActiveはAnimationEventで行う
+            _player.Animator.SetTrigger(Throw);
+            // ジャンプのキャンセル
+            _player.PlayerMove.JumpTokenCancel();
             // 非アクティブは_specialCollider自身がする
         }
     }
@@ -100,14 +178,27 @@ public class PlayerAttack : MonoBehaviour
         _specialCollider.SetActive(false);
     }
 
-    private void OnLongRangeAttack(InputAction.CallbackContext context)
+    private async void OnLongRangeAttack(InputAction.CallbackContext context)
     {
-        if (!_musicBoxPlaying)
+        if (!_player.PlayerMusicBox.MusicBoxPlaying && // オルゴールが再生中でない
+            _player.PlayerStatus.IsLongRangeAttackRelease && // 遠距離攻撃が解放されている
+            _player.PlayerStatus.CanUseFairyGauge(_rangeAttackDiminution) && // ゲージが十分
+            _canRangeAttack) //クールタイム中でない
         {
-            // ToDo: AnimationEventで呼ぶようにする
+            _canRangeAttack = false;
+            //アニメーションの再生
+            _player.Animator.SetTrigger(RangeAttack);
             RangeAttackInstantiate();
+            _player.PlayerStatus.UseFairyGauge(_rangeAttackDiminution);
+            _player.PlayerMusicBox.MusicBoxPlaying = false;
+            
+            await UniTask.Delay(TimeSpan.FromSeconds(_rangeCoolTime), cancellationToken: _player.CancellationToken);
+            _canRangeAttack = true;
         }
-        _musicBoxPlaying = false;
+        else
+        {
+            _player.PlayerMusicBox.MusicBoxPlaying = false;
+        }
     }
 
     private void RangeAttackInstantiate()

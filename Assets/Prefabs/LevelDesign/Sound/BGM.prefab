@@ -45,4 +45,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bgmCueSheet: BGM
-  _forestBGM: BGM_Stage01_Forest01
+  _soundList:
+  - _stageEnum: 1
+    _cueName: BGM_Stage01_Forest01
+  - _stageEnum: 2
+    _cueName: BGM_Stage02_Castle01
+  - _stageEnum: 3
+    _cueName: BGM_Boss1_Moriss01
+  - _stageEnum: 4
+    _cueName: BGM_Boss2_Doora01
+  - _stageEnum: 5
+    _cueName: BGM_Boss3_Nancy01
+  - _stageEnum: 6
+    _cueName: BGM_Ending_Prototype
+  - _stageEnum: 0
+    _cueName: BGM_Outgame_introduction01

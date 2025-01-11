@@ -1,29 +1,63 @@
+using System;
+using System.Threading;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private PlayerMove _playerMove;
-    public PlayerMove PlayerMove => _playerMove;
-    
     [SerializeField] Animator _animator;
     public Animator Animator => _animator;
     
-    [SerializeField] private SpriteStudioAnimationEventScript _animationEvent;
-    public SpriteStudioAnimationEventScript AnimationEvent => _animationEvent;
+    [SerializeField] private PlayerAnimationEventController _animEvent;
+    public PlayerAnimationEventController AnimEvent => _animEvent;
     
-    private PlayerSounds _playerSounds;
-    public PlayerSounds PlayerSounds => _playerSounds;
+    [SerializeField] private PlayerStatusUI _playerStatusUI;
+    public PlayerStatusUI PlayerStatusUI => _playerStatusUI;
+
+    public Rigidbody Rigidbody { get; private set; }
     
-    private PlayerStatus _playerStatus;
-    public PlayerStatus PlayerStatus => _playerStatus;
+    public PlayerMove PlayerMove {get; private set; }
     
-    private PlayerAttack _playerAttack;
-    public PlayerAttack PlayerAttack => _playerAttack;
+    public PlayerSounds PlayerSounds { get; private set; }
+    
+    public PlayerStatus PlayerStatus { get; private set; }
+    
+    public PlayerAttack PlayerAttack { get; private set; }
+    
+    public PlayerMusicBox PlayerMusicBox { get; private set; }
+    
+    private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+    
+    public CancellationToken CancellationToken => _cancellationTokenSource.Token;
+
+    public GameOverManager GameOver {get; private set; }
+
     private void Awake()
     {
-        _playerMove = GetComponent<PlayerMove>();
-        _playerSounds = GetComponent<PlayerSounds>();
-        _playerStatus = GetComponent<PlayerStatus>();
-        _playerAttack = GetComponent<PlayerAttack>();
+        Rigidbody = GetComponent<Rigidbody>();
+        PlayerMove = GetComponent<PlayerMove>();
+        PlayerSounds = GetComponent<PlayerSounds>();
+        PlayerStatus = GetComponent<PlayerStatus>();
+        PlayerAttack = GetComponent<PlayerAttack>();
+        PlayerMusicBox = GetComponent<PlayerMusicBox>();
+    }
+
+    private void Start()
+    {
+        try
+        {
+            _playerStatusUI= GameObject.Find("PlayerUICanvas").GetComponent<PlayerStatusUI>();
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning($"PlayerUICanvas can't be found \n {e.Message}");
+        }
+
+        GameOverManager.I.Player = this;
+    }
+
+    private void OnDestroy()
+    {
+        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource.Dispose();
     }
 }

@@ -1,0 +1,186 @@
+using Cysharp.Threading.Tasks;
+using UnityEngine;
+
+public class Dragon : EnemyBase, IPlayerTarget
+{
+    [SerializeField, Header("接触時攻撃力")] private int _collideDamage;
+    [SerializeField, Header("playerにぶつかった後動けるまでの時間")] private int _freezeTime;
+    [SerializeField, Header("前方攻撃後の待機時間")] private int _attackFreezeTime;
+    [SerializeField, Header("地上ブレス後の待機時間")] private int _shootFreezeTime;
+    [SerializeField, Header("突進後の待機時間")] private int _rushFreezeTime;
+    [SerializeField, Header("ジャンプ後の待機時間")] private int _jumpAttackFreezeTime;
+    [SerializeField, Header("飛行ブレス後の待機時間")] private int _flyFreezeTime;
+    [SerializeField, Header("歩行後の待機時間")] private int _chaseFreezeTime;
+    [SerializeField, Header("Playerにつけるタグの名前")] private string _playerTag;
+    [SerializeField, Header("ジャンプ攻撃時のスピード")] private float _jumpSpeed;
+    [SerializeField, Header("ジャンプ攻撃時の限界高度")] private float _jumpHeight;
+    [SerializeField, Header("突進時の移動距離")] private float _rushDistance;
+    [SerializeField, Header("突進時のスピード")] private float _rushSpeed;
+    [SerializeField, Header("何秒歩行をするか")] private int _walkTime;
+    [SerializeField, Header("飛行時にどのくらい飛ぶか")] private float _height;
+    [SerializeField, Header("ブレスの弾")] private GameObject _breathBullet;
+    [SerializeField, Header("地上ブレスのoffset")] private Vector2 _offSet;
+    [SerializeField, Header("距離A")] private int _disA;
+    [SerializeField, Header("距離B")] private int _disB;
+    [SerializeField, Header("距離C")] private int _disC;
+    [SerializeField, Header("距離Bにいたときの攻撃のそれぞれの確率")]
+    private Weight[] _disBWeights = new Weight[4]
+    {
+        new Weight("地上ブレス"),
+        new Weight("突進"),
+        new Weight("ジャンプ攻撃"),
+        new Weight("歩行なら待機, 待機なら歩行")
+    };
+    [SerializeField, Header("距離Cにいたときの攻撃のそれぞれの確率")]
+    private Weight[] _disCWeights = new Weight[3]
+    {
+        new Weight("地上ブレス"),
+        new Weight("突進"),
+        new Weight("飛行->空中ブレス")
+    };
+
+    private Animator _animator;
+    private readonly int _flyEnd = Animator.StringToHash("FlyEnd"); // FlyEndは着地したときにplay
+    private bool _canMove; // 飛んでる間は次の攻撃ができないようにする用
+    
+    private EnemyChaseState _chaseState; // 歩行ステート
+    private EnemyAttackState _attackState;
+    private EnemyJumpAttackState _jumpAttackState;
+    private EnemyRushState _rushState;
+    private EnemyShootState _shootState;
+    private EnemyBreathState _breathState;
+    private EnemyFlyState _flyState;
+    private EnemyFreezeState _freezeState;
+    private EnemyFreezeState _chaseFreezeState; // 歩行後の待機ステート
+    private EnemyFreezeState _attackFreezeState; // 前方攻撃後の待機ステート
+    private EnemyFreezeState _jumpAttackFreezeState; // ジャンプ攻撃後の待機ステート
+    private EnemyFreezeState _rushFreezeState; // 突進攻撃後の待機ステート
+    private EnemyFreezeState _shootFreezeState; // 地上ブレス後の待機ステート
+    private EnemyFreezeState _flyFreezeState; // 飛行ブレス後の待機ステート
+    private EnemyDeathState _deathState;
+    
+    protected override void OnStart()
+    {
+        ParticleSystem particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
+        GameObject attackCollider = gameObject.transform.GetChild(2).gameObject;
+        GameObject breaths = gameObject.transform.GetChild(3).gameObject;
+        _animator = gameObject.transform.GetChild(4).GetComponent<Animator>();
+        Rigidbody rb = GetComponent<Rigidbody>();
+        EnemySounds sounds = GetComponent<EnemySounds>();
+
+        _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
+        _chaseFreezeState = new EnemyFreezeState(this, _idleState, _chaseFreezeTime);
+        _attackFreezeState = new EnemyFreezeState(this, _idleState, _attackFreezeTime);
+        _jumpAttackFreezeState = new EnemyFreezeState(this, _idleState, _jumpAttackFreezeTime);
+        _rushFreezeState = new EnemyFreezeState(this, _idleState, _rushFreezeTime);
+        _shootFreezeState = new EnemyFreezeState(this, _idleState, _shootFreezeTime);
+        _flyFreezeState = new EnemyFreezeState(this, _idleState, _flyFreezeTime);
+        
+        _chaseState = new EnemyChaseState(this, _chaseFreezeState, _animator, transform, _speed, false, _walkTime);
+        _attackState = new EnemyAttackState(this, _attackFreezeState, _animator, attackCollider);
+        _jumpAttackState = new EnemyJumpAttackState(this, _jumpAttackFreezeState, _animator, transform, _jumpSpeed, _jumpHeight, rb);
+        _rushState = new EnemyRushState(this, _rushFreezeState, _animator, transform, _rushDistance, _rushSpeed);
+        _shootState = new EnemyShootState(this, _shootFreezeState, _animator, transform, _offSet, _breathBullet, sounds); // 地上ブレス
+        _breathState = new EnemyBreathState(this, _flyFreezeState, _animator, breaths, sounds); // 飛びブレス
+        _flyState = new EnemyFlyState(this, _breathState, _animator, transform, rb, _height, sounds);
+        _deathState = new EnemyDeathState(this, particle, _animator, gameObject);
+        
+    }
+
+    protected override void OnUpdate()
+    {
+        if (_isDeath) return;
+        
+        if (_hp.CurrentHp <= 0)
+        {
+            _isDeath = true;
+            ChangeState(_deathState);
+            return;
+        }
+        
+        if (_playerMove && _canMove)
+        {
+            if (_currentState != _idleState && _currentState != _chaseState) return;
+            transform.eulerAngles = new Vector2(0, _playerMove.transform.position.x > transform.position.x ? 0 : 180);
+            switch (Distance())
+            {
+                case 1: // 距離A
+                    ChangeState(_attackState);
+                    break;
+                case 2: // 距離B
+                {
+                    var num = EnemyUtility.ProbabilityCalculate(_disBWeights);
+                    if (num == 0) _shootState.GetPlayerPos(_playerMove.transform.position);
+                    if (num == 2) _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
+                    ChangeState(num switch
+                    {
+                        0 => _shootState,
+                        1 => _rushState,
+                        2 => _jumpAttackState,
+                        _ => _currentState == _idleState ? _chaseState : _idleState
+                    });
+                }
+                    break;
+                case 3: // 距離C
+                {
+                    var num = EnemyUtility.ProbabilityCalculate(_disCWeights);
+                    if (num == 0) _shootState.GetPlayerPos(_playerMove.transform.position);
+                    ChangeState(num switch
+                    {
+                        0 => _shootState,
+                        1 => _rushState,
+                        _ => _flyState
+                    });
+                    if (num == 2) _canMove = false;
+                }
+                    break;
+            }
+        }
+    }
+    
+    public void GetPlayerMove(PlayerMove playerMove)
+    {
+        if (playerMove) _playerMove = playerMove;
+    }
+    
+    private void OnCollisionStay(Collision other)
+    {
+        if (!other.gameObject.CompareTag(_playerTag)) return;
+        if(other.gameObject.TryGetComponent(out IDamageable dmg) && other.gameObject.TryGetComponent(out IBlowable blo))
+        {
+            dmg.TakeDamage(_collideDamage);
+            blo.BlownAway(transform.position);
+            ChangeState(_freezeState);
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (_canMove) return;
+        if (LayerMask.LayerToName(other.gameObject.layer) != "Ground") return;
+        _animator.SetTrigger(_flyEnd);
+        CanMove().Forget();
+    }
+    
+    private int Distance()
+    {
+        var dis = Mathf.Abs(transform.position.x - _playerMove.transform.position.x);
+        return dis <= _disA ? 1 : dis <= _disB ? 2 : 3;
+    }
+
+    private async UniTask CanMove() // 着地のアニメーションが再生し終わったら動けるように
+    {
+        await UniTask.WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+        _canMove = true;
+    }
+    
+    void OnDrawGizmos()
+    {
+        if (Application.isPlaying) return;
+        // 距離A,B,C がどのくらいか
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(new Vector3(transform.position.x + _disA, transform.position.y), 1f);
+        Gizmos.DrawSphere(new Vector3(transform.position.x + _disB, transform.position.y), 1f);
+        Gizmos.DrawSphere(new Vector3(transform.position.x + _disC, transform.position.y), 1f);
+    }
+}

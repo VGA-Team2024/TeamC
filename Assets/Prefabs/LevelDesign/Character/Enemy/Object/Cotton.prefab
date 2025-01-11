@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -8253879635120411312}
   - component: {fileID: 3855741702691264513}
   - component: {fileID: 7085799352067910994}
+  - component: {fileID: 7422479430144382211}
   - component: {fileID: 6256446193173497057}
   m_Layer: 0
   m_Name: Cotton
@@ -76,8 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 997cf0d71095b6a498cb8c84815c3812, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5308a37930ca9ab48b16e2d29282ccbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _time: 10
+  _deleteTime: 10
+  _effectTime: 3
 --- !u!114 &7085799352067910994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +114,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3f5943939d931d47899f120d85186b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 5
+  _maxHp: 2
+--- !u!114 &7422479430144382211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072312635714639250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c02c58bf4df1f844a061c03c5159cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
 --- !u!135 &6256446193173497057
 SphereCollider:
   m_ObjectHideFlags: 0

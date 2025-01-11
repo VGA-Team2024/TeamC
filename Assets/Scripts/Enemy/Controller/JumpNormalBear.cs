@@ -8,10 +8,7 @@ public class JumpNormalBear : EnemyBase, IPlayerTarget
     [SerializeField, Header("Playerを攻撃した後次の攻撃が可能になるまでの時間")] private int _freezeTime;
     [SerializeField, Header("Playerにつけるタグの名前")] private string _playerTag;
     [SerializeField, Header("ジャンプのスピード")] private float _jumpSpeed;
-    [SerializeField, Header("敵の動き方")] private AnimationCurve _animationCurve;
-    
-    private ParticleSystem _particle;
-    private Animator _animator;
+    [SerializeField, Header("ジャンプ攻撃時の限界高度")] private float _jumpHeight;
     
     private EnemyWalkState _walkState;
     private EnemyJumpAttackState _jumpAttackState;
@@ -20,35 +17,38 @@ public class JumpNormalBear : EnemyBase, IPlayerTarget
     
     protected override void OnStart()
     {
-        _particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
-        _animator = gameObject.transform.GetChild(2).GetComponent<Animator>();
+        ParticleSystem particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
+        Animator animator = gameObject.transform.GetChild(2).GetComponent<Animator>();
+        Rigidbody rb = GetComponent<Rigidbody>();
         
-        _walkState = new EnemyWalkState(this, _animator, transform, _speed, _patrolArea);
+        _walkState = new EnemyWalkState(animator, transform, _speed, _patrolArea);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
-        _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, _animator, transform, _jumpSpeed, _animationCurve);
-        _deathState = new EnemyDeathState(this, _particle, gameObject);
+        _jumpAttackState = new EnemyJumpAttackState(this, _freezeState, animator, transform, _jumpSpeed, _jumpHeight, rb);
+        _deathState = new EnemyDeathState(this, particle, animator, gameObject);
     }
 
     protected override void OnUpdate()
     {
         if (_isDeath) return;
         
+        if (_hp.CurrentHp <= 0)
+        {
+            _isDeath = true;
+            ChangeState(_deathState);
+            return;
+        }
+        
         if (_playerMove)
         {
             if (_currentState == _jumpAttackState || _currentState == _freezeState) return;
             
             transform.eulerAngles = new Vector2(0, _playerMove.transform.position.x > transform.position.x ? 0 : 180);
+            _jumpAttackState.GetPlayerPos(_playerMove.transform.position);
             ChangeState(_jumpAttackState);
         }
         else
         {
             if (_currentState == _idleState) ChangeState(_walkState);
-        }
-        
-        if (_hp.CurrentHp <= 0)
-        {
-            _isDeath = true;
-            ChangeState(_deathState);
         }
     }
     
@@ -59,11 +59,19 @@ public class JumpNormalBear : EnemyBase, IPlayerTarget
     
     private void OnCollisionStay(Collision other)
     {
-        if (_currentState == _freezeState) return;
-        if(other.gameObject.CompareTag(_playerTag) && other.gameObject.TryGetComponent(out IDamageable dmg))
+        if (!other.gameObject.CompareTag(_playerTag)) return;
+        if(other.gameObject.TryGetComponent(out IDamageable dmg) && other.gameObject.TryGetComponent(out IBlowable blo))
         {
             dmg.TakeDamage(_collideDamage);
+            blo.BlownAway(transform.position);
             ChangeState(_freezeState);
         }
+    }
+    
+    private void OnDrawGizmos()
+    {
+        if(Application.isPlaying) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position + new Vector3(0, 1), Vector3.right * _patrolArea);
     }
 }

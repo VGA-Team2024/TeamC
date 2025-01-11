@@ -23,15 +23,22 @@ public class RushNormalBear : EnemyBase, IPlayerTarget
         _particle = gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
         _animator = gameObject.transform.GetChild(2).GetComponent<Animator>();
         
-        _walkState = new EnemyWalkState(this, _animator, transform, _speed, _patrolArea);
+        _walkState = new EnemyWalkState(_animator, transform, _speed, _patrolArea);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _rushState = new EnemyRushState(this, _freezeState, _animator, transform, _rushDistance, _rushSpeed);
-        _deathState = new EnemyDeathState(this, _particle, gameObject);
+        _deathState = new EnemyDeathState(this, _particle, _animator, gameObject);
     }
 
     protected override void OnUpdate()
     {
         if (_isDeath) return;
+        
+        if (_hp.CurrentHp <= 0)
+        {
+            _isDeath = true;
+            ChangeState(_deathState);
+            return;
+        }
         
         if (_playerMove)
         {
@@ -39,16 +46,11 @@ public class RushNormalBear : EnemyBase, IPlayerTarget
             
             transform.eulerAngles = new Vector2(0, _playerMove.transform.position.x > transform.position.x ? 0 : 180);
             ChangeState(_rushState);
+            gameObject.transform.GetChild(3).GetComponent<ParticleSystem>().Play();
         }
         else
         {
             if (_currentState == _idleState) ChangeState(_walkState);
-        }
-        
-        if (_hp.CurrentHp <= 0)
-        {
-            _isDeath = true;
-            ChangeState(_deathState);
         }
     }
     
@@ -59,11 +61,19 @@ public class RushNormalBear : EnemyBase, IPlayerTarget
     
     private void OnCollisionStay(Collision other)
     {
-        if (_currentState == _freezeState) return;
-        if(other.gameObject.CompareTag(_playerTag) && other.gameObject.TryGetComponent(out IDamageable dmg))
+        if (!other.gameObject.CompareTag(_playerTag)) return;
+        if(other.gameObject.TryGetComponent(out IDamageable dmg) && other.gameObject.TryGetComponent(out IBlowable blo))
         {
             dmg.TakeDamage(_collideDamage);
+            blo.BlownAway(transform.position);
             ChangeState(_freezeState);
         }
+    }
+    
+    private void OnDrawGizmos()
+    {
+        if(Application.isPlaying) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position + new Vector3(0, 1), Vector3.right * _patrolArea);
     }
 }

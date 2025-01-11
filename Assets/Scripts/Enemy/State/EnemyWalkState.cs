@@ -1,36 +1,49 @@
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 /// <summary> 敵の巡回ステート </summary>
 public class EnemyWalkState : IEnemyState
 {
-    private EnemyBase _enemyBase;
     private readonly Animator _animator;
     private readonly int _walk = Animator.StringToHash("Walk");
     private readonly Transform _transform;
     private readonly float _speed;
     private readonly float _patrolArea;
-    private readonly Vector2 _startPos;
+    private readonly Vector3 _startPos;
+    private readonly EnemySounds _sounds;
+    private bool _isPlaying;
+    private const int Interval = 1;
+    private CancellationTokenSource _tokenSource;
     
     private readonly float _rayLength;
     private readonly Vector3 _rayOffset = new Vector3(0, -0.5f, 0);
-    private readonly Vector2 _rightDir = new Vector2(1, -1).normalized;
-    private readonly Vector2 _leftDir = new Vector2(-1, -1).normalized;
+    private readonly Vector2 _rightRayDir;
+    private readonly Vector2 _leftRayDir;
+
+    private readonly Vector3 right = new Vector3(0, 180, 0);
+    private readonly Vector3 left = new Vector3(0, 0, 0);
     
-    public EnemyWalkState(EnemyBase enemyBase,Animator animator, Transform transform, float speed, float area)
+    public EnemyWalkState(Animator animator, Transform transform, float speed, float area, EnemySounds sounds = null)
     {
-        _enemyBase = enemyBase;
         _animator = animator;
         _transform = transform;
         _startPos = transform.position;
         _speed = speed;
         _patrolArea = area;
-        _rayLength = transform.gameObject.GetComponent<BoxCollider>().size.y / 2 + 1f;
+        _sounds = sounds;
+        var colliderSize = transform.gameObject.GetComponent<BoxCollider>().size;
+        _rayLength = colliderSize.y / 2 + 1f;
+        _rightRayDir = new Vector2(colliderSize.x, -colliderSize.y).normalized;
+        _leftRayDir = new Vector2(-colliderSize.x, -colliderSize.y).normalized;
     }
     
     
     public void Enter()
     {
+        _tokenSource = new CancellationTokenSource();
         _animator.SetBool(_walk, true);
+        PlaySe().Forget();
     }
 
     public void Execute()
@@ -41,36 +54,52 @@ public class EnemyWalkState : IEnemyState
 
     public void Exit()
     {
+        _isPlaying = false;
         _animator.SetBool(_walk, false);
+        _tokenSource?.Cancel();
+        _tokenSource?.Dispose();
     }
     
     private void Walk()
     {
-        _transform.Translate(Vector3.right * -(Time.deltaTime * _speed));
+        Vector3 newPos = _transform.position + -_transform.right * (Time.deltaTime * _speed);
+        _transform.position = new Vector3(newPos.x, newPos.y, 0);
     }
 
     private void Direction()
     {
         // 前に床がなければ引き返す
         Vector3 rayOrigin = _transform.position + _rayOffset;
-        bool hit = Physics.Raycast(rayOrigin, _transform.rotation.y > 0 ? _rightDir : _leftDir, out RaycastHit hitInfo, _rayLength);
+        bool hit = Physics.Raycast(rayOrigin, _transform.rotation.y > 0 ? _rightRayDir : _leftRayDir, out RaycastHit hitInfo, _rayLength);
 
         // 前が壁なら引き返す
         bool wallHit = Physics.Raycast(rayOrigin, -_transform.right, out RaycastHit wallHitInfo, _rayLength);
         
         if (!hit || LayerMask.LayerToName(hitInfo.transform.gameObject.layer) != "Ground" || wallHit && LayerMask.LayerToName(wallHitInfo.transform.gameObject.layer) == "Ground")
         {
-            _transform.eulerAngles = new Vector2(0, _transform.eulerAngles.y == 0 ? 180 : 0);
+            _transform.eulerAngles = new Vector3(0, _transform.eulerAngles.y == 0 ? right.y : left.y);
         }
         
         if (_transform.position.x <= _startPos.x + 0.01f)
         {
-            _transform.eulerAngles = new Vector2(0, 180);
+            _transform.eulerAngles = right;
         }
 
-        if (_transform.position.x >= _startPos.x + _patrolArea - 0.1f)
+        if (_transform.position.x >= _startPos.x + _patrolArea - 0.01f)
         {
-            _transform.eulerAngles = new Vector2(0, 0);
+            _transform.eulerAngles = left;
+        }
+    }
+
+    private async UniTask PlaySe()
+    {
+        _isPlaying = true;
+
+        while (_isPlaying)
+        {
+            if (_sounds != null) _sounds.PlayEnemySE(EnemySeEnum.Walk);
+
+            await UniTask.Delay(Interval * 1000, cancellationToken : _tokenSource.Token);
         }
     }
 }

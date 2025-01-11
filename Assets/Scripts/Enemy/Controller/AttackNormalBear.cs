@@ -11,6 +11,7 @@ public class AttackNormalBear : EnemyBase, IPlayerTarget
     private ParticleSystem _particle;
     private Animator _animator;
     private GameObject _attackCollider;
+    private int _turn = Animator.StringToHash("Turn");
 
     private EnemyWalkState _walkState;
     private EnemyAttackState _attackState;
@@ -23,15 +24,22 @@ public class AttackNormalBear : EnemyBase, IPlayerTarget
         _attackCollider = gameObject.transform.GetChild(2).gameObject;
         _animator = gameObject.transform.GetChild(3).GetComponent<Animator>();
         
-        _walkState = new EnemyWalkState(this, _animator, transform, _speed, _patrolArea);
+        _walkState = new EnemyWalkState(_animator, transform, _speed, _patrolArea);
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
         _attackState = new EnemyAttackState(this, _freezeState, _animator, _attackCollider);
-        _deathState = new EnemyDeathState(this, _particle, gameObject);
+        _deathState = new EnemyDeathState(this, _particle, _animator, gameObject);
     }
 
     protected override void OnUpdate()
     {
         if (_isDeath) return;
+        
+        if (_hp.CurrentHp <= 0)
+        {
+            _isDeath = true;
+            ChangeState(_deathState);
+            return;
+        }
         
         if (_playerMove)
         {
@@ -42,13 +50,10 @@ public class AttackNormalBear : EnemyBase, IPlayerTarget
         }
         else
         {
-            if (_currentState == _idleState) ChangeState(_walkState);
-        }
-        
-        if (_hp.CurrentHp <= 0)
-        {
-            _isDeath = true;
-            ChangeState(_deathState);
+            if (_currentState == _idleState)
+            {
+                ChangeState(_walkState);
+            }
         }
     }
     
@@ -59,11 +64,19 @@ public class AttackNormalBear : EnemyBase, IPlayerTarget
     
     private void OnCollisionStay(Collision other)
     {
-        if (_currentState == _freezeState) return;
-        if(other.gameObject.CompareTag(_playerTag) && other.gameObject.TryGetComponent(out IDamageable dmg))
+        if (!other.gameObject.CompareTag(_playerTag)) return;
+        if(other.gameObject.TryGetComponent(out IDamageable dmg) && other.gameObject.TryGetComponent(out IBlowable blo))
         {
             dmg.TakeDamage(_collideDamage);
+            blo.BlownAway(transform.position);
             ChangeState(_freezeState);
         }
+    }
+    
+    private void OnDrawGizmos()
+    {
+        if(Application.isPlaying) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position + new Vector3(0, 1), Vector3.right * _patrolArea);
     }
 }

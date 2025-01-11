@@ -13,27 +13,15 @@ public class OnTriggerEvent : MonoBehaviour
     public IObservable<Collider> OnTriggerEnterAsObservable => OnTriggerEnterSubject;
     public IObservable<Collider> OnTriggerExitAsObservable => OnTriggerExitSubject;
 
-    /// <summary> 最後に使用したポータル </summary>
-    public Collider LastPortalUsed
-    {
-        get => _lastPortalUsed;
-        set => _lastPortalUsed = value;
-    }
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.CompareTag(""))   // ToDO:ポータルのタグを入れる
-        //{
         OnTriggerEnterSubject.OnNext(other);
-        //}
     }
 
     private void OnTriggerExit(Collider other)
     {
-        //if (other.CompareTag(""))   // ToDO:ポータルのタグを入れる
-        //{
         OnTriggerExitSubject.OnNext(other);
-        //}
     }
 
     // クラスが破棄されるときにSubjectを解放

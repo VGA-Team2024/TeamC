@@ -20,9 +20,9 @@ public class WalkBlockDwarf : EnemyBase
         _particle = gameObject.transform.GetChild(0).GetComponent<ParticleSystem>();
         _animator = GetComponent<Animator>();
 
-        _walkState = new EnemyWalkState(this, _animator, transform, _speed, _patrolArea);
+        _walkState = new EnemyWalkState(_animator, transform, _speed, _patrolArea, gameObject.GetComponent<EnemySounds>());
         _freezeState = new EnemyFreezeState(this, _idleState, _freezeTime);
-        _deathState = new EnemyDeathState(this, _particle, gameObject);
+        _deathState = new EnemyDeathState(this, _particle, _animator, gameObject);
         ChangeState(_walkState);
     }
 
@@ -30,22 +30,31 @@ public class WalkBlockDwarf : EnemyBase
     {
         if (_isDeath) return;
         
-        if (_currentState == _idleState) ChangeState(_walkState);
-        
         if (_hp.CurrentHp <= 0)
         {
             _isDeath = true;
             ChangeState(_deathState);
+            return;
         }
+        
+        if (_currentState == _idleState) ChangeState(_walkState);
     }
    
     private void OnCollisionStay(Collision other)
     {
-        if (_currentState == _freezeState) return;
-        if(other.gameObject.CompareTag(_playerTag) && other.gameObject.TryGetComponent(out IDamageable dmg))
+        if (!other.gameObject.CompareTag(_playerTag)) return;
+        if(other.gameObject.TryGetComponent(out IDamageable dmg) && other.gameObject.TryGetComponent(out IBlowable blo))
         {
             dmg.TakeDamage(_damage);
+            blo.BlownAway(transform.position);
             ChangeState(_freezeState);
         }
+    }
+    
+    private void OnDrawGizmos()
+    {
+        if(Application.isPlaying) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position + new Vector3(0, 1), Vector3.right * _patrolArea);
     }
 }

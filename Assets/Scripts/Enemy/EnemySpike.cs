@@ -8,5 +8,11 @@ public class EnemySpike : MonoBehaviour
         {
             dmg.TakeDamage(1);
         }
+
+        if (other.TryGetComponent<IBlowable>(out IBlowable blow))
+        {
+            blow.BlownAway(gameObject.transform.position);
+        }
     }
+    
 }
