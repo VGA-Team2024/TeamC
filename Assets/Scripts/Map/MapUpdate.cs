@@ -81,15 +81,16 @@ public class MapUpdate : MonoBehaviour
         
         if (!exit) return; // 対応したポータルがない場合は実行しない
 
-        _portalBoxSize_x = exit.transform.localScale.x;
-        _portalBoxHalfSize_y = exit.transform.localScale.y / 2;
+        ExitPositionCalculator(exit);
         _playerMove.IsFreeze = (true, true); // プレイヤーの動きを制限
         
         // 画面フェードアウト(完全にフェードアウトしてからマップを切り替える)
         if (_fadeController) // Todo:フェードパネルがない状態でも挙動を確認できるようにするため。後で消す
         {
             _fadeController.FadeOut(_fadeDuration);
-            await UniTask.Delay(TimeSpan.FromSeconds(_fadeDuration), cancellationToken: destroyCancellationToken);        
+            await UniTask.Delay(TimeSpan.FromSeconds(_fadeDuration), cancellationToken: destroyCancellationToken);
+            // ToDO:
+            //await _fadeController.FadeOutAsync(_fadeDuration);
         }
         
         // ポータルに対応するマップの生成とカメラの設定
@@ -109,10 +110,19 @@ public class MapUpdate : MonoBehaviour
         {
             await UniTask.Delay(TimeSpan.FromSeconds(_bufferTIme), cancellationToken: destroyCancellationToken);
             _fadeController.FadeIn(_fadeDuration);
+            // ToDo:
+            //await _fadeController.FadeInAsync(_fadeDuration);
         }
         _playerMove.IsFreeze = (false, false); // プレイヤーの移動制限を解除
     }
-    
+
+    // コライダーから出る位置を計算する
+    private void ExitPositionCalculator(Collider exitCollider)
+    {
+        _portalBoxSize_x = exitCollider.transform.localScale.x;
+        _portalBoxHalfSize_y = exitCollider.transform.localScale.y / 2;
+    }
+
     //セットになっているポータル先を取得する
     private void GetPairPortal(Collider triggerCollider, out Collider exitCollider)
     {
@@ -140,7 +150,7 @@ public class MapUpdate : MonoBehaviour
         position.x += _playerMove.PlayerFlip ? diff : -diff;        // ポータルから確実に抜けるように位置をずらす
         position.y -= _portalBoxHalfSize_y - _playerBoxHalfSize_y;  // 移動した瞬間に浮かないようにする
         _player.transform.position = position;
-        Debug.Log($"Player_z:{_playerBoxSize_x}, Player_y:{_playerBoxHalfSize_y}");
+        //Debug.Log($"Player_z:{_playerBoxSize_x}, Player_y:{_playerBoxHalfSize_y}");
     }
 
     // マップの更新
@@ -160,7 +170,7 @@ public class MapUpdate : MonoBehaviour
         _cameraSwitch.ChangeBoundingVolume(mapData.CameraCollider);
     }
 
-    /// <summary> 指定のマップをセットする </summary>
+    /// <summary> 指定の名前のマップをセットする(デバッグ用) </summary>
     /// <param name="mapName"> string マップのプレハブ名 </param>
     public void SetStartMap(string mapName)
     {
@@ -183,5 +193,35 @@ public class MapUpdate : MonoBehaviour
         var map = _mapManager.MapData[0];
         ChangeMapPrefab(map);
         ToTeleportPlayer(map.ExitMapPrefab.transform.position);
+    }
+
+    /// <summary> 指定のマップオブジェクトからマップをセットする </summary>
+    /// <param name="mapObject"> GameObject マップのBlock </param>
+    // public void SetMapFromObject(GameObject mapObject)
+    // {
+    //     foreach (var mapData in _mapManager.MapData)
+    //     {
+    //         if (mapObject == mapData.ExitMapPrefab)
+    //         {
+    //             GetPairPortal(mapData.EntranceColliders[0], out var exit);
+    //             ChangeMapPrefab(mapData);
+    //             SetCameraBoundingVolume(mapData);
+    //             ToTeleportPlayer(exit.transform.position); // 一番最初に設定した入口と繋がる出口へ移動
+    //         }
+    //     }
+    // }
+
+    public void SetMapFromPortal(Collider exitPortal)
+    {
+        GetPairPortal(exitPortal, out var entrancePortal);
+        foreach (var mapData in _mapManager.MapData)
+        {
+            if (mapData.EntranceColliders.Contains(entrancePortal))
+            {
+                ChangeMapPrefab(mapData);
+                SetCameraBoundingVolume(mapData);
+                ToTeleportPlayer(exitPortal.transform.position); // 設定した出口へ移動
+            }
+        }
     }
 }
