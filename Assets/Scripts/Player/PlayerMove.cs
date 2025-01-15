@@ -44,7 +44,7 @@ public class PlayerMove : MonoBehaviour, ITeleportable
     public bool PlayerFlip
     {
         get => _dirRight;
-        private set
+        set
         {
             if(!_isMove) return;
             // 見た目の反転はアニメーターコントローラーがする
