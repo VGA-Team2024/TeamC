@@ -4,10 +4,10 @@ using UnityEngine.UI;
 public class MapSetter : MonoBehaviour
 {
     [SerializeField, InspectorVariantName("移動先のポータル")] private Collider _portal;
+    [SerializeField, InspectorVariantName("ポータルの右から出る")] private bool _dirRight;
     [SerializeField] private MapManager _mapManager;
     [SerializeField] private MapUpdate _mapUpdate;
     [SerializeField] private PlayerMove _playerMove;
-    //[SerializeField] private GameObject _mapObject;
     [SerializeField] private Button _button;
 
     private void Start()
@@ -22,8 +22,9 @@ public class MapSetter : MonoBehaviour
     // MapManagerからMap移動の機能を呼び出す
     private void SkipMap()
     {
-        // プレイヤーの向き買える？
+        _playerMove.PlayerFlip = _dirRight; // プレイヤーの向きを変える
         _mapUpdate.SetMapFromPortal(_portal);
-        _mapManager.CanvasActivateFlag = false;
+        _mapManager.CanvasActivateFlag = false; // UIを消す
+        _playerMove.IsFreeze = (false, false); // プレイヤーの移動制限を解除(制限している場合)
     }
 }

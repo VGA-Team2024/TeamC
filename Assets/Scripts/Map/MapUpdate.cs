@@ -188,23 +188,9 @@ public class MapUpdate : MonoBehaviour
         ChangeMapPrefab(map);
         ToTeleportPlayer(map.ExitMapPrefab.transform.position);
     }
-
-    /// <summary> 指定のマップオブジェクトからマップをセットする </summary>
-    /// <param name="mapObject"> GameObject マップのBlock </param>
-    // public void SetMapFromObject(GameObject mapObject)
-    // {
-    //     foreach (var mapData in _mapManager.MapData)
-    //     {
-    //         if (mapObject == mapData.ExitMapPrefab)
-    //         {
-    //             GetPairPortal(mapData.EntranceColliders[0], out var exit);
-    //             ChangeMapPrefab(mapData);
-    //             SetCameraBoundingVolume(mapData);
-    //             ToTeleportPlayer(exit.transform.position); // 一番最初に設定した入口と繋がる出口へ移動
-    //         }
-    //     }
-    // }
-
+    
+    /// <summary> 出口のポータルから現在のマップを設定する </summary>
+    /// <param name="exitPortal"> 移動先のポータル </param>
     public void SetMapFromPortal(Collider exitPortal)
     {
         GetPairPortal(exitPortal, out var entrancePortal);
