@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 /// <summary>　ポータルの組み合わせを保存する構造体 </summary>
 [Serializable]
@@ -36,7 +38,27 @@ public class MapManager : MonoBehaviour
 {
     [SerializeField, Header("マップとそこにつながる出口のリスト")] private List<Map> _mapData;
     [SerializeField, Header("ポータルの組み合わせのリスト")] private List<Potal> _spawnerPositionPair;
+    [SerializeField, Header("マップ設定用のキャンバス")] private GameObject _mapSetCanvas;
+    [SerializeField, InspectorVariantName("キャンバスのON, OFF設定")] private bool _canvasActivateFlag;
 
     public List<Potal> SpawnerPositionPair => _spawnerPositionPair;
     public List<Map> MapData => _mapData;
+    
+    /// <summary> マップ設定用のキャンバスをアクティブ化するフラグ </summary>
+    public bool CanvasActivateFlag
+    {
+        get => _canvasActivateFlag;
+        set
+        {
+            _canvasActivateFlag = value;
+            CanvasActivate();
+        }
+    }
+
+    private void CanvasActivate()
+    {
+        _mapSetCanvas.SetActive(_canvasActivateFlag);
+        var button = _mapSetCanvas.transform.GetChild(0).gameObject;
+        EventSystem.current.SetSelectedGameObject(button);
+    }
 }

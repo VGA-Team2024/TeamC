@@ -260,7 +260,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.8962993, g: 0.65471697, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -292,9 +292,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f353e154582130499d6d58875d865a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _portal: {fileID: 0}
   _mapManager: {fileID: 0}
   _mapUpdate: {fileID: 0}
-  _mapObject: {fileID: 0}
+  _playerMove: {fileID: 0}
   _button: {fileID: 0}
 --- !u!1 &1861700103397258792
 GameObject:
@@ -398,7 +399,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.8980392, g: 0.654902, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -430,9 +431,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f353e154582130499d6d58875d865a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _portal: {fileID: 0}
   _mapManager: {fileID: 0}
   _mapUpdate: {fileID: 0}
-  _mapObject: {fileID: 0}
+  _playerMove: {fileID: 0}
   _button: {fileID: 0}
 --- !u!1 &4060881778915276041
 GameObject:
@@ -745,7 +747,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.8980392, g: 0.654902, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -777,9 +779,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f353e154582130499d6d58875d865a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _portal: {fileID: 0}
   _mapManager: {fileID: 0}
   _mapUpdate: {fileID: 0}
-  _mapObject: {fileID: 0}
+  _playerMove: {fileID: 0}
   _button: {fileID: 0}
 --- !u!1 &7007374312066821570
 GameObject:
@@ -883,7 +886,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.8980392, g: 0.654902, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -915,9 +918,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f353e154582130499d6d58875d865a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _portal: {fileID: 0}
   _mapManager: {fileID: 0}
   _mapUpdate: {fileID: 0}
-  _mapObject: {fileID: 0}
+  _playerMove: {fileID: 0}
   _button: {fileID: 0}
 --- !u!1 &8962723665877730346
 GameObject:
