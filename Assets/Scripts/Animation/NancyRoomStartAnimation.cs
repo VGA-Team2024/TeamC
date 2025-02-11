@@ -2,7 +2,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 // ナンシーの部屋に入った時に一度だけ再生されるAnimation
-public class NancyRoomStartAnimation : MonoBehaviour,IAnimationBase
+public class NancyRoomStartAnimation : MonoBehaviour
 {
    [SerializeField] private MapUpdate _mapUpdate;
    [SerializeField] private SearchArea _searchArea;
