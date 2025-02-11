@@ -27,6 +27,8 @@ public class MapUpdate : MonoBehaviour
     private float _portalBoxHalfSize_y;
     
     public string StartMapName => _startMapName;
+     public PlayerMove PlayerMove => _playerMove;
+   
     
     private void Start()
     {
