@@ -19,6 +19,7 @@ namespace Title
         private async void Start()
         {
             await _movieAnimation.PrepareMovie();
+            CRIAudioManager.Initialize();
             Initialize();
         }
 

@@ -11,7 +11,11 @@ public class MovieAnimation : MonoBehaviour
 
     [SerializeField, InspectorVariantName("fairyのエフェクト")] private EffectAnimation _fairy;
 
-    [SerializeField,InspectorVariantName("妖精を出す間隔")] private float _duration;
+    [SerializeField,InspectorVariantName("妖精を出す間隔")] private float _fairyDuration;
+
+    [SerializeField, InspectorVariantName("流したいBGM")] private string _bgmName;
+
+    [SerializeField, InspectorVariantName("BGMの再生待ち時間")] private float _bgmDuration;
     
     [SerializeField] private OpeningTitleText _titleText;
 
@@ -66,11 +70,13 @@ public class MovieAnimation : MonoBehaviour
         {
             await UniTask.Yield();
         }
-
+        
         _moviePlayer.Play();
+
+        CRIAudioManager.BGM.Play("BGM",_bgmName,_bgmDuration);
         
         // エフェクトの再生をスケジュール
-        _ = PlayEffectAfterDelay(_duration, ct);
+        _ = PlayEffectAfterDelay(_fairyDuration, ct);
         
         await _titleText.ShowTitle();
 
