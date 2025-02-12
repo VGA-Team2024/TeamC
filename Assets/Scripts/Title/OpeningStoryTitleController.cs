@@ -1,5 +1,3 @@
-using System.Threading;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -13,8 +11,8 @@ namespace Title
         [SerializeField] private VideoPlayer _videoPlayer;
 
         [SerializeField] private MovieAnimation _movieAnimation;
+        [SerializeField] private GameObject _chapterPanel;
         [SerializeField] private GameObject _optionsPanel;
-        private CancellationTokenSource _cts;
 
         private async void Start()
         {
@@ -26,16 +24,16 @@ namespace Title
         // 初期化
         private void Initialize()
         {
-            _cts = new CancellationTokenSource();
-            _startButton.OnClickAddListener(() => UniTask.Void(async () => await HandleStartButtonClick()));
+            _startButton.OnClickAddListener(OnClickStartButton);
             _optionButton.OnClickAddListener(OnClickOptionButton);
         }
         
-        // ボタン押下時の非同期処理
-        private async UniTask HandleStartButtonClick()
+        // ボタン押下時の処理
+        private void OnClickStartButton()
         {
             _startButton.gameObject.SetActive(false);
-            await _movieAnimation.StartMovieAnimation(_cts.Token);
+            _optionButton.gameObject.SetActive(false);
+            _chapterPanel.SetActive(true);
         }
 
         private void OnClickOptionButton()
