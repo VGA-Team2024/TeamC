@@ -14,11 +14,18 @@ public class UIButton : MonoBehaviour, ISubmitHandler, ISelectHandler, IDeselect
     private Action _onClickCallback;
     private Color _startColor;
     private Image _image;
+    private Text _buttonText;
 
     protected void Awake()
     {
-        _image = GetComponent<Image>();
-        _startColor = _image.color;
+        if (TryGetComponent(out _image))
+        {
+            _startColor = _image.color;
+        }
+        if (TryGetComponent(out _buttonText))
+        {
+            _startColor = _buttonText.color;
+        }
     }
     public void SetText(string text)
     {
@@ -42,11 +49,25 @@ public class UIButton : MonoBehaviour, ISubmitHandler, ISelectHandler, IDeselect
 
     public void OnSelect(BaseEventData eventData)
     {
-        _image.color = _pressedColor;
+        if (_image)
+        {
+            _image.color = _pressedColor;
+        }
+        if (_buttonText)
+        {
+            _buttonText.color = _pressedColor;
+        }
     }
     public void OnDeselect(BaseEventData eventData)
     {
-        _image.color = _startColor;
+        if (_image)
+        {
+            _image.color = _startColor;
+        }
+        if (_buttonText)
+        {
+            _buttonText.color = _startColor;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)

@@ -24,6 +24,10 @@ public class BackgroundMover : MonoBehaviour
 
     private void Update()
     {
+        if (!_followObj)
+        {
+            _followObj = Camera.main.gameObject;
+        }
         Vector3 currentPlayerPos = _followObj.transform.position;
 
         // 前回の位置と現在の位置の差分を計算

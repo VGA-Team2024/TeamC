@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary> インゲームのチャプター機能用のボタンにアタッチする </summary>
 public class MapSetter : MonoBehaviour
 {
     [SerializeField, InspectorVariantName("移動先のポータル")] private Collider _portal;
@@ -10,17 +11,17 @@ public class MapSetter : MonoBehaviour
     [SerializeField] private PlayerMove _playerMove;
     [SerializeField] private Button _button;
 
-    private void Start()
+    private void Awake()
     {
         _mapManager = FindObjectOfType<MapManager>();
         _mapUpdate = FindObjectOfType<MapUpdate>();
         _playerMove = FindObjectOfType<PlayerMove>();
-        _button = gameObject.GetComponent<Button>();
+        _button = GetComponent<Button>();
         _button.onClick.AddListener(SkipMap);
     }
 
     // MapManagerからMap移動の機能を呼び出す
-    private void SkipMap()
+    public void SkipMap()
     {
         _playerMove.PlayerFlip = _dirRight; // プレイヤーの向きを変える
         _mapUpdate.SetMapFromPortal(_portal);
