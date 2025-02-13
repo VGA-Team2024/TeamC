@@ -198727,6 +198727,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01925da888ec53d488a02a230150d1aa, type: 3}
+--- !u!114 &780881527 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1048361668952770742, guid: 01925da888ec53d488a02a230150d1aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 780881526}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0227f112ce1ffbf41ac4581cb9d71068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &782250194
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -214667,6 +214679,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 968023284}
+  - component: {fileID: 968023285}
   m_Layer: 0
   m_Name: Block_Boss_3
   m_TagString: Untagged
@@ -214696,6 +214709,21 @@ Transform:
   - {fileID: 420606240}
   m_Father: {fileID: 800376629}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &968023285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968023283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a97e418bd033448b325967a73b5dd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mapUpdate: {fileID: 1703638321}
+  _searchArea: {fileID: 780881527}
+  _cueName: Voice_Nancy_Mary01
 --- !u!1 &971499412 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3884011740711219504, guid: b1eff954cdc28254f9436e8680487b8b,
@@ -407698,6 +407726,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60aa1b00506db55408f3c5f2630bd1bd, type: 3}
+--- !u!114 &1703638321 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3138949443481620908, guid: 60aa1b00506db55408f3c5f2630bd1bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1703638320}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b18b323ca7f3820428ff1324ea8e6aa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1707112501
 PrefabInstance:
   m_ObjectHideFlags: 0
