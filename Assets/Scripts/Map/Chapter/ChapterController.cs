@@ -57,6 +57,10 @@ public class ChapterController : MonoBehaviour
     {
         _chapterCanvas = transform.parent.gameObject;
         _movieAnimation = FindObjectOfType<MovieAnimation>();
+        if (_movieAnimation == null)
+        {
+            Debug.LogWarning("MovieAnimationが取得できませんでした");
+        }
         _stageSelectButton = GetComponent<UIButton>();
     }
     

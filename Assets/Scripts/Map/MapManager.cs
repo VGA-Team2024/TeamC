@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 
 /// <summary>　ポータルの組み合わせを保存する構造体 </summary>
 [Serializable]
@@ -58,7 +57,14 @@ public class MapManager : MonoBehaviour
     private void CanvasActivate()
     {
         _mapSetCanvas.SetActive(_canvasActivateFlag);
-        var button = _mapSetCanvas.transform.GetChild(0).gameObject;
-        EventSystem.current.SetSelectedGameObject(button);
+        if (_canvasActivateFlag)
+        {
+            var button = FindObjectsOfType<MapSetter>()[^1].gameObject;
+            if (button.gameObject == null)
+            {
+                Debug.LogWarning("MapSetterがアタッチされたボタンを取得できませんでした");
+            }
+            EventSystem.current.SetSelectedGameObject(button);            
+        }
     }
 }
