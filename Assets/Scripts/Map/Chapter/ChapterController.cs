@@ -33,7 +33,6 @@ public class ChapterController : MonoBehaviour
     // シーン(インゲーム)の同時読み込みとマップ移動を行い、シーンを遷移する
     private async UniTask LoadMapData()
     {
-        Debug.Log("クリック");
         var asyncLoad = SceneManager.LoadSceneAsync(_gameSceneName, LoadSceneMode.Additive);
         await UniTask.WaitUntil(() => asyncLoad.isDone); // アクティブ化→シーン切り替えが早すぎるとエラーが出るため必要
 
