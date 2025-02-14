@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class StageStateManager : MonoBehaviour
 {
+    [SerializeField] private GameObject _optionCanvas;
     private OnTriggerEvent _triggerEvent;
     private ReactiveProperty<StageEnum> _currentStageState = new ReactiveProperty<StageEnum>();
 
@@ -21,7 +22,15 @@ public class StageStateManager : MonoBehaviour
                 SetStageState(stageStateChanger.StageEnum);
             }).AddTo(this);
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && !_optionCanvas.activeSelf)
+        {
+            _optionCanvas.SetActive(true);
+        }
+    }
+
     private void SetStageState(StageEnum newState)
     {
         _currentStageState.Value = newState;
