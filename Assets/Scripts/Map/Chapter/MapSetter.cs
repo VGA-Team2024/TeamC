@@ -18,6 +18,7 @@ public class MapSetter : MonoBehaviour
         _playerMove = FindObjectOfType<PlayerMove>();
         _button = GetComponent<Button>();
         _button.onClick.AddListener(SkipMap);
+        nullCheck();
     }
 
     // MapManagerからMap移動の機能を呼び出す
@@ -27,5 +28,23 @@ public class MapSetter : MonoBehaviour
         _mapUpdate.SetMapFromPortal(_portal);
         _mapManager.CanvasActivateFlag = false; // UIを消す
         _playerMove.IsFreeze = (false, false); // プレイヤーの移動制限を解除(制限している場合)
+    }
+
+    private void nullCheck()
+    {
+        if (_mapManager == null)
+        {
+            Debug.LogWarning($"{_mapManager}が取得できませんでした({gameObject.name})");
+        }
+        
+        if (_mapUpdate == null)
+        {
+            Debug.LogWarning($"{_mapUpdate}が取得できませんでした({gameObject.name})");
+        }
+        
+        if (_playerMove == null)
+        {
+            Debug.LogWarning($"{_playerMove}が取得できませんでした({gameObject.name})");
+        }
     }
 }
