@@ -62,11 +62,11 @@ namespace Ending
 
         public async UniTask PlayEnding()
         {
-            _musicBoxPlayer.Play("BGM", _endingBgmName);
+            _musicBoxPlayer.Play("MusicBox", _creditBgmName);
             await ShowEndingMovie();
             await UniTask.Delay(TimeSpan.FromSeconds(_delay));
             _musicBoxPlayer.Stop();
-            _musicBoxPlayer.Play("MusicBox", _creditBgmName);
+            _musicBoxPlayer.Play("BGM", _endingBgmName);
             await _credit.ShowCredit(_fadeCreditDuration);
             _musicBoxPlayer.Stop();
             await StartFadeOut(_finalDuration);
