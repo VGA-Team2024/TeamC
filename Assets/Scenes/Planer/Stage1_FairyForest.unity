@@ -316834,8 +316834,18 @@ PrefabInstance:
       objectReference: {fileID: 187142090}
     - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
+      propertyPath: _creditBgmName
+      value: BGM_Outgame_Ending01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
+        type: 3}
+      propertyPath: _endingBgmName
+      value: BGM_Musicbox_Musicbox01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
+        type: 3}
       propertyPath: _finalDuration
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
@@ -316845,7 +316855,7 @@ PrefabInstance:
     - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
       propertyPath: _fadeinDuration
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
@@ -316855,12 +316865,12 @@ PrefabInstance:
     - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
       propertyPath: _fadeInCreditDuration
-      value: 11
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
       propertyPath: _fadeOutCreditDuration
-      value: 11
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6664340075611941053, guid: d65d50cab20ff6e43af37efcaf56e95f,
         type: 3}
