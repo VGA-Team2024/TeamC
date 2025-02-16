@@ -1,8 +1,8 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class InGameOption : MonoBehaviour
 {
+    [SerializeField] private string _sceneName;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -13,6 +13,6 @@ public class InGameOption : MonoBehaviour
 
     private void TitleBack()
     {
-        SceneManager.LoadScene("01_Title");
+        SceneLoader.LoadSceneSimple(_sceneName);
     }
 }
