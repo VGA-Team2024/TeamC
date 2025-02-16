@@ -4,6 +4,7 @@ public class BackButton : MonoBehaviour
 {
    [SerializeField] private UIButton _backButton;
    [SerializeField,InspectorVariantName("非表示にしたいオブジェクト")] private GameObject _object;
+   [SerializeField,InspectorVariantName("表示したいオブジェクト")] private GameObject _activeObject;
 
    private void Start()
    {
@@ -18,5 +19,8 @@ public class BackButton : MonoBehaviour
    private void OnClickBack()
    {
       _object.SetActive(false);
+      
+      if(_activeObject)
+         _activeObject.SetActive(true);
    }
 }
