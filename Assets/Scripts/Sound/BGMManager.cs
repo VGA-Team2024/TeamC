@@ -19,6 +19,8 @@ public class BGMManager : MonoBehaviour
     [SerializeField, InspectorVariantName("BGMのキューシート(string)")] private string _bgmCueSheet;
     [SerializeField] private List<BGMSoundCue> _soundList;
 
+    private const int DiscardCount = 1; // 初期値を通さないようにするための値
+    private int _changeCount;           // BGMを変更した回数
     private StageStateManager _stageStateManager;
     private StageEnum _currentStage;
     private bool _playing;
@@ -35,7 +37,9 @@ public class BGMManager : MonoBehaviour
             Debug.LogError("StageManagerプレハブをシーン上に置いてください");
         }
         
-        _stageStateManager.CurrentStageState.DistinctUntilChanged()
+        _stageStateManager.CurrentStageState
+            .Skip(DiscardCount)
+            .DistinctUntilChanged()
             .Subscribe(newState =>
             {
                 ChangeBGM(newState);
@@ -63,12 +67,20 @@ public class BGMManager : MonoBehaviour
     // BGMをステージの状態に合わせて変更する
     private void ChangeBGM(StageEnum newState)
     {
+        // BGMが一度でも再生されていたら
+        if (_changeCount > 0)
+        {
+            CRIAudioManager.BGM.Stop();
+        }
+
         for (int i = 0; i < _soundList.Count; i++)
         {
             var data =_soundList[i];
             if (newState == data.StageEnum)
             {
                 CRIAudioManager.BGM.Play(_bgmCueSheet, data.CueName);
+                _currentStage = newState;
+                _changeCount++;
             }
         }
     }
