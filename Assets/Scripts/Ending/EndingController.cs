@@ -42,9 +42,9 @@ namespace Ending
             if (_isEnding) return;
             
             _isEnding = true;
-            _nancyObject.SetActive(false);
             CRIAudioManager.BGM.Stop();
             await _endingSequence.PlayEnding();
+            _nancyObject.SetActive(false);
         }
     }
 }
