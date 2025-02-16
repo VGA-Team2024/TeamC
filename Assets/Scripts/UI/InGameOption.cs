@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class InGameOption : MonoBehaviour
 {
+    [SerializeField] private string _sceneName;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -12,6 +13,6 @@ public class InGameOption : MonoBehaviour
 
     private void TitleBack()
     {
-        SceneLoader.LoadSceneSimple("Stage1_FairyForest");
+        SceneLoader.LoadSceneSimple(_sceneName);
     }
 }
